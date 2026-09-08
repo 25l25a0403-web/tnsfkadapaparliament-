@@ -1,45 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TNSF KADAPA PARLIAMENT</title>
-  <!-- Google Fonts & Font Awesome Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <style>
+    :root {
+      --primary-yellow: #FFD700;
+      --secondary-yellow: #FFE552;
+      --accent-yellow: #FFF8C5;
+      --dark-text: #1C1917;
+      --muted-text: #57534E;
+      --white: #FFFFFF;
+      --border-radius: 20px;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
     }
 
     body {
-      background-color: #f7f9fc;
-      color: #333;
+      background-color: #FAFAFA;
+      color: var(--dark-text);
       display: flex;
       justify-content: center;
+      min-height: 100vh;
     }
 
-    /* Mobile Container Wrapper */
+    /* Container styled like the mobile mock-up interface */
     .app-container {
       width: 100%;
       max-width: 480px;
-      background: #ffffff;
-      min-height: 100vh;
+      background: #FFFFFF;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       position: relative;
-      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      overflow-x: hidden;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      padding-bottom: 20px;
     }
 
     /* Header */
     header {
-      background: #ffcc00;
-      padding: 15px 20px;
+      background: linear-gradient(180deg, var(--primary-yellow) 0%, var(--secondary-yellow) 100%);
+      padding: 16px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -52,148 +61,211 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      cursor: pointer;
       text-decoration: none;
+      color: inherit;
     }
 
-    .brand img {
-      width: 50px;
-      height: 50px;
+    .logo-img {
+      width: 55px;
+      height: 55px;
       border-radius: 50%;
-      background: #fff;
+      object-fit: cover;
+      background: white;
       padding: 2px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      cursor: pointer;
+      transition: transform 0.2s;
     }
 
-    .brand-text h1 {
+    .logo-img:hover {
+      transform: scale(1.05);
+    }
+
+    .brand-title {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title h1 {
       font-size: 22px;
-      font-weight: 800;
-      color: #000;
-      line-height: 1.1;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      line-height: 1;
+      color: var(--dark-text);
     }
 
-    .brand-text p {
-      font-size: 13px;
-      font-weight: 700;
-      color: #222;
+    .brand-title span {
+      font-size: 15px;
+      font-weight: 800;
       letter-spacing: 0.5px;
+      color: #333;
+      margin-top: 2px;
     }
 
     .menu-btn {
-      background: #e6b800;
+      background: #EAB308;
       border: none;
-      width: 45px;
-      height: 45px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      color: #fff;
+      color: white;
       font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: background 0.2s;
     }
 
-    /* Transparent Overlay Menu Bar */
+    .menu-btn:hover {
+      background: #CA8A04;
+    }
+
+    /* Overlay Transparent Yellow Navigation */
     .nav-overlay {
-      position: fixed;
+      position: absolute;
       top: 0;
-      left: 50%;
-      transform: translateX(-50%);
+      left: 0;
       width: 100%;
-      max-width: 480px;
-      height: 100vh;
-      background: rgba(255, 204, 0, 0.95);
+      height: 100%;
+      background: rgba(255, 215, 0, 0.95);
+      backdrop-filter: blur(8px);
       z-index: 200;
-      display: none;
+      display: flex;
       flex-direction: column;
-      padding: 20px;
-      backdrop-filter: blur(5px);
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
     }
 
     .nav-overlay.active {
-      display: flex;
+      opacity: 1;
+      pointer-events: auto;
     }
 
-    .close-btn {
-      align-self: flex-end;
-      background: none;
+    .close-nav {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(0,0,0,0.1);
       border: none;
-      font-size: 28px;
+      font-size: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
       cursor: pointer;
-      color: #000;
+      color: var(--dark-text);
     }
 
-    .nav-links {
-      margin-top: 30px;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .nav-links a {
+    .nav-overlay a {
       text-decoration: none;
-      color: #000;
-      font-size: 18px;
-      font-weight: 700;
-      padding: 12px 20px;
-      background: rgba(255,255,255,0.4);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      color: var(--dark-text);
+      font-size: 20px;
+      font-weight: 800;
+      padding: 10px 24px;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.4);
+      width: 80%;
+      text-align: center;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .nav-overlay a:hover {
+      background: rgba(255, 255, 255, 0.8);
+      transform: translateY(-2px);
     }
 
     /* Main Content */
     main {
-      padding: 15px;
+      padding: 16px;
       display: flex;
       flex-direction: column;
       gap: 20px;
+      flex: 1;
     }
 
-    /* Hero Auto Image Slider */
+    /* Hero Slider */
     .hero-slider {
       position: relative;
       width: 100%;
       height: 220px;
-      border-radius: 20px;
+      border-radius: var(--border-radius);
       overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     }
 
     .slides {
-      display: flex;
-      width: 300%;
-      height: 100%;
-      transition: transform 0.5s ease-in-out;
-    }
-
-    .slide {
-      width: 33.333%;
+      width: 100%;
       height: 100%;
       position: relative;
     }
 
-    .slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .slide.active {
+      opacity: 1;
+    }
+
+    .slide-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(255,215,0,0.85) 0%, rgba(255,255,255,0.2) 100%);
+    }
+
+    .slide-content {
+      position: relative;
+      z-index: 2;
+      max-width: 65%;
+    }
+
+    .slide-content h2 {
+      font-size: 26px;
+      font-weight: 900;
+      color: #111;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .slide-content h2 span {
+      color: #D97706;
+    }
+
+    .slide-content p {
+      font-size: 16px;
+      font-weight: 700;
+      color: #333;
     }
 
     .slider-btn {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(255,255,255,0.8);
-      border: none;
       width: 32px;
       height: 32px;
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
       border-radius: 50%;
+      z-index: 10;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 10;
-      font-size: 12px;
+      color: #333;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
 
     .slider-btn.prev { left: 10px; }
@@ -212,179 +284,219 @@
     .dot {
       width: 10px;
       height: 10px;
-      background: rgba(255,255,255,0.6);
+      background: rgba(255, 255, 255, 0.6);
       border-radius: 50%;
       cursor: pointer;
+      transition: background 0.3s;
     }
 
     .dot.active {
-      background: #ffffff;
+      background: #FFFFFF;
       width: 12px;
       height: 12px;
     }
 
     /* Passport Card */
     .passport-card {
-      background: linear-gradient(135deg, #fffde7 0%, #fff59d 100%);
-      border: 2px solid #fff59d;
-      border-radius: 20px;
-      padding: 15px;
-      position: relative;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      background: linear-gradient(135deg, #FFFDE7 0%, #FFF9C4 100%);
+      border: 2px solid #FFEE58;
+      border-radius: var(--border-radius);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
     }
 
     .passport-header {
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 10px;
     }
 
-    .passport-title-container {
+    .passport-title-group {
       display: flex;
       align-items: center;
       gap: 12px;
     }
 
-    .passport-logo {
-      width: 65px;
-      height: 65px;
-      background: #fff;
+    .passport-badge {
+      width: 60px;
+      height: 60px;
+      background: white;
+      border: 2px solid var(--primary-yellow);
       border-radius: 12px;
-      padding: 5px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      border: 2px solid #ffe082;
-    }
-
-    .passport-title-container h2 {
-      font-size: 22px;
-      font-weight: 800;
-      line-height: 1.1;
-      color: #1a237e;
-    }
-
-    .points-badge {
-      background: #ffffff;
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: 700;
-      color: #1a237e;
       display: flex;
       align-items: center;
-      gap: 5px;
-      border: 1px solid #ffe082;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
 
-    .points-badge i {
-      color: #ffb300;
+    .passport-badge img {
+      width: 45px;
+      height: 45px;
     }
 
-    .passport-subtitle {
-      font-size: 11px;
-      color: #666;
-      display: flex;
-      gap: 10px;
-      margin-left: 5px;
-      margin-bottom: 15px;
+    .passport-title-group h3 {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--dark-text);
+      line-height: 1.1;
     }
 
-    .passport-btn {
-      background: #ffcc00;
-      border: none;
-      width: 100%;
-      padding: 10px;
+    .points-pill {
+      background: #FFFFFF;
+      border: 1px solid #FDE047;
+      padding: 6px 14px;
       border-radius: 20px;
       font-weight: 700;
       font-size: 14px;
-      color: #000;
       display: flex;
       align-items: center;
-      justify-content: flex-end;
-      padding-right: 20px;
+      gap: 6px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .points-pill i {
+      color: #EAB308;
+    }
+
+    .passport-subtext {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #78350F;
+      font-weight: 600;
+      padding: 0 4px;
+    }
+
+    .passport-action-btn {
+      background: linear-gradient(90deg, #FACC15 0%, #EAB308 100%);
+      color: #000;
+      border: none;
+      padding: 12px;
+      border-radius: 25px;
+      font-weight: 800;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       gap: 8px;
       cursor: pointer;
+      box-shadow: 0 3px 8px rgba(234, 179, 8, 0.3);
+      transition: transform 0.2s;
+      text-decoration: none;
     }
 
-    /* TNSF Hub Grid */
+    .passport-action-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* TNSF Hub Grid Section */
     .hub-section {
-      background: #ffffff;
-      border-radius: 20px;
-      padding: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      border: 1px solid #f0f0f0;
+      background: #FFFFFF;
+      border: 1px solid #F3F4F6;
+      border-radius: var(--border-radius);
+      padding: 20px 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
     }
 
-    .hub-title {
-      font-size: 22px;
+    .hub-section h2 {
+      font-size: 24px;
       font-weight: 800;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
       position: relative;
       display: inline-block;
     }
 
-    .hub-title::after {
+    .hub-section h2::after {
       content: '';
       position: absolute;
-      bottom: -4px;
+      bottom: -6px;
       left: 0;
-      width: 100%;
+      width: 60%;
       height: 4px;
-      background: #ffcc00;
+      background: var(--primary-yellow);
       border-radius: 2px;
     }
 
     .hub-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 12px;
-      row-gap: 18px;
+      gap: 16px 8px;
     }
 
     .hub-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      text-decoration: none;
-      color: #333;
       text-align: center;
+      text-decoration: none;
+      color: var(--dark-text);
+      gap: 8px;
     }
 
     .icon-circle {
-      width: 50px;
-      height: 50px;
+      width: 54px;
+      height: 54px;
+      background: #FFFBEB;
+      border: 2px solid #FDE047;
       border-radius: 50%;
-      border: 2px solid #ffcc00;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 20px;
       color: #000;
-      background: #fff;
-      margin-bottom: 6px;
-      transition: transform 0.2s;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
     }
 
-    .icon-circle:active {
-      transform: scale(0.95);
-      background: #fffde7;
+    .hub-item:hover .icon-circle {
+      background: var(--primary-yellow);
+      transform: translateY(-3px);
     }
 
     .hub-item span {
-      font-size: 10px;
-      font-weight: 600;
+      font-size: 11px;
+      font-weight: 700;
       line-height: 1.2;
+    }
+
+    /* Target Section Display Container for demo redirection */
+    .page-view {
+      display: none;
+      padding: 20px;
+      background: white;
+      border-radius: var(--border-radius);
+      min-height: 250px;
+      animation: fadeIn 0.3s forwards;
+    }
+
+    .page-view.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* Footer */
     footer {
-      background: #ffcc00;
+      background: linear-gradient(180deg, var(--secondary-yellow) 0%, var(--primary-yellow) 100%);
       text-align: center;
-      padding: 15px;
-      font-size: 11px;
-      font-weight: 600;
-      color: #000;
+      padding: 16px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #1F2937;
       margin-top: auto;
+    }
+
+    /* Responsive Grid adjustments */
+    @media (max-width: 400px) {
+      .hub-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
     }
   </style>
 </head>
@@ -392,192 +504,305 @@
 
   <div class="app-container">
     
-    <!-- Header -->
+    <!-- Topbar Navigation Overlay -->
+    <nav class="nav-overlay" id="navOverlay">
+      <button class="close-nav" onclick="toggleMenu()"><i class="fa-solid fa-xmark"></i></button>
+      <a href="#about" onclick="navigateTo('about')">About Us</a>
+      <a href="#join" onclick="navigateTo('join')">Join TNSF</a>
+      <a href="#student-help" onclick="navigateTo('student-help')">Student Help</a>
+      <a href="#gallery" onclick="navigateTo('gallery')">Gallery</a>
+      <a href="#inbox" onclick="navigateTo('inbox')">Inbox</a>
+      <a href="#constituencies" onclick="navigateTo('constituencies')">Constituencies</a>
+      <a href="#leadership" onclick="navigateTo('leadership')">Leadership</a>
+      <a href="#events" onclick="navigateTo('events')">Events</a>
+      <a href="#feedback" onclick="navigateTo('feedback')">Feedback</a>
+      <a href="#contact" onclick="navigateTo('contact')">Contact Us</a>
+      <a href="#donate" onclick="navigateTo('donate')">Donate</a>
+    </nav>
+
+    <!-- Header Section -->
     <header>
-      <!-- Logo image redirects to Login for Admins -->
-      <a href="login.html" class="brand" title="Admin Login">
-        <img src="https://via.placeholder.com/100/ffcc00/000000?text=TNSF+Logo" alt="TNSF Logo">
-        <div class="brand-text">
+      <!-- Logo image redirects to Admin Login on click -->
+      <a href="#admin-login" onclick="navigateTo('admin-login')" class="brand" title="Click for Admin Login">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Telugu_Desam_Party_Flag.svg/1200px-Telugu_Desam_Party_Flag.svg.png" alt="TNSF Logo" class="logo-img" />
+        <div class="brand-title">
           <h1>TNSF</h1>
-          <p>KADAPA PARLIAMENT</p>
+          <span>KADAPA PARLIAMENT</span>
         </div>
       </a>
-      <button class="menu-btn" onclick="toggleMenu()">
+      <button class="menu-btn" onclick="toggleMenu()" aria-label="Toggle Menu">
         <i class="fa-solid fa-bars"></i>
       </button>
     </header>
 
-    <!-- Transparent Yellow Topbar / Navigation Drawer -->
-    <div class="nav-overlay" id="navOverlay">
-      <button class="close-btn" onclick="toggleMenu()">&times;</button>
-      <div class="nav-links">
-        <a href="#about"><i class="fa-solid fa-circle-info"></i> About Us</a>
-        <a href="#hub"><i class="fa-solid fa-grip"></i> TNSF Hub</a>
-        <a href="login.html"><i class="fa-solid fa-user-shield"></i> Admin Login</a>
-      </div>
-    </div>
-
+    <!-- Main Dynamic Views -->
     <main>
-      <!-- Hero Auto Image Slider -->
-      <div class="hero-slider">
-        <div class="slides" id="slides">
-          <div class="slide">
-            <img src="https://via.placeholder.com/800x400/ffcc00/000000?text=Empowering+Students" alt="Banner 1">
+      
+      <!-- Home Content Page -->
+      <div id="home-view" class="page-view active">
+        
+        <!-- Hero Auto Image Slider -->
+        <div class="hero-slider">
+          <div class="slides">
+            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=800&q=80');">
+              <div class="slide-overlay"></div>
+              <div class="slide-content">
+                <h2>Empowering <span>Students</span></h2>
+                <p>Building a Better Tomorrow</p>
+              </div>
+            </div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80');">
+              <div class="slide-overlay"></div>
+              <div class="slide-content">
+                <h2>Uniting <span>Youth</span></h2>
+                <p>For A Stronger Nation</p>
+              </div>
+            </div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80');">
+              <div class="slide-overlay"></div>
+              <div class="slide-content">
+                <h2>Leader <span>Development</span></h2>
+                <p>Transforming Kadapa Together</p>
+              </div>
+            </div>
           </div>
-          <div class="slide">
-            <img src="https://via.placeholder.com/800x400/000000/ffcc00?text=Building+a+Better+Tomorrow" alt="Banner 2">
-          </div>
-          <div class="slide">
-            <img src="https://via.placeholder.com/800x400/ffe082/000000?text=TNSF+Kadapa+Parliament" alt="Banner 3">
+          <button class="slider-btn prev" onclick="moveSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+          <button class="slider-btn next" onclick="moveSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
+          <div class="slider-dots">
+            <span class="dot active" onclick="setSlide(0)"></span>
+            <span class="dot" onclick="setSlide(1)"></span>
+            <span class="dot" onclick="setSlide(2)"></span>
           </div>
         </div>
-        <button class="slider-btn prev" onclick="moveSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
-        <button class="slider-btn next" onclick="moveSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
-        <div class="slider-dots">
-          <span class="dot active" onclick="setSlide(0)"></span>
-          <span class="dot" onclick="setSlide(1)"></span>
-          <span class="dot" onclick="setSlide(2)"></span>
+
+        <!-- My TNSF Passport Section -->
+        <div class="passport-card" style="margin-top:20px;">
+          <div class="passport-header">
+            <div class="passport-title-group">
+              <div class="passport-badge">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Telugu_Desam_Party_Flag.svg/1200px-Telugu_Desam_Party_Flag.svg.png" alt="Passport Icon"/>
+              </div>
+              <h3>My TNSF<br>Passport</h3>
+            </div>
+            <div class="points-pill">
+              <i class="fa-solid fa-star"></i> <span id="user-points">450.6</span> Points
+            </div>
+          </div>
+          <div class="passport-subtext">
+            <span>Your Journey</span>
+            <span>•</span>
+            <span>Your Points</span>
+            <span>•</span>
+            <span>Your Growth</span>
+          </div>
+          <button class="passport-action-btn" onclick="handlePassportClick()">
+            View My Passport <i class="fa-solid fa-arrow-right"></i>
+          </button>
         </div>
+
+        <!-- TNSF Hub Section -->
+        <div class="hub-section" style="margin-top:20px;">
+          <h2>TNSF Hub</h2>
+          <div class="hub-grid">
+            
+            <a href="#join" onclick="navigateTo('join')" class="hub-item">
+              <div class="icon-circle"><i class="fa-solid fa-user-group"></i></div>
+              <span>Join TNSF</span>
+            </a>
+
+            <a href="#student-help" onclick="navigateTo('student-help')" class="hub-item">
+              <div class="icon-circle"><i class="fa-solid fa-graduation-cap"></i></div>
+              <span>Student Help</span>
+            </a>
+
+            <a href="#gallery" onclick="navigateTo('gallery')" class="hub-item">
+              <div class="icon-circle"><i class="fa-solid fa-image"></i></div>
+              <span>Gallery</span>
+            </a>
+
+            <a href="#inbox" onclick="navigateTo('inbox')" class="hub-item">
+              <div class="icon-circle"><i class="fa-solid fa-envelope"></i></div>
+              <span>Inbox</span>
+            </a>
+
+            <a href="#constituencies" onclick="navigateTo('constituencies')" class="hub-item">
+              <div class="icon-circle"><i class="fa-solid fa-location-dot"></i></div>
+              <span>Constituencies</span>
+            </a>
+
+            <a href="#leadership" onclick="navigateTo('leadership')" class="hub-item">
+              <div class="icon-circle"><i class="fa-solid fa-user-tie"></i></div>
+              <span>Leadership</span>
+            </a>
+
+            <a href="#events" onclick="navigateTo('events')" class="hub-item">
+              <div class="icon-circle"><i class="fa-solid fa-calendar-days"></i></div>
+              <span>Events</span>
+            </a>
+
+            <a href="#feedback" onclick="navigateTo('feedback')" class="hub-item">
+              <div class="icon-circle"><i class="fa-solid fa-comment-dots"></i></div>
+              <span>Feedback</span>
+            </a>
+
+            <a href="#contact" onclick="navigateTo('contact')" class="hub-item">
+              <div class="icon-circle"><i class="fa-solid fa-phone"></i></div>
+              <span>Contact Us</span>
+            </a>
+
+            <a href="#donate" onclick="navigateTo('donate')" class="hub-item">
+              <div class="icon-circle"><i class="fa-solid fa-hand-holding-heart"></i></div>
+              <span>Donate</span>
+            </a>
+
+          </div>
+        </div>
+
       </div>
 
-      <!-- My TNSF Passport Card -->
-      <div class="passport-card">
-        <div class="passport-header">
-          <div class="passport-title-container">
-            <img src="https://via.placeholder.com/100/ffcc00/000000?text=TNSF" alt="Logo" class="passport-logo">
-            <h2>My TNSF<br>Passport</h2>
-          </div>
-          <div class="points-badge">
-            <i class="fa-solid fa-star"></i> 689 Rank
-          </div>
-        </div>
-        <div class="passport-subtitle">
-          <span>Your Journey</span> • 
-          <span>Your Points</span> • 
-          <span>Your Growth</span>
-        </div>
-        <button class="passport-btn" onclick="handlePassportClick()">
-          View My Passport <i class="fa-solid fa-arrow-right"></i>
-        </button>
+      <!-- Section Views (Target destinations when redirected) -->
+      <div id="admin-login-view" class="page-view">
+        <h2>Admin Login</h2>
+        <p style="margin-top:10px;">Login page for TNSF Administrators.</p>
+        <form style="display:flex; flex-direction:column; gap:10px; margin-top:15px;" onsubmit="event.preventDefault(); adminGrantAccess();">
+          <input type="text" placeholder="Admin Username" required style="padding:10px; border-radius:8px; border:1px solid #ccc;">
+          <input type="password" placeholder="Password" required style="padding:10px; border-radius:8px; border:1px solid #ccc;">
+          <button type="submit" style="padding:10px; background:var(--primary-yellow); border:none; border-radius:8px; font-weight:bold; cursor:pointer;">Login</button>
+        </form>
+        <button onclick="navigateTo('home')" style="margin-top:15px; background:none; border:none; color:blue; cursor:pointer;">← Back to Home</button>
       </div>
 
-      <!-- TNSF Hub -->
-      <div class="hub-section" id="hub">
-        <h2 class="hub-title">TNSF Hub</h2>
-        <br><br>
-        <div class="hub-grid">
-          
-          <a href="join-tnsf.html" class="hub-item">
-            <div class="icon-circle"><i class="fa-solid fa-user-group"></i></div>
-            <span>Join TNSF</span>
-          </a>
-
-          <a href="student-help.html" class="hub-item">
-            <div class="icon-circle"><i class="fa-solid fa-graduation-cap"></i></div>
-            <span>Student Help</span>
-          </a>
-
-          <a href="gallery.html" class="hub-item">
-            <div class="icon-circle"><i class="fa-solid fa-image"></i></div>
-            <span>Gallery</span>
-          </a>
-
-          <a href="inbox.html" class="hub-item">
-            <div class="icon-circle"><i class="fa-solid fa-envelope"></i></div>
-            <span>Inbox</span>
-          </a>
-
-          <a href="constituencies.html" class="hub-item">
-            <div class="icon-circle"><i class="fa-solid fa-location-dot"></i></div>
-            <span>Constituencies</span>
-          </a>
-
-          <a href="leadership.html" class="hub-item">
-            <div class="icon-circle"><i class="fa-solid fa-user-tie"></i></div>
-            <span>Leadership</span>
-          </a>
-
-          <a href="events.html" class="hub-item">
-            <div class="icon-circle"><i class="fa-regular fa-calendar-check"></i></div>
-            <span>Events</span>
-          </a>
-
-          <a href="feedback.html" class="hub-item">
-            <div class="icon-circle"><i class="fa-solid fa-comment-dots"></i></div>
-            <span>Feedback</span>
-          </a>
-
-          <a href="contact.html" class="hub-item">
-            <div class="icon-circle"><i class="fa-solid fa-phone"></i></div>
-            <span>Contact Us</span>
-          </a>
-
-          <a href="donate.html" class="hub-item">
-            <div class="icon-circle"><i class="fa-solid fa-hands-holding-circle"></i></div>
-            <span>Donate</span>
-          </a>
-
+      <div id="passport-view" class="page-view">
+        <h2>My TNSF Passport Details</h2>
+        <p style="margin-top:10px;">Welcome back! Here is your active TNSF Student Passport & ID.</p>
+        <div style="background:#FFF9C4; padding:15px; border-radius:10px; margin-top:10px; border:1px solid #FDE047;">
+          <p><strong>Member ID:</strong> TNSF-KDP-2026-88</p>
+          <p><strong>Status:</strong> Active Credential</p>
+          <p><strong>Reward Points:</strong> 450.6 Points</p>
         </div>
+        <button onclick="navigateTo('home')" style="margin-top:15px; background:none; border:none; color:blue; cursor:pointer;">← Back to Home</button>
       </div>
+
+      <div id="about-view" class="page-view">
+        <h2>About TNSF</h2>
+        <p style="margin-top:10px;">Telugu Nadu Students Federation (TNSF) Kadapa Parliament division is dedicated to empowering students and building a brighter future.</p>
+        <button onclick="navigateTo('home')" style="margin-top:15px; background:none; border:none; color:blue; cursor:pointer;">← Back to Home</button>
+      </div>
+
+      <div id="join-view" class="page-view">
+        <h2>Join TNSF</h2>
+        <p style="margin-top:10px;">Fill out the registration form below to join TNSF Kadapa Parliament.</p>
+        <form style="display:flex; flex-direction:column; gap:10px; margin-top:15px;" onsubmit="event.preventDefault(); alert('Registration submitted! Admin review pending.'); navigateTo('home');">
+          <input type="text" placeholder="Full Name" required style="padding:10px; border-radius:8px; border:1px solid #ccc;">
+          <input type="text" placeholder="College / University" required style="padding:10px; border-radius:8px; border:1px solid #ccc;">
+          <input type="tel" placeholder="Mobile Number" required style="padding:10px; border-radius:8px; border:1px solid #ccc;">
+          <button type="submit" style="padding:10px; background:var(--primary-yellow); border:none; border-radius:8px; font-weight:bold; cursor:pointer;">Submit Registration</button>
+        </form>
+        <button onclick="navigateTo('home')" style="margin-top:15px; background:none; border:none; color:blue; cursor:pointer;">← Back to Home</button>
+      </div>
+
+      <div id="generic-view" class="page-view">
+        <h2 id="generic-title">Section</h2>
+        <p style="margin-top:10px;" id="generic-desc">Content page view.</p>
+        <button onclick="navigateTo('home')" style="margin-top:15px; background:none; border:none; color:blue; cursor:pointer;">← Back to Home</button>
+      </div>
+
     </main>
 
     <!-- Footer -->
     <footer>
-      © 2026 TNSF KADAPA PARLIAMENT | All Rights Reserved
+      Copy 2026 TNSF KADAPA PARLIAMENT all rights reserved
     </footer>
 
   </div>
 
+  <!-- JavaScript Interactions -->
   <script>
-    // --- Navigation Drawer Overlay ---
+    // State management for TNSF Passport logic
+    let hasAdminCredentials = false; // Initially false: first click redirects to Join TNSF
+
+    // Overlay Menu Handler
     function toggleMenu() {
-      const overlay = document.getElementById('navOverlay');
-      overlay.classList.toggle('active');
+      const nav = document.getElementById('navOverlay');
+      nav.classList.toggle('active');
     }
 
-    // --- Hero Auto Image Slider Logic ---
+    // Page Navigation Handler
+    function navigateTo(targetId) {
+      document.getElementById('navOverlay').classList.remove('active');
+      
+      const views = document.querySelectorAll('.page-view');
+      views.forEach(v => v.classList.remove('active'));
+
+      if (document.getElementById(targetId + '-view')) {
+        document.getElementById(targetId + '-view').classList.add('active');
+      } else {
+        // Fallback generic section view
+        const genericView = document.getElementById('generic-view');
+        const title = targetId.charAt(0).toUpperCase() + targetId.slice(1).replace('-', ' ');
+        document.getElementById('generic-title').innerText = title;
+        document.getElementById('generic-desc').innerText = `Welcome to the ${title} section of TNSF Kadapa Parliament.`;
+        genericView.classList.add('active');
+      }
+      window.scrollTo(0, 0);
+    }
+
+    // TNSF Passport Logic
+    function handlePassportClick() {
+      if (!hasAdminCredentials) {
+        alert("First-time access detected! Redirecting to Join TNSF registration form.");
+        navigateTo('join');
+      } else {
+        navigateTo('passport');
+      }
+    }
+
+    // Admin Grant Access simulation helper
+    function adminGrantAccess() {
+      hasAdminCredentials = true;
+      alert("Admin logged in successfully! Passport access unlocked.");
+      navigateTo('home');
+    }
+
+    // Hero Auto Image Slider Logic
     let currentSlide = 0;
-    const slides = document.getElementById('slides');
+    const slides = document.querySelectorAll('.slide');
     const dots = document.querySelectorAll('.dot');
-    const totalSlides = 3;
+    let slideInterval;
 
     function showSlide(index) {
-      if (index >= totalSlides) currentSlide = 0;
-      else if (index < 0) currentSlide = totalSlides - 1;
-      else currentSlide = index;
+      slides.forEach(s => s.classList.remove('active'));
+      dots.forEach(d => d.classList.remove('active'));
 
-      slides.style.transform = `translateX(-${currentSlide * 33.333}%)`;
-
-      dots.forEach((dot, idx) => {
-        dot.classList.toggle('active', idx === currentSlide);
-      });
+      currentSlide = (index + slides.length) % slides.length;
+      
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
     }
 
     function moveSlide(step) {
       showSlide(currentSlide + step);
+      resetAutoSlider();
     }
 
     function setSlide(index) {
       showSlide(index);
+      resetAutoSlider();
     }
 
-    // Automatic slide timer (every 3.5 seconds)
-    setInterval(() => {
-      moveSlide(1);
-    }, 3500);
-
-    // --- My TNSF Passport Handler Logic ---
-    function handlePassportClick() {
-      // Check local storage for admin credentials approval flag
-      const hasCredentials = localStorage.getItem('tnsf_credentials_received');
-
-      if (hasCredentials === 'true') {
-        window.location.href = 'passport.html'; // Redirect to actual Passport
-      } else {
-        // Redirect first-time user to Join TNSF registration page
-        window.location.href = 'join-tnsf.html';
-      }
+    function startAutoSlider() {
+      slideInterval = setInterval(() => {
+        showSlide(currentSlide + 1);
+      }, 3500); // Slider changes every 3.5 seconds
     }
+
+    function resetAutoSlider() {
+      clearInterval(slideInterval);
+      startAutoSlider();
+    }
+
+    // Start auto slider on load
+    startAutoSlider();
   </script>
 </body>
 </html>
