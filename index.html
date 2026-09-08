@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TNSF KADAPA PARLIAMENT</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Mobile Container Layout */
+        .mobile-container {
+            width: 100%;
+            max-width: 480px;
+            background-color: #ffffff;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            position: relative;
+        }
+
+        /* --- Header --- */
+        header {
+            background-color: #ffdc00;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #d90000;
+            border: 2px solid #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.1;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .logo-text h1 {
+            font-size: 22px;
+            font-weight: 800;
+            color: #111;
+            line-height: 1;
+        }
+
+        .logo-text h2 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #111;
+            letter-spacing: 0.5px;
+        }
+
+        .menu-btn {
+            background-color: #e5a700;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Main Content Padding */
+        .content {
+            padding: 0 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* --- Hero Banner Carousel --- */
+        .hero-banner {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            height: 230px;
+        }
+
+        .banner-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Fallback Overlay Banner Content (Matches the image) */
+        .banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.3) 60%, transparent 100%);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .banner-text {
+            max-width: 65%;
+        }
+
+        .banner-text .sub {
+            font-size: 16px;
+            font-weight: 700;
+            color: #222;
+            font-style: italic;
+        }
+
+        .banner-text .main {
+            font-size: 28px;
+            font-weight: 800;
+            color: #ff9800;
+            line-height: 1;
+            margin: 2px 0;
+        }
+
+        .banner-text .desc {
+            font-size: 14px;
+            font-weight: 700;
+            color: #222;
+        }
+
+        .banner-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #444;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .banner-arrow.left { left: 10px; }
+        .banner-arrow.right { right: 10px; }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            z-index: 2;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+        }
+
+        .dot.active {
+            background-color: #ffdc00;
+            width: 10px;
+            height: 10px;
+        }
+
+        /* --- TNSF Passport Card --- */
+        .passport-card {
+            background: linear-gradient(180deg, #fffde7 0%, #fff59d 100%);
+            border: 2px solid #fff59d;
+            border-radius: 20px;
+            padding: 16px;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            overflow: hidden;
+        }
+
+        .passport-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .passport-title-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .passport-badge {
+            width: 70px;
+            height: 70px;
+            background: #fff;
+            border: 2px solid #ffca28;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: rotate(-5deg);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+
+        .passport-badge i {
+            font-size: 36px;
+            color: #d90000;
+        }
+
+        .passport-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: #1a237e;
+            line-height: 1.1;
+        }
+
+        .points-pill {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 20px;
+            padding: 6px 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 700;
+            font-size: 13px;
+            color: #1a237e;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .points-pill i {
+            color: #ffc107;
+        }
+
+        .passport-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .passport-subtext {
+            font-size: 11px;
+            color: #555;
+            font-weight: 600;
+            display: flex;
+            gap: 6px;
+        }
+
+        .passport-subtext span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .passport-subtext span:not(:last-child)::after {
+            content: "•";
+            color: #ffb300;
+        }
+
+        .btn-passport {
+            background-color: #ffc107;
+            color: #000;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* --- TNSF Hub Section --- */
+        .hub-section {
+            background: #ffffff;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 20px;
+            padding: 20px 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        }
+
+        .hub-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: #1a237e;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hub-title::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: #ffc107;
+            border-radius: 2px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px 5px;
+            text-align: center;
+        }
+
+        .grid-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .icon-circle {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background-color: #fffde7;
+            border: 2px solid #ffca28;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease;
+        }
+
+        .grid-item:hover .icon-circle {
+            transform: translateY(-2px);
+            background-color: #fff9c4;
+        }
+
+        .icon-circle i {
+            font-size: 20px;
+            color: #1a237e;
+        }
+
+        .grid-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: #1a237e;
+            line-height: 1.2;
+            word-wrap: break-word;
+            max-width: 60px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: #ffdc00;
+            padding: 15px;
+            text-align: center;
+            font-size: 10px;
+            font-weight: 600;
+            color: #222;
+            margin-top: 10px;
+            background-image: radial-gradient(circle at 50% 100%, #ffea60 0%, #ffdc00 100%);
+        }
+
+        /* Responsive Fix for Desktop preview */
+        @media (min-width: 500px) {
+            body {
+                padding: 20px 0;
+                background-color: #e9ecef;
+            }
+            .mobile-container {
+                border-radius: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mobile-container">
+        <!-- Header -->
+        <header>
+            <div class="logo-container">
+                <div class="logo-img">
+                    T.N.S.F.
+                </div>
+                <div class="logo-text">
+                    <h1>TNSF</h1>
+                    <h2>KADAPA PARLIAMENT</h2>
+                </div>
+            </div>
+            <div class="menu-btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </header>
+
+        <div class="content">
+            <!-- Hero Banner / Carousel -->
+            <div class="hero-banner">
+                <!-- Arrow controls -->
+                <div class="banner-arrow left"><i class="fa-solid fa-chevron-left"></i></div>
+                <div class="banner-arrow right"><i class="fa-solid fa-chevron-right"></i></div>
+                
+                <!-- Slide overlay text content -->
+                <div class="banner-overlay">
+                    <div class="banner-text">
+                        <div class="sub">Empowering</div>
+                        <div class="main">Students</div>
+                        <div class="desc">Building a<br>Better Tomorrow</div>
+                    </div>
+                </div>
+
+                <!-- Pagination dots -->
+                <div class="carousel-dots">
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+
+            <!-- TNSF Passport Card -->
+            <div class="passport-card">
+                <div class="passport-header">
+                    <div class="passport-title-group">
+                        <div class="passport-badge">
+                            <i class="fa-solid fa-id-card"></i>
+                        </div>
+                        <div class="passport-title">
+                            My TNSF<br>Passport
+                        </div>
+                    </div>
+                    <div class="points-pill">
+                        <i class="fa-solid fa-star"></i>
+                        <span>450.6 Points</span>
+                    </div>
+                </div>
+                
+                <div class="passport-footer">
+                    <div class="passport-subtext">
+                        <span>Your Journey</span>
+                        <span>Your Points</span>
+                        <span>Your Growth</span>
+                    </div>
+                    <button class="btn-passport">
+                        View My Passport <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- TNSF Hub Section -->
+            <div class="hub-section">
+                <div class="hub-title">TNSF Hub</div>
+                
+                <div class="grid-container">
+                    <!-- Row 1 -->
+                    <a href="#" class="grid-item">
+                        <div class="icon-circle"><i class="fa-solid fa-user-group"></i></div>
+                        <span class="grid-label">Join TNSF</span>
+                    </a>
+                    
+                    <a href="#" class="grid-item">
+                        <div class="icon-circle"><i class="fa-solid fa-graduation-cap"></i></div>
+                        <span class="grid-label">Student Help</span>
+                    </a>
+                    
+                    <a href="#" class="grid-item">
+                        <div class="icon-circle"><i class="fa-regular fa-image"></i></div>
+                        <span class="grid-label">Gallery</span>
+                    </a>
+                    
+                    <a href="#" class="grid-item">
+                        <div class="icon-circle"><i class="fa-regular fa-envelope"></i></div>
+                        <span class="grid-label">Inbox</span>
+                    </a>
+                    
+                    <a href="#" class="grid-item">
+                        <div class="icon-circle"><i class="fa-solid fa-location-dot"></i></div>
+                        <span class="grid-label">Constituencies</span>
+                    </a>
+
+                    <!-- Row 2 -->
+                    <a href="#" class="grid-item">
+                        <div class="icon-circle"><i class="fa-solid fa-user-tie"></i></div>
+                        <span class="grid-label">Leadership</span>
+                    </a>
+                    
+                    <a href="#" class="grid-item">
+                        <div class="icon-circle"><i class="fa-regular fa-calendar-check"></i></div>
+                        <span class="grid-label">Events</span>
+                    </a>
+                    
+                    <a href="#" class="grid-item">
+                        <div class="icon-circle"><i class="fa-regular fa-comment-dots"></i></div>
+                        <span class="grid-label">Feedback</span>
+                    </a>
+                    
+                    <a href="#" class="grid-item">
+                        <div class="icon-circle"><i class="fa-solid fa-phone"></i></div>
+                        <span class="grid-label">Contact Us</span>
+                    </a>
+                    
+                    <a href="#" class="grid-item">
+                        <div class="icon-circle"><i class="fa-solid fa-hand-holding-heart"></i></div>
+                        <span class="grid-label">Donate</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            Copy 2026 TNSF KADAPA PARLIAMENT all rights reserved
+        </footer>
+    </div>
+
+</body>
+</html>
+
