@@ -32,10 +32,10 @@
       min-height: 100vh;
     }
 
-    /* Container matching mobile interface proportion */
+    /* Container widened to max-width 560px for better layout scaling */
     .app-container {
       width: 100%;
-      max-width: 480px;
+      max-width: 560px;
       background: #FFFFFF;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       position: relative;
@@ -48,7 +48,7 @@
     /* Header */
     header {
       background: linear-gradient(180deg, var(--primary-yellow) 0%, var(--secondary-yellow) 100%);
-      padding: 14px 18px;
+      padding: 16px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -66,8 +66,8 @@
     }
 
     .logo-img {
-      width: 58px;
-      height: 58px;
+      width: 55px;
+      height: 55px;
       border-radius: 50%;
       object-fit: cover;
       background: white;
@@ -81,8 +81,13 @@
       transform: scale(1.05);
     }
 
+    .brand-title {
+      display: flex;
+      flex-direction: column;
+    }
+
     .brand-title h1 {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 900;
       letter-spacing: -0.5px;
       line-height: 1;
@@ -90,27 +95,31 @@
     }
 
     .brand-title span {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 800;
       letter-spacing: 0.5px;
       color: #333;
       margin-top: 2px;
-      display: block;
     }
 
     .menu-btn {
       background: #EAB308;
       border: none;
-      width: 50px;
-      height: 50px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
-      font-size: 22px;
+      font-size: 20px;
       cursor: pointer;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: background 0.2s;
+    }
+
+    .menu-btn:hover {
+      background: #CA8A04;
     }
 
     /* Overlay Transparent Yellow Navigation */
@@ -127,7 +136,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 15px;
+      gap: 16px;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.3s ease;
@@ -149,6 +158,7 @@
       height: 44px;
       border-radius: 50%;
       cursor: pointer;
+      color: var(--dark-text);
     }
 
     .nav-overlay a {
@@ -156,23 +166,29 @@
       color: var(--dark-text);
       font-size: 18px;
       font-weight: 800;
-      padding: 10px 24px;
+      padding: 8px 24px;
       border-radius: 30px;
       background: rgba(255, 255, 255, 0.4);
       width: 80%;
       text-align: center;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .nav-overlay a:hover {
+      background: rgba(255, 255, 255, 0.8);
+      transform: translateY(-2px);
     }
 
     /* Main Content */
     main {
-      padding: 14px;
+      padding: 12px; /* Reduced outer padding to maximize width of inner cards */
       display: flex;
       flex-direction: column;
       gap: 16px;
       flex: 1;
     }
 
-    /* Hero Slider */
+    /* Increased Width Hero Slider */
     .hero-slider {
       position: relative;
       width: 100%;
@@ -180,6 +196,12 @@
       border-radius: var(--border-radius);
       overflow: hidden;
       box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .slides {
+      width: 100%;
+      height: 100%;
+      position: relative;
     }
 
     .slide {
@@ -201,7 +223,7 @@
     .slide-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(90deg, rgba(255,215,0,0.88) 0%, rgba(255,255,255,0.2) 100%);
+      background: linear-gradient(90deg, rgba(255,215,0,0.85) 0%, rgba(255,255,255,0.2) 100%);
     }
 
     .slide-content {
@@ -211,7 +233,7 @@
     }
 
     .slide-content h2 {
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 900;
       color: #111;
       line-height: 1.1;
@@ -232,8 +254,8 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      width: 34px;
-      height: 34px;
+      width: 32px;
+      height: 32px;
       background: rgba(255, 255, 255, 0.9);
       border: none;
       border-radius: 50%;
@@ -265,6 +287,7 @@
       background: rgba(255, 255, 255, 0.6);
       border-radius: 50%;
       cursor: pointer;
+      transition: background 0.3s;
     }
 
     .dot.active {
@@ -273,8 +296,9 @@
       height: 12px;
     }
 
-    /* Passport Card */
+    /* Increased Width Passport Card */
     .passport-card {
+      width: 100%;
       background: linear-gradient(135deg, #FFFDE7 0%, #FFF9C4 100%);
       border: 2px solid #FFEE58;
       border-radius: var(--border-radius);
@@ -282,6 +306,7 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
     }
 
     .passport-header {
@@ -293,7 +318,7 @@
     .passport-title-group {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
     .passport-badge {
@@ -301,7 +326,7 @@
       height: 60px;
       background: white;
       border: 2px solid var(--primary-yellow);
-      border-radius: 14px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -309,8 +334,8 @@
     }
 
     .passport-badge img {
-      width: 48px;
-      height: 48px;
+      width: 45px;
+      height: 45px;
     }
 
     .passport-title-group h3 {
@@ -325,21 +350,25 @@
       border: 1px solid #FDE047;
       padding: 6px 12px;
       border-radius: 20px;
-      font-weight: 800;
-      font-size: 13px;
+      font-weight: 700;
+      font-size: 14px;
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
 
-    .points-pill i { color: #EAB308; }
+    .points-pill i {
+      color: #EAB308;
+    }
 
     .passport-subtext {
       display: flex;
-      justify-content: space-around;
-      font-size: 11px;
+      justify-content: space-between;
+      font-size: 12px;
       color: #78350F;
-      font-weight: 700;
+      font-weight: 600;
+      padding: 0 4px;
     }
 
     .passport-action-btn {
@@ -356,21 +385,29 @@
       gap: 8px;
       cursor: pointer;
       box-shadow: 0 3px 8px rgba(234, 179, 8, 0.3);
+      transition: transform 0.2s;
+      text-decoration: none;
     }
 
-    /* TNSF Hub Section with EXACT 5 buttons per row */
+    .passport-action-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Increased Width TNSF Hub Section with EXACT 5 buttons per row */
     .hub-section {
+      width: 100%;
       background: #FFFFFF;
       border: 1px solid #F3F4F6;
       border-radius: var(--border-radius);
-      padding: 18px 12px;
+      padding: 20px 10px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.03);
     }
 
     .hub-section h2 {
       font-size: 24px;
       font-weight: 800;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
+      margin-left: 6px;
       position: relative;
       display: inline-block;
     }
@@ -378,7 +415,7 @@
     .hub-section h2::after {
       content: '';
       position: absolute;
-      bottom: -4px;
+      bottom: -6px;
       left: 0;
       width: 60%;
       height: 4px;
@@ -386,11 +423,11 @@
       border-radius: 2px;
     }
 
-    /* Grid strictly configured for 5 columns/buttons per row */
+    /* Grid strictly set to 5 equal columns */
     .hub-grid {
       display: grid;
-      grid-template-columns: repeat(5, 1fr); 
-      gap: 16px 4px;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px 2px; /* Balanced spacing so 5 buttons fit perfectly per row */
     }
 
     .hub-item {
@@ -404,15 +441,15 @@
     }
 
     .icon-circle {
-      width: 58px;
-      height: 58px;
+      width: 52px;
+      height: 52px;
       background: #FFFBEB;
       border: 2px solid #FDE047;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
+      font-size: 18px;
       color: #000;
       transition: all 0.2s ease;
       box-shadow: 0 2px 6px rgba(0,0,0,0.04);
@@ -420,27 +457,33 @@
 
     .hub-item:hover .icon-circle {
       background: var(--primary-yellow);
-      transform: translateY(-2px);
+      transform: translateY(-3px);
     }
 
     .hub-item span {
-      font-size: 10px;
+      font-size: 10.5px;
       font-weight: 700;
       line-height: 1.1;
-      word-break: break-word;
+      word-wrap: break-word;
     }
 
-    /* Dynamic Pages */
+    /* Target Section Display Container */
     .page-view {
       display: none;
       padding: 16px;
       background: white;
       border-radius: var(--border-radius);
       min-height: 250px;
+      animation: fadeIn 0.3s forwards;
     }
 
     .page-view.active {
       display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* Footer */
@@ -448,10 +491,22 @@
       background: linear-gradient(180deg, var(--secondary-yellow) 0%, var(--primary-yellow) 100%);
       text-align: center;
       padding: 16px;
-      font-size: 11px;
-      font-weight: 800;
+      font-size: 12px;
+      font-weight: 700;
       color: #1F2937;
       margin-top: auto;
+    }
+
+    /* Scaling optimization for smaller screens */
+    @media (max-width: 380px) {
+      .icon-circle {
+        width: 44px;
+        height: 44px;
+        font-size: 15px;
+      }
+      .hub-item span {
+        font-size: 9.5px;
+      }
     }
   </style>
 </head>
@@ -489,13 +544,13 @@
       </button>
     </header>
 
-    <!-- Main Views -->
+    <!-- Main Content Views -->
     <main>
       
-      <!-- Home Content View -->
+      <!-- Home Content Page -->
       <div id="home-view" class="page-view active">
         
-        <!-- Hero Auto Image Slider -->
+        <!-- Increased Width Hero Auto Image Slider -->
         <div class="hero-slider">
           <div class="slides">
             <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=800&q=80');">
@@ -529,17 +584,17 @@
           </div>
         </div>
 
-        <!-- My TNSF Passport Section -->
+        <!-- Increased Width My TNSF Passport Section -->
         <div class="passport-card" style="margin-top:16px;">
           <div class="passport-header">
             <div class="passport-title-group">
               <div class="passport-badge">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Telugu_Desam_Party_Flag.svg/1200px-Telugu_Desam_Party_Flag.svg.png" alt="Passport Badge"/>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Telugu_Desam_Party_Flag.svg/1200px-Telugu_Desam_Party_Flag.svg.png" alt="Passport Icon"/>
               </div>
               <h3>My TNSF<br>Passport</h3>
             </div>
             <div class="points-pill">
-              <i class="fa-solid fa-star"></i> <span>450.6 Points</span>
+              <i class="fa-solid fa-star"></i> <span id="user-points">450.6</span> Points
             </div>
           </div>
           <div class="passport-subtext">
@@ -554,7 +609,7 @@
           </button>
         </div>
 
-        <!-- TNSF Hub Grid Section (Strictly 5 Buttons Per Row) -->
+        <!-- Increased Width TNSF Hub Section (EXACT 5 BUTTONS PER ROW) -->
         <div class="hub-section" style="margin-top:16px;">
           <h2>TNSF Hub</h2>
           <div class="hub-grid">
@@ -616,10 +671,10 @@
 
       </div>
 
-      <!-- Target Section Views -->
+      <!-- Redirection Target Sections -->
       <div id="admin-login-view" class="page-view">
         <h2>Admin Login</h2>
-        <p style="margin-top:10px;">Portal for TNSF Administrators.</p>
+        <p style="margin-top:10px;">Login page for TNSF Administrators.</p>
         <form style="display:flex; flex-direction:column; gap:10px; margin-top:15px;" onsubmit="event.preventDefault(); adminGrantAccess();">
           <input type="text" placeholder="Admin Username" required style="padding:10px; border-radius:8px; border:1px solid #ccc;">
           <input type="password" placeholder="Password" required style="padding:10px; border-radius:8px; border:1px solid #ccc;">
@@ -630,23 +685,29 @@
 
       <div id="passport-view" class="page-view">
         <h2>My TNSF Passport Details</h2>
-        <p style="margin-top:10px;">Welcome back! Active TNSF Passport Account.</p>
+        <p style="margin-top:10px;">Welcome back! Here is your active TNSF Student Passport & ID.</p>
         <div style="background:#FFF9C4; padding:15px; border-radius:10px; margin-top:10px; border:1px solid #FDE047;">
           <p><strong>Member ID:</strong> TNSF-KDP-2026-88</p>
-          <p><strong>Status:</strong> Active Member</p>
-          <p><strong>Points:</strong> 450.6</p>
+          <p><strong>Status:</strong> Active Credential</p>
+          <p><strong>Reward Points:</strong> 450.6 Points</p>
         </div>
+        <button onclick="navigateTo('home')" style="margin-top:15px; background:none; border:none; color:blue; cursor:pointer;">← Back to Home</button>
+      </div>
+
+      <div id="about-view" class="page-view">
+        <h2>About TNSF</h2>
+        <p style="margin-top:10px;">Telugu Nadu Students Federation (TNSF) Kadapa Parliament division is dedicated to empowering students and building a brighter future.</p>
         <button onclick="navigateTo('home')" style="margin-top:15px; background:none; border:none; color:blue; cursor:pointer;">← Back to Home</button>
       </div>
 
       <div id="join-view" class="page-view">
         <h2>Join TNSF</h2>
-        <p style="margin-top:10px;">Complete the form to submit your membership application.</p>
-        <form style="display:flex; flex-direction:column; gap:10px; margin-top:15px;" onsubmit="event.preventDefault(); alert('Registration submitted! Pending admin review.'); navigateTo('home');">
+        <p style="margin-top:10px;">Fill out the registration form below to join TNSF Kadapa Parliament.</p>
+        <form style="display:flex; flex-direction:column; gap:10px; margin-top:15px;" onsubmit="event.preventDefault(); alert('Registration submitted! Admin review pending.'); navigateTo('home');">
           <input type="text" placeholder="Full Name" required style="padding:10px; border-radius:8px; border:1px solid #ccc;">
           <input type="text" placeholder="College / University" required style="padding:10px; border-radius:8px; border:1px solid #ccc;">
           <input type="tel" placeholder="Mobile Number" required style="padding:10px; border-radius:8px; border:1px solid #ccc;">
-          <button type="submit" style="padding:10px; background:var(--primary-yellow); border:none; border-radius:8px; font-weight:bold; cursor:pointer;">Submit Application</button>
+          <button type="submit" style="padding:10px; background:var(--primary-yellow); border:none; border-radius:8px; font-weight:bold; cursor:pointer;">Submit Registration</button>
         </form>
         <button onclick="navigateTo('home')" style="margin-top:15px; background:none; border:none; color:blue; cursor:pointer;">← Back to Home</button>
       </div>
@@ -671,11 +732,13 @@
     let hasAdminCredentials = false;
 
     function toggleMenu() {
-      document.getElementById('navOverlay').classList.toggle('active');
+      const nav = document.getElementById('navOverlay');
+      nav.classList.toggle('active');
     }
 
     function navigateTo(targetId) {
       document.getElementById('navOverlay').classList.remove('active');
+      
       const views = document.querySelectorAll('.page-view');
       views.forEach(v => v.classList.remove('active'));
 
@@ -685,7 +748,7 @@
         const genericView = document.getElementById('generic-view');
         const title = targetId.charAt(0).toUpperCase() + targetId.slice(1).replace('-', ' ');
         document.getElementById('generic-title').innerText = title;
-        document.getElementById('generic-desc').innerText = `Welcome to the ${title} section.`;
+        document.getElementById('generic-desc').innerText = `Welcome to the ${title} section of TNSF Kadapa Parliament.`;
         genericView.classList.add('active');
       }
       window.scrollTo(0, 0);
@@ -693,7 +756,7 @@
 
     function handlePassportClick() {
       if (!hasAdminCredentials) {
-        alert("First-time access! Redirecting to Join TNSF registration.");
+        alert("First-time access detected! Redirecting to Join TNSF registration form.");
         navigateTo('join');
       } else {
         navigateTo('passport');
@@ -702,11 +765,11 @@
 
     function adminGrantAccess() {
       hasAdminCredentials = true;
-      alert("Admin Access Granted! Passport unlocked.");
+      alert("Admin logged in successfully! Passport access unlocked.");
       navigateTo('home');
     }
 
-    /* Auto Slider */
+    // Hero Auto Slider Script
     let currentSlide = 0;
     const slides = document.querySelectorAll('.slide');
     const dots = document.querySelectorAll('.dot');
@@ -715,7 +778,9 @@
     function showSlide(index) {
       slides.forEach(s => s.classList.remove('active'));
       dots.forEach(d => d.classList.remove('active'));
+
       currentSlide = (index + slides.length) % slides.length;
+      
       slides[currentSlide].classList.add('active');
       dots[currentSlide].classList.add('active');
     }
@@ -731,7 +796,9 @@
     }
 
     function startAutoSlider() {
-      slideInterval = setInterval(() => { showSlide(currentSlide + 1); }, 3500);
+      slideInterval = setInterval(() => {
+        showSlide(currentSlide + 1);
+      }, 3500);
     }
 
     function resetAutoSlider() {
