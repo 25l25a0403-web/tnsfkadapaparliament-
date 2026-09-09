@@ -392,12 +392,12 @@
       transform: translateY(-2px);
     }
 
-    /* TNSF Hub Grid Section */
+    /* TNSF Hub Grid Section (Fixed 5 items per row) */
     .hub-section {
       background: #FFFFFF;
       border: 1px solid #F3F4F6;
       border-radius: var(--border-radius);
-      padding: 20px 16px;
+      padding: 20px 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.03);
     }
 
@@ -405,6 +405,7 @@
       font-size: 24px;
       font-weight: 800;
       margin-bottom: 20px;
+      margin-left: 4px;
       position: relative;
       display: inline-block;
     }
@@ -420,10 +421,12 @@
       border-radius: 2px;
     }
 
+    /* Exact 5 buttons per row setup */
     .hub-grid {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 16px 8px;
+      grid-template-columns: repeat(5, 1fr); /* Exactly 5 items per row */
+      gap: 16px 4px;
+      width: 100%;
     }
 
     .hub-item {
@@ -433,20 +436,20 @@
       text-align: center;
       text-decoration: none;
       color: var(--dark-text);
-      gap: 8px;
+      gap: 6px;
     }
 
     .icon-circle {
-      width: 54px;
-      height: 54px;
+      width: 58px;
+      height: 58px;
       background: #FFFBEB;
-      border: 2px solid #FDE047;
+      border: 2px solid #FACC15;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
-      color: #000;
+      font-size: 22px;
+      color: #1F2937;
       transition: all 0.2s ease;
       box-shadow: 0 2px 6px rgba(0,0,0,0.04);
     }
@@ -459,10 +462,11 @@
     .hub-item span {
       font-size: 11px;
       font-weight: 700;
-      line-height: 1.2;
+      line-height: 1.1;
+      word-break: break-word;
     }
 
-    /* Target Section Display Container for demo redirection */
+    /* Target Section Display Container */
     .page-view {
       display: none;
       padding: 20px;
@@ -491,13 +495,6 @@
       color: #1F2937;
       margin-top: auto;
     }
-
-    /* Responsive Grid adjustments */
-    @media (max-width: 400px) {
-      .hub-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
   </style>
 </head>
 <body>
@@ -522,7 +519,6 @@
 
     <!-- Header Section -->
     <header>
-      <!-- Logo image redirects to Admin Login on click -->
       <a href="#admin-login" onclick="navigateTo('admin-login')" class="brand" title="Click for Admin Login">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Telugu_Desam_Party_Flag.svg/1200px-Telugu_Desam_Party_Flag.svg.png" alt="TNSF Logo" class="logo-img" />
         <div class="brand-title">
@@ -535,7 +531,7 @@
       </button>
     </header>
 
-    <!-- Main Dynamic Views -->
+    <!-- Main Content -->
     <main>
       
       <!-- Home Content Page -->
@@ -600,7 +596,7 @@
           </button>
         </div>
 
-        <!-- TNSF Hub Section -->
+        <!-- TNSF Hub Section (Fixed 5 Items Row) -->
         <div class="hub-section" style="margin-top:20px;">
           <h2>TNSF Hub</h2>
           <div class="hub-grid">
@@ -660,7 +656,7 @@
 
       </div>
 
-      <!-- Section Views (Target destinations when redirected) -->
+      <!-- Section Views -->
       <div id="admin-login-view" class="page-view">
         <h2>Admin Login</h2>
         <p style="margin-top:10px;">Login page for TNSF Administrators.</p>
@@ -716,18 +712,14 @@
 
   </div>
 
-  <!-- JavaScript Interactions -->
   <script>
-    // State management for TNSF Passport logic
-    let hasAdminCredentials = false; // Initially false: first click redirects to Join TNSF
+    let hasAdminCredentials = false;
 
-    // Overlay Menu Handler
     function toggleMenu() {
       const nav = document.getElementById('navOverlay');
       nav.classList.toggle('active');
     }
 
-    // Page Navigation Handler
     function navigateTo(targetId) {
       document.getElementById('navOverlay').classList.remove('active');
       
@@ -737,7 +729,6 @@
       if (document.getElementById(targetId + '-view')) {
         document.getElementById(targetId + '-view').classList.add('active');
       } else {
-        // Fallback generic section view
         const genericView = document.getElementById('generic-view');
         const title = targetId.charAt(0).toUpperCase() + targetId.slice(1).replace('-', ' ');
         document.getElementById('generic-title').innerText = title;
@@ -747,7 +738,6 @@
       window.scrollTo(0, 0);
     }
 
-    // TNSF Passport Logic
     function handlePassportClick() {
       if (!hasAdminCredentials) {
         alert("First-time access detected! Redirecting to Join TNSF registration form.");
@@ -757,14 +747,12 @@
       }
     }
 
-    // Admin Grant Access simulation helper
     function adminGrantAccess() {
       hasAdminCredentials = true;
       alert("Admin logged in successfully! Passport access unlocked.");
       navigateTo('home');
     }
 
-    // Hero Auto Image Slider Logic
     let currentSlide = 0;
     const slides = document.querySelectorAll('.slide');
     const dots = document.querySelectorAll('.dot');
@@ -793,7 +781,7 @@
     function startAutoSlider() {
       slideInterval = setInterval(() => {
         showSlide(currentSlide + 1);
-      }, 3500); // Slider changes every 3.5 seconds
+      }, 3500);
     }
 
     function resetAutoSlider() {
@@ -801,7 +789,6 @@
       startAutoSlider();
     }
 
-    // Start auto slider on load
     startAutoSlider();
   </script>
 </body>
