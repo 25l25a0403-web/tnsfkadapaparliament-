@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TNSF KADAPA PARLIAMENT</title>
   <!-- Google Fonts & Font Awesome Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Reenie+Beanie&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- html2canvas Library for Capturing Passport Card as Image -->
+  <!-- html2canvas Library for Capturing Passport Card -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
   <style>
@@ -24,10 +24,10 @@
       color: #333;
       display: flex;
       justify-content: center;
-      overflow-x: hidden;
+      min-height: 100vh;
     }
 
-    /* App Viewport Container */
+    /* Mobile App Frame Viewport */
     .app-container {
       width: 100%;
       max-width: 480px;
@@ -35,73 +35,90 @@
       min-height: 100vh;
       position: relative;
       box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-      overflow: hidden;
-    }
-
-    /* --- HOME SCREEN WRAPPER WITH MINIMIZE TRANSITION --- */
-    .home-screen {
-      width: 100%;
-      min-height: 100vh;
+      overflow-x: hidden;
       display: flex;
       flex-direction: column;
-      padding-bottom: 20px;
-      background: #ffffff;
-      transform-origin: center top;
-      transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.5s ease;
     }
 
-    /* Class applied when any overlay modal opens */
-    .home-screen.minimized {
-      transform: scale(0.88) translateY(-30px);
-      opacity: 0.3;
-      pointer-events: none;
-      filter: blur(2px);
+    /* Screen Views Management */
+    .page-view {
+      display: none;
+      width: 100%;
+      min-height: 100vh;
+      flex-direction: column;
+      animation: fadeIn 0.4s ease-out forwards;
     }
 
-    /* Header */
+    .page-view.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* --- COMMON HEADER --- */
     header {
       background: linear-gradient(135deg, #ffcc00 0%, #ffdb4d 100%);
-      padding: 15px 20px;
+      padding: 12px 18px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3);
+      box-shadow: 0 4px 12px rgba(255, 204, 0, 0.25);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .back-nav-btn {
+      background: transparent;
+      border: none;
+      font-size: 20px;
+      color: #000;
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease;
+    }
+
+    .back-nav-btn:hover {
+      transform: translateX(-3px);
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
-      cursor: pointer;
+      gap: 10px;
       text-decoration: none;
     }
 
     .brand img {
-      width: 50px;
-      height: 50px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       background: #fff;
       padding: 2px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-      transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    }
-
-    .brand:hover img {
-      transform: rotateY(180deg) scale(1.1);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
 
     .brand-text h1 {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 800;
       color: #000;
       line-height: 1.1;
     }
 
     .brand-text p {
-      font-size: 13px;
+      font-size: 11px;
       font-weight: 700;
       color: #222;
       letter-spacing: 0.5px;
@@ -110,25 +127,24 @@
     .menu-btn {
       background: #e6b800;
       border: none;
-      width: 45px;
-      height: 45px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       color: #fff;
-      font-size: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      font-size: 18px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
     }
 
     .menu-btn:hover {
-      background: #cca300;
-      transform: rotate(180deg) scale(1.1);
+      transform: scale(1.08);
     }
 
-    /* Transparent Yellow Overlay Top Bar */
+    /* Top Overlay Navigation Menu */
     .nav-overlay {
       position: fixed;
       top: 0;
@@ -143,11 +159,9 @@
       flex-direction: column;
       padding: 20px 25px;
       backdrop-filter: blur(12px);
-      box-sizing: border-box;
       opacity: 0;
       pointer-events: none;
-      transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.4s ease;
-      overflow-y: auto;
+      transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.3s ease;
     }
 
     .nav-overlay.active {
@@ -163,67 +177,45 @@
       font-size: 32px;
       cursor: pointer;
       color: #000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.4s ease, color 0.3s ease;
-    }
-
-    .close-btn:hover {
-      color: #d32f2f;
-      transform: rotate(90deg) scale(1.2);
     }
 
     .nav-links {
-      margin-top: 10px;
+      margin-top: 15px;
       display: flex;
       flex-direction: column;
+      gap: 12px;
+    }
+
+    .nav-links button {
+      background: transparent;
+      border: none;
+      text-align: left;
+      font-size: 17px;
+      font-weight: 700;
+      color: #1a1a1a;
+      padding: 8px 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
       gap: 14px;
     }
 
-    .nav-links a {
-      text-decoration: none;
-      color: #1a1a1a;
-      font-size: 18px;
-      font-weight: 700;
-      padding: 8px 12px;
-      background: transparent;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      position: relative;
-      opacity: 0;
-      transform: translateX(-30px);
-      transition: transform 0.4s ease, color 0.3s ease, opacity 0.4s ease;
-      cursor: pointer;
-    }
-
-    .nav-overlay.active .nav-links a {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    .nav-links a:hover {
-      color: #000;
-      transform: translateX(10px) !important;
-    }
-
-    /* Main Content */
+    /* --- HOME PAGE STYLES --- */
     main {
       padding: 15px;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 18px;
     }
 
     /* Hero Slider */
     .hero-slider {
       position: relative;
       width: 100%;
-      height: 220px;
-      border-radius: 20px;
+      height: 200px;
+      border-radius: 18px;
       overflow: hidden;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
     }
 
     .slides {
@@ -236,14 +228,10 @@
       position: absolute;
       inset: 0;
       opacity: 0;
-      transition: opacity 0.8s ease-in-out, transform 1.2s ease;
-      transform: scale(1.1);
+      transition: opacity 0.6s ease;
     }
 
-    .slide.active {
-      opacity: 1;
-      transform: scale(1);
-    }
+    .slide.active { opacity: 1; }
 
     .slide img {
       width: 100%;
@@ -251,36 +239,13 @@
       object-fit: cover;
     }
 
-    .slider-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(255,255,255,0.85);
-      border: none;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 10;
-      font-size: 14px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-      transition: all 0.3s ease;
-    }
-
-    .slider-btn.prev { left: 10px; }
-    .slider-btn.next { right: 10px; }
-
     .slider-dots {
       position: absolute;
-      bottom: 12px;
+      bottom: 10px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
-      gap: 8px;
-      z-index: 10;
+      gap: 6px;
     }
 
     .dot {
@@ -289,12 +254,11 @@
       background: rgba(255,255,255,0.6);
       border-radius: 50%;
       cursor: pointer;
-      transition: all 0.4s ease;
     }
 
     .dot.active {
       background: #ffffff;
-      width: 22px;
+      width: 20px;
       border-radius: 10px;
     }
 
@@ -302,69 +266,54 @@
     .passport-card {
       background: linear-gradient(135deg, #fffde7 0%, #fff59d 100%);
       border: 2px solid #ffe082;
-      border-radius: 20px;
-      padding: 18px;
-      position: relative;
-      box-shadow: 0 6px 18px rgba(255, 204, 0, 0.15);
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-    }
-
-    .passport-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 25px rgba(255, 204, 0, 0.25);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: 0 4px 14px rgba(255, 204, 0, 0.15);
     }
 
     .passport-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .passport-title-container {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .passport-logo {
-      width: 65px;
-      height: 65px;
+      width: 55px;
+      height: 55px;
       background: #fff;
-      border-radius: 14px;
-      padding: 5px;
+      border-radius: 12px;
+      padding: 4px;
       border: 2px solid #ffe082;
     }
 
     .passport-title-container h2 {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 800;
-      line-height: 1.1;
       color: #1a237e;
+      line-height: 1.1;
     }
 
     .points-badge {
       background: #ffffff;
-      padding: 6px 12px;
+      padding: 5px 10px;
       border-radius: 20px;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
       color: #1a237e;
-      display: flex;
-      align-items: center;
-      gap: 5px;
       border: 1px solid #ffe082;
     }
-
-    .points-badge i { color: #ffb300; }
 
     .passport-subtitle {
       font-size: 11px;
       color: #666;
-      display: flex;
-      gap: 10px;
-      margin-left: 5px;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
       font-weight: 600;
     }
 
@@ -373,38 +322,32 @@
       border: none;
       width: 100%;
       padding: 12px;
-      border-radius: 20px;
+      border-radius: 14px;
       font-weight: 700;
       font-size: 14px;
       color: #000;
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      padding-right: 20px;
+      padding-right: 18px;
       gap: 8px;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(255, 204, 0, 0.4);
-      transition: all 0.3s ease;
-    }
-
-    .passport-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(255, 204, 0, 0.5);
+      box-shadow: 0 4px 10px rgba(255, 204, 0, 0.3);
     }
 
     /* Hub Grid */
     .hub-section {
       background: #ffffff;
-      border-radius: 20px;
-      padding: 18px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
       border: 1px solid #f0f0f0;
     }
 
     .hub-title {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 800;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       position: relative;
       display: inline-block;
     }
@@ -412,11 +355,11 @@
     .hub-title::after {
       content: '';
       position: absolute;
-      bottom: -6px;
+      bottom: -4px;
       left: 0;
       width: 100%;
-      height: 4px;
-      background: linear-gradient(90deg, #ffcc00, #ffe082);
+      height: 3px;
+      background: #ffcc00;
       border-radius: 2px;
     }
 
@@ -424,37 +367,38 @@
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 10px;
-      row-gap: 20px;
+      row-gap: 18px;
     }
 
     .hub-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      text-decoration: none;
+      border: none;
+      background: transparent;
+      cursor: pointer;
       color: #333;
       text-align: center;
-      cursor: pointer;
     }
 
     .icon-circle {
-      width: 50px;
-      height: 50px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       border: 2px solid #ffcc00;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 17px;
       color: #000;
       background: #fff;
       margin-bottom: 6px;
-      transition: all 0.3s ease;
+      transition: all 0.25s ease;
     }
 
     .hub-item:hover .icon-circle {
       background: #ffcc00;
-      transform: translateY(-4px) scale(1.1);
+      transform: translateY(-3px);
     }
 
     .hub-item span {
@@ -463,118 +407,319 @@
       line-height: 1.2;
     }
 
-    footer {
-      background: linear-gradient(135deg, #ffcc00 0%, #ffdb4d 100%);
-      text-align: center;
-      padding: 15px;
-      font-size: 11px;
-      font-weight: 600;
-      color: #000;
-      margin-top: auto;
+    /* --- JOIN TNSF PAGE SPECIFIC STYLES --- */
+    .join-banner {
+      background: linear-gradient(180deg, #fffde7 0%, #ffffff 100%);
+      padding: 20px 18px 10px 18px;
+      position: relative;
     }
 
-    /* --- FULL SCREEN MODALS BASE TRANSITION STYLES --- */
-    .page-modal {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      min-height: 100vh;
-      background: #f4f6f9;
-      z-index: 250;
+    .banner-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .join-title-group h2 {
+      font-size: 32px;
+      font-weight: 900;
+      color: #ffaa00;
+      line-height: 1;
+      letter-spacing: -0.5px;
+    }
+
+    .join-title-group span {
+      color: #0f172a;
+    }
+
+    .join-title-group p {
+      font-size: 12px;
+      color: #555;
+      font-weight: 600;
+      margin-top: 6px;
+    }
+
+    .slogan-badge {
+      font-family: 'Poppins', sans-serif;
+      font-style: italic;
+      font-weight: 700;
+      font-size: 13px;
+      color: #000;
+      text-align: right;
+      line-height: 1.2;
+      transform: rotate(-3deg);
+      border-bottom: 2px solid #ffaa00;
+      padding-bottom: 2px;
+    }
+
+    /* Form Container */
+    .form-container {
+      padding: 15px 18px 30px 18px;
       display: flex;
       flex-direction: column;
-      transform: translateY(100%) scale(0.95);
-      opacity: 0;
-      transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.5s ease;
-      overflow-y: auto;
-      pointer-events: none;
+      gap: 16px;
     }
 
-    .page-modal.active {
-      transform: translateY(0) scale(1);
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    /* Modal Shared Header */
-    .modal-header {
-      background: linear-gradient(135deg, #ffb700 0%, #ffcc00 100%);
-      padding: 14px 20px;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      box-shadow: 0 4px 12px rgba(255, 183, 0, 0.25);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-
-    .back-btn {
-      background: none;
-      border: none;
-      font-size: 22px;
-      color: #000;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-
-    .back-btn:hover {
-      transform: translateX(-4px);
-    }
-
-    .modal-header-brand {
+    .section-head {
       display: flex;
       align-items: center;
       gap: 10px;
+      margin-bottom: 4px;
     }
 
-    .modal-header-brand img {
-      width: 38px;
-      height: 38px;
+    .section-head-icon {
+      width: 30px;
+      height: 30px;
+      background: #ffaa00;
       border-radius: 50%;
-      background: #fff;
-      padding: 2px;
-    }
-
-    .modal-header-text h2 {
-      font-size: 18px;
-      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: #000;
-      line-height: 1.1;
+      font-size: 14px;
     }
 
-    .modal-header-text p {
-      font-size: 11px;
-      font-weight: 700;
-      color: #222;
-      letter-spacing: 0.5px;
+    .section-head h3 {
+      font-size: 16px;
+      font-weight: 800;
+      color: #111;
     }
 
-    /* --- MY TNSF PASSPORT STYLES --- */
-    .passport-page-body {
-      padding: 20px;
+    /* 2 Column Form Grid */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .input-group {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 5px;
+    }
+
+    .input-group.full-width {
+      grid-column: span 2;
+    }
+
+    .input-group label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .input-group label span {
+      color: #e53935;
+    }
+
+    .field-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .field-wrapper i {
+      position: absolute;
+      left: 12px;
+      color: #777;
+      font-size: 13px;
+    }
+
+    .field-wrapper input,
+    .field-wrapper select,
+    .field-wrapper textarea {
+      width: 100%;
+      padding: 10px 10px 10px 34px;
+      font-size: 11px;
+      font-weight: 500;
+      border: 1px solid #dcdfe6;
+      border-radius: 10px;
+      background: #ffffff;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .field-wrapper textarea {
+      height: 60px;
+      resize: none;
+      padding-top: 8px;
+    }
+
+    .field-wrapper input:focus,
+    .field-wrapper select:focus,
+    .field-wrapper textarea:focus {
+      border-color: #ffaa00;
+    }
+
+    .field-wrapper select {
+      appearance: none;
+      cursor: pointer;
+    }
+
+    .field-wrapper .select-arrow {
+      position: absolute;
+      right: 12px;
+      left: auto;
+      pointer-events: none;
+      font-size: 11px;
+    }
+
+    /* Membership Box */
+    .membership-card {
+      background: #fffde7;
+      border: 1.5px solid #ffcc00;
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+
+    .radio-circle {
+      width: 18px;
+      height: 18px;
+      border: 2px solid #ffaa00;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .radio-circle::after {
+      content: '';
+      width: 10px;
+      height: 10px;
+      background: #0f172a;
+      border-radius: 50%;
+    }
+
+    .member-icon {
+      width: 32px;
+      height: 32px;
+      background: #ffcc00;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    .member-info h5 {
+      font-size: 12px;
+      font-weight: 800;
+      color: #000;
+    }
+
+    .member-info p {
+      font-size: 10px;
+      color: #666;
+    }
+
+    /* Upload Box */
+    .upload-box {
+      border: 1.5px dashed #cccccc;
+      border-radius: 12px;
+      padding: 15px;
+      text-align: center;
+      background: #ffffff;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .upload-box i {
+      font-size: 24px;
+      color: #475569;
+    }
+
+    .upload-box p {
+      font-size: 11px;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .upload-box span {
+      font-size: 9px;
+      color: #888;
+    }
+
+    /* Declaration */
+    .declaration-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 5px;
+    }
+
+    .declaration-group input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      margin-top: 2px;
+      accent-color: #ffaa00;
+      cursor: pointer;
+    }
+
+    .declaration-group label {
+      font-size: 10px;
+      color: #444;
+      line-weight: 1.3;
+      font-weight: 500;
+    }
+
+    /* Form Buttons */
+    .submit-btn {
+      background: linear-gradient(135deg, #ffcc00 0%, #ffaa00 100%);
+      border: none;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 800;
+      color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(255, 170, 0, 0.3);
+      width: 100%;
+      margin-top: 5px;
+    }
+
+    .security-note {
+      text-align: center;
+      font-size: 10px;
+      font-weight: 600;
+      color: #444;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .security-note i {
+      color: #22c55e;
+    }
+
+    /* --- MY PASSPORT SCREEN STYLES --- */
+    .passport-page-body {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
     }
 
     .digital-passport-card {
       background: #ffffff;
-      border-radius: 24px;
-      padding: 24px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.05);
       display: flex;
       flex-direction: column;
-      gap: 20px;
-      position: relative;
+      gap: 18px;
       border: 1px solid #f0f0f0;
-      animation: cardPopIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both;
-    }
-
-    @keyframes cardPopIn {
-      from { opacity: 0; transform: translateY(30px) scale(0.92); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     .digital-card-top {
@@ -584,23 +729,22 @@
     }
 
     .card-title-group h3 {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 800;
       color: #ff9800;
       line-height: 1.2;
-      letter-spacing: 0.3px;
     }
 
     .card-title-group p {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
       color: #e67e22;
       margin-top: 2px;
     }
 
     .qr-box img {
-      width: 70px;
-      height: 70px;
+      width: 65px;
+      height: 65px;
       border-radius: 8px;
       border: 1px solid #eee;
     }
@@ -608,110 +752,86 @@
     .passport-stats-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+      gap: 10px;
     }
 
     .stat-box {
       background: #f8f9fa;
-      border-radius: 16px;
-      padding: 14px 8px;
+      border-radius: 14px;
+      padding: 12px 6px;
       text-align: center;
-      transition: transform 0.3s ease;
-    }
-
-    .stat-box:hover {
-      transform: translateY(-3px);
-      background: #fff8e1;
     }
 
     .stat-box h4 {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 800;
       color: #f39c12;
     }
 
     .stat-box p {
-      font-size: 10px;
+      font-size: 9px;
       color: #777;
       font-weight: 600;
-      margin-top: 4px;
+      margin-top: 2px;
     }
 
     .user-profile-row {
       display: flex;
       align-items: center;
-      gap: 16px;
-      margin-top: 5px;
+      gap: 14px;
     }
 
     .user-avatar {
-      width: 70px;
-      height: 70px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       object-fit: cover;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
       border: 2px solid #ffcc00;
     }
 
     .user-details h4 {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 800;
       color: #f39c12;
-      line-height: 1.2;
     }
 
     .user-details p {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
       color: #f39c12;
-      margin-top: 2px;
     }
 
     .passport-actions {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 15px;
-      animation: cardPopIn 0.8s ease 0.3s both;
+      gap: 12px;
     }
 
     .action-btn {
       border: none;
-      padding: 14px 10px;
-      border-radius: 16px;
-      font-size: 14px;
+      padding: 12px;
+      border-radius: 14px;
+      font-size: 13px;
       font-weight: 700;
       color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 8px;
       cursor: pointer;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
     }
 
-    .action-btn.download {
-      background: linear-gradient(135deg, #ffa726 0%, #fb8c00 100%);
-    }
-
-    .action-btn.share {
-      background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
-    }
-
-    .action-btn:hover {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 8px 22px rgba(0,0,0,0.18);
-    }
+    .action-btn.download { background: linear-gradient(135deg, #ffa726 0%, #fb8c00 100%); }
+    .action-btn.share { background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%); }
 
     .activity-section {
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      animation: cardPopIn 0.8s ease 0.4s both;
+      gap: 10px;
     }
 
     .activity-section h3 {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 800;
       color: #1a1a1a;
       display: flex;
@@ -722,551 +842,382 @@
     .activity-list {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
 
     .activity-card {
       background: #ffffff;
-      border-radius: 18px;
-      padding: 14px 18px;
+      border-radius: 14px;
+      padding: 12px 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-      transition: transform 0.3s ease;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.02);
     }
 
     .activity-left {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
     }
 
     .activity-icon {
-      width: 45px;
-      height: 45px;
+      width: 40px;
+      height: 40px;
       background: #fff3e0;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 16px;
       color: #29b6f6;
     }
 
-    .activity-details h5 {
-      font-size: 15px;
-      font-weight: 700;
-      color: #222;
-    }
+    .activity-details h5 { font-size: 14px; font-weight: 700; }
+    .activity-details p { font-size: 11px; color: #888; }
+    .activity-points { font-size: 15px; font-weight: 800; color: #29b6f6; }
 
-    .activity-details p {
-      font-size: 12px;
-      color: #888;
-      margin-top: 2px;
-    }
-
-    .activity-points {
-      font-size: 16px;
-      font-weight: 800;
-      color: #29b6f6;
-    }
-
-    /* --- JOIN TNSF PAGE STYLES --- */
-    .join-tnsf-banner {
-      background: #ffffff;
-      padding: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom-left-radius: 30px;
-      border-bottom-right-radius: 30px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-      margin-bottom: 10px;
-    }
-
-    .join-banner-left h1 {
-      font-size: 34px;
-      font-weight: 900;
-      color: #0b1c39;
-      line-height: 1;
-      letter-spacing: -0.5px;
-    }
-
-    .join-banner-left h1 span {
-      color: #0b1c39;
-    }
-
-    .join-banner-left p {
-      font-size: 13px;
-      color: #555;
-      margin-top: 6px;
-      font-weight: 500;
-    }
-
-    .join-banner-right {
-      text-align: right;
-    }
-
-    .tagline-cursive {
-      font-family: 'Reenie Beanie', cursive;
-      font-size: 26px;
-      color: #0b1c39;
-      line-height: 1.1;
-      transform: rotate(-4deg);
-      display: inline-block;
-      font-weight: 700;
-    }
-
-    .join-form-wrapper {
-      padding: 10px 18px 30px 18px;
-    }
-
-    .form-card {
-      background: #ffffff;
-      border-radius: 20px;
-      padding: 22px 18px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.05);
-      border: 1px solid #f0f0f0;
-      animation: cardPopIn 0.7s ease both;
-    }
-
-    .form-section-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 22px;
-    }
-
-    .section-icon-badge {
-      width: 36px;
-      height: 36px;
-      background: #ffcc00;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #000;
-      font-size: 16px;
-    }
-
-    .form-section-header h3 {
-      font-size: 18px;
-      font-weight: 800;
-      color: #111;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    @media (max-width: 400px) {
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .form-group.full-width {
-      grid-column: 1 / -1;
-    }
-
-    .form-label {
-      font-size: 12px;
-      font-weight: 700;
-      color: #222;
-    }
-
-    .form-label span.required {
-      color: #e53935;
-    }
-
-    .input-wrapper {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-
-    .input-wrapper i.field-icon {
-      position: absolute;
-      left: 14px;
-      color: #666;
-      font-size: 14px;
-      pointer-events: none;
-    }
-
-    .input-control {
-      width: 100%;
-      height: 46px;
-      padding: 10px 14px 10px 42px;
-      border: 1.5px solid #e2e8f0;
-      border-radius: 12px;
-      font-size: 13px;
-      color: #333;
-      background-color: #fafafa;
-      outline: none;
-      transition: all 0.3s ease;
-    }
-
-    .input-control:focus {
-      border-color: #ffc107;
-      background-color: #fff;
-      box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.2);
-    }
-
-    .input-control::placeholder {
-      color: #a0aec0;
-      font-size: 12px;
-    }
-
-    select.input-control {
-      appearance: none;
-      -webkit-appearance: none;
-      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%3a4a5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-      background-repeat: no-repeat;
-      background-position: right 12px center;
-      background-size: 14px;
-    }
-
-    textarea.input-control {
-      height: 60px;
-      resize: none;
-      padding-top: 12px;
-    }
-
-    /* Custom Radio Box for Membership */
-    .membership-radio-card {
-      border: 2px solid #ffcc00;
-      background: #fffde7;
-      border-radius: 14px;
-      padding: 12px 14px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .custom-radio {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      border: 2px solid #000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .custom-radio::after {
-      content: '';
-      width: 10px;
-      height: 10px;
-      background: #000;
-      border-radius: 50%;
-    }
-
-    .radio-icon-box {
-      width: 32px;
-      height: 32px;
-      background: #e0e0e0;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      color: #000;
-    }
-
-    .radio-info h5 {
-      font-size: 13px;
-      font-weight: 800;
-      color: #000;
-    }
-
-    .radio-info p {
+    footer {
+      background: linear-gradient(135deg, #ffcc00 0%, #ffdb4d 100%);
+      text-align: center;
+      padding: 12px;
       font-size: 10px;
-      color: #666;
-    }
-
-    /* Upload Box */
-    .upload-box {
-      border: 2px dashed #cbd5e1;
-      border-radius: 14px;
-      height: 110px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: #fafafa;
-      cursor: pointer;
-      text-align: center;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .upload-box:hover {
-      border-color: #ffb700;
-      background: #fffdf0;
-    }
-
-    .upload-box i {
-      font-size: 26px;
-      color: #475569;
-      margin-bottom: 6px;
-    }
-
-    .upload-box p {
-      font-size: 11px;
       font-weight: 700;
-      color: #334155;
-    }
-
-    .upload-box span {
-      font-size: 9px;
-      color: #94a3b8;
-    }
-
-    .upload-box input[type="file"] {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      cursor: pointer;
-    }
-
-    .upload-preview {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      position: absolute;
-      top: 0;
-      left: 0;
-      display: none;
-    }
-
-    /* Terms & Declaration */
-    .terms-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      margin-top: 20px;
-    }
-
-    .terms-checkbox {
-      width: 18px;
-      height: 18px;
-      margin-top: 2px;
-      accent-color: #ffcc00;
-      cursor: pointer;
-    }
-
-    .terms-text {
-      font-size: 11px;
-      color: #475569;
-      line-height: 1.4;
-      font-weight: 500;
-    }
-
-    /* Submit Button */
-    .submit-btn {
-      background: linear-gradient(135deg, #ffcc00 0%, #ffc107 100%);
-      border: none;
-      width: 100%;
-      padding: 14px;
-      border-radius: 14px;
-      font-weight: 800;
-      font-size: 15px;
       color: #000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      cursor: pointer;
-      margin-top: 22px;
-      box-shadow: 0 6px 18px rgba(255, 193, 7, 0.4);
-      transition: all 0.3s ease;
-    }
-
-    .submit-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 22px rgba(255, 193, 7, 0.5);
-    }
-
-    .safety-note {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      margin-top: 16px;
-      font-size: 11px;
-      color: #64748b;
-      font-weight: 600;
-    }
-
-    .safety-note i {
-      color: #ffc107;
-    }
-
-    .form-footer-copyright {
-      text-align: center;
-      padding: 16px;
-      font-size: 11px;
-      font-weight: 600;
-      color: #000;
-      background: #ffcc00;
-      margin-top: 25px;
+      margin-top: auto;
     }
   </style>
 </head>
 <body>
 
   <div class="app-container">
-    
-    <!-- HOME SCREEN WRAPPER -->
-    <div class="home-screen" id="homeScreen">
-      <!-- Header -->
+
+    <!-- OVERLAY NAV MENU (Shared Across Views) -->
+    <div class="nav-overlay" id="navOverlay">
+      <button class="close-btn" onclick="toggleMenu()">&times;</button>
+      <div class="nav-links">
+        <button onclick="navigateTo('homeView')"><i class="fa-solid fa-house"></i> Home</button>
+        <button onclick="navigateTo('joinTnsfView')"><i class="fa-solid fa-user-plus"></i> Join TNSF</button>
+        <button onclick="navigateTo('passportView')"><i class="fa-solid fa-id-card"></i> My Passport</button>
+        <button onclick="toggleMenu()"><i class="fa-solid fa-image"></i> Gallery</button>
+        <button onclick="toggleMenu()"><i class="fa-solid fa-location-dot"></i> Constituencies</button>
+        <button onclick="toggleMenu()"><i class="fa-solid fa-user-tie"></i> Leadership</button>
+        <button onclick="toggleMenu()"><i class="fa-regular fa-calendar-check"></i> Events</button>
+        <button onclick="toggleMenu()"><i class="fa-solid fa-phone"></i> Contact Us</button>
+      </div>
+    </div>
+
+    <!-- ================= 1. HOME SCREEN VIEW ================= -->
+    <div class="page-view active" id="homeView">
       <header>
-        <a href="login.html" class="brand" title="Admin Login">
-          <img src="https://via.placeholder.com/100/ffcc00/000000?text=TNSF+Logo" alt="TNSF Logo">
-          <div class="brand-text">
-            <h1>TNSF</h1>
-            <p>KADAPA PARLIAMENT</p>
-          </div>
-        </a>
-        <button class="menu-btn" onclick="toggleMenu()" aria-label="Toggle Navigation Menu">
-          <i class="fa-solid fa-bars"></i>
-        </button>
+        <div class="header-left">
+          <a href="#" class="brand">
+            <img src="https://via.placeholder.com/100/ffcc00/000000?text=TNSF" alt="TNSF Logo">
+            <div class="brand-text">
+              <h1>TNSF</h1>
+              <p>KADAPA PARLIAMENT</p>
+            </div>
+          </a>
+        </div>
+        <button class="menu-btn" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
       </header>
 
-      <!-- Transparent Yellow Overlay Menu Bar -->
-      <div class="nav-overlay" id="navOverlay">
-        <button class="close-btn" onclick="toggleMenu()" aria-label="Close Menu">&times;</button>
-        <div class="nav-links">
-          <a href="#about"><i class="fa-solid fa-circle-info"></i> About Us</a>
-          <a onclick="openJoinTnsfPage()"><i class="fa-solid fa-user-plus"></i> Join TNSF</a>
-          <a href="gallery.html"><i class="fa-solid fa-image"></i> Gallery</a>
-          <a href="inbox.html"><i class="fa-solid fa-envelope"></i> Inbox</a>
-          <a href="constituencies.html"><i class="fa-solid fa-location-dot"></i> Constituencies</a>
-          <a href="leadership.html"><i class="fa-solid fa-user-tie"></i> Leadership</a>
-          <a href="events.html"><i class="fa-regular fa-calendar-check"></i> Events</a>
-          <a href="feedback.html"><i class="fa-solid fa-comment-dots"></i> Feedback</a>
-          <a href="contact.html"><i class="fa-solid fa-phone"></i> Contact Us</a>
-          <a href="donate.html"><i class="fa-solid fa-hand-holding-dollar"></i> Donate</a>
-        </div>
-      </div>
-
       <main>
-        <!-- Hero Auto Image Slider -->
+        <!-- Hero Image Slider -->
         <div class="hero-slider">
-          <div class="slides" id="slides">
-            <div class="slide active">
-              <img src="https://via.placeholder.com/800x400/ffcc00/000000?text=Empowering+Students" alt="Banner 1">
-            </div>
-            <div class="slide">
-              <img src="https://via.placeholder.com/800x400/000000/ffcc00?text=Building+a+Better+Tomorrow" alt="Banner 2">
-            </div>
-            <div class="slide">
-              <img src="https://via.placeholder.com/800x400/ffe082/000000?text=TNSF+Kadapa+Parliament" alt="Banner 3">
-            </div>
+          <div class="slides">
+            <div class="slide active"><img src="https://via.placeholder.com/800x400/ffcc00/000000?text=Empowering+Students" alt="Banner 1"></div>
+            <div class="slide"><img src="https://via.placeholder.com/800x400/000000/ffcc00?text=Building+a+Better+Tomorrow" alt="Banner 2"></div>
           </div>
-          <button class="slider-btn prev" onclick="moveSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
-          <button class="slider-btn next" onclick="moveSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
           <div class="slider-dots">
-            <span class="dot active" onclick="setSlide(0)"></span>
-            <span class="dot" onclick="setSlide(1)"></span>
-            <span class="dot" onclick="setSlide(2)"></span>
+            <span class="dot active"></span>
+            <span class="dot"></span>
           </div>
         </div>
 
-        <!-- My TNSF Passport Entry Card -->
+        <!-- Passport Card Trigger -->
         <div class="passport-card">
           <div class="passport-header">
             <div class="passport-title-container">
               <img src="https://via.placeholder.com/100/ffcc00/000000?text=TNSF" alt="Logo" class="passport-logo">
               <h2>My TNSF<br>Passport</h2>
             </div>
-            <div class="points-badge">
-              <i class="fa-solid fa-star"></i> 689 Rank
-            </div>
+            <div class="points-badge"><i class="fa-solid fa-star"></i> 689 Rank</div>
           </div>
-          <div class="passport-subtitle">
-            <span>Your Journey</span> • 
-            <span>Your Points</span> • 
-            <span>Your Growth</span>
-          </div>
-          <button class="passport-btn" onclick="openPassportPage()">
+          <div class="passport-subtitle"><span>Your Journey</span> • <span>Your Points</span> • <span>Your Growth</span></div>
+          <button class="passport-btn" onclick="navigateTo('passportView')">
             View My Passport <i class="fa-solid fa-arrow-right"></i>
           </button>
         </div>
 
         <!-- TNSF Hub -->
-        <div class="hub-section" id="hub">
+        <div class="hub-section">
           <h2 class="hub-title">TNSF Hub</h2>
           <div class="hub-grid">
-            <div class="hub-item" onclick="openJoinTnsfPage()">
+            <!-- Direct page redirection to Join TNSF -->
+            <button class="hub-item" onclick="navigateTo('joinTnsfView')">
               <div class="icon-circle"><i class="fa-solid fa-user-group"></i></div>
               <span>Join TNSF</span>
-            </div>
-            <a href="student-help.html" class="hub-item">
+            </button>
+            <button class="hub-item" onclick="navigateTo('passportView')">
+              <div class="icon-circle"><i class="fa-solid fa-id-card"></i></div>
+              <span>Passport</span>
+            </button>
+            <button class="hub-item">
               <div class="icon-circle"><i class="fa-solid fa-graduation-cap"></i></div>
               <span>Student Help</span>
-            </a>
-            <a href="gallery.html" class="hub-item">
+            </button>
+            <button class="hub-item">
               <div class="icon-circle"><i class="fa-solid fa-image"></i></div>
               <span>Gallery</span>
-            </a>
-            <a href="inbox.html" class="hub-item">
+            </button>
+            <button class="hub-item">
               <div class="icon-circle"><i class="fa-solid fa-envelope"></i></div>
               <span>Inbox</span>
-            </a>
-            <a href="constituencies.html" class="hub-item">
+            </button>
+            <button class="hub-item">
               <div class="icon-circle"><i class="fa-solid fa-location-dot"></i></div>
               <span>Constituencies</span>
-            </a>
-            <a href="leadership.html" class="hub-item">
+            </button>
+            <button class="hub-item">
               <div class="icon-circle"><i class="fa-solid fa-user-tie"></i></div>
               <span>Leadership</span>
-            </a>
-            <a href="events.html" class="hub-item">
+            </button>
+            <button class="hub-item">
               <div class="icon-circle"><i class="fa-regular fa-calendar-check"></i></div>
               <span>Events</span>
-            </a>
-            <a href="feedback.html" class="hub-item">
+            </button>
+            <button class="hub-item">
               <div class="icon-circle"><i class="fa-solid fa-comment-dots"></i></div>
               <span>Feedback</span>
-            </a>
-            <a href="contact.html" class="hub-item">
+            </button>
+            <button class="hub-item">
               <div class="icon-circle"><i class="fa-solid fa-phone"></i></div>
               <span>Contact Us</span>
-            </a>
-            <a href="donate.html" class="hub-item">
-              <div class="icon-circle"><i class="fa-solid fa-hands-holding-circle"></i></div>
-              <span>Donate</span>
-            </a>
+            </button>
           </div>
         </div>
       </main>
 
-      <!-- Footer -->
-      <footer>
-        © 2026 TNSF KADAPA PARLIAMENT | All Rights Reserved
-      </footer>
+      <footer>Copy 2026 TNSF KADAPA PARLIAMENT all rights reserved</footer>
     </div>
 
-    <!-- MY TNSF PASSPORT FULL SCREEN MODAL -->
-    <div class="page-modal" id="passportPage">
-      <div class="modal-header">
-        <button class="back-btn" onclick="closeModal('passportPage')"><i class="fa-solid fa-arrow-left"></i></button>
-        <h2>My TNSF Passport</h2>
+    <!-- ================= 2. JOIN TNSF SCREEN VIEW ================= -->
+    <div class="page-view" id="joinTnsfView">
+      <header>
+        <div class="header-left">
+          <button class="back-nav-btn" onclick="navigateTo('homeView')"><i class="fa-solid fa-arrow-left"></i></button>
+          <a href="#" class="brand">
+            <img src="https://via.placeholder.com/100/ffcc00/000000?text=TNSF" alt="TNSF Logo">
+            <div class="brand-text">
+              <h1>TNSF</h1>
+              <p>KADAPA PARLIAMENT</p>
+            </div>
+          </a>
+        </div>
+        <button class="menu-btn" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
+      </header>
+
+      <!-- Banner -->
+      <div class="join-banner">
+        <div class="banner-top-row">
+          <div class="join-title-group">
+            <h2>Join <span>TNSF</span></h2>
+            <p>Become a member of TNSF Kadapa Parliament</p>
+          </div>
+          <div class="slogan-badge">
+            Students<br>For a<br>Better Tomorrow
+          </div>
+        </div>
       </div>
+
+      <!-- Application Form -->
+      <div class="form-container">
+        <div class="section-head">
+          <div class="section-head-icon"><i class="fa-solid fa-user"></i></div>
+          <h3>Personal Details</h3>
+        </div>
+
+        <form onsubmit="handleFormSubmit(event)">
+          <div class="form-grid">
+            
+            <!-- Full Name -->
+            <div class="input-group">
+              <label>Full Name <span>*</span></label>
+              <div class="field-wrapper">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" placeholder="Enter your full name" required>
+              </div>
+            </div>
+
+            <!-- Mobile Number -->
+            <div class="input-group">
+              <label>Mobile Number <span>*</span></label>
+              <div class="field-wrapper">
+                <i class="fa-solid fa-phone"></i>
+                <input type="tel" placeholder="Enter mobile number" required>
+              </div>
+            </div>
+
+            <!-- Email Address -->
+            <div class="input-group">
+              <label>Email Address <span>*</span></label>
+              <div class="field-wrapper">
+                <i class="fa-solid fa-envelope"></i>
+                <input type="email" placeholder="Enter email address" required>
+              </div>
+            </div>
+
+            <!-- Date of Birth -->
+            <div class="input-group">
+              <label>Date of Birth <span>*</span></label>
+              <div class="field-wrapper">
+                <i class="fa-regular fa-calendar"></i>
+                <input type="text" placeholder="DD/MM/YYYY" required>
+              </div>
+            </div>
+
+            <!-- Gender -->
+            <div class="input-group">
+              <label>Gender <span>*</span></label>
+              <div class="field-wrapper">
+                <i class="fa-solid fa-user"></i>
+                <select required>
+                  <option value="" disabled selected>Select gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+                <i class="fa-solid fa-chevron-down select-arrow"></i>
+              </div>
+            </div>
+
+            <!-- District -->
+            <div class="input-group">
+              <label>District <span>*</span></label>
+              <div class="field-wrapper">
+                <i class="fa-solid fa-location-dot"></i>
+                <select required>
+                  <option value="" disabled selected>Select district</option>
+                  <option value="kadapa">Kadapa</option>
+                </select>
+                <i class="fa-solid fa-chevron-down select-arrow"></i>
+              </div>
+            </div>
+
+            <!-- Constituency -->
+            <div class="input-group">
+              <label>Constituency <span>*</span></label>
+              <div class="field-wrapper">
+                <i class="fa-solid fa-location-dot"></i>
+                <select required>
+                  <option value="" disabled selected>Select constituency</option>
+                  <option value="kadapa">Kadapa</option>
+                  <option value="proddatur">Proddatur</option>
+                  <option value="pulivendula">Pulivendula</option>
+                  <option value="mydukur">Mydukur</option>
+                </select>
+                <i class="fa-solid fa-chevron-down select-arrow"></i>
+              </div>
+            </div>
+
+            <!-- College/Institution -->
+            <div class="input-group">
+              <label>College / Institution <span>*</span></label>
+              <div class="field-wrapper">
+                <i class="fa-solid fa-building-columns"></i>
+                <input type="text" placeholder="Enter college / institution name" required>
+              </div>
+            </div>
+
+            <!-- Qualification -->
+            <div class="input-group">
+              <label>Course / Qualification <span>*</span></label>
+              <div class="field-wrapper">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <select required>
+                  <option value="" disabled selected>Select course / qualification</option>
+                  <option value="btech">B.Tech / B.E.</option>
+                  <option value="degree">Degree (B.Sc / B.Com / B.A)</option>
+                  <option value="inter">Intermediate</option>
+                  <option value="diploma">Diploma</option>
+                </select>
+                <i class="fa-solid fa-chevron-down select-arrow"></i>
+              </div>
+            </div>
+
+            <!-- Address -->
+            <div class="input-group">
+              <label>Address <span>*</span></label>
+              <div class="field-wrapper">
+                <i class="fa-solid fa-house"></i>
+                <textarea placeholder="Enter your complete address" required></textarea>
+              </div>
+            </div>
+
+            <!-- Membership Type -->
+            <div class="input-group full-width">
+              <label>Membership Type <span>*</span></label>
+              <div class="membership-card">
+                <div class="radio-circle"></div>
+                <div class="member-icon"><i class="fa-solid fa-user"></i></div>
+                <div class="member-info">
+                  <h5>Student Member</h5>
+                  <p>For students only</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Profile Photo Upload -->
+            <div class="input-group full-width">
+              <label>Profile Photo <span>*</span></label>
+              <div class="upload-box" onclick="document.getElementById('photoInput').click()">
+                <i class="fa-solid fa-camera"></i>
+                <p>Tap to upload photo</p>
+                <span>JPG, PNG (Max 5MB)</span>
+                <input type="file" id="photoInput" style="display:none;" accept="image/*">
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Declaration Checkbox -->
+          <div class="declaration-group" style="margin-top:15px;">
+            <input type="checkbox" id="declare" required>
+            <label for="declare">
+              I hereby declare that the information provided above is true and correct. I am willing to be a part of TNSF Kadapa Parliament and work for student welfare.
+            </label>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="submit-btn">
+            <i class="fa-solid fa-paper-plane"></i> Submit Application
+          </button>
+
+          <div class="security-note" style="margin-top:12px;">
+            <i class="fa-solid fa-shield-halved"></i> Your details are safe and used only for TNSF membership.
+          </div>
+        </form>
+      </div>
+
+      <footer>Copy 2026 TNSF KADAPA PARLIAMENT all rights reserved</footer>
+    </div>
+
+    <!-- ================= 3. MY PASSPORT SCREEN VIEW ================= -->
+    <div class="page-view" id="passportView">
+      <header>
+        <div class="header-left">
+          <button class="back-nav-btn" onclick="navigateTo('homeView')"><i class="fa-solid fa-arrow-left"></i></button>
+          <a href="#" class="brand">
+            <img src="https://via.placeholder.com/100/ffcc00/000000?text=TNSF" alt="TNSF Logo">
+            <div class="brand-text">
+              <h1>TNSF</h1>
+              <p>KADAPA PARLIAMENT</p>
+            </div>
+          </a>
+        </div>
+        <button class="menu-btn" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
+      </header>
 
       <div class="passport-page-body">
         <div class="digital-passport-card" id="digitalPassportCard">
@@ -1326,7 +1277,6 @@
               </div>
               <div class="activity-points">+0.10</div>
             </div>
-
             <div class="activity-card">
               <div class="activity-left">
                 <div class="activity-icon"><i class="fa-regular fa-newspaper"></i></div>
@@ -1337,316 +1287,48 @@
               </div>
               <div class="activity-points">+0.10</div>
             </div>
-
-            <div class="activity-card">
-              <div class="activity-left">
-                <div class="activity-icon"><i class="fa-regular fa-newspaper"></i></div>
-                <div class="activity-details">
-                  <h5>news view</h5>
-                  <p>2 hours ago</p>
-                </div>
-              </div>
-              <div class="activity-points">+0.10</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- JOIN TNSF REGISTRATION FULL SCREEN MODAL -->
-    <div class="page-modal" id="joinTnsfPage">
-      <div class="modal-header">
-        <button class="back-btn" onclick="closeModal('joinTnsfPage')"><i class="fa-solid fa-arrow-left"></i></button>
-        <div class="modal-header-brand">
-          <img src="https://via.placeholder.com/100/ffcc00/000000?text=TNSF" alt="TNSF Logo">
-          <div class="modal-header-text">
-            <h2>TNSF</h2>
-            <p>KADAPA PARLIAMENT</p>
           </div>
         </div>
       </div>
 
-      <!-- Top Yellow Banner -->
-      <div class="join-tnsf-banner">
-        <div class="join-banner-left">
-          <h1>Join TNSF</h1>
-          <p>Become a member of TNSF Kadapa Parliament</p>
-        </div>
-        <div class="join-banner-right">
-          <div class="tagline-cursive">Students<br>For a<br>Better Tomorrow</div>
-        </div>
-      </div>
-
-      <!-- Form Container -->
-      <div class="join-form-wrapper">
-        <form class="form-card" onsubmit="handleFormSubmit(event)">
-          <div class="form-section-header">
-            <div class="section-icon-badge">
-              <i class="fa-solid fa-user"></i>
-            </div>
-            <h3>Personal Details</h3>
-          </div>
-
-          <div class="form-grid">
-            <!-- Full Name -->
-            <div class="form-group">
-              <label class="form-label">Full Name <span class="required">*</span></label>
-              <div class="input-wrapper">
-                <i class="fa-solid fa-user field-icon"></i>
-                <input type="text" class="input-control" placeholder="Enter your full name" required>
-              </div>
-            </div>
-
-            <!-- Mobile Number -->
-            <div class="form-group">
-              <label class="form-label">Mobile Number <span class="required">*</span></label>
-              <div class="input-wrapper">
-                <i class="fa-solid fa-phone field-icon"></i>
-                <input type="tel" class="input-control" placeholder="Enter mobile number" required>
-              </div>
-            </div>
-
-            <!-- Email Address -->
-            <div class="form-group">
-              <label class="form-label">Email Address <span class="required">*</span></label>
-              <div class="input-wrapper">
-                <i class="fa-solid fa-envelope field-icon"></i>
-                <input type="email" class="input-control" placeholder="Enter email address" required>
-              </div>
-            </div>
-
-            <!-- Date of Birth -->
-            <div class="form-group">
-              <label class="form-label">Date of Birth <span class="required">*</span></label>
-              <div class="input-wrapper">
-                <i class="fa-regular fa-calendar-days field-icon"></i>
-                <input type="text" class="input-control" placeholder="DD/MM/YYYY" required>
-              </div>
-            </div>
-
-            <!-- Gender -->
-            <div class="form-group">
-              <label class="form-label">Gender <span class="required">*</span></label>
-              <div class="input-wrapper">
-                <i class="fa-solid fa-user-group field-icon"></i>
-                <select class="input-control" required>
-                  <option value="" disabled selected>Select gender</option>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- District -->
-            <div class="form-group">
-              <label class="form-label">District <span class="required">*</span></label>
-              <div class="input-wrapper">
-                <i class="fa-solid fa-location-dot field-icon"></i>
-                <select class="input-control" required>
-                  <option value="" disabled selected>Select district</option>
-                  <option value="Kadapa">Kadapa</option>
-                  <option value="Annamayya">Annamayya</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- Constituency -->
-            <div class="form-group">
-              <label class="form-label">Constituency <span class="required">*</span></label>
-              <div class="input-wrapper">
-                <i class="fa-solid fa-location-dot field-icon"></i>
-                <select class="input-control" required>
-                  <option value="" disabled selected>Select constituency</option>
-                  <option value="Kadapa">Kadapa</option>
-                  <option value="Pulivendula">Pulivendula</option>
-                  <option value="Proddatur">Proddatur</option>
-                  <option value="Kamalapuram">Kamalapuram</option>
-                  <option value="Jammalamadugu">Jammalamadugu</option>
-                  <option value="Mydukur">Mydukur</option>
-                  <option value="Badvel">Badvel</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- College / Institution -->
-            <div class="form-group">
-              <label class="form-label">College / Institution <span class="required">*</span></label>
-              <div class="input-wrapper">
-                <i class="fa-solid fa-building-columns field-icon"></i>
-                <input type="text" class="input-control" placeholder="Enter college / institution name" required>
-              </div>
-            </div>
-
-            <!-- Course / Qualification -->
-            <div class="form-group">
-              <label class="form-label">Course / Qualification <span class="required">*</span></label>
-              <div class="input-wrapper">
-                <i class="fa-solid fa-graduation-cap field-icon"></i>
-                <select class="input-control" required>
-                  <option value="" disabled selected>Select course / qualification</option>
-                  <option value="B.Tech">B.Tech / B.E.</option>
-                  <option value="Degree">Degree / B.Sc / B.Com</option>
-                  <option value="Intermediate">Intermediate</option>
-                  <option value="Post Graduation">Post Graduation (PG)</option>
-                  <option value="Diploma">Diploma</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- Address -->
-            <div class="form-group">
-              <label class="form-label">Address <span class="required">*</span></label>
-              <div class="input-wrapper">
-                <i class="fa-solid fa-house field-icon"></i>
-                <textarea class="input-control" placeholder="Enter your complete address" required></textarea>
-              </div>
-            </div>
-
-            <!-- Membership Type Radio Card -->
-            <div class="form-group">
-              <label class="form-label">Membership Type <span class="required">*</span></label>
-              <div class="membership-radio-card">
-                <div class="custom-radio"></div>
-                <div class="radio-icon-box">
-                  <i class="fa-solid fa-user"></i>
-                </div>
-                <div class="radio-info">
-                  <h5>Student Member</h5>
-                  <p>For students only</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Upload Photo Box -->
-            <div class="form-group">
-              <label class="form-label">Profile Photo <span class="required">*</span></label>
-              <div class="upload-box" id="uploadContainer">
-                <i class="fa-solid fa-camera"></i>
-                <p>Tap to upload photo</p>
-                <span>JPG, PNG (Max 5MB)</span>
-                <input type="file" accept="image/*" onchange="previewProfilePhoto(event)" required>
-                <img id="photoPreview" class="upload-preview" alt="Preview">
-              </div>
-            </div>
-          </div>
-
-          <!-- Terms Checkbox -->
-          <div class="terms-row">
-            <input type="checkbox" class="terms-checkbox" id="declaration" required>
-            <label for="declaration" class="terms-text">
-              I hereby declare that the information provided above is true and correct.
-              I am willing to be a part of TNSF Kadapa Parliament and work for student welfare.
-            </label>
-          </div>
-
-          <!-- Submit Button -->
-          <button type="submit" class="submit-btn">
-            <i class="fa-solid fa-paper-plane"></i> Submit Application
-          </button>
-
-          <!-- Security Note -->
-          <div class="safety-note">
-            <i class="fa-solid fa-shield-halved"></i> Your details are safe and used only for TNSF membership.
-          </div>
-        </form>
-
-        <div class="form-footer-copyright">
-          Copy 2026 TNSF KADAPA PARLIAMENT all rights reserved
-        </div>
-      </div>
+      <footer>Copy 2026 TNSF KADAPA PARLIAMENT all rights reserved</footer>
     </div>
 
   </div>
-
   <script>
-    // --- Navigation Overlay Toggle ---
+    // --- Page Routing / Redirection Function ---
+    function navigateTo(targetPageId) {
+      // Close overlay menu if open
+      document.getElementById('navOverlay').classList.remove('active');
+
+      // Hide all pages
+      const pages = document.querySelectorAll('.page-view');
+      pages.forEach(page => page.classList.remove('active'));
+
+      // Show targeted page view
+      const targetPage = document.getElementById(targetPageId);
+      if (targetPage) {
+        targetPage.classList.add('active');
+        window.scrollTo(0, 0);
+      }
+    }
+
+    // --- Overlay Navigation Toggle ---
     function toggleMenu() {
       document.getElementById('navOverlay').classList.toggle('active');
     }
 
-    // --- Hero Image Slider ---
-    let currentSlide = 0;
-    const slideElements = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dot');
-    const totalSlides = slideElements.length;
-    let autoSlideInterval;
-
-    function showSlide(index) {
-      if (index >= totalSlides) currentSlide = 0;
-      else if (index < 0) currentSlide = totalSlides - 1;
-      else currentSlide = index;
-
-      slideElements.forEach((s, idx) => s.classList.toggle('active', idx === currentSlide));
-      dots.forEach((dot, idx) => dot.classList.toggle('active', idx === currentSlide));
-    }
-
-    function moveSlide(step) {
-      showSlide(currentSlide + step);
-      resetAutoSlider();
-    }
-
-    function setSlide(index) {
-      showSlide(index);
-      resetAutoSlider();
-    }
-
-    function startAutoSlider() {
-      autoSlideInterval = setInterval(() => moveSlide(1), 3500);
-    }
-
-    function resetAutoSlider() {
-      clearInterval(autoSlideInterval);
-      startAutoSlider();
-    }
-    startAutoSlider();
-
-    // --- Page Transitions & Minimise Animation Logic ---
-    function openPassportPage() {
-      document.getElementById('homeScreen').classList.add('minimized');
-      document.getElementById('passportPage').classList.add('active');
-    }
-
-    function openJoinTnsfPage() {
-      document.getElementById('navOverlay').classList.remove('active');
-      document.getElementById('homeScreen').classList.add('minimized');
-      document.getElementById('joinTnsfPage').classList.add('active');
-    }
-
-    function closeModal(pageId) {
-      document.getElementById(pageId).classList.remove('active');
-      document.getElementById('homeScreen').classList.remove('minimized');
-    }
-
-    // --- Image Preview Logic for Registration Photo Upload ---
-    function previewProfilePhoto(event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          const previewImg = document.getElementById('photoPreview');
-          previewImg.src = e.target.result;
-          previewImg.style.display = 'block';
-        }
-        reader.readAsDataURL(file);
-      }
-    }
-
-    // --- Application Submission Form Handler ---
+    // --- Application Form Submit Handler ---
     function handleFormSubmit(event) {
       event.preventDefault();
-      alert('Application Submitted Successfully! Welcome to TNSF Kadapa Parliament.');
-      closeModal('joinTnsfPage');
+      alert('Application Submitted Successfully!');
+      navigateTo('passportView');
     }
 
     // --- Download Card Image Feature ---
     function downloadPassportCard() {
       const cardElement = document.getElementById('digitalPassportCard');
-      html2canvas(cardElement, {
-        scale: 2,
-        useCORS: true,
-        backgroundColor: "#ffffff"
-      }).then(canvas => {
+      html2canvas(cardElement, { scale: 2, useCORS: true, backgroundColor: "#ffffff" }).then(canvas => {
         const link = document.createElement('a');
         link.download = 'TNSF_Passport_Card.png';
         link.href = canvas.toDataURL('image/png');
@@ -1661,7 +1343,6 @@
       
       canvas.toBlob(async (blob) => {
         const file = new File([blob], 'TNSF_Passport_Card.png', { type: 'image/png' });
-        
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
           try {
             await navigator.share({
@@ -1670,7 +1351,7 @@
               files: [file]
             });
           } catch (err) {
-            console.log('Share canceled or failed:', err);
+            console.log('Share canceled:', err);
           }
         } else {
           downloadPassportCard();
