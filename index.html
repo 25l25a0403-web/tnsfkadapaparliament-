@@ -20,11 +20,12 @@
     }
 
     body {
-      background-color: #eef2f5;
+      background-color: #1a1a1a;
       color: #333;
       display: flex;
       justify-content: center;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
     /* Mobile App Frame Viewport */
@@ -34,10 +35,11 @@
       background: #f7f9fc;
       min-height: 100vh;
       position: relative;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
       overflow-x: hidden;
       display: flex;
       flex-direction: column;
+      perspective: 1000px;
     }
 
     /* Screen Views Management */
@@ -46,11 +48,29 @@
       width: 100%;
       min-height: 100vh;
       flex-direction: column;
-      animation: fadeIn 0.4s ease-out forwards;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+      background: #f7f9fc;
     }
 
     .page-view.active {
       display: flex;
+      animation: fadeIn 0.35s ease-out forwards;
+    }
+
+    /* Home View Minimize Effect for Passport Opening */
+    .page-view.minimized {
+      display: flex !important;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      transform: scale(0.88) translateY(-20px);
+      opacity: 0.3;
+      filter: blur(2px);
+      pointer-events: none;
+      border-radius: 20px;
     }
 
     @keyframes fadeIn {
@@ -665,7 +685,7 @@
     .declaration-group label {
       font-size: 10px;
       color: #444;
-      line-weight: 1.3;
+      line-height: 1.3;
       font-weight: 500;
     }
 
@@ -703,7 +723,45 @@
       color: #22c55e;
     }
 
-    /* --- MY PASSPORT SCREEN STYLES --- */
+    /* --- MY PASSPORT SCREEN STYLES (MATCHES IMAGE 1 EXCLUSIVELY) --- */
+    .passport-overlay-page {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%) translateY(100%);
+      width: 100%;
+      max-width: 480px;
+      height: 100vh;
+      background: #f7f9fc;
+      z-index: 500;
+      overflow-y: auto;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .passport-overlay-page.active {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .passport-overlay-header {
+      background: linear-gradient(135deg, #ff9800 0%, #ffaa00 100%);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: #000;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .passport-overlay-header h2 {
+      font-size: 18px;
+      font-weight: 800;
+      color: #000;
+    }
+
     .passport-page-body {
       padding: 18px;
       display: flex;
@@ -809,16 +867,18 @@
 
     .action-btn {
       border: none;
-      padding: 12px;
+      padding: 14px;
       border-radius: 14px;
       font-size: 13px;
       font-weight: 700;
       color: #fff;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
       cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
     .action-btn.download { background: linear-gradient(135deg, #ffa726 0%, #fb8c00 100%); }
@@ -898,7 +958,7 @@
       <div class="nav-links">
         <button onclick="navigateTo('homeView')"><i class="fa-solid fa-house"></i> Home</button>
         <button onclick="navigateTo('joinTnsfView')"><i class="fa-solid fa-user-plus"></i> Join TNSF</button>
-        <button onclick="navigateTo('passportView')"><i class="fa-solid fa-id-card"></i> My Passport</button>
+        <button onclick="openPassportOverlay()"><i class="fa-solid fa-id-card"></i> My Passport</button>
         <button onclick="toggleMenu()"><i class="fa-solid fa-image"></i> Gallery</button>
         <button onclick="toggleMenu()"><i class="fa-solid fa-location-dot"></i> Constituencies</button>
         <button onclick="toggleMenu()"><i class="fa-solid fa-user-tie"></i> Leadership</button>
@@ -945,21 +1005,20 @@
             <div class="points-badge"><i class="fa-solid fa-star"></i> 689 Rank</div>
           </div>
           <div class="passport-subtitle"><span>Your Journey</span> • <span>Your Points</span> • <span>Your Growth</span></div>
-          <button class="passport-btn" onclick="navigateTo('passportView')">
+          <button class="passport-btn" onclick="openPassportOverlay()">
             View My Passport <i class="fa-solid fa-arrow-right"></i>
           </button>
         </div>
 
-        <!-- TNSF Hub -->
+        <!-- TNSF Hub Grid -->
         <div class="hub-section">
           <h2 class="hub-title">TNSF Hub</h2>
           <div class="hub-grid">
-            <!-- Direct page redirection to Join TNSF -->
             <button class="hub-item" onclick="navigateTo('joinTnsfView')">
               <div class="icon-circle"><i class="fa-solid fa-user-group"></i></div>
               <span>Join TNSF</span>
             </button>
-            <button class="hub-item" onclick="navigateTo('passportView')">
+            <button class="hub-item" onclick="openPassportOverlay()">
               <div class="icon-circle"><i class="fa-solid fa-id-card"></i></div>
               <span>Passport</span>
             </button>
@@ -1018,7 +1077,6 @@
         <button class="menu-btn" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
       </header>
 
-      <!-- Banner -->
       <div class="join-banner">
         <div class="banner-top-row">
           <div class="join-title-group">
@@ -1031,7 +1089,6 @@
         </div>
       </div>
 
-      <!-- Application Form -->
       <div class="form-container">
         <div class="section-head">
           <div class="section-head-icon"><i class="fa-solid fa-user"></i></div>
@@ -1040,8 +1097,6 @@
 
         <form onsubmit="handleFormSubmit(event)">
           <div class="form-grid">
-            
-            <!-- Full Name -->
             <div class="input-group">
               <label>Full Name <span>*</span></label>
               <div class="field-wrapper">
@@ -1050,7 +1105,6 @@
               </div>
             </div>
 
-            <!-- Mobile Number -->
             <div class="input-group">
               <label>Mobile Number <span>*</span></label>
               <div class="field-wrapper">
@@ -1059,7 +1113,6 @@
               </div>
             </div>
 
-            <!-- Email Address -->
             <div class="input-group">
               <label>Email Address <span>*</span></label>
               <div class="field-wrapper">
@@ -1068,7 +1121,6 @@
               </div>
             </div>
 
-            <!-- Date of Birth -->
             <div class="input-group">
               <label>Date of Birth <span>*</span></label>
               <div class="field-wrapper">
@@ -1077,7 +1129,6 @@
               </div>
             </div>
 
-            <!-- Gender -->
             <div class="input-group">
               <label>Gender <span>*</span></label>
               <div class="field-wrapper">
@@ -1086,13 +1137,11 @@
                   <option value="" disabled selected>Select gender</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
-                  <option value="other">Other</option>
                 </select>
                 <i class="fa-solid fa-chevron-down select-arrow"></i>
               </div>
             </div>
 
-            <!-- District -->
             <div class="input-group">
               <label>District <span>*</span></label>
               <div class="field-wrapper">
@@ -1105,7 +1154,6 @@
               </div>
             </div>
 
-            <!-- Constituency -->
             <div class="input-group">
               <label>Constituency <span>*</span></label>
               <div class="field-wrapper">
@@ -1113,15 +1161,11 @@
                 <select required>
                   <option value="" disabled selected>Select constituency</option>
                   <option value="kadapa">Kadapa</option>
-                  <option value="proddatur">Proddatur</option>
-                  <option value="pulivendula">Pulivendula</option>
-                  <option value="mydukur">Mydukur</option>
                 </select>
                 <i class="fa-solid fa-chevron-down select-arrow"></i>
               </div>
             </div>
 
-            <!-- College/Institution -->
             <div class="input-group">
               <label>College / Institution <span>*</span></label>
               <div class="field-wrapper">
@@ -1130,23 +1174,18 @@
               </div>
             </div>
 
-            <!-- Qualification -->
             <div class="input-group">
               <label>Course / Qualification <span>*</span></label>
               <div class="field-wrapper">
                 <i class="fa-solid fa-graduation-cap"></i>
                 <select required>
                   <option value="" disabled selected>Select course / qualification</option>
-                  <option value="btech">B.Tech / B.E.</option>
-                  <option value="degree">Degree (B.Sc / B.Com / B.A)</option>
-                  <option value="inter">Intermediate</option>
-                  <option value="diploma">Diploma</option>
+                  <option value="btech">B.Tech</option>
                 </select>
                 <i class="fa-solid fa-chevron-down select-arrow"></i>
               </div>
             </div>
 
-            <!-- Address -->
             <div class="input-group">
               <label>Address <span>*</span></label>
               <div class="field-wrapper">
@@ -1155,7 +1194,6 @@
               </div>
             </div>
 
-            <!-- Membership Type -->
             <div class="input-group full-width">
               <label>Membership Type <span>*</span></label>
               <div class="membership-card">
@@ -1168,7 +1206,6 @@
               </div>
             </div>
 
-            <!-- Profile Photo Upload -->
             <div class="input-group full-width">
               <label>Profile Photo <span>*</span></label>
               <div class="upload-box" onclick="document.getElementById('photoInput').click()">
@@ -1178,10 +1215,8 @@
                 <input type="file" id="photoInput" style="display:none;" accept="image/*">
               </div>
             </div>
-
           </div>
 
-          <!-- Declaration Checkbox -->
           <div class="declaration-group" style="margin-top:15px;">
             <input type="checkbox" id="declare" required>
             <label for="declare">
@@ -1189,7 +1224,6 @@
             </label>
           </div>
 
-          <!-- Submit Button -->
           <button type="submit" class="submit-btn">
             <i class="fa-solid fa-paper-plane"></i> Submit Application
           </button>
@@ -1203,21 +1237,12 @@
       <footer>Copy 2026 TNSF KADAPA PARLIAMENT all rights reserved</footer>
     </div>
 
-    <!-- ================= 3. MY PASSPORT SCREEN VIEW ================= -->
-    <div class="page-view" id="passportView">
-      <header>
-        <div class="header-left">
-          <button class="back-nav-btn" onclick="navigateTo('homeView')"><i class="fa-solid fa-arrow-left"></i></button>
-          <a href="#" class="brand">
-            <img src="https://via.placeholder.com/100/ffcc00/000000?text=TNSF" alt="TNSF Logo">
-            <div class="brand-text">
-              <h1>TNSF</h1>
-              <p>KADAPA PARLIAMENT</p>
-            </div>
-          </a>
-        </div>
-        <button class="menu-btn" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
-      </header>
+    <!-- ================= 3. MY PASSPORT OVERLAY VIEW (EXACT PASSPORT DESIGN) ================= -->
+    <div class="passport-overlay-page" id="passportOverlay">
+      <div class="passport-overlay-header">
+        <button class="back-nav-btn" onclick="closePassportOverlay()"><i class="fa-solid fa-arrow-left"></i></button>
+        <h2>My TNSF Passport</h2>
+      </div>
 
       <div class="passport-page-body">
         <div class="digital-passport-card" id="digitalPassportCard">
@@ -1257,10 +1282,12 @@
 
         <div class="passport-actions">
           <button class="action-btn download" onclick="downloadPassportCard()">
-            <i class="fa-solid fa-download"></i> Download Card
+            <i class="fa-solid fa-download"></i>
+            <span>Download Card</span>
           </button>
           <button class="action-btn share" onclick="sharePassportCard()">
-            <i class="fa-solid fa-share-nodes"></i> Share Passport
+            <i class="fa-solid fa-share-nodes"></i>
+            <span>Share Passport</span>
           </button>
         </div>
 
@@ -1269,7 +1296,7 @@
           <div class="activity-list">
             <div class="activity-card">
               <div class="activity-left">
-                <div class="activity-icon"><i class="fa-regular fa-newspaper"></i></div>
+                <div class="activity-icon"><i class="fa-solid fa-list-check"></i></div>
                 <div class="activity-details">
                   <h5>news view</h5>
                   <p>Just now</p>
@@ -1279,7 +1306,7 @@
             </div>
             <div class="activity-card">
               <div class="activity-left">
-                <div class="activity-icon"><i class="fa-regular fa-newspaper"></i></div>
+                <div class="activity-icon"><i class="fa-solid fa-list-check"></i></div>
                 <div class="activity-details">
                   <h5>news view</h5>
                   <p>40 minutes ago</p>
@@ -1290,22 +1317,18 @@
           </div>
         </div>
       </div>
-
-      <footer>Copy 2026 TNSF KADAPA PARLIAMENT all rights reserved</footer>
     </div>
 
   </div>
   <script>
-    // --- Page Routing / Redirection Function ---
+    // --- Direct Page View Navigation ---
     function navigateTo(targetPageId) {
-      // Close overlay menu if open
       document.getElementById('navOverlay').classList.remove('active');
+      closePassportOverlay();
 
-      // Hide all pages
       const pages = document.querySelectorAll('.page-view');
       pages.forEach(page => page.classList.remove('active'));
 
-      // Show targeted page view
       const targetPage = document.getElementById(targetPageId);
       if (targetPage) {
         targetPage.classList.add('active');
@@ -1313,22 +1336,32 @@
       }
     }
 
-    // --- Overlay Navigation Toggle ---
+    // --- Passport Overlay Minimization Effects ---
+    function openPassportOverlay() {
+      document.getElementById('navOverlay').classList.remove('active');
+      document.getElementById('homeView').classList.add('minimized');
+      document.getElementById('passportOverlay').classList.add('active');
+    }
+
+    function closePassportOverlay() {
+      document.getElementById('homeView').classList.remove('minimized');
+      document.getElementById('passportOverlay').classList.remove('active');
+    }
+
     function toggleMenu() {
       document.getElementById('navOverlay').classList.toggle('active');
     }
 
-    // --- Application Form Submit Handler ---
     function handleFormSubmit(event) {
       event.preventDefault();
       alert('Application Submitted Successfully!');
-      navigateTo('passportView');
+      openPassportOverlay();
     }
 
-    // --- Download Card Image Feature ---
+    // --- Download Passport Card as PNG ---
     function downloadPassportCard() {
       const cardElement = document.getElementById('digitalPassportCard');
-      html2canvas(cardElement, { scale: 2, useCORS: true, backgroundColor: "#ffffff" }).then(canvas => {
+      html2canvas(cardElement, { scale: 3, useCORS: true, backgroundColor: "#ffffff" }).then(canvas => {
         const link = document.createElement('a');
         link.download = 'TNSF_Passport_Card.png';
         link.href = canvas.toDataURL('image/png');
@@ -1336,10 +1369,10 @@
       });
     }
 
-    // --- Share Passport Feature ---
+    // --- Share Passport Card as Image File ---
     async function sharePassportCard() {
       const cardElement = document.getElementById('digitalPassportCard');
-      const canvas = await html2canvas(cardElement, { scale: 2, useCORS: true, backgroundColor: "#ffffff" });
+      const canvas = await html2canvas(cardElement, { scale: 3, useCORS: true, backgroundColor: "#ffffff" });
       
       canvas.toBlob(async (blob) => {
         const file = new File([blob], 'TNSF_Passport_Card.png', { type: 'image/png' });
@@ -1347,13 +1380,14 @@
           try {
             await navigator.share({
               title: 'My TNSF Passport',
-              text: 'Check out my TNSF Passport Card!',
+              text: 'Check out my digital TNSF Passport Card!',
               files: [file]
             });
           } catch (err) {
             console.log('Share canceled:', err);
           }
         } else {
+          // Fallback to downloading image if sharing files isn't supported on device
           downloadPassportCard();
         }
       });
