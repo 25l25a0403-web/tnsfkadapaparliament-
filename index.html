@@ -1,1447 +1,889 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TNSF KADAPA PARLIAMENT</title>
-  <!-- Google Fonts & Font Awesome Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    body {
-      background-color: #f2f4f8;
-      color: #333;
-      display: flex;
-      justify-content: center;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* Mobile Container Wrapper */
-    .app-container {
-      width: 100%;
-      max-width: 480px;
-      background: #f7f9fc;
-      min-height: 100vh;
-      position: relative;
-      box-shadow: 0 0 25px rgba(0,0,0,0.15);
-      overflow-x: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* Common Header */
-    header {
-      background: #ffcc00;
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      text-decoration: none;
-    }
-
-    .brand img {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: #fff;
-      padding: 2px;
-      object-fit: cover;
-    }
-
-    .brand-text h1 {
-      font-size: 18px;
-      font-weight: 800;
-      color: #000;
-      line-height: 1.1;
-    }
-
-    .brand-text p {
-      font-size: 11px;
-      font-weight: 700;
-      color: #222;
-      letter-spacing: 0.3px;
-    }
-
-    .menu-btn {
-      background: #e6b800;
-      border: none;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      color: #000;
-      font-size: 18px;
-    }
-
-    /* Navigation Drawer Overlay */
-    .nav-overlay {
-      position: fixed;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: 480px;
-      height: 100vh;
-      background: rgba(255, 204, 0, 0.96);
-      z-index: 300;
-      display: none;
-      flex-direction: column;
-      padding: 20px;
-      backdrop-filter: blur(5px);
-    }
-
-    .nav-overlay.active {
-      display: flex;
-    }
-
-    .close-btn {
-      align-self: flex-end;
-      background: none;
-      border: none;
-      font-size: 28px;
-      cursor: pointer;
-      color: #000;
-    }
-
-    .nav-links {
-      margin-top: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: #000;
-      font-size: 16px;
-      font-weight: 700;
-      padding: 12px 18px;
-      background: rgba(255,255,255,0.5);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    /* PAGE TRANSITION ENGINE */
-    .page-container {
-      position: relative;
-      flex: 1;
-      width: 100%;
-      overflow: hidden;
-    }
-
-    .page {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      min-height: 100%;
-      background: #f7f9fc;
-      opacity: 0;
-      pointer-events: none;
-      transform: translateX(100%);
-      transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.35s ease;
-      display: flex;
-      flex-direction: column;
-      padding-bottom: 20px;
-    }
-
-    .page.active {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateX(0);
-      position: relative;
-    }
-
-    .page.exit-left {
-      transform: translateX(-30%);
-      opacity: 0;
-    }
-
-    /* Common Banner Style for Sub-pages */
-    .subpage-banner {
-      background: linear-gradient(180deg, #fff standard, #fff9c4);
-      padding: 15px 16px;
-      border-bottom: 2px solid #ffe082;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .back-nav-btn {
-      background: #ffffff;
-      border: 1px solid #ffd54f;
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 700;
-      color: #333;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-
-    .banner-title {
-      font-size: 26px;
-      font-weight: 800;
-      color: #000;
-      line-height: 1.1;
-    }
-
-    .banner-subtitle {
-      font-size: 12px;
-      color: #555;
-      margin-top: 4px;
-      font-weight: 500;
-    }
-
-    .banner-tag {
-      position: absolute;
-      right: -10px;
-      bottom: 10px;
-      font-size: 24px;
-      font-weight: 800;
-      color: rgba(255, 204, 0, 0.25);
-      font-style: italic;
-      pointer-events: none;
-      transform: rotate(-5deg);
-    }
-
-    /* Footer */
-    footer {
-      background: #ffcc00;
-      text-align: center;
-      padding: 12px;
-      font-size: 11px;
-      font-weight: 700;
-      color: #000;
-      margin-top: auto;
-    }
-
-    /* -------------------------------------------------------------
-       HOME DASHBOARD
-    ------------------------------------------------------------- */
-    main.home-content {
-      padding: 15px;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    /* Hero Auto Image Slider */
-    .hero-slider {
-      position: relative;
-      width: 100%;
-      height: 190px;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    }
-
-    .slides {
-      display: flex;
-      width: 300%;
-      height: 100%;
-      transition: transform 0.5s ease-in-out;
-    }
-
-    .slide {
-      width: 33.333%;
-      height: 100%;
-    }
-
-    .slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .slider-dots {
-      position: absolute;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 6px;
-    }
-
-    .dot {
-      width: 8px;
-      height: 8px;
-      background: rgba(255,255,255,0.6);
-      border-radius: 50%;
-    }
-
-    .dot.active {
-      background: #ffffff;
-      width: 18px;
-      border-radius: 10px;
-    }
-
-    /* Passport Card */
-    .passport-card {
-      background: linear-gradient(135deg, #fffde7 0%, #fff59d 100%);
-      border: 2px solid #ffe082;
-      border-radius: 18px;
-      padding: 14px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-    }
-
-    .passport-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 8px;
-    }
-
-    .passport-title-container {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .passport-logo {
-      width: 50px;
-      height: 50px;
-      background: #fff;
-      border-radius: 10px;
-      padding: 4px;
-      border: 1px solid #ffe082;
-    }
-
-    .passport-title-container h2 {
-      font-size: 18px;
-      font-weight: 800;
-      line-height: 1.1;
-      color: #1a237e;
-    }
-
-    .points-badge {
-      background: #ffffff;
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 700;
-      color: #1a237e;
-      border: 1px solid #ffe082;
-    }
-
-    .passport-btn {
-      background: #ffcc00;
-      border: none;
-      width: 100%;
-      padding: 9px;
-      border-radius: 20px;
-      font-weight: 700;
-      font-size: 13px;
-      color: #000;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      padding-right: 15px;
-      gap: 8px;
-      cursor: pointer;
-    }
-
-    /* TNSF Hub Grid */
-    .hub-section {
-      background: #ffffff;
-      border-radius: 18px;
-      padding: 15px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-      border: 1px solid #eee;
-    }
-
-    .hub-title {
-      font-size: 20px;
-      font-weight: 800;
-      margin-bottom: 15px;
-      position: relative;
-      display: inline-block;
-    }
-
-    .hub-title::after {
-      content: '';
-      position: absolute;
-      bottom: -3px;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: #ffcc00;
-      border-radius: 2px;
-    }
-
-    .hub-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 10px;
-      row-gap: 16px;
-    }
-
-    .hub-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-decoration: none;
-      color: #333;
-      text-align: center;
-      cursor: pointer;
-    }
-
-    .icon-circle {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      border: 2px solid #ffcc00;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      color: #000;
-      background: #fff;
-      margin-bottom: 5px;
-      transition: transform 0.15s, background 0.15s;
-    }
-
-    .hub-item:active .icon-circle {
-      transform: scale(0.92);
-      background: #fffde7;
-    }
-
-    .hub-item span {
-      font-size: 9.5px;
-      font-weight: 600;
-      line-height: 1.2;
-    }
-
-    /* -------------------------------------------------------------
-       1. JOIN TNSF PAGE[span_2](start_span)[span_2](end_span)
-    ------------------------------------------------------------- */
-    .form-card {
-      background: #fff;
-      margin: 15px;
-      border-radius: 16px;
-      padding: 16px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-      border: 1px solid #eaeaea;
-    }
-
-    .form-group-title {
-      font-size: 15px;
-      font-weight: 700;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .full-width {
-      grid-column: span 2;
-    }
-
-    .input-field {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      margin-bottom: 8px;
-    }
-
-    .input-field label {
-      font-size: 11px;
-      font-weight: 600;
-      color: #444;
-    }
-
-    .input-field label span {
-      color: red;
-    }
-
-    .input-wrapper {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-
-    .input-wrapper i {
-      position: absolute;
-      left: 10px;
-      font-size: 12px;
-      color: #777;
-    }
-
-    .input-wrapper input, 
-    .input-wrapper select, 
-    .input-wrapper textarea {
-      width: 100%;
-      padding: 8px 10px 8px 30px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      font-size: 11px;
-      outline: none;
-      background: #fafafa;
-    }
-
-    .photo-upload {
-      border: 2px dashed #ffd54f;
-      background: #fffde7;
-      border-radius: 10px;
-      padding: 15px;
-      text-align: center;
-      cursor: pointer;
-    }
-
-    .photo-upload i {
-      font-size: 22px;
-      color: #f57f17;
-      margin-bottom: 4px;
-    }
-
-    .photo-upload p {
-      font-size: 11px;
-      font-weight: 600;
-    }
-
-    .photo-upload span {
-      font-size: 9px;
-      color: #777;
-    }
-
-    .checkbox-container {
-      display: flex;
-      gap: 8px;
-      align-items: flex-start;
-      margin: 12px 0;
-    }
-
-    .checkbox-container input {
-      margin-top: 2px;
-    }
-
-    .checkbox-container label {
-      font-size: 10px;
-      color: #555;
-      line-height: 1.3;
-    }
-
-    .btn-submit {
-      width: 100%;
-      background: #ffcc00;
-      border: none;
-      padding: 12px;
-      border-radius: 25px;
-      font-weight: 700;
-      font-size: 14px;
-      cursor: pointer;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    /* -------------------------------------------------------------
-       2. STUDENT HELP PAGE
-    ------------------------------------------------------------- */
-    .help-support-card {
-      background: linear-gradient(135deg, #fffde7, #fff59d);
-      border: 1px solid #ffe082;
-      border-radius: 14px;
-      padding: 12px 15px;
-      margin: 0 15px 15px 15px;
-    }
-
-    .help-support-card h4 {
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: #1a237e;
-    }
-
-    .support-list {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
-    }
-
-    .support-item {
-      font-size: 10.5px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .support-item i {
-      color: #2e7d32;
-      font-size: 10px;
-    }
-
-    /* -------------------------------------------------------------
-       3. GALLERY PAGE
-    ------------------------------------------------------------- */
-    .gallery-filter-bar {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding: 12px 15px;
-      scrollbar-width: none;
-    }
-
-    .gallery-filter-bar::-webkit-scrollbar {
-      display: none;
-    }
-
-    .filter-btn {
-      padding: 6px 14px;
-      background: #fff;
-      border: 1px solid #e0e0e0;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 600;
-      white-space: nowrap;
-      cursor: pointer;
-    }
-
-    .filter-btn.active {
-      background: #ffcc00;
-      border-color: #ffcc00;
-      color: #000;
-    }
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      padding: 0 15px 15px 15px;
-    }
-
-    .gallery-card {
-      background: #fff;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      border: 1px solid #eee;
-    }
-
-    .gallery-img-wrap {
-      position: relative;
-      height: 100px;
-    }
-
-    .gallery-img-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .gallery-date {
-      position: absolute;
-      bottom: 6px;
-      left: 6px;
-      background: rgba(255,204,0,0.9);
-      padding: 2px 6px;
-      border-radius: 10px;
-      font-size: 8.5px;
-      font-weight: 700;
-    }
-
-    .gallery-info {
-      padding: 8px;
-    }
-
-    .gallery-info h5 {
-      font-size: 11px;
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 2px;
-    }
-
-    .gallery-info p {
-      font-size: 9px;
-      color: #777;
-    }
-
-    /* -------------------------------------------------------------
-       4. INBOX PAGE
-    ------------------------------------------------------------- */
-    .inbox-layout {
-      display: flex;
-      flex-direction: column;
-      padding: 12px 15px;
-      gap: 12px;
-    }
-
-    .inbox-filter-pills {
-      display: flex;
-      gap: 8px;
-    }
-
-    .pill-btn {
-      padding: 4px 12px;
-      border-radius: 15px;
-      font-size: 10px;
-      font-weight: 700;
-      border: none;
-      background: #e0e0e0;
-      cursor: pointer;
-    }
-
-    .pill-btn.active {
-      background: #ffcc00;
-    }
-
-    .message-card {
-      background: #fff;
-      border-radius: 12px;
-      padding: 10px;
-      display: flex;
-      gap: 10px;
-      border: 1px solid #eee;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
-    }
-
-    .msg-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: #fffde7;
-      border: 1px solid #ffe082;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #f57f17;
-      font-size: 14px;
-      flex-shrink: 0;
-    }
-
-    .msg-body {
-      flex: 1;
-    }
-
-    .msg-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .msg-sender {
-      font-size: 10px;
-      font-weight: 700;
-      color: #555;
-    }
-
-    .badge-official {
-      background: #fff8e1;
-      border: 1px solid #ffe082;
-      color: #b78103;
-      font-size: 8px;
-      padding: 1px 5px;
-      border-radius: 8px;
-      font-weight: 700;
-    }
-
-    .msg-date {
-      font-size: 9px;
-      color: #999;
-    }
-
-    .msg-title {
-      font-size: 11px;
-      font-weight: 700;
-      margin: 2px 0;
-    }
-
-    .msg-snippet {
-      font-size: 9.5px;
-      color: #666;
-      line-height: 1.3;
-    }
-
-    /* -------------------------------------------------------------
-       5. CONSTITUENCIES PAGE
-    ------------------------------------------------------------- */
-    .constituency-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-      padding: 15px;
-    }
-
-    .const-card {
-      background: #fff;
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      border: 1px solid #eaeaea;
-    }
-
-    .const-img {
-      height: 110px;
-      width: 100%;
-      object-fit: cover;
-    }
-
-    .const-info {
-      padding: 10px 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .const-text h4 {
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .const-text p {
-      font-size: 10px;
-      color: #777;
-    }
-
-    .const-arrow {
-      width: 28px;
-      height: 28px;
-      background: #ffcc00;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TELUGU NADU STUDENT'S FEDERATION - KADAPA PARLIAMENT</title>
+
+    <!-- Google Fonts: Inter for Clean UI & Permanent Marker for Handwritten Slogan -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Permanent+Marker&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-yellow: #FFCB05;
+            --primary-yellow-hover: #e0b200;
+            --bg-yellow: #FFF9E5;
+            --header-bg: #FFE500;
+            --border-color: #E2E8F0;
+            --text-dark: #1E293B;
+            --text-muted: #64748B;
+            --input-bg: #FFFFFF;
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+            --radius-main: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-yellow);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Top Header Navigation */
+        header {
+            width: 100%;
+            background: linear-gradient(180deg, #FFE800 0%, #FFDC00 100%);
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-bottom: 2px solid #F0C400;
+        }
+
+        .header-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #fff;
+            padding: 2px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-text h1 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #1A1A1A;
+            line-height: 1.2;
+            letter-spacing: 0.2px;
+        }
+
+        .header-text h2 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #2D3748;
+            margin-top: 2px;
+        }
+
+        /* Container Main Layout */
+        main {
+            width: 100%;
+            max-width: 750px;
+            padding: 25px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        /* Outer Animated Wrapper */
+        .card-wrapper {
+            width: 100%;
+            max-width: 480px;
+            perspective: 1000px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-wrapper.expand-form {
+            max-width: 700px;
+        }
+
+        /* Card Component */
+        .card {
+            background: #FFFFFF;
+            border-radius: var(--radius-main);
+            padding: 30px 25px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #F1F5F9;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            transform-origin: center top;
+            transition: transform 0.4s ease, opacity 0.3s ease;
+        }
+
+        /* Fade/Scale Animation Effects */
+        .animate-fade-in {
+            animation: fadeInScale 0.4s ease forwards;
+        }
+
+        @keyframes fadeInScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.96) translateY(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* Slogan Header inside Card */
+        .handwritten-slogan {
+            font-family: 'Permanent Marker', cursive;
+            color: #2D3748;
+            font-size: 1.35rem;
+            line-height: 1.2;
+            transform: rotate(-3deg);
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+
+        .center-logo {
+            width: 90px;
+            height: 90px;
+            margin: 10px auto 15px auto;
+            border-radius: 50%;
+            display: block;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+
+        .card-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 22px;
+        }
+
+        /* Form Controls */
+        .input-group {
+            position: relative;
+            margin-bottom: 16px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #334155;
+            margin-bottom: 6px;
+        }
+
+        .input-group label span {
+            color: #E53E3E;
+        }
+
+        .input-field-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-field-wrapper i.input-icon {
+            position: absolute;
+            left: 14px;
+            color: #94A3B8;
+            font-size: 0.95rem;
+            pointer-events: none;
+        }
+
+        .input-field-wrapper i.toggle-password {
+            position: absolute;
+            right: 14px;
+            color: #94A3B8;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 14px 12px 40px;
+            font-size: 0.88rem;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background-color: var(--input-bg);
+            color: var(--text-dark);
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="%2394A3B8" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 18px;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 42px;
+        }
+
+        .form-control:focus {
+            border-color: #E2B200;
+            box-shadow: 0 0 0 3px rgba(255, 203, 5, 0.2);
+        }
+
+        .btn-primary {
+            width: 100%;
+            background: linear-gradient(180deg, #FFD000 0%, #FFC400 100%);
+            border: none;
+            padding: 13px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #1A1A1A;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(255, 196, 0, 0.3);
+            transition: all 0.2s ease;
+            margin-top: 8px;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(180deg, #FFC400 0%, #E6AF00 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 14px rgba(255, 196, 0, 0.4);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 20px 0 16px 0;
+            color: #CBD5E1;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #E2E8F0;
+        }
+
+        .divider span {
+            padding: 0 10px;
+            color: #94A3B8;
+        }
+
+        .switch-text {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .switch-link {
+            color: #D97706;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .switch-link:hover {
+            color: #B45309;
+            text-decoration: underline;
+        }
+
+        /* Form Specific Layout Grid */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 16px;
+        }
+
+        @media (max-width: 600px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Custom File Upload Box */
+        .file-upload-box {
+            border: 1.5px dashed #CBD5E1;
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            background: #F8FAFC;
+            transition: background 0.2s, border-color 0.2s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .file-upload-box:hover {
+            background: #F1F5F9;
+            border-color: #94A3B8;
+        }
+
+        .file-upload-box i {
+            font-size: 1.2rem;
+            color: #64748B;
+            margin-bottom: 4px;
+        }
+
+        .file-upload-box span {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #334155;
+            display: block;
+        }
+
+        .file-upload-box small {
+            font-size: 0.65rem;
+            color: #94A3B8;
+        }
+
+        /* Membership Type Card Options */
+        .membership-card {
+            border: 1.5px solid var(--primary-yellow);
+            background: #FFFDF0;
+            border-radius: 10px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .membership-card input[type="radio"] {
+            accent-color: #D97706;
+            transform: scale(1.1);
+        }
+
+        .membership-details strong {
+            display: block;
+            font-size: 0.78rem;
+            color: #1E293B;
+        }
+
+        .membership-details span {
+            font-size: 0.68rem;
+            color: #64748B;
+        }
+
+        /* Declaration Checkbox */
+        .declaration {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            text-align: left;
+            margin: 15px 0;
+            font-size: 0.72rem;
+            color: #475569;
+            line-height: 1.3;
+        }
+
+        .declaration input {
+            margin-top: 2px;
+            accent-color: #D97706;
+        }
+
+        .privacy-note {
+            font-size: 0.7rem;
+            color: #64748B;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25D366;
+            color: #FFF;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            z-index: 100;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 15px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #1E293B;
+            letter-spacing: 0.3px;
+        }
+
+        /* Modal Popup for Success Submission */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 15px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 35px 25px;
+            text-align: center;
+            max-width: 420px;
+            width: 100%;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+            transform: translateY(20px) scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: translateY(0) scale(1);
+        }
+
+        /* Success Animated Checkmark Icon */
+        .success-checkmark {
+            width: 75px;
+            height: 75px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: #DEF7EC;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .success-checkmark i {
+            font-size: 40px;
+            color: #0E9F6E;
+            animation: popCheck 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes popCheck {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+
+        .modal-card h3 {
+            font-size: 1.4rem;
+            color: #111827;
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
+
+        .modal-card p {
+            font-size: 0.85rem;
+            color: #4B5563;
+            line-height: 1.5;
+            margin-bottom: 22px;
+        }
+
+        /* Utility Hidden Class */
+        .hidden {
+            display: none !important;
+        }
+    </style>
 </head>
 <body>
 
-  <div class="app-container">
-
-    <!-- Global Header -->
+    <!-- Header Banner -->
     <header>
-      <div class="brand" onclick="navigateTo('page-home')">
-        <img src="https://via.placeholder.com/100/ffcc00/000000?text=TNSF" alt="Logo">
-        <div class="brand-text">
-          <h1>TNSF</h1>
-          <p>KADAPA PARLIAMENT</p>
+        <!-- Logo SVG Graphic -->
+        <svg class="header-logo" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="48" fill="#FF0000" stroke="#FFD700" stroke-width="3"/>
+            <circle cx="50" cy="50" r="38" fill="#FFF"/>
+            <polygon points="50,20 62,40 38,40" fill="#FF0000"/>
+            <rect x="42" y="40" width="16" height="30" fill="#008000"/>
+            <path d="M 25 70 Q 50 85 75 70" stroke="#FFD700" stroke-width="4" fill="none"/>
+            <text x="50" y="93" font-size="8" font-weight="bold" text-anchor="middle" fill="#000">T.N.S.F.</text>
+        </svg>
+        <div class="header-text">
+            <h1>TELUGU NADU STUDENT'S FEDERATION</h1>
+            <h2>KADAPA PARLIAMENT</h2>
         </div>
-      </div>
-      <button class="menu-btn" onclick="toggleMenu()">
-        <i class="fa-solid fa-bars"></i>
-      </button>
     </header>
 
-    <!-- Navigation Overlay -->
-    <div class="nav-overlay" id="navOverlay">
-      <button class="close-btn" onclick="toggleMenu()">&times;</button>
-      <div class="nav-links">
-        <a href="javascript:void(0)" onclick="toggleMenu(); navigateTo('page-home')"><i class="fa-solid fa-house"></i> Home</a>
-        <a href="javascript:void(0)" onclick="toggleMenu(); navigateTo('page-join')"><i class="fa-solid fa-user-group"></i> Join TNSF</a>
-        <a href="javascript:void(0)" onclick="toggleMenu(); navigateTo('page-help')"><i class="fa-solid fa-graduation-cap"></i> Student Help</a>
-        <a href="javascript:void(0)" onclick="toggleMenu(); navigateTo('page-gallery')"><i class="fa-solid fa-image"></i> Gallery</a>
-        <a href="javascript:void(0)" onclick="toggleMenu(); navigateTo('page-inbox')"><i class="fa-solid fa-envelope"></i> Inbox</a>
-        <a href="javascript:void(0)" onclick="toggleMenu(); navigateTo('page-constituencies')"><i class="fa-solid fa-location-dot"></i> Constituencies</a>
-      </div>
-    </div>
+    <main>
+        <div class="card-wrapper" id="cardWrapper">
+            
+            <!-- LOGIN CARD SECTION -->
+            <div class="card animate-fade-in" id="loginCard">
+                <div class="handwritten-slogan">Students<br>For a<br>Better Tomorrow</div>
+                
+                <svg class="center-logo" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="48" fill="#E53E3E" stroke="#FFD700" stroke-width="3"/>
+                    <circle cx="50" cy="50" r="38" fill="#FFF"/>
+                    <polygon points="50,22 62,42 38,42" fill="#E53E3E"/>
+                    <rect x="43" y="42" width="14" height="28" fill="#2F855A"/>
+                    <text x="50" y="90" font-size="9" font-weight="bold" text-anchor="middle" fill="#000">T.N.S.F.</text>
+                </svg>
 
-    <!-- Page Engine Wrapper -->
-    <div class="page-container">
+                <h2 class="card-title">Welcome Back!</h2>
+                <p class="card-subtitle">Login to your TNSF Kadapa Parliament account</p>
 
-      <!-- =========================================================
-           PAGE: HOME DASHBOARD
-      ========================================================= -->
-      <div id="page-home" class="page active">
-        <main class="home-content">
-          <!-- Hero Auto Slider -->
-          <div class="hero-slider">
-            <div class="slides" id="slides">
-              <div class="slide">
-                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80" alt="Banner 1">
-              </div>
-              <div class="slide">
-                <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80" alt="Banner 2">
-              </div>
-              <div class="slide">
-                <img src="https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&w=800&q=80" alt="Banner 3">
-              </div>
-            </div>
-            <div class="slider-dots">
-              <span class="dot active"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-            </div>
-          </div>
+                <form id="loginForm" onsubmit="handleLogin(event)">
+                    <div class="input-group">
+                        <div class="input-field-wrapper">
+                            <i class="fa-solid fa-user input-icon"></i>
+                            <input type="text" class="form-control" placeholder="User ID" required>
+                        </div>
+                    </div>
 
-          <!-- My Passport Card -->
-          <div class="passport-card">
-            <div class="passport-header">
-              <div class="passport-title-container">
-                <img src="https://via.placeholder.com/100/ffcc00/000000?text=TNSF" alt="Logo" class="passport-logo">
-                <h2>My TNSF<br>Passport</h2>
-              </div>
-              <div class="points-badge">
-                <i class="fa-solid fa-star"></i> 689 Rank
-              </div>
-            </div>
-            <button class="passport-btn" onclick="navigateTo('page-join')">
-              View My Passport <i class="fa-solid fa-arrow-right"></i>
-            </button>
-          </div>
+                    <div class="input-group">
+                        <div class="input-field-wrapper">
+                            <i class="fa-solid fa-lock input-icon"></i>
+                            <input type="password" id="loginPassword" class="form-control" placeholder="Password" required>
+                            <i class="fa-solid fa-eye-slash toggle-password" onclick="togglePasswordVisibility('loginPassword', this)"></i>
+                        </div>
+                    </div>
 
-          <!-- TNSF Hub Grid -->
-          <div class="hub-section">
-            <h2 class="hub-title">TNSF Hub</h2>
-            <div class="hub-grid">
-              
-              <div class="hub-item" onclick="navigateTo('page-join')">
-                <div class="icon-circle"><i class="fa-solid fa-user-group"></i></div>
-                <span>Join TNSF</span>
-              </div>
+                    <button type="submit" class="btn-primary">
+                        Login <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </form>
 
-              <div class="hub-item" onclick="navigateTo('page-help')">
-                <div class="icon-circle"><i class="fa-solid fa-graduation-cap"></i></div>
-                <span>Student Help</span>
-              </div>
-
-              <div class="hub-item" onclick="navigateTo('page-gallery')">
-                <div class="icon-circle"><i class="fa-solid fa-image"></i></div>
-                <span>Gallery</span>
-              </div>
-
-              <div class="hub-item" onclick="navigateTo('page-inbox')">
-                <div class="icon-circle"><i class="fa-solid fa-envelope"></i></div>
-                <span>Inbox</span>
-              </div>
-
-              <div class="hub-item" onclick="navigateTo('page-constituencies')">
-                <div class="icon-circle"><i class="fa-solid fa-location-dot"></i></div>
-                <span>Constituencies</span>
-              </div>
-
-            </div>
-          </div>
-        </main>
-      </div>
-
-      <!-- =========================================================
-           1. PAGE: JOIN TNSF[span_3](start_span)[span_3](end_span)
-      ========================================================= -->
-      <div id="page-join" class="page">
-        <div class="subpage-banner">
-          <button class="back-nav-btn" onclick="navigateTo('page-home')">
-            <i class="fa-solid fa-arrow-left"></i> Back
-          </button>
-          <div class="banner-title">Join TNSF</div>
-          <div class="banner-subtitle">Become a member of TNSF Kadapa Parliament</div>
-          <div class="banner-tag">Students For A Better Tomorrow</div>
-        </div>
-
-        <div class="form-card">
-          <div class="form-group-title">
-            <i class="fa-solid fa-user" style="color:#f57f17;"></i> Personal Details
-          </div>
-
-          <form onsubmit="event.preventDefault(); alert('Application Submitted Successfully!'); navigateTo('page-home');">
-            <div class="form-grid">
-              
-              <div class="input-field">
-                <label>Full Name <span>*</span></label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-user"></i>
-                  <input type="text" placeholder="Enter full name" required>
+                <div class="divider">
+                    <span>OR</span>
                 </div>
-              </div>
 
-              <div class="input-field">
-                <label>Mobile Number <span>*</span></label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-phone"></i>
-                  <input type="tel" placeholder="Enter mobile number" required>
+                <div class="switch-text">
+                    If you are a new user?<br>
+                    <a class="switch-link" onclick="showRegistrationForm()">Register Here &rarr;</a>
                 </div>
-              </div>
-
-              <div class="input-field">
-                <label>Email Address <span>*</span></label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-envelope"></i>
-                  <input type="email" placeholder="Enter email address" required>
-                </div>
-              </div>
-
-              <div class="input-field">
-                <label>Date of Birth <span>*</span></label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-calendar"></i>
-                  <input type="date" required>
-                </div>
-              </div>
-
-              <div class="input-field">
-                <label>Gender <span>*</span></label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-venus-mars"></i>
-                  <select required>
-                    <option value="">Select gender</option>
-                    <option>Male</option>
-                    <option>Female</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="input-field">
-                <label>District <span>*</span></label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-location-dot"></i>
-                  <select required>
-                    <option value="">Select district</option>
-                    <option selected>YSR Kadapa</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="input-field">
-                <label>Constituency <span>*</span></label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-map-pin"></i>
-                  <select required>
-                    <option value="">Select constituency</option>
-                    <option>Kadapa</option>
-                    <option>Badvel</option>
-                    <option>Pulivendla</option>
-                    <option>Proddatur</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="input-field">
-                <label>College / Institution <span>*</span></label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-building-columns"></i>
-                  <input type="text" placeholder="Enter college name" required>
-                </div>
-              </div>
-
-              <div class="input-field full-width">
-                <label>Course / Qualification <span>*</span></label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-graduation-cap"></i>
-                  <select required>
-                    <option value="">Select course / qualification</option>
-                    <option>B.Tech / B.E</option>
-                    <option>Degree (B.A / B.Sc / B.Com)</option>
-                    <option>Diploma / Poly</option>
-                    <option>Intermediate</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="input-field full-width">
-                <label>Address <span>*</span></label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-house"></i>
-                  <textarea rows="2" placeholder="Enter your complete address" required></textarea>
-                </div>
-              </div>
-
-              <div class="input-field full-width">
-                <label>Profile Photo <span>*</span></label>
-                <div class="photo-upload">
-                  <i class="fa-solid fa-camera"></i>
-                  <p>Tap to upload photo</p>
-                  <span>JPG, PNG (Max 5MB)</span>
-                </div>
-              </div>
-
             </div>
 
-            <div class="checkbox-container">
-              <input type="checkbox" id="declare" required>
-              <label for="declare">I hereby declare that the information provided above is true and correct. I am willing to be a part of TNSF Kadapa Parliament.</label>
-            </div>
+            <!-- REGISTRATION FORM CARD SECTION -->
+            <div class="card hidden" id="registerCard">
+                <div class="handwritten-slogan" style="font-size: 1.1rem; margin-bottom: 5px;">Students<br>For a<br>Better Tomorrow</div>
+                
+                <svg class="center-logo" viewBox="0 0 100 100" style="width: 65px; height: 65px; margin: 0 auto 10px;">
+                    <circle cx="50" cy="50" r="48" fill="#E53E3E" stroke="#FFD700" stroke-width="3"/>
+                    <circle cx="50" cy="50" r="38" fill="#FFF"/>
+                    <polygon points="50,22 62,42 38,42" fill="#E53E3E"/>
+                    <rect x="43" y="42" width="14" height="28" fill="#2F855A"/>
+                    <text x="50" y="90" font-size="9" font-weight="bold" text-anchor="middle" fill="#000">T.N.S.F.</text>
+                </svg>
 
-            <button type="submit" class="btn-submit">
-              <i class="fa-solid fa-paper-plane"></i> Submit Application
-            </button>
-          </form>
-        </div>
-      </div>
+                <h2 class="card-title" style="font-size: 1.35rem;">My TNSF Registration</h2>
+                <p class="card-subtitle">Become a member of TNSF Kadapa Parliament</p>
 
-      <!-- =========================================================
-           2. PAGE: STUDENT HELP
-      ========================================================= -->
-      <div id="page-help" class="page">
-        <div class="subpage-banner">
-          <button class="back-nav-btn" onclick="navigateTo('page-home')">
-            <i class="fa-solid fa-arrow-left"></i> Back
-          </button>
-          <div class="banner-title">Student Help</div>
-          <div class="banner-subtitle">We are here to support you at every step of your academic journey.</div>
-          <div class="banner-tag">Your Success is Our Priority</div>
-        </div>
+                <form id="registrationForm" onsubmit="handleRegistrationSubmit(event)">
+                    <div class="form-grid">
+                        
+                        <!-- Full Name -->
+                        <div class="input-group">
+                            <label>Full Name <span>*</span></label>
+                            <div class="input-field-wrapper">
+                                <i class="fa-solid fa-user input-icon"></i>
+                                <input type="text" class="form-control" placeholder="Enter your full name" required>
+                            </div>
+                        </div>
 
-        <div style="height: 12px;"></div>
+                        <!-- Mobile Number -->
+                        <div class="input-group">
+                            <label>Mobile Number <span>*</span></label>
+                            <div class="input-field-wrapper">
+                                <i class="fa-solid fa-phone input-icon"></i>
+                                <input type="tel" class="form-control" placeholder="Enter mobile number" pattern="[0-9]{10}" required>
+                            </div>
+                        </div>
 
-        <div class="help-support-card">
-          <h4>We Support You In</h4>
-          <div class="support-list">
-            <div class="support-item"><i class="fa-solid fa-circle-check"></i> Scholarship Guidance</div>
-            <div class="support-item"><i class="fa-solid fa-circle-check"></i> Education Support</div>
-            <div class="support-item"><i class="fa-solid fa-circle-check"></i> Study Materials</div>
-            <div class="support-item"><i class="fa-solid fa-circle-check"></i> Career Guidance</div>
-            <div class="support-item"><i class="fa-solid fa-circle-check"></i> Hostel & Accomodation</div>
-            <div class="support-item"><i class="fa-solid fa-circle-check"></i> Financial Assistance</div>
-          </div>
-        </div>
+                        <!-- Email Address -->
+                        <div class="input-group">
+                            <label>Email Address <span>*</span></label>
+                            <div class="input-field-wrapper">
+                              <i class="fa-solid fa-envelope input-icon"></i>
+                                <input type="email" class="form-control" placeholder="Enter email address" required>
+                            </div>
+                        </div>
 
-        <div class="form-card" style="margin-top: 0;">
-          <div class="form-group-title">
-            <i class="fa-solid fa-list-check" style="color:#f57f17;"></i> Student Help Form
-          </div>
+                        <!-- Date of Birth -->
+                        <div class="input-group">
+                            <label>Date of Birth <span>*</span></label>
+                            <div class="input-field-wrapper">
+                                <i class="fa-solid fa-calendar input-icon"></i>
+                                <input type="date" class="form-control" required>
+                            </div>
+                        </div>
 
-          <form onsubmit="event.preventDefault(); alert('Help Request Submitted!'); navigateTo('page-home');">
-            <div class="form-grid">
-              
-              <div class="input-field full-width">
-                <label>Full Name <span>*</span></label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-user"></i>
-                  <input type="text" placeholder="Enter your full name" required>
+                        <!-- Gender -->
+                        <div class="input-group">
+                            <label>Gender <span>*</span></label>
+                            <div class="input-field-wrapper">
+                                <i class="fa-solid fa-user input-icon"></i>
+                                <select class="form-control" required>
+                                    <option value="" disabled selected>Select gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- District -->
+                        <div class="input-group">
+                            <label>District <span>*</span></label>
+                            <div class="input-field-wrapper">
+                                <i class="fa-solid fa-location-dot input-icon"></i>
+                                <select class="form-control" required>
+                                    <option value="" disabled selected>Select district</option>
+                                    <option value="Kadapa">YSR Kadapa</option>
+                                    <option value="Annamayya">Annamayya</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Constituency -->
+                        <div class="input-group">
+                            <label>Constituency <span>*</span></label>
+                            <div class="input-field-wrapper">
+                                <i class="fa-solid fa-location-dot input-icon"></i>
+                                <select class="form-control" required>
+                                    <option value="" disabled selected>Select constituency</option>
+                                    <option value="Kadapa">Kadapa</option>
+                                    <option value="Proddatur">Proddatur</option>
+                                    <option value="Mydukur">Mydukur</option>
+                                    <option value="Pulivendula">Pulivendula</option>
+                                    <option value="Kamalapuram">Kamalapuram</option>
+                                    <option value="Jammalamadugu">Jammalamadugu</option>
+                                    <option value="Badvel">Badvel</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- College / Institution -->
+                        <div class="input-group">
+                            <label>College / Institution <span>*</span></label>
+                            <div class="input-field-wrapper">
+                                <i class="fa-solid fa-building-columns input-icon"></i>
+                                <input type="text" class="form-control" placeholder="Enter college / institution name" required>
+                            </div>
+                        </div>
+
+                        <!-- Course / Qualification -->
+                        <div class="input-group">
+                            <label>Course / Qualification <span>*</span></label>
+                            <div class="input-field-wrapper">
+                                <i class="fa-solid fa-graduation-cap input-icon"></i>
+                                <select class="form-control" required>
+                                    <option value="" disabled selected>Select course / qualification</option>
+                                    <option value="Intermediate">Intermediate</option>
+                                    <option value="Degree">Degree / B.Sc / B.Com / B.A</option>
+                                    <option value="B.Tech">B.Tech / Engineering</option>
+                                    <option value="PG">Post Graduation (M.Tech/MBA/MCA)</option>
+                                    <option value="Diploma">Diploma</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Address -->
+                        <div class="input-group">
+                            <label>Address <span>*</span></label>
+                            <div class="input-field-wrapper">
+                                <i class="fa-solid fa-house input-icon"></i>
+                                <textarea class="form-control" rows="1" placeholder="Enter your complete address" required></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Membership Type Options -->
+                        <div class="input-group">
+                            <label>Membership Type <span>*</span></label>
+                            <div class="membership-card">
+                                <input type="radio" name="membership" checked id="studentMember">
+                                <i class="fa-solid fa-user-gear" style="color: #D97706; font-size: 1rem;"></i>
+                                <div class="membership-details">
+                                    <strong>Student Member</strong>
+                                    <span>For students only</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Profile Photo Upload -->
+                        <div class="input-group">
+                            <label>Profile Photo <span>*</span></label>
+                            <div class="file-upload-box" onclick="document.getElementById('photoInput').click()">
+                                <i class="fa-solid fa-camera"></i>
+                                <span id="fileNameDisplay">Tap to upload photo</span>
+                                <small>JPG, PNG (Max 5MB)</small>
+                                <input type="file" id="photoInput" accept="image/*" class="hidden" onchange="handleFileSelect(this)" required>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Declaration Checkbox -->
+                    <div class="declaration">
+                        <input type="checkbox" id="declareCheck" required>
+                        <label for="declareCheck">
+                            I hereby declare that the information provided above is true and correct. I am willing to be a part of TNSF Kadapa Parliament and work for student welfare.
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-primary">
+                        <i class="fa-solid fa-paper-plane"></i> Submit Registration
+                    </button>
+
+                    <div class="privacy-note">
+                        <i class="fa-solid fa-shield-halved" style="color: #D97706;"></i> Your details are safe and used only for TNSF membership.
+                    </div>
+                </form>
+
+                <div class="divider">
+                    <span>OR</span>
                 </div>
-              </div>
 
-              <div class="input-field">
-                <label>Mobile Number <span>*</span></label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-phone"></i>
-                  <input type="tel" placeholder="Mobile number" required>
+                <div class="switch-text">
+                    Already have an account?<br>
+                    <a class="switch-link" onclick="showLoginForm()">&larr; Back to Login</a>
                 </div>
-              </div>
-
-              <div class="input-field">
-                <label>Email Address</label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-envelope"></i>
-                  <input type="email" placeholder="Email address">
-                </div>
-              </div>
-
-              <div class="input-field">
-                <label>Education Level <span>*</span></label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-graduation-cap"></i>
-                  <select required>
-                    <option value="">Select level</option>
-                    <option>Undergraduate</option>
-                    <option>Postgraduate</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="input-field">
-                <label>Issue Type <span>*</span></label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-circle-exclamation"></i>
-                  <select required>
-                    <option value="">Select issue</option>
-                    <option>Scholarship Issue</option>
-                    <option>Admission Help</option>
-                    <option>Hostel Concern</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="input-field full-width">
-                <label>Description / Message <span>*</span></label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-message"></i>
-                  <textarea rows="3" placeholder="Describe your issue or requirement in detail" required></textarea>
-                </div>
-              </div>
-
             </div>
-
-            <button type="submit" class="btn-submit" style="margin-top: 10px;">
-              <i class="fa-solid fa-paper-plane"></i> Submit Request
-            </button>
-          </form>
-        </div>
-      </div>
-
-      <!-- =========================================================
-           3. PAGE: GALLERY
-      ========================================================= -->
-      <div id="page-gallery" class="page">
-        <div class="subpage-banner">
-          <button class="back-nav-btn" onclick="navigateTo('page-home')">
-            <i class="fa-solid fa-arrow-left"></i> Back
-          </button>
-          <div class="banner-title">Gallery</div>
-          <div class="banner-subtitle">Moments of unity, action, and change. Explore our journey through photos.</div>
-        </div>
-
-        <div class="gallery-filter-bar">
-          <button class="filter-btn active">All</button>
-          <button class="filter-btn">Events</button>
-          <button class="filter-btn">Meetings</button>
-          <button class="filter-btn">Activities</button>
-          <button class="filter-btn">Campus Programs</button>
-        </div>
-
-        <div class="gallery-grid">
-          
-          <div class="gallery-card">
-            <div class="gallery-img-wrap">
-              <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=400&q=80" alt="Event">
-              <span class="gallery-date">15 May 2025</span>
-            </div>
-            <div class="gallery-info">
-              <h5>Student Awareness Rally</h5>
-              <p>Events</p>
-            </div>
-          </div>
-
-          <div class="gallery-card">
-            <div class="gallery-img-wrap">
-              <img src="https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?auto=format&fit=crop&w=400&q=80" alt="Meeting">
-              <span class="gallery-date">10 May 2025</span>
-            </div>
-            <div class="gallery-info">
-              <h5>Career Guidance Session</h5>
-              <p>Meetings</p>
-            </div>
-          </div>
-
-          <div class="gallery-card">
-            <div class="gallery-img-wrap">
-              <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=400&q=80" alt="Campus">
-              <span class="gallery-date">02 May 2025</span>
-            </div>
-            <div class="gallery-info">
-              <h5>Campus Visit</h5>
-              <p>Campus Programs</p>
-            </div>
-          </div>
-
-          <div class="gallery-card">
-            <div class="gallery-img-wrap">
-              <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=400&q=80" alt="Donation">
-              <span class="gallery-date">28 Apr 2025</span>
-            </div>
-            <div class="gallery-info">
-              <h5>Blood Donation Camp</h5>
-              <p>Events</p>
-            </div>
-          </div>
 
         </div>
-      </div>
-      <!-- =========================================================
-           4. PAGE: INBOX
-      ========================================================= -->
-      <div id="page-inbox" class="page">
-        <div class="subpage-banner">
-          <button class="back-nav-btn" onclick="navigateTo('page-home')">
-            <i class="fa-solid fa-arrow-left"></i> Back
-          </button>
-          <div class="banner-title">Stay Connected With TNSF</div>
-          <div class="banner-subtitle">Messages • Updates • Opportunities</div>
-        </div>
+    </main>
 
-        <div class="inbox-layout">
-          <div class="inbox-filter-pills">
-            <button class="pill-btn active">All 12</button>
-            <button class="pill-btn">Unread 7</button>
-            <button class="pill-btn">Read 5</button>
-          </div>
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/" target="_blank" class="whatsapp-float" title="Contact Support">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
 
-          <div class="message-card">
-            <div class="msg-icon"><i class="fa-solid fa-bullhorn"></i></div>
-            <div class="msg-body">
-              <div class="msg-header">
-                <span class="msg-sender">TNSF Kadapa Parliament <span class="badge-official">Official</span></span>
-                <span class="msg-date">26 Aug 2025</span>
-              </div>
-              <div class="msg-title">Upcoming Student Meet - Kadapa</div>
-              <div class="msg-snippet">Dear Students, We are happy to inform you about the upcoming student meet...</div>
-            </div>
-          </div>
-
-          <div class="message-card">
-            <div class="msg-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-            <div class="msg-body">
-              <div class="msg-header">
-                <span class="msg-sender">Student Coordinator <span class="badge-official">Official</span></span>
-                <span class="msg-date">24 Aug 2025</span>
-              </div>
-              <div class="msg-title">Scholarship Application Update</div>
-              <div class="msg-snippet">The scholarship application dates have been extended till 5th September 2025...</div>
-            </div>
-          </div>
-
-          <div class="message-card">
-            <div class="msg-icon"><i class="fa-solid fa-users"></i></div>
-            <div class="msg-body">
-              <div class="msg-header">
-                <span class="msg-sender">TNSF Kadapa Parliament <span class="badge-official">Official</span></span>
-                <span class="msg-date">22 Aug 2025</span>
-              </div>
-              <div class="msg-title">Volunteers Needed - Blood Camp</div>
-              <div class="msg-snippet">We need 50 volunteers for the upcoming blood donation camp on 28th August...</div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- =========================================================
-           5. PAGE: CONSTITUENCIES
-      ========================================================= -->
-      <div id="page-constituencies" class="page">
-        <div class="subpage-banner">
-          <button class="back-nav-btn" onclick="navigateTo('page-home')">
-            <i class="fa-solid fa-arrow-left"></i> Back
-          </button>
-          <div class="banner-title">Stronger Together</div>
-          <div class="banner-subtitle">Across All Constituencies | 7 Constituencies | 1 Vision</div>
-        </div>
-
-        <div class="constituency-grid">
-          
-          <div class="const-card">
-            <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=500&q=80" class="const-img" alt="Kadapa">
-            <div class="const-info">
-              <div class="const-text">
-                <h4>Kadapa</h4>
-                <p>Education Drives Progress</p>
-              </div>
-              <div class="const-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-            </div>
-          </div>
-
-          <div class="const-card">
-            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=500&q=80" class="const-img" alt="Badvel">
-            <div class="const-info">
-              <div class="const-text">
-                <h4>Badvel</h4>
-                <p>Unity in Diversity</p>
-              </div>
-              <div class="const-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-            </div>
-          </div>
-
-          <div class="const-card">
-            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=500&q=80" class="const-img" alt="Pulivendla">
-            <div class="const-info">
-              <div class="const-text">
-                <h4>Pulivendla</h4>
-                <p>People Power Change</p>
-              </div>
-              <div class="const-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-            </div>
-          </div>
-
-          <div class="const-card">
-            <img src="https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&w=500&q=80" class="const-img" alt="Proddatur">
-            <div class="const-info">
-              <div class="const-text">
-                <h4>Proddatur</h4>
-                <p>Progress Together</p>
-              </div>
-              <div class="const-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Global Footer -->
+    <!-- Footer -->
     <footer>
-      © 2026 TNSF KADAPA PARLIAMENT | All Rights Reserved
+        &copy; 2026 TELUGU NADU STUDENT'S FEDERATION<br>KADAPA PARLIAMENT
     </footer>
 
-  </div>
+    <!-- SUCCESS MODAL POPUP -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-card">
+            <div class="success-checkmark">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h3>Registration Submitted!</h3>
+            <p>Your details have been sent to the Admin for approval. Once approved, your User ID & Password will be sent via WhatsApp or Email.</p>
+            <button class="btn-primary" onclick="closeSuccessModal()">
+                Back to Login
+            </button>
+        </div>
+    </div>
 
-  <script>
-    // --- Navigation Drawer Overlay ---
-    function toggleMenu() {
-      const overlay = document.getElementById('navOverlay');
-      overlay.classList.toggle('active');
-    }
+    <!-- JavaScript logic -->
+    <script>
+        const cardWrapper = document.getElementById('cardWrapper');
+        const loginCard = document.getElementById('loginCard');
+        const registerCard = document.getElementById('registerCard');
+        const successModal = document.getElementById('successModal');
 
-    // --- Page Transition Logic ---
-    let currentPageId = 'page-home';
+        // Transition from Login Form to Registration Form
+        function showRegistrationForm() {
+            loginCard.classList.add('hidden');
+            loginCard.classList.remove('animate-fade-in');
 
-    function navigateTo(targetPageId) {
-      if (currentPageId === targetPageId) return;
+            cardWrapper.classList.add('expand-form');
+            registerCard.classList.remove('hidden');
+            registerCard.classList.add('animate-fade-in');
 
-      const currentPage = document.getElementById(currentPageId);
-      const targetPage = document.getElementById(targetPageId);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
-      // Slide current page out left
-      currentPage.classList.remove('active');
-      currentPage.classList.add('exit-left');
+        // Transition from Registration Form to Login Form
+        function showLoginForm() {
+            registerCard.classList.add('hidden');
+            registerCard.classList.remove('animate-fade-in');
 
-      // Prepare target page to slide in
-      targetPage.classList.add('active');
+            cardWrapper.classList.remove('expand-form');
+            loginCard.classList.remove('hidden');
+            loginCard.classList.add('animate-fade-in');
 
-      // Reset scroll position on new view
-      window.scrollTo(0, 0);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
-      // Update current reference
-      currentPageId = targetPageId;
+        // Password visibility toggle
+        function togglePasswordVisibility(inputId, iconElem) {
+            const input = document.getElementById(inputId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                iconElem.classList.remove('fa-eye-slash');
+                iconElem.classList.add('fa-eye');
+            } else {
+                input.type = 'password';
+                iconElem.classList.remove('fa-eye');
+                iconElem.classList.add('fa-eye-slash');
+            }
+        }
 
-      // Clean up exit class after animation
-      setTimeout(() => {
-        currentPage.classList.remove('exit-left');
-      }, 350);
-    }
+        // Custom File Upload Text Display
+        function handleFileSelect(input) {
+            const display = document.getElementById('fileNameDisplay');
+            if (input.files && input.files[0]) {
+                display.innerText = input.files[0].name;
+            } else {
+                display.innerText = 'Tap to upload photo';
+            }
+        }
 
-    // --- Hero Auto Image Slider Logic ---
-    let currentSlide = 0;
-    const slides = document.getElementById('slides');
-    const dots = document.querySelectorAll('.slider-dots .dot');
-    const totalSlides = 3;
+        // Form Submission Handlers
+        function handleLogin(event) {
+            event.preventDefault();
+            alert('Logging in...');
+        }
 
-    setInterval(() => {
-      currentSlide = (currentSlide + 1) % totalSlides;
-      slides.style.transform = `translateX(-${currentSlide * 33.333}%)`;
-      dots.forEach((dot, idx) => {
-        dot.classList.toggle('active', idx === currentSlide);
-      });
-    }, 3500);
-  </script>
+        function handleRegistrationSubmit(event) {
+            event.preventDefault();
+            // Show Animated Modal Box
+            successModal.classList.add('active');
+        }
+
+        function closeSuccessModal() {
+            successModal.classList.remove('active');
+            document.getElementById('registrationForm').reset();
+            document.getElementById('fileNameDisplay').innerText = 'Tap to upload photo';
+            showLoginForm();
+        }
+    </script>
 </body>
 </html>
+      
