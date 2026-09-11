@@ -1,75 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TNSF Kadapa Parliament</title>
-  <!-- Google Fonts: Inter & Caveat for handwritten slogan style -->
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TNSF Kadapa Parliament - Portal</title>
+  <!-- Google Fonts & FontAwesome Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
   <style>
-    /* Global Styles & Theme Variables */
     :root {
-      --primary-yellow: #FFCB05;
-      --yellow-gradient: linear-gradient(180deg, #FFFDE8 0%, #FFEA7A 100%);
-      --button-yellow: #FFC400;
-      --button-hover: #E5B000;
-      --text-dark: #222222;
-      --text-gray: #666666;
-      --border-color: #E2E8F0;
-      --bg-light: #F9FAFB;
-      --shadow-color: rgba(218, 165, 32, 0.2);
+      --primary-yellow: #ffcc00;
+      --primary-dark-yellow: #e6b800;
+      --bg-gradient-start: #fff9e6;
+      --bg-gradient-end: #fff0b3;
+      --card-bg: #ffffff;
+      --text-main: #222222;
+      --text-muted: #666666;
+      --border-color: #e2e8f0;
+      --success-green: #22c55e;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Poppins', sans-serif;
     }
 
     body {
-      background: #FFFDF0;
-      color: var(--text-dark);
+      background: linear-gradient(180deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+      min-height: 100vh;
       display: flex;
       justify-content: center;
-      min-height: 100vh;
+      align-items: center;
       overflow-x: hidden;
+      perspective: 1200px;
+      position: relative;
     }
 
-    /* Mobile / Container Frame Viewport */
-    .app-container {
+    /* Container */
+    .app-viewport {
       width: 100%;
       max-width: 480px;
-      background-color: #FFFFFF;
       min-height: 100vh;
-      box-shadow: 0 0 25px rgba(0,0,0,0.08);
+      background: #fefefe;
       position: relative;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
       overflow: hidden;
     }
 
-    /* Header Styling */
-    header {
+    /* Header */
+    .header {
       background: var(--primary-yellow);
-      padding: 16px;
+      padding: 15px 20px;
       display: flex;
       align-items: center;
-      gap: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      z-index: 10;
+      gap: 15px;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     }
 
-    .header-logo {
+    .header img {
       width: 55px;
       height: 55px;
-      border-radius: 50%;
-      background: #FFF;
-      padding: 2px;
-      border: 2px solid #FFF;
       object-fit: contain;
     }
 
@@ -78,7 +76,6 @@
       font-weight: 800;
       color: #000;
       line-height: 1.2;
-      letter-spacing: 0.5px;
     }
 
     .header-text h2 {
@@ -88,37 +85,31 @@
       margin-top: 2px;
     }
 
-    /* Slogan Banner */
-    .slogan-box {
-      text-align: center;
-      padding: 12px 10px 5px;
+    /* Main Container with 3D animation */
+    .content-area {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
     }
 
-    .slogan-box h3 {
+    .slogan-top {
       font-family: 'Caveat', cursive;
-      font-size: 28px;
-      color: #1A1A1A;
+      font-size: 26px;
+      font-weight: 700;
+      color: #1a1a1a;
+      text-align: center;
+      transform: rotate(-4deg);
+      margin-bottom: 10px;
       line-height: 1.1;
-      transform: rotate(-3deg);
     }
 
-    /* Main Container with 3D Perspective */
-    .main-content {
-      padding: 15px 20px 80px;
-      flex-grow: 1;
-      perspective: 1200px; /* Essential for 3D flip */
-      position: relative;
-    }
-
-    /* ULTRA ANIMATED LOGIN CARD ROTATION */
-    .card {
-      background: #FFFFFF;
-      border-radius: 20px;
-      padding: 24px 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 0 15px var(--shadow-color);
-      border: 1px solid #FFF4A3;
-      position: relative;
-      backface-visibility: hidden;
+    /* ULTRA ANIMATED LOGIN CARD */
+    .card-3d-wrapper {
+      width: 100%;
       transform-style: preserve-3d;
       animation: ultraRotateIn 1.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
@@ -126,14 +117,10 @@
     @keyframes ultraRotateIn {
       0% {
         opacity: 0;
-        transform: rotateY(-360deg) rotateX(45deg) scale(0.3) translateY(-100px);
+        transform: rotateY(-180deg) rotateX(45deg) scale(0.6) translateY(-100px);
       }
       60% {
-        opacity: 1;
         transform: rotateY(20deg) rotateX(-10deg) scale(1.05);
-      }
-      80% {
-        transform: rotateY(-10deg) rotateX(5deg) scale(0.98);
       }
       100% {
         opacity: 1;
@@ -141,631 +128,600 @@
       }
     }
 
-    .logo-center {
+    .login-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 25px 20px;
+      border: 1px solid rgba(255, 204, 0, 0.4);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.07);
       text-align: center;
-      margin-bottom: 15px;
     }
 
-    .logo-center img {
+    .logo-center {
       width: 70px;
       height: 70px;
-      border-radius: 50%;
+      margin: 0 auto 10px;
+      display: block;
     }
 
-    .card-title {
-      text-align: center;
-      font-size: 22px;
+    .login-card h3 {
+      font-size: 20px;
       font-weight: 700;
       color: #111;
-      margin-bottom: 4px;
     }
 
-    .card-subtitle {
-      text-align: center;
+    .login-card p {
       font-size: 12px;
-      color: var(--text-gray);
+      color: var(--text-muted);
       margin-bottom: 20px;
     }
 
-    /* Form Fields - One by One Vertical Layout */
-    .form-group {
-      margin-bottom: 15px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .form-group label {
-      font-size: 13px;
-      font-weight: 600;
-      color: #333;
-    }
-
-    .form-group label span {
-      color: #E53E3E;
-    }
-
-    .input-wrapper {
+    /* Form Fields */
+    .input-group {
       position: relative;
-      display: flex;
-      align-items: center;
-    }
-
-    .input-wrapper i.icon-left {
-      position: absolute;
-      left: 14px;
-      color: #718096;
-      font-size: 14px;
-    }
-
-    .input-wrapper i.icon-right {
-      position: absolute;
-      right: 14px;
-      color: #718096;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-    .form-control {
+      margin-bottom: 15px;
       width: 100%;
-      padding: 12px 14px 12px 40px;
-      border: 1px solid var(--border-color);
-      border-radius: 10px;
-      font-size: 13.5px;
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-      background: #FAFAFA;
     }
 
-    select.form-control {
-      appearance: none;
-      background-image: url('data:image/svg+xml;utf8,<svg fill="%23718096" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
-      background-repeat: no-repeat;
-      background-position: right 10px center;
-      background-size: 18px;
+    .input-group i.left-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #888;
+      font-size: 15px;
     }
 
-    .form-control:focus {
-      border-color: var(--button-yellow);
-      background: #FFF;
-      box-shadow: 0 0 0 3px rgba(255, 203, 5, 0.25);
-    }
-
-    /* Buttons */
-    .btn-primary {
-      width: 100%;
-      background: var(--button-yellow);
-      color: #000;
-      font-weight: 700;
-      border: none;
-      padding: 14px;
-      border-radius: 10px;
+    .input-group i.right-icon {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #888;
       font-size: 15px;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      box-shadow: 0 4px 12px rgba(255, 196, 0, 0.4);
-      transition: background 0.2s, transform 0.1s;
-      margin-top: 10px;
     }
 
-    .btn-primary:active {
-      transform: scale(0.98);
+    .input-control {
+      width: 100%;
+      padding: 12px 40px 12px 42px;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      font-size: 13px;
+      outline: none;
+      transition: all 0.3s ease;
+      background: #fafafa;
+    }
+
+    select.input-control {
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .input-control:focus {
+      border-color: var(--primary-yellow);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.2);
+    }
+
+    .btn-primary {
+      width: 100%;
+      background: var(--primary-yellow);
+      border: none;
+      padding: 13px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 15px;
+      color: #000;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(255, 204, 0, 0.4);
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark-yellow);
+      transform: translateY(-2deg);
     }
 
     .divider {
+      margin: 18px 0;
       display: flex;
       align-items: center;
       text-align: center;
-      margin: 20px 0 15px;
-      color: #A0AEC0;
-      font-size: 12px;
+      color: #aaa;
+      font-size: 11px;
     }
 
     .divider::before, .divider::after {
       content: '';
       flex: 1;
-      border-bottom: 1px solid var(--border-color);
+      border-bottom: 1px solid #eee;
     }
 
     .divider span {
       padding: 0 10px;
     }
 
-    .register-link-box {
-      text-align: center;
-      font-size: 13px;
-      color: var(--text-gray);
+    .register-link-text {
+      font-size: 12px;
+      color: var(--text-muted);
     }
 
-    .register-link-box a {
-      color: #D69E00;
+    .register-link {
+      color: #d9a400;
       font-weight: 700;
       text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      margin-top: 4px;
       cursor: pointer;
+      display: inline-block;
+      margin-top: 4px;
+      font-size: 13px;
     }
 
-    /* SLIDE UP REGISTRATION FORM PAGE */
-    .registration-page {
+    /* BOTTOM SLIDE-UP MODAL (SWIPEABLE REGISTRATION FORM) */
+    .modal-overlay {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      min-height: 100%;
-      background: #FFFFFF;
-      z-index: 20;
-      padding: 20px;
-      transform: translateY(100%);
-      opacity: 0;
-      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
-      display: none;
-    }
-
-    .registration-page.active {
-      display: block;
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    /* File Upload Box */
-    .file-upload-box {
-      border: 2px dashed #CBD5E0;
-      border-radius: 10px;
-      padding: 15px;
-      text-align: center;
-      background: #FAFAFA;
-      cursor: pointer;
-      transition: border-color 0.2s;
-    }
-
-    .file-upload-box:hover {
-      border-color: var(--button-yellow);
-    }
-
-    .file-upload-box i {
-      font-size: 22px;
-      color: #718096;
-      margin-bottom: 4px;
-    }
-
-    .file-upload-box p {
-      font-size: 12px;
-      font-weight: 600;
-      color: #4A5568;
-    }
-
-    .file-upload-box span {
-      font-size: 10px;
-      color: #A0AEC0;
-    }
-
-    /* Declaration Checkbox */
-    .declaration-box {
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      margin: 15px 0;
-    }
-
-    .declaration-box input {
-      margin-top: 3px;
-      accent-color: var(--button-yellow);
-    }
-
-    .declaration-box p {
-      font-size: 11px;
-      color: #4A5568;
-      line-height: 1.4;
-    }
-
-    .security-note {
-      text-align: center;
-      font-size: 11px;
-      color: #718096;
-      margin-top: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-    }
-
-    .security-note i {
-      color: var(--button-yellow);
-    }
-
-    /* SUCCESS POPUP WITH GREEN TICK */
-    .popup-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.6);
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
       z-index: 100;
       opacity: 0;
       visibility: hidden;
-      transition: opacity 0.3s ease;
+      transition: all 0.4s ease;
     }
 
-    .popup-overlay.show {
+    .modal-overlay.active {
       opacity: 1;
       visibility: visible;
     }
 
-    .popup-card {
-      background: #FFF;
-      width: 85%;
-      max-width: 360px;
-      border-radius: 20px;
-      padding: 30px 20px;
-      text-align: center;
-      transform: scale(0.7);
-      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    }
-
-    .popup-overlay.show .popup-card {
-      transform: scale(1);
-    }
-
-    .green-tick-circle {
-      width: 70px;
-      height: 70px;
-      background: #DEF7EC;
-      border-radius: 50%;
+    .registration-modal {
+      position: absolute;
+      bottom: -100%;
+      left: 0;
+      width: 100%;
+      height: 90%;
+      background: #ffffff;
+      border-top-left-radius: 25px;
+      border-top-right-radius: 25px;
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.2);
+      transition: bottom 0.4s cubic-bezier(0.1, 0.9, 0.2, 1);
       display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 15px;
+      flex-direction: column;
+      z-index: 101;
+      overflow: hidden;
     }
 
-    .green-tick-circle i {
-      font-size: 35px;
-      color: #0E9F6E;
+    .modal-overlay.active .registration-modal {
+      bottom: 0;
     }
 
-    .popup-card h3 {
+    /* Swipe indicator pill */
+    .swipe-pill {
+      width: 40px;
+      height: 5px;
+      background: #ddd;
+      border-radius: 10px;
+      margin: 10px auto 5px;
+      cursor: pointer;
+    }
+
+    .modal-header {
+      padding: 10px 20px 15px;
+      text-align: center;
+      border-bottom: 1px solid #f0f0f0;
+      position: relative;
+    }
+
+    .modal-header h3 {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .modal-header p {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .close-btn {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      font-size: 18px;
+      color: #888;
+      cursor: pointer;
+    }
+
+    /* One-by-one sequential form layout */
+    .form-body {
+      padding: 20px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .form-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    .form-label span {
+      color: red;
+    }
+
+    .upload-box {
+      border: 2px dashed #ddd;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      background: #fafafa;
+      cursor: pointer;
+      margin-bottom: 15px;
+    }
+
+    .upload-box i {
       font-size: 20px;
-      color: #111;
-      margin-bottom: 8px;
+      color: #666;
     }
 
-    .popup-card p {
-      font-size: 13px;
-      color: #666;
-      line-height: 1.4;
+    .upload-box p {
+      font-size: 11px;
+      color: #777;
+      margin-top: 4px;
+    }
+
+    .checkbox-group {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
       margin-bottom: 20px;
     }
 
-    /* Footer */
-    footer {
-      background: var(--primary-yellow);
-      text-align: center;
-      padding: 12px;
-      font-size: 10px;
-      font-weight: 700;
-      color: #000;
-      margin-top: auto;
+    .checkbox-group input {
+      margin-top: 3px;
+      accent-color: var(--primary-yellow);
     }
 
-    /* Floating WhatsApp Icon */
-    .whatsapp-float {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #25D366;
-      color: #FFF;
-      width: 50px;
-      height: 50px;
+    .checkbox-group label {
+      font-size: 10px;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    /* SUCCESS ANIMATION VIEW */
+    .success-view {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+
+    .checkmark-circle {
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
+      background: #e6f4ea;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 26px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      z-index: 50;
+      margin-bottom: 20px;
+      animation: scaleUp 0.4s ease-out forwards;
+    }
+
+    .checkmark-circle i {
+      font-size: 40px;
+      color: var(--success-green);
+    }
+
+    @keyframes scaleUp {
+      0% { transform: scale(0); }
+      80% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+
+    .success-view h2 {
+      font-size: 20px;
+      color: #111;
+      margin-bottom: 10px;
+    }
+
+    .success-view p {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.5;
+      margin-bottom: 25px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 10px;
+      color: #555;
+      background: var(--primary-yellow);
+      font-weight: 600;
+    }
+
+    /* Floating WhatsApp Icon */
+    .whatsapp-btn {
+      position: absolute;
+      bottom: 50px;
+      right: 20px;
+      width: 45px;
+      height: 45px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 24px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      z-index: 90;
       text-decoration: none;
     }
   </style>
 </head>
 <body>
 
-  <div class="app-container">
-    <!-- Header -->
-    <header>
-      <img src="https://via.placeholder.com/60/FFCB05/000000?text=TNSF" alt="TNSF Logo" class="header-logo">
+  <div class="app-viewport">
+    
+    <!-- Top Header Banner -->
+    <div class="header">
+      <!-- IMAGE LINK 1: TNSF Logo Header -->
+      <img src="https://i.ibb.co/vzPypS3/tnsf-logo.png" alt="TNSF Logo" id="img-header-logo"/>
       <div class="header-text">
-        <h1>TELUGU NADU<br>STUDENT'S FEDERATION</h1>
+        <h1>TELUGU NADU STUDENT'S FEDERATION</h1>
         <h2>KADAPA PARLIAMENT</h2>
       </div>
-    </header>
-
-    <!-- Main Content Box -->
-    <div class="main-content">
-
-      <!-- LOGIN CARD (Ultra Animated on Load) -->
-      <div class="card" id="loginCard">
-        <div class="slogan-box">
-          <h3>Students For a<br>Better Tomorrow</h3>
-        </div>
-        
-        <div class="logo-center">
-          <img src="https://via.placeholder.com/70/FFCB05/000000?text=TNSF" alt="TNSF Emblem">
-        </div>
-
-        <h2 class="card-title">Welcome Back!</h2>
-        <p class="card-subtitle">Login to your TNSF Kadapa Parliament account</p>
-
-        <form id="loginForm" onsubmit="event.preventDefault();">
-          <div class="form-group">
-            <div class="input-wrapper">
-              <i class="fa-solid fa-user icon-left"></i>
-              <input type="text" class="form-control" placeholder="User ID" required>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <div class="input-wrapper">
-              <i class="fa-solid fa-lock icon-left"></i>
-              <input type="password" id="loginPassword" class="form-control" placeholder="Password" required>
-              <i class="fa-solid fa-eye-slash icon-right" onclick="togglePassword('loginPassword', this)"></i>
-            </div>
-          </div>
-
-          <button type="submit" class="btn-primary">
-            Login <i class="fa-solid fa-arrow-right"></i>
-          </button>
-        </form>
-
-        <div class="divider"><span>OR</span></div>
-
-        <div class="register-link-box">
-          <p>If you are a new user?</p>
-          <a onclick="openRegisterPage()">Register Here <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-      </div>
-
-      <!-- REGISTRATION FORM PAGE (Transitions From Bottom Side) -->
-      <div class="registration-page" id="registerPage">
-        <div class="slogan-box">
-          <h3>Students For a<br>Better Tomorrow</h3>
-        </div>
-
-        <div class="logo-center">
-          <img src="https://via.placeholder.com/70/FFCB05/000000?text=TNSF" alt="TNSF Emblem">
-        </div>
-
-        <h2 class="card-title">My TNSF Registration</h2>
-        <p class="card-subtitle">Become a member of TNSF Kadapa Parliament</p>
-
-        <form id="registrationForm" onsubmit="handleRegistration(event)">
-          
-          <!-- One-by-One Vertical Placeholders -->
-          <div class="form-group">
-            <label>Full Name <span>*</span></label>
-            <div class="input-wrapper">
-              <i class="fa-solid fa-user icon-left"></i>
-              <input type="text" class="form-control" placeholder="Enter your full name" required>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Mobile Number <span>*</span></label>
-            <div class="input-wrapper">
-              <i class="fa-solid fa-phone icon-left"></i>
-              <input type="tel" class="form-control" placeholder="Enter mobile number" required>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Email Address <span>*</span></label>
-            <div class="input-wrapper">
-              <i class="fa-solid fa-envelope icon-left"></i>
-              <input type="email" class="form-control" placeholder="Enter email address" required>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Date of Birth <span>*</span></label>
-            <div class="input-wrapper">
-              <i class="fa-solid fa-calendar icon-left"></i>
-              <input type="text" class="form-control" placeholder="DD/MM/YYYY" onfocus="(this.type='date')" required>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Gender <span>*</span></label>
-            <div class="input-wrapper">
-              <i class="fa-solid fa-user-gear icon-left"></i>
-              <select class="form-control" required>
-                <option value="" disabled selected>Select gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>District <span>*</span></label>
-            <div class="input-wrapper">
-              <i class="fa-solid fa-location-dot icon-left"></i>
-              <select class="form-control" required>
-                <option value="" disabled selected>Select district</option>
-                <option value="Kadapa">Kadapa</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Constituency <span>*</span></label>
-            <div class="input-wrapper">
-              <i class="fa-solid fa-map-pin icon-left"></i>
-              <select class="form-control" required>
-                <option value="" disabled selected>Select constituency</option>
-                <option value="Kadapa">Kadapa</option>
-                <option value="Proddatur">Proddatur</option>
-                <option value="Mydukur">Mydukur</option>
-                <option value="Pulivendula">Pulivendula</option>
-                <option value="Kamalapuram">Kamalapuram</option>
-                <option value="Jammalamadugu">Jammalamadugu</option>
-                <option value="Badvel">Badvel</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>College / Institution <span>*</span></label>
-            <div class="input-wrapper">
-              <i class="fa-solid fa-building-columns icon-left"></i>
-              <input type="text" class="form-control" placeholder="Enter college / institution name" required>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Course / Qualification <span>*</span></label>
-            <div class="input-wrapper">
-              <i class="fa-solid fa-graduation-cap icon-left"></i>
-              <select class="form-control" required>
-                <option value="" disabled selected>Select course / qualification</option>
-                <option value="Intermediate">Intermediate</option>
-                <option value="Degree">Degree</option>
-                <option value="B.Tech">B.Tech</option>
-                <option value="Post Graduation">Post Graduation</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Address <span>*</span></label>
-            <div class="input-wrapper">
-              <i class="fa-solid fa-house icon-left"></i>
-              <input type="text" class="form-control" placeholder="Enter your complete address" required>
-            </div>
-          </div>
-
-          <!-- REPLACED: Referral ID (Replaced Membership Type) -->
-          <div class="form-group">
-            <label>Referral ID <span>(Optional)</span></label>
-            <div class="input-wrapper">
-              <i class="fa-solid fa-user-plus icon-left"></i>
-              <input type="text" class="form-control" placeholder="Enter referrer ID or phone number">
-            </div>
-          </div>
-
-          <!-- Profile Photo Upload -->
-          <div class="form-group">
-            <label>Profile Photo <span>*</span></label>
-            <div class="file-upload-box" onclick="document.getElementById('photoInput').click()">
-              <i class="fa-solid fa-camera"></i>
-              <p id="fileUploadText">Tap to upload photo</p>
-              <span>JPG, PNG (Max 5MB)</span>
-              <input type="file" id="photoInput" accept="image/*" style="display: none;" onchange="handleFileChange(this)">
-            </div>
-          </div>
-
-          <!-- Declaration -->
-          <div class="declaration-box">
-            <input type="checkbox" id="declaration" required>
-            <p>I hereby declare that the information provided above is true and correct. I am willing to be a part of TNSF Kadapa Parliament and work for student welfare.</p>
-          </div>
-
-          <button type="submit" class="btn-primary">
-            <i class="fa-solid fa-paper-plane"></i> Submit Registration
-          </button>
-
-          <div class="security-note">
-            <i class="fa-solid fa-shield-halved"></i>
-            <span>Your details are safe and used only for TNSF membership.</span>
-          </div>
-
-        </form>
-      </div>
-
     </div>
+
+    <!-- Center Content -->
+    <div class="content-area">
+      <div class="slogan-top">Students For a<br>Better Tomorrow</div>
+
+      <!-- 3D Animated Login Card -->
+      <div class="card-3d-wrapper">
+        <div class="login-card">
+          <!-- IMAGE LINK 2: Main Logo -->
+          <img src="https://i.ibb.co/vzPypS3/tnsf-logo.png" alt="TNSF Badge" class="logo-center" id="img-main-logo"/>
+          <h3>Welcome Back!</h3>
+          <p>Login to your TNSF Kadapa Parliament account</p>
+
+          <form id="loginForm" onsubmit="event.preventDefault();">
+            <!-- User ID -->
+            <div class="input-group">
+              <i class="fa-solid fa-user left-icon"></i>
+              <input type="text" class="input-control" placeholder="User ID" required>
+            </div>
+
+            <!-- Password -->
+            <div class="input-group">
+              <i class="fa-solid fa-lock left-icon"></i>
+              <input type="password" id="loginPassword" class="input-control" placeholder="Password" required>
+              <i class="fa-solid fa-eye-slash right-icon" onclick="togglePasswordVisibility()"></i>
+            </div>
+
+            <button type="submit" class="btn-primary">Login <i class="fa-solid fa-arrow-right"></i></button>
+          </form>
+
+          <div class="divider"><span>OR</span></div>
+
+          <div class="register-link-text">If you are a new user?</div>
+          <a class="register-link" id="openRegisterBtn">Register Here &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- WhatsApp Floating Action -->
+    <a href="#" class="whatsapp-btn"><i class="fa-brands fa-whatsapp"></i></a>
 
     <!-- Footer -->
-    <footer>
-      © 2026 TELUGU NADU STUDENT'S FEDERATION<br>KADAPA PARLIAMENT
-    </footer>
-
-    <!-- WhatsApp Floating Action Button -->
-    <a href="#" class="whatsapp-float">
-      <i class="fa-brands fa-whatsapp"></i>
-    </a>
-  </div>
-
-  <!-- SUCCESS POPUP MODAL -->
-  <div class="popup-overlay" id="successPopup">
-    <div class="popup-card">
-      <div class="green-tick-circle">
-        <i class="fa-solid fa-check"></i>
-      </div>
-      <h3>Registration Successful!</h3>
-      <p>Your details have been submitted to the Admin for approval. You will receive your User ID & Password on Mail/WhatsApp upon verification.</p>
-      <button class="btn-primary" onclick="closePopup()">Done</button>
+    <div class="footer">
+      &copy; 2026 TELUGU NADU STUDENT'S FEDERATION<br>KADAPA PARLIAMENT
     </div>
+
+    <!-- REGISTER SLIDE-UP MODAL OVERLAY -->
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="registration-modal" id="registrationModal">
+        <div class="swipe-pill" id="swipePill"></div>
+        <i class="fa-solid fa-xmark close-btn" id="closeRegisterBtn"></i>
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h3>My TNSF Registration</h3>
+          <p>Become a member of TNSF Kadapa Parliament</p>
+        </div>
+
+        <!-- Registration Form (Fields arranged 1-by-1 vertically) -->
+        <div class="form-body" id="formBody">
+          <form id="registrationForm">
+            
+            <label class="form-label">Full Name <span>*</span></label>
+            <div class="input-group">
+              <i class="fa-solid fa-user left-icon"></i>
+              <input type="text" class="input-control" placeholder="Enter your full name" required />
+            </div>
+
+            <label class="form-label">Mobile Number <span>*</span></label>
+            <div class="input-group">
+              <i class="fa-solid fa-phone left-icon"></i>
+              <input type="tel" class="input-control" placeholder="Enter mobile number" required />
+            </div>
+
+            <label class="form-label">Email Address <span>*</span></label>
+            <div class="input-group">
+              <i class="fa-solid fa-envelope left-icon"></i>
+              <input type="email" class="input-control" placeholder="Enter email address" required />
+            </div>
+
+            <label class="form-label">Date of Birth <span>*</span></label>
+            <div class="input-group">
+              <i class="fa-solid fa-calendar-days left-icon"></i>
+              <input type="date" class="input-control" required />
+            </div>
+
+            <label class="form-label">Gender <span>*</span></label>
+            <div class="input-group">
+              <i class="fa-solid fa-venus-mars left-icon"></i>
+              <select class="input-control" required>
+                <option value="" disabled selected>Select gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <label class="form-label">District <span>*</span></label>
+            <div class="input-group">
+              <i class="fa-solid fa-location-dot left-icon"></i>
+              <select class="input-control" required>
+                <option value="" disabled selected>Select district</option>
+                <option value="kadapa">YSR Kadapa</option>
+              </select>
+            </div>
+
+            <label class="form-label">Constituency <span>*</span></label>
+            <div class="input-group">
+              <i class="fa-solid fa-map-pin left-icon"></i>
+              <select class="input-control" required>
+                <option value="" disabled selected>Select constituency</option>
+                <option value="kadapa_city">Kadapa</option>
+                <option value="proddatur">Proddatur</option>
+                <option value="mydukur">Mydukur</option>
+                <option value="pulivendula">Pulivendula</option>
+                <option value="kamalapuram">Kamalapuram</option>
+                <option value="jammalamadugu">Jammalamadugu</option>
+                <option value="badvel">Badvel</option>
+              </select>
+            </div>
+
+            <label class="form-label">College / Institution <span>*</span></label>
+            <div class="input-group">
+              <i class="fa-solid fa-building-columns left-icon"></i>
+              <input type="text" class="input-control" placeholder="Enter college / institution name" required />
+            </div>
+
+            <label class="form-label">Course / Qualification <span>*</span></label>
+            <div class="input-group">
+              <i class="fa-solid fa-graduation-cap left-icon"></i>
+              <select class="input-control" required>
+                <option value="" disabled selected>Select course / qualification</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="degree">Degree</option>
+                <option value="btech">B.Tech</option>
+                <option value="post_graduation">Post Graduation</option>
+              </select>
+            </div>
+
+            <label class="form-label">Address <span>*</span></label>
+            <div class="input-group">
+              <i class="fa-solid fa-house left-icon"></i>
+              <input type="text" class="input-control" placeholder="Enter your complete address" required />
+            </div>
+
+            <!-- REPLACEMENT: Referral ID Field -->
+            <label class="form-label">Referral ID (Optional)</label>
+            <div class="input-group">
+              <i class="fa-solid fa-id-card left-icon"></i>
+              <input type="text" class="input-control" placeholder="Enter referral ID (if any)" />
+            </div>
+
+            <label class="form-label">Profile Photo <span>*</span></label>
+            <div class="upload-box" onclick="document.getElementById('photoInput').click()">
+              <i class="fa-solid fa-camera"></i>
+              <p>Tap to upload photo<br><span style="font-size: 9px; color: #999;">JPG, PNG (Max 5MB)</span></p>
+              <input type="file" id="photoInput" accept="image/*" style="display: none;" required />
+            </div>
+
+            <div class="checkbox-group">
+              <input type="checkbox" id="terms" required />
+              <label for="terms">I hereby declare that the information provided above is true and correct. I am willing to be a part of TNSF Kadapa Parliament.</label>
+            </div>
+
+            <button type="submit" class="btn-primary">
+              <i class="fa-solid fa-paper-plane"></i> Submit Registration
+            </button>
+          </form>
+        </div>
+
+        <!-- Success Animation Page State -->
+        <div class="success-view" id="successView">
+          <div class="checkmark-circle">
+            <i class="fa-solid fa-check"></i>
+          </div>
+          <h2>Registration Successful!</h2>
+          <p>Your details have been submitted to the Admin. Once approved, your User ID and Password will be sent to your WhatsApp and Email.</p>
+          <button class="btn-primary" onclick="closeRegistrationModal()">Back to Login</button>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 
-  <!-- JavaScript Animations & Logic -->
   <script>
-    // Open Registration Form with Bottom-to-Top Transition
-    function openRegisterPage() {
-      const regPage = document.getElementById('registerPage');
-      regPage.style.display = 'block';
+    // Elements Reference
+    const modalOverlay = document.getElementById('modalOverlay');
+    const openRegisterBtn = document.getElementById('openRegisterBtn');
+    const closeRegisterBtn = document.getElementById('closeRegisterBtn');
+    const registrationForm = document.getElementById('registrationForm');
+    const formBody = document.getElementById('formBody');
+    const successView = document.getElementById('successView');
+    const swipePill = document.getElementById('swipePill');
+
+    // Toggle Open Registration Modal
+    openRegisterBtn.addEventListener('click', () => {
+      modalOverlay.classList.add('active');
+    });
+
+    // Close Modal Function
+    function closeRegistrationModal() {
+      modalOverlay.classList.remove('active');
       setTimeout(() => {
-        regPage.classList.add('active');
-      }, 10);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // Password Toggle Visibility
-    function togglePassword(inputId, icon) {
-      const input = document.getElementById(inputId);
-      if (input.type === "password") {
-        input.type = "text";
-        icon.classList.replace('fa-eye-slash', 'fa-eye');
-      } else {
-        input.type = "password";
-        icon.classList.replace('fa-eye', 'fa-eye-slash');
-      }
-    }
-
-    // Profile Photo File Upload Preview Text Change
-    function handleFileChange(input) {
-      const fileText = document.getElementById('fileUploadText');
-      if (input.files && input.files[0]) {
-        fileText.innerText = "Selected: " + input.files[0].name;
-      }
-    }
-
-    // Handle Form Submit & Show Green Tick Popup
-    function handleRegistration(e) {
-      e.preventDefault();
-      document.getElementById('successPopup').classList.add('show');
-    }
-
-    // Close Popup and Reset Form
-    function closePopup() {
-      document.getElementById('successPopup').classList.remove('show');
-      const regPage = document.getElementById('registerPage');
-      regPage.classList.remove('active');
-      setTimeout(() => {
-        regPage.style.display = 'none';
-        document.getElementById('registrationForm').reset();
-        document.getElementById('fileUploadText').innerText = "Tap to upload photo";
+        // Reset form states
+        formBody.style.display = 'block';
+        successView.style.display = 'none';
+        registrationForm.reset();
       }, 400);
     }
+
+    closeRegisterBtn.addEventListener('click', closeRegistrationModal);
+    swipePill.addEventListener('click', closeRegistrationModal);
+
+    // Form Submission & Success Tick Trigger
+    registrationForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // Animate to success view
+      formBody.style.display = 'none';
+      successView.style.display = 'flex';
+    });
+
+    // Password Visibility Toggle
+    function togglePasswordVisibility() {
+      const passwordInput = document.getElementById('loginPassword');
+      const icon = event.target;
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+      } else {
+        passwordInput.type = 'password';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+      }
+    }
   </script>
+
 </body>
 </html>
