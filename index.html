@@ -5,15 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TNSF Kadapa Parliament - Portal</title>
   <!-- Google Fonts & FontAwesome Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
   <style>
     :root {
       --primary-yellow: #ffcc00;
       --primary-dark-yellow: #e6b800;
-      --bg-gradient-start: #fff9e6;
-      --bg-gradient-end: #fff0b3;
+      --bg-cream: #fbf8e7;
+      --tnsf-green: #0a8a3c;
+      --tnsf-red: #d92525;
       --card-bg: #ffffff;
       --text-main: #222222;
       --text-muted: #666666;
@@ -29,7 +30,7 @@
     }
 
     body {
-      background: linear-gradient(180deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+      background: var(--bg-cream);
       min-height: 100vh;
       display: flex;
       justify-content: center;
@@ -39,12 +40,12 @@
       position: relative;
     }
 
-    /* Container */
+    /* Main Phone Viewport Container */
     .app-viewport {
       width: 100%;
       max-width: 480px;
       min-height: 100vh;
-      background: #fefefe;
+      background: var(--bg-cream);
       position: relative;
       box-shadow: 0 10px 30px rgba(0,0,0,0.1);
       display: flex;
@@ -53,7 +54,155 @@
       overflow: hidden;
     }
 
-    /* Header */
+    /* ========================================================= */
+    /* 1. INITIAL 3D SPLASH / LANDING SCREEN (MATCHING IMAGE)   */
+    /* ========================================================= */
+    .splash-screen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-cream);
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 30px 20px 20px 20px;
+      transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
+      transform-style: preserve-3d;
+    }
+
+    .splash-screen.hide {
+      transform: translateY(-100%) rotateX(30deg);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Top Nara Lokesh Circle Badge */
+    .leader-badge {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 4px solid var(--primary-yellow);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+      overflow: hidden;
+      background: #fff;
+      animation: floatBadge 3s ease-in-out infinite alternate;
+    }
+
+    .leader-badge img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @keyframes floatBadge {
+      0% { transform: translateY(0px) rotate(0deg); }
+      100% { transform: translateY(-8px) rotate(2deg); }
+    }
+
+    /* Center 3D Green Kadapa District Map */
+    .map-3d-wrapper {
+      position: relative;
+      width: 280px;
+      height: 220px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      perspective: 1000px;
+      margin: 10px 0;
+    }
+
+    .map-3d-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0px 15px 12px rgba(0, 0, 0, 0.25));
+      animation: map3DRotate 4s ease-in-out infinite alternate;
+      transform-style: preserve-3d;
+    }
+
+    @keyframes map3DRotate {
+      0% { transform: rotateX(25deg) rotateY(-10deg) translateZ(10px); }
+      100% { transform: rotateX(15deg) rotateY(12deg) translateZ(25px) translateY(-6px); }
+    }
+
+    /* Text Typography: TNSF KADAPA */
+    .district-title {
+      text-align: center;
+      line-height: 1.0;
+      margin-bottom: 5px;
+    }
+
+    .district-title .green-text {
+      font-size: 38px;
+      font-weight: 900;
+      color: var(--tnsf-green);
+      letter-spacing: 1px;
+    }
+
+    .district-title .red-text {
+      font-size: 38px;
+      font-weight: 900;
+      color: var(--tnsf-red);
+      letter-spacing: 1.5px;
+    }
+
+    /* Bottom Round TNSF Logo & Footer */
+    .splash-bottom {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .tnsf-round-logo {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      animation: pulseLogo 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseLogo {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+    }
+
+    .splash-footer-text {
+      font-size: 11px;
+      color: #333;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .enter-btn {
+      background: var(--primary-yellow);
+      border: none;
+      padding: 12px 30px;
+      border-radius: 25px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #000;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(255, 204, 0, 0.5);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      margin-top: 5px;
+    }
+
+    .enter-btn:hover {
+      background: var(--primary-dark-yellow);
+      transform: scale(1.05);
+    }
+
+    /* ========================================================= */
+    /* 2. LOGIN & APP PORTAL SECTION                             */
+    /* ========================================================= */
     .header {
       background: var(--primary-yellow);
       padding: 15px 20px;
@@ -85,7 +234,6 @@
       margin-top: 2px;
     }
 
-    /* Main Container with 3D animation */
     .content-area {
       padding: 20px;
       flex: 1;
@@ -111,6 +259,9 @@
     .card-3d-wrapper {
       width: 100%;
       transform-style: preserve-3d;
+    }
+
+    .card-3d-wrapper.animate-in {
       animation: ultraRotateIn 1.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
 
@@ -301,7 +452,6 @@
       bottom: 0;
     }
 
-    /* Swipe indicator pill */
     .swipe-pill {
       width: 40px;
       height: 5px;
@@ -337,7 +487,6 @@
       cursor: pointer;
     }
 
-    /* One-by-one sequential form layout */
     .form-body {
       padding: 20px;
       overflow-y: auto;
@@ -442,7 +591,6 @@
       margin-bottom: 25px;
     }
 
-    /* Footer */
     .footer {
       text-align: center;
       padding: 15px;
@@ -452,7 +600,6 @@
       font-weight: 600;
     }
 
-    /* Floating WhatsApp Icon */
     .whatsapp-btn {
       position: absolute;
       bottom: 50px;
@@ -476,10 +623,54 @@
 
   <div class="app-viewport">
     
-    <!-- Top Header Banner -->
+    <!-- ========================================================= -->
+    <!-- 1. 3D SPLASH / INTRO SCREEN (EXACT DESIGN AS REQUESTED)    -->
+    <!-- ========================================================= -->
+    <div class="splash-screen" id="splashScreen">
+      <!-- Top Leader Circular Badge -->
+      <div class="leader-badge">
+        <!-- Replace src with Nara Lokesh image link -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Nara_Lokesh_in_2024.jpg/440px-Nara_Lokesh_in_2024.jpg" alt="Nara Lokesh TNSF" id="img-leader-badge" />
+      </div>
+
+      <!-- Center 3D Green Kadapa District Vector Map -->
+      <div class="map-3d-wrapper">
+        <!-- SVG Vector mimicking 3D Green Kadapa Map -->
+        <svg class="map-3d-img" viewBox="0 0 500 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- 3D Extrusion Shadow Layer -->
+          <path d="M150 120 L220 80 L310 90 L380 140 L410 200 L370 280 L290 320 L210 300 L140 250 L120 180 Z" fill="#045223" transform="translate(0, 18)"/>
+          <!-- Main 3D Green Map Body -->
+          <path d="M150 120 L220 80 L310 90 L380 140 L410 200 L370 280 L290 320 L210 300 L140 250 L120 180 Z" fill="#0A8A3C" stroke="#12ab4e" stroke-width="4"/>
+          <!-- Internal Constituency Borders -->
+          <path d="M220 80 L250 180 L210 300" stroke="#06692d" stroke-width="3"/>
+          <path d="M310 90 L280 200 L370 280" stroke="#06692d" stroke-width="3"/>
+          <path d="M150 120 L280 200 L410 200" stroke="#06692d" stroke-width="3"/>
+        </svg>
+      </div>
+
+      <!-- Title Text -->
+      <div class="district-title">
+        <div class="green-text">TNSF</div>
+        <div class="red-text">KADAPA</div>
+      </div>
+
+      <!-- Bottom Round TNSF Logo & Copyright -->
+      <div class="splash-bottom">
+        <img src="https://i.ibb.co/vzPypS3/tnsf-logo.png" alt="TNSF Emblem" class="tnsf-round-logo" id="img-splash-logo" />
+        <button class="enter-btn" id="enterPortalBtn">
+          Proceed to Portal <i class="fa-solid fa-arrow-right"></i>
+        </button>
+        <div class="splash-footer-text">
+          &copy; 2026 TNSF Kadapa Parliament. All Rights Reserved.
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- 2. MAIN WEBSITE / LOGIN PORTAL CONTENT                    -->
+    <!-- ========================================================= -->
     <div class="header">
-      <!-- IMAGE LINK 1: TNSF Logo Header -->
-      <img src="image/images (3).jpeg" alt="TNSF Logo" id="img-header-logo"/>
+      <img src="https://i.ibb.co/vzPypS3/tnsf-logo.png" alt="TNSF Logo" id="img-header-logo"/>
       <div class="header-text">
         <h1>TELUGU NADU STUDENT'S FEDERATION</h1>
         <h2>KADAPA PARLIAMENT</h2>
@@ -491,10 +682,9 @@
       <div class="slogan-top">Students For a<br>Better Tomorrow</div>
 
       <!-- 3D Animated Login Card -->
-      <div class="card-3d-wrapper">
+      <div class="card-3d-wrapper" id="card3DWrapper">
         <div class="login-card">
-          <!-- IMAGE LINK 2: Main Logo -->
-          <img src="image/images (3).jpeg" alt="TNSF Badge" class="logo-center" id="img-main-logo"/>
+          <img src="https://i.ibb.co/vzPypS3/tnsf-logo.png" alt="TNSF Badge" class="logo-center" id="img-main-logo"/>
           <h3>Welcome Back!</h3>
           <p>Login to your TNSF Kadapa Parliament account</p>
 
@@ -523,7 +713,7 @@
       </div>
     </div>
 
-    <!-- WhatsApp Floating Action -->
+    <!-- WhatsApp Floating Button -->
     <a href="#" class="whatsapp-btn"><i class="fa-brands fa-whatsapp"></i></a>
 
     <!-- Footer -->
@@ -537,13 +727,11 @@
         <div class="swipe-pill" id="swipePill"></div>
         <i class="fa-solid fa-xmark close-btn" id="closeRegisterBtn"></i>
 
-        <!-- Modal Header -->
         <div class="modal-header">
           <h3>My TNSF Registration</h3>
           <p>Become a member of TNSF Kadapa Parliament</p>
         </div>
 
-        <!-- Registration Form (Fields arranged 1-by-1 vertically) -->
         <div class="form-body" id="formBody">
           <form id="registrationForm">
             
@@ -630,7 +818,6 @@
               <input type="text" class="input-control" placeholder="Enter your complete address" required />
             </div>
 
-            <!-- REPLACEMENT: Referral ID Field -->
             <label class="form-label">Referral ID (Optional)</label>
             <div class="input-group">
               <i class="fa-solid fa-id-card left-icon"></i>
@@ -655,13 +842,13 @@
           </form>
         </div>
 
-        <!-- Success Animation Page State -->
+        <!-- Success Animation View -->
         <div class="success-view" id="successView">
           <div class="checkmark-circle">
             <i class="fa-solid fa-check"></i>
           </div>
           <h2>Registration Successful!</h2>
-          <p>Your details have been submitted to the TNSF. Once approved, your User ID and Password will be sent to your WhatsApp and Email.</p>
+          <p>Your details have been submitted to the Admin. Once approved, your User ID and Password will be sent to your WhatsApp and Email.</p>
           <button class="btn-primary" onclick="closeRegistrationModal()">Back to Login</button>
         </div>
 
@@ -671,7 +858,28 @@
   </div>
 
   <script>
-    // Elements Reference
+    // Splash screen transitions
+    const splashScreen = document.getElementById('splashScreen');
+    const enterPortalBtn = document.getElementById('enterPortalBtn');
+    const card3DWrapper = document.getElementById('card3DWrapper');
+
+    function openPortal() {
+      splashScreen.classList.add('hide');
+      setTimeout(() => {
+        card3DWrapper.classList.add('animate-in');
+      }, 300);
+    }
+
+    enterPortalBtn.addEventListener('click', openPortal);
+
+    // Auto open after 3 seconds if not clicked
+    setTimeout(() => {
+      if (!splashScreen.classList.contains('hide')) {
+        openPortal();
+      }
+    }, 3500);
+
+    // Modal References
     const modalOverlay = document.getElementById('modalOverlay');
     const openRegisterBtn = document.getElementById('openRegisterBtn');
     const closeRegisterBtn = document.getElementById('closeRegisterBtn');
@@ -680,16 +888,13 @@
     const successView = document.getElementById('successView');
     const swipePill = document.getElementById('swipePill');
 
-    // Toggle Open Registration Modal
     openRegisterBtn.addEventListener('click', () => {
       modalOverlay.classList.add('active');
     });
 
-    // Close Modal Function
     function closeRegistrationModal() {
       modalOverlay.classList.remove('active');
       setTimeout(() => {
-        // Reset form states
         formBody.style.display = 'block';
         successView.style.display = 'none';
         registrationForm.reset();
@@ -699,15 +904,12 @@
     closeRegisterBtn.addEventListener('click', closeRegistrationModal);
     swipePill.addEventListener('click', closeRegistrationModal);
 
-    // Form Submission & Success Tick Trigger
     registrationForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      // Animate to success view
       formBody.style.display = 'none';
       successView.style.display = 'flex';
     });
 
-    // Password Visibility Toggle
     function togglePasswordVisibility() {
       const passwordInput = document.getElementById('loginPassword');
       const icon = event.target;
