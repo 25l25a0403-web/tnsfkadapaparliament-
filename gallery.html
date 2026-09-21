@@ -36,7 +36,7 @@
     /* Header */
     header {
       background: var(--primary);
-      padding: 12px 24px;
+      padding: 10px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -53,45 +53,46 @@
     }
 
     .brand img {
-      width: 45px;
-      height: 45px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
       background: #fff;
     }
 
     .brand-text h1 {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       font-weight: 800;
       line-height: 1.1;
       color: #000;
     }
 
     .brand-text span {
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       font-weight: 700;
       color: #333;
     }
 
-    /* Home Button on the Right Side of Header */
-    .icon-btn {
-      background: #fff;
+    /* Updated Home Button styled exactly as per reference image */
+    .home-btn {
+      background: #ffffff;
       border: none;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
+      padding: 6px 16px;
+      border-radius: 20px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: var(--transition);
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      gap: 6px;
+      font-size: 0.88rem;
+      font-weight: 700;
       color: #000;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      transition: var(--transition);
     }
 
-    .icon-btn:hover {
+    .home-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-      background: #f8f9fa;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      background: #fdfdfd;
     }
 
     /* Updatable Hero Banner Styling */
@@ -165,7 +166,6 @@
       transition: var(--transition);
     }
 
-    /* Change Image Overlay Button */
     .hero-img-upload-btn {
       position: absolute;
       bottom: 12px;
@@ -190,7 +190,7 @@
       color: #000;
     }
 
-    /* Category Filters */
+    /* Category Filters (Campus Programs Removed) */
     .filters-wrapper {
       max-width: 1200px;
       margin: 0 auto 20px;
@@ -254,7 +254,7 @@
       }
     }
 
-    /* Card Styling */
+    /* Card Styling & Animated Transitions */
     .card {
       background: var(--card-bg);
       border-radius: var(--border-radius);
@@ -357,7 +357,7 @@
       width: fit-content;
     }
 
-    /* Expandable Animated Text Transition */
+    /* Expandable Animated Text Matter */
     .card-details {
       max-height: 0;
       overflow: hidden;
@@ -402,13 +402,14 @@
         <span>KADAPA PARLIAMENT</span>
       </div>
     </div>
-    <!-- Home button with home icon in right side of header -->
-    <button class="icon-btn" title="Home" onclick="goHome()">
-      <i data-lucide="home"></i>
+    <!-- Updated Home Button matching reference image -->
+    <button class="home-btn" title="Home" onclick="goHome()">
+      <i data-lucide="home" size="16"></i>
+      <span>Home</span>
     </button>
   </header>
 
-  <!-- Hero Banner with Updatable Image -->
+  <!-- Hero Banner -->
   <section class="hero">
     <div class="hero-text-content">
       <div class="hero-title">
@@ -420,10 +421,7 @@
 
     <!-- Updatable Image Box -->
     <div class="hero-image-wrapper">
-      <!-- Change src below to update default banner image -->
       <img id="heroImage" src="https://picsum.photos/id/1015/800/400" alt="Hero Banner Image" />
-      
-      <!-- Instant Image Change Trigger -->
       <button class="hero-img-upload-btn" onclick="document.getElementById('heroImageInput').click()">
         <i data-lucide="upload" size="14"></i> Update Image
       </button>
@@ -525,12 +523,6 @@
 
     let currentOpenCardId = null;
 
-    // Helper function to update Hero Image dynamically via JavaScript URL call
-    function updateHeroBanner(newImageUrl) {
-      document.getElementById('heroImage').src = newImageUrl;
-    }
-
-    // Function to handle local file upload update
     function handleHeroImageUpload(e) {
       const file = e.target.files[0];
       if (file) {
@@ -542,7 +534,6 @@
       }
     }
 
-    // Render Gallery Grid Cards
     function renderGallery(filter = 'all') {
       const grid = document.getElementById('galleryGrid');
       grid.innerHTML = '';
@@ -577,11 +568,9 @@
       lucide.createIcons();
     }
 
-    // Toggle Card Matter with Animated Transition
     function toggleCard(id) {
       const targetCard = document.getElementById(`card-${id}`);
 
-      // Close previous open card if it exists and is different
       if (currentOpenCardId !== null && currentOpenCardId !== id) {
         const prevCard = document.getElementById(`card-${currentOpenCardId}`);
         if (prevCard) {
@@ -589,7 +578,6 @@
         }
       }
 
-      // Toggle current card matter
       if (targetCard.classList.contains('active')) {
         targetCard.classList.remove('active');
         currentOpenCardId = null;
@@ -599,7 +587,6 @@
       }
     }
 
-    // Category Filter Function
     function filterCategory(category, event) {
       document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
       event.currentTarget.classList.add('active');
@@ -607,7 +594,6 @@
       renderGallery(category);
     }
 
-    // Direct Share Image with Text Functionality
     async function shareCard(e, id) {
       e.stopPropagation();
       const item = galleryItems.find(i => i.id === id);
@@ -642,14 +628,12 @@
       }
     }
 
-    // Home Icon Action
     function goHome() {
       window.history.pushState({}, document.title, window.location.pathname);
       filterCategory('all', { currentTarget: document.querySelector('.filter-btn') });
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Handle incoming shared links targeting a specific image card
     function handleSharedUrl() {
       const urlParams = new URLSearchParams(window.location.search);
       const itemId = urlParams.get('item');
@@ -664,7 +648,6 @@
       }
     }
 
-    // Initial Execution
     document.addEventListener('DOMContentLoaded', () => {
       renderGallery('all');
       handleSharedUrl();
