@@ -157,7 +157,7 @@
             font-size: 24px;
             cursor: pointer;
             color: #000;
-            z-index: 101;
+            z-index: 1001;
             transition: transform 0.3s;
         }
 
@@ -165,72 +165,93 @@
             transform: scale(1.1);
         }
 
-        /* --- MOBILE ANIMATED FULL-SCREEN MENU --- */
+        /* --- MOBILE RIGHT-SIDE SLIDING DRAWER MENU --- */
         .mobile-menu-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 252, 235, 0.98);
-            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.4); /* Dark background fade */
             z-index: 999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             opacity: 0;
             visibility: hidden;
-            transform: scale(0.95);
-            transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+            transition: opacity 0.4s ease, visibility 0.4s;
         }
 
+        .mobile-drawer {
+            position: fixed;
+            top: 0;
+            right: -280px; /* Hidden completely to the right */
+            width: 280px;
+            height: 100%;
+            background: #fffdf0;
+            box-shadow: -5px 0 20px rgba(0,0,0,0.15);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            padding: 25px 20px;
+            transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        /* When active, show overlay and slide drawer to 0 */
         .mobile-menu-overlay.active {
             opacity: 1;
             visibility: visible;
-            transform: scale(1);
+        }
+
+        .mobile-menu-overlay.active .mobile-drawer {
+            right: 0;
+        }
+
+        .drawer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ffcc00;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .drawer-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #000;
         }
 
         .close-menu {
-            position: absolute;
-            top: 25px;
-            right: 25px;
-            font-size: 28px;
+            font-size: 22px;
             cursor: pointer;
             color: #333;
-            transition: transform 0.3s;
+            transition: transform 0.3s, color 0.3s;
         }
 
         .close-menu:hover {
             transform: rotate(90deg);
-            color: #ff9900;
+            color: #d4a000;
         }
 
         .mobile-nav-links {
             list-style: none;
-            text-align: center;
             display: flex;
             flex-direction: column;
-            gap: 18px;
-            max-height: 80vh;
+            gap: 15px;
             overflow-y: auto;
-            width: 100%;
-            padding: 0 20px;
+            flex-grow: 1;
         }
 
         .mobile-nav-links li {
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.4s ease, transform 0.4s ease;
+            transform: translateX(30px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
-        /* Staggered animation effect when menu opens */
+        /* Cascade animation from right for list items */
         .mobile-menu-overlay.active .mobile-nav-links li {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateX(0);
         }
 
-        /* Delay for each list item for smooth cascade effect */
         .mobile-menu-overlay.active .mobile-nav-links li:nth-child(1) { transition-delay: 0.1s; }
         .mobile-menu-overlay.active .mobile-nav-links li:nth-child(2) { transition-delay: 0.15s; }
         .mobile-menu-overlay.active .mobile-nav-links li:nth-child(3) { transition-delay: 0.2s; }
@@ -244,24 +265,27 @@
 
         .mobile-nav-links a {
             text-decoration: none;
-            font-size: 18px;
+            font-size: 15px;
             font-weight: 600;
-            color: #222;
-            display: inline-flex;
+            color: #333;
+            display: flex;
             align-items: center;
             gap: 12px;
-            transition: color 0.3s, transform 0.3s;
+            padding: 8px 10px;
+            border-radius: 8px;
+            transition: background 0.3s, color 0.3s, transform 0.2s;
         }
 
         .mobile-nav-links a i {
-            color: #ffcc00;
-            width: 25px;
+            color: #d4a000;
+            width: 20px;
             text-align: center;
         }
 
         .mobile-nav-links a:hover {
-            color: #d4a000;
-            transform: scale(1.08);
+            background-color: #fff4b8;
+            color: #000;
+            transform: translateX(5px);
         }
 
         .container {
@@ -598,23 +622,28 @@
             </div>
         </header>
 
-        <!-- MOBILE ANIMATED OVERLAY MENU -->
+        <!-- MOBILE RIGHT-SIDE SLIDING DRAWER MENU -->
         <div class="mobile-menu-overlay" id="mobileMenuOverlay">
-            <div class="close-menu" id="closeMenuBtn">
-                <i class="fa-solid fa-xmark"></i>
+            <div class="mobile-drawer" id="mobileDrawer">
+                <div class="drawer-header">
+                    <span class="drawer-title">Menu</span>
+                    <div class="close-menu" id="closeMenuBtn">
+                        <i class="fa-solid fa-xmark"></i>
+                    </div>
+                </div>
+                <ul class="mobile-nav-links">
+                    <li><a href="#"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li><a href="#"><i class="fa-solid fa-graduation-cap"></i> Student Help</a></li>
+                    <li><a href="#"><i class="fa-solid fa-images"></i> Gallery</a></li>
+                    <li><a href="#"><i class="fa-solid fa-envelope"></i> Inbox</a></li>
+                    <li><a href="#"><i class="fa-solid fa-map-location-dot"></i> Constituencies</a></li>
+                    <li><a href="#"><i class="fa-solid fa-user-tie"></i> Leadership</a></li>
+                    <li><a href="#"><i class="fa-solid fa-calendar-days"></i> Events</a></li>
+                    <li><a href="#"><i class="fa-solid fa-comments"></i> Feedback</a></li>
+                    <li><a href="#"><i class="fa-solid fa-headset"></i> Contact Us</a></li>
+                    <li><a href="#"><i class="fa-solid fa-hand-holding-heart"></i> Donate Us</a></li>
+                </ul>
             </div>
-            <ul class="mobile-nav-links">
-                <li><a href="#"><i class="fa-solid fa-house"></i> Home</a></li>
-                <li><a href="#"><i class="fa-solid fa-graduation-cap"></i> Student Help</a></li>
-                <li><a href="#"><i class="fa-solid fa-images"></i> Gallery</a></li>
-                <li><a href="#"><i class="fa-solid fa-envelope"></i> Inbox</a></li>
-                <li><a href="#"><i class="fa-solid fa-map-location-dot"></i> Constituencies</a></li>
-                <li><a href="#"><i class="fa-solid fa-user-tie"></i> Leadership</a></li>
-                <li><a href="#"><i class="fa-solid fa-calendar-days"></i> Events</a></li>
-                <li><a href="#"><i class="fa-solid fa-comments"></i> Feedback</a></li>
-                <li><a href="#"><i class="fa-solid fa-headset"></i> Contact Us</a></li>
-                <li><a href="#"><i class="fa-solid fa-hand-holding-heart"></i> Donate Us</a></li>
-            </ul>
         </div>
 
         <div class="container">
@@ -725,7 +754,7 @@
         </footer>
     </div>
 
-    <!-- JavaScript for Menu Animation and Auto Slider -->
+    <!-- JavaScript for Right-Side Menu Animation and Auto Slider -->
     <script>
         // 1. Loading Screen
         window.addEventListener('DOMContentLoaded', () => {
@@ -734,7 +763,7 @@
             }, 2000);
         });
 
-        // 2. Mobile Menu Toggle Logic with Animations
+        // 2. Right-Side Sliding Menu Logic
         const menuToggleBtn = document.getElementById('menuToggleBtn');
         const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
         const closeMenuBtn = document.getElementById('closeMenuBtn');
@@ -748,7 +777,14 @@
             mobileMenuOverlay.classList.remove('active');
         });
 
-        // Close menu when clicking any link inside mobile menu
+        // Close menu when clicking anywhere on the dark background overlay
+        mobileMenuOverlay.addEventListener('click', (e) => {
+            if (e.target === mobileMenuOverlay) {
+                mobileMenuOverlay.classList.remove('active');
+            }
+        });
+
+        // Close menu when clicking any link inside the drawer
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenuOverlay.classList.remove('active');
