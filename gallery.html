@@ -94,24 +94,40 @@
       background: #f8f9fa;
     }
 
-    /* Hero Banner */
+    /* Updatable Hero Banner Styling */
     .hero {
       position: relative;
       background: linear-gradient(135deg, #fff 0%, #fff8e1 100%);
-      padding: 30px 20px;
+      padding: 24px;
+      margin: 20px auto;
+      border-radius: 16px;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      flex-direction: column;
+      gap: 20px;
       max-width: 1200px;
-      margin: 0 auto;
-      width: 100%;
+      width: 90%;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      overflow: hidden;
+    }
+
+    @media (min-width: 768px) {
+      .hero {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 32px;
+      }
+    }
+
+    .hero-text-content {
+      flex: 1;
     }
 
     .hero-title {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .hero-title i {
@@ -127,10 +143,54 @@
 
     .hero p {
       color: var(--text-muted);
-      max-width: 450px;
+      max-width: 500px;
+      line-height: 1.5;
     }
 
-    /* Category Filters (Campus Programs Removed) */
+    .hero-image-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 450px;
+      height: 220px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+      flex-shrink: 0;
+    }
+
+    .hero-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    /* Change Image Overlay Button */
+    .hero-img-upload-btn {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(0, 0, 0, 0.75);
+      color: #fff;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      backdrop-filter: blur(4px);
+      transition: var(--transition);
+    }
+
+    .hero-img-upload-btn:hover {
+      background: var(--primary);
+      color: #000;
+    }
+
+    /* Category Filters */
     .filters-wrapper {
       max-width: 1200px;
       margin: 0 auto 20px;
@@ -194,7 +254,7 @@
       }
     }
 
-    /* Card Styling & Animated Transitions */
+    /* Card Styling */
     .card {
       background: var(--card-bg);
       border-radius: var(--border-radius);
@@ -297,7 +357,7 @@
       width: fit-content;
     }
 
-    /* Expandable Animated Text Matter */
+    /* Expandable Animated Text Transition */
     .card-details {
       max-height: 0;
       overflow: hidden;
@@ -333,7 +393,7 @@
 </head>
 <body>
 
-  <!-- Header without menu button -->
+  <!-- Header -->
   <header>
     <div class="brand">
       <img src="https://via.placeholder.com/45" alt="TNSF Logo" />
@@ -348,18 +408,30 @@
     </button>
   </header>
 
-  <!-- Hero Section -->
-  section class="hero">
-    <div>
+  <!-- Hero Banner with Updatable Image -->
+  <section class="hero">
+    <div class="hero-text-content">
       <div class="hero-title">
         <i data-lucide="camera"></i>
         <h2>Gallery</h2>
       </div>
       <p>Moments of unity, action and change. Explore our journey through photos.</p>
     </div>
+
+    <!-- Updatable Image Box -->
+    <div class="hero-image-wrapper">
+      <!-- Change src below to update default banner image -->
+      <img id="heroImage" src="https://picsum.photos/id/1015/800/400" alt="Hero Banner Image" />
+      
+      <!-- Instant Image Change Trigger -->
+      <button class="hero-img-upload-btn" onclick="document.getElementById('heroImageInput').click()">
+        <i data-lucide="upload" size="14"></i> Update Image
+      </button>
+      <input type="file" id="heroImageInput" accept="image/*" style="display: none;" onchange="handleHeroImageUpload(event)" />
+    </div>
   </section>
 
-  <!-- Category Filters (Campus Programs Removed) -->
+  <!-- Category Filters -->
   <div class="filters-wrapper">
     <div class="filters">
       <button class="filter-btn active" onclick="filterCategory('all', event)"><i data-lucide="grid" size="16"></i> All</button>
@@ -370,7 +442,7 @@
     </div>
   </div>
 
-  <!-- Responsive Cards Grid -->
+  <!-- Cards Grid -->
   <main class="gallery-container">
     <div class="gallery-grid" id="galleryGrid">
       <!-- Generated Dynamically -->
@@ -384,7 +456,6 @@
   </footer>
 
   <script>
-    // Gallery Data Exclude Campus Programs
     const galleryItems = [
       {
         id: 1,
@@ -454,7 +525,24 @@
 
     let currentOpenCardId = null;
 
-    // Render Gallery Cards
+    // Helper function to update Hero Image dynamically via JavaScript URL call
+    function updateHeroBanner(newImageUrl) {
+      document.getElementById('heroImage').src = newImageUrl;
+    }
+
+    // Function to handle local file upload update
+    function handleHeroImageUpload(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          document.getElementById('heroImage').src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    // Render Gallery Grid Cards
     function renderGallery(filter = 'all') {
       const grid = document.getElementById('galleryGrid');
       grid.innerHTML = '';
@@ -521,20 +609,17 @@
 
     // Direct Share Image with Text Functionality
     async function shareCard(e, id) {
-      e.stopPropagation(); // Avoid triggering card accordion toggle
+      e.stopPropagation();
       const item = galleryItems.find(i => i.id === id);
       if (!item) return;
 
-      // Construct direct shareable URL pointing specifically to this card image
       const shareUrl = `${window.location.origin}${window.location.pathname}?item=${item.id}`;
 
       try {
-        // Fetch image to share as an actual File object
         const response = await fetch(item.img);
         const blob = await response.blob();
         const file = new File([blob], `${item.title.replace(/\s+/g, '_')}.jpg`, { type: 'image/jpeg' });
 
-        // Use Web Share API if supported
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
           await navigator.share({
             title: item.title,
@@ -543,27 +628,22 @@
             files: [file]
           });
         } else if (navigator.share) {
-          // Fallback Web Share for browsers that share URL & Text
           await navigator.share({
             title: item.title,
             text: `${item.title}\n${item.description}`,
             url: shareUrl
           });
         } else {
-          // Fallback copy link to clipboard
           await navigator.clipboard.writeText(`${item.title}\n${item.description}\n${shareUrl}`);
           alert('Share link and details copied to clipboard!');
         }
       } catch (err) {
-        console.error('Error sharing:', err);
-        // Fallback option in case fetch fails
         window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(item.title + ' - ' + item.description + ' ' + shareUrl)}`, '_blank');
       }
     }
 
     // Home Icon Action
     function goHome() {
-      // Clear URL parameters and reset gallery
       window.history.pushState({}, document.title, window.location.pathname);
       filterCategory('all', { currentTarget: document.querySelector('.filter-btn') });
       window.scrollTo({ top: 0, behavior: 'smooth' });
