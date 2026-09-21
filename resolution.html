@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TNSF Resolution Desk</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Global Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f4f6f8;
+      color: #333;
+    }
+
+    /* Top Navigation Bar */
+    .header {
+      background-color: #ffcc00;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 24px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .header .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .header .logo img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+    }
+
+    .header .nav-icons {
+      display: flex;
+      gap: 18px;
+      font-size: 1.2rem;
+    }
+
+    /* Main Container Layout (Desktop First) */
+    .main-container {
+      max-width: 1300px;
+      margin: 20px auto;
+      padding: 0 15px;
+      display: flex;
+      gap: 20px;
+    }
+
+    /* Left Sidebar Section (Moved Support Section Here) */
+    .left-sidebar {
+      flex: 0 0 300px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    /* Support Section Styles */
+    .support-card {
+      background: linear-gradient(135deg, #fffde7 0%, #ffffff 100%);
+      border: 1px solid #ffe082;
+      text-align: center;
+    }
+
+    .support-card .icon-hat {
+      font-size: 2.5rem;
+      color: #1a237e;
+      margin-bottom: 10px;
+    }
+
+    .support-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      color: #1a237e;
+    }
+
+    .support-list {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 15px;
+    }
+
+    .support-list li {
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #444;
+    }
+
+    .support-list li i {
+      color: #ffb300;
+      font-size: 0.8rem;
+    }
+
+    .support-quote {
+      font-style: italic;
+      color: #0d47a1;
+      font-weight: bold;
+      margin: 15px 0;
+      font-size: 0.95rem;
+    }
+
+    .need-help-card {
+      text-align: center;
+      border: 1px solid #e0e0e0;
+    }
+
+    .need-help-card .help-icon {
+      background: #fff59d;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px auto;
+      color: #f57f17;
+    }
+
+    .btn-contact {
+      display: inline-block;
+      width: 100%;
+      padding: 10px;
+      background-color: #ffcc00;
+      border: none;
+      border-radius: 20px;
+      font-weight: bold;
+      color: #333;
+      cursor: pointer;
+      margin-top: 10px;
+      text-decoration: none;
+    }
+
+    /* Main Content Area */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Hero Banner */
+    .hero-banner {
+      background: linear-gradient(135deg, #e8eaf6 0%, #e1f5fe 100%);
+      border-radius: 12px;
+      padding: 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-text h2 {
+      font-size: 1.8rem;
+      color: #1a237e;
+      margin-bottom: 8px;
+    }
+
+    .hero-text p {
+      font-size: 0.9rem;
+      color: #555;
+      max-width: 400px;
+    }
+
+    .hero-tagline {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #d81b60;
+      font-style: italic;
+    }
+
+    /* Form Section */
+    .form-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .form-header i {
+      background: #fff59d;
+      padding: 10px;
+      border-radius: 8px;
+      color: #f57f17;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #444;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .form-group input, 
+    .form-group select, 
+    .form-group textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      outline: none;
+      font-size: 0.9rem;
+    }
+
+    .form-group input:focus, 
+    .form-group select:focus, 
+    .form-group textarea:focus {
+      border-color: #ffcc00;
+    }
+
+    .file-upload {
+      border: 2px dashed #ccc;
+      border-radius: 6px;
+      padding: 15px;
+      text-align: center;
+      background: #fafafa;
+      cursor: pointer;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 12px;
+      background-color: #ffcc00;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #333;
+      cursor: pointer;
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-submit:hover {
+      background-color: #e6b800;
+    }
+
+    /* Modal Popup */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-box {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      transform: scale(0.8);
+      transition: all 0.3s ease;
+    }
+
+    .modal-overlay.active .modal-box {
+      transform: scale(1);
+    }
+
+    .modal-icon {
+      font-size: 3rem;
+      color: #4caf50;
+      margin-bottom: 15px;
+    }
+
+    .modal-box h3 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .modal-box p {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .btn-ok {
+      padding: 8px 30px;
+      background-color: #ffcc00;
+      border: none;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* MOBILE RESPONSIVE MEDIA QUERY */
+    @media (max-width: 768px) {
+      .main-container {
+        flex-direction: column;
+      }
+
+      /* Hero Banner stays on Top */
+      .hero-banner {
+        order: 1;
+      }
+
+      /* Support Sidebar moved directly below Hero Banner */
+      .left-sidebar {
+        order: 2;
+        flex: 1 1 auto;
+      }
+
+      /* Form Section moved below Support Section */
+      .main-content {
+        order: 3;
+      }
+
+      /* Single Column Form Fields for Mobile */
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header class="header">
+    <div class="logo">
+      <i class="fa-solid fa-graduation-cap fa-2x"></i>
+      <div>
+        <div>TNSF</div>
+        <div style="font-size: 0.75rem; font-weight: normal;">KADAPA PARLIAMENT</div>
+      </div>
+    </div>
+    <div class="nav-icons">
+      <i class="fa-regular fa-bell"></i>
+      <i class="fa-regular fa-user"></i>
+    </div>
+  </header>
+
+  <div class="main-container">
+    
+    <!-- Left Sidebar (Desktop: Left | Mobile: 2nd place below Hero) -->
+    <aside class="left-sidebar">
+      
+      <!-- We Support You In Section -->
+      <div class="card support-card">
+        <i class="fa-solid fa-user-graduate icon-hat"></i>
+        <h3>We Support You In</h3>
+        <ul class="support-list">
+          <li><i class="fa-solid fa-check"></i> Scholarship Guidance</li>
+          <li><i class="fa-solid fa-check"></i> Education Support</li>
+          <li><i class="fa-solid fa-check"></i> Study Materials</li>
+          <li><i class="fa-solid fa-check"></i> Career Guidance</li>
+          <li><i class="fa-solid fa-check"></i> Hostel & Accommodation</li>
+          <li><i class="fa-solid fa-check"></i> Financial Assistance</li>
+          <li><i class="fa-solid fa-check"></i> And More...</li>
+        </ul>
+        <div class="support-quote">"Together We Can Build a Brighter Future"</div>
+      </div>
+
+      <!-- Need Help Section -->
+      <div class="card need-help-card">
+        <div class="help-icon">
+          <i class="fa-solid fa-headset"></i>
+        </div>
+        <h4>Need Help?</h4>
+        <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">Our support team is always ready to assist you.</p>
+        <a href="#" class="btn-contact">Contact Us ></a>
+      </div>
+
+    </aside>
+
+    <!-- Main Content (Desktop: Right | Mobile: Split between 1st & 3rd place) -->
+    <main class="main-content">
+      
+      <!-- Resolution Desk Hero Banner (Mobile: 1st place) -->
+      <section class="hero-banner">
+        <div class="hero-text">
+          <h2><i class="fa-solid fa-headset" style="color: #f57f17;"></i> Resolution Desk</h2>
+          <p><strong>Raise your issue. We're here to help.</strong><br>Fill the form below with your details and issue information. Our team will review and get back to you soon.</p>
+          <div class="hero-tagline">Your Voice Matters</div>
+        </div>
+      </section>
+
+      <!-- Form Section (Mobile: 3rd place below Support) -->
+      <section class="card">
+        <div class="form-header">
+          <i class="fa-solid fa-list-check"></i>
+          <div>
+            <h3>Resolution Desk Form</h3>
+            <p style="font-size: 0.8rem; color: #666;">Please fill in the details below. Our team will get back to you soon.</p>
+          </div>
+        </div>
+
+        <form id="resolutionForm">
+          <div class="form-grid">
+            
+            <div class="form-group">
+              <label><i class="fa-regular fa-user"></i> Full Name *</label>
+              <input type="text" placeholder="Enter your full name" required>
+            </div>
+
+            <div class="form-group">
+              <label><i class="fa-solid fa-phone"></i> Mobile Number *</label>
+              <input type="tel" placeholder="Enter your mobile number" required>
+            </div>
+
+            <div class="form-group">
+              <label><i class="fa-regular fa-envelope"></i> Email Address</label>
+              <input type="email" placeholder="Enter your email address">
+            </div>
+
+            <div class="form-group">
+              <label><i class="fa-solid fa-graduation-cap"></i> Education Level *</label>
+              <select required>
+                <option value="">Select your education level</option>
+                <option value="school">School</option>
+                <option value="undergraduate">Undergraduate</option>
+                <option value="postgraduate">Postgraduate</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label><i class="fa-solid fa-building-columns"></i> College / Institution Name *</label>
+              <input type="text" placeholder="Enter your college / institution name" required>
+            </div>
+
+            <div class="form-group">
+              <label><i class="fa-solid fa-book"></i> Course / Branch *</label>
+              <input type="text" placeholder="Enter your course / branch" required>
+            </div>
+
+            <div class="form-group">
+              <label><i class="fa-regular fa-calendar"></i> Year of Study *</label>
+              <select required>
+                <option value="">Select your year of study</option>
+                <option value="1">1st Year</option>
+                <option value="2">2nd Year</option>
+                <option value="3">3rd Year</option>
+                <option value="4">4th Year</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label><i class="fa-regular fa-file-lines"></i> Description / Message *</label>
+              <textarea rows="3" placeholder="Please describe your issue or requirement in detail..." required></textarea>
+            </div>
+
+            <div class="form-group full-width">
+              <label><i class="fa-solid fa-paperclip"></i> Upload Document (Optional)</label>
+              <div class="file-upload">
+                <i class="fa-solid fa-cloud-arrow-up" style="font-size: 1.5rem; color: #f57f17;"></i>
+                <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">Choose a file or drag and drop (PDF, JPG, PNG - Max 5MB)</p>
+              </div>
+            </div>
+
+          </div>
+
+          <button type="submit" class="btn-submit">
+            <i class="fa-solid fa-paper-plane"></i> Submit Request
+          </button>
+        </form>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Success Popup Modal -->
+  <div class="modal-overlay" id="successModal">
+    <div class="modal-box">
+      <i class="fa-regular fa-circle-check modal-icon"></i>
+      <h3>Submitted Successfully!</h3>
+      <p>Thank you. Your request has been submitted to the Resolution Desk. We will get back to you shortly.</p>
+      <button class="btn-ok" onclick="closePopup()">OK</button>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('resolutionForm');
+    const modal = document.getElementById('successModal');
+
+    // Handle Form Submit Event
+    form.addEventListener('submit', function(e) {
+      e.preventDefault(); // Prevent page refresh
+      modal.classList.add('active'); // Show Success Popup
+    });
+
+    // Close/Minimise Popup Action
+    function closePopup() {
+      modal.classList.remove('active'); // Hide Popup
+      form.reset(); // Reset form fields
+    }
+  </script>
+</body>
+</html>
+
