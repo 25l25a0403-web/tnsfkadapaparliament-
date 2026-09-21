@@ -1,772 +1,815 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TNSF Kadapa Parliament - Resolution Desk</title>
-  <!-- FontAwesome Icons & Google Fonts -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
-  <style>
-    :root {
-      --primary-yellow: #FFD700;
-      --secondary-yellow: #FFF8D6;
-      --accent-yellow: #FFC107;
-      --dark-blue: #1A1C2e;
-      --text-dark: #333333;
-      --text-muted: #666666;
-      --light-gray: #f4f6f9;
-      --white: #ffffff;
-      --border-color: #e2e8f0;
-      --shadow: 0 4px 15px rgba(0,0,0,0.05);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    body {
-      background-color: #f8fafc;
-      color: var(--text-dark);
-    }
-
-    /* HEADER */
-    header {
-      background-color: var(--primary-yellow);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 5%;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .header-logo {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      background-color: white;
-      padding: 2px;
-      object-fit: contain;
-    }
-
-    .header-title h1 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: #000;
-      line-height: 1.1;
-    }
-
-    .header-title p {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: #333;
-      letter-spacing: 0.5px;
-    }
-
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .home-btn {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: white;
-      padding: 8px 16px;
-      border-radius: 20px;
-      text-decoration: none;
-      color: var(--text-dark);
-      font-weight: 600;
-      font-size: 0.85rem;
-      transition: all 0.3s ease;
-      box-shadow: var(--shadow);
-    }
-
-    .home-btn:hover {
-      background-color: var(--dark-blue);
-      color: white;
-    }
-
-    /* MAIN CONTAINER */
-    .container {
-      max-width: 1250px;
-      margin: 20px auto;
-      padding: 0 15px;
-    }
-
-    .main-grid {
-      display: grid;
-      grid-template-columns: 320px 1fr;
-      gap: 20px;
-    }
-
-    /* CARD STYLES */
-    .card {
-      background: var(--white);
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border-color);
-      margin-bottom: 20px;
-    }
-
-    /* WE SUPPORT YOU IN (LEFT PANEL / ANIMATED) */
-    .support-card {
-      background: linear-gradient(180deg, #FFFFFF 0%, var(--secondary-yellow) 100%);
-      border: 2px solid var(--accent-yellow);
-      animation: floatCard 4s ease-in-out infinite;
-      position: relative;
-      overflow: hidden;
-    }
-
-    @keyframes floatCard {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-6px); }
-      100% { transform: translateY(0px); }
-    }
-
-    .support-header {
-      text-align: center;
-      margin-bottom: 15px;
-    }
-
-    .support-icon-wrapper {
-      background: var(--primary-yellow);
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 10px;
-      font-size: 24px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-
-    .support-header h2 {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--dark-blue);
-    }
-
-    .support-list {
-      list-style: none;
-      margin-bottom: 20px;
-    }
-
-    .support-list li {
-      padding: 8px 0;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      border-bottom: 1px dashed rgba(0,0,0,0.08);
-      transition: transform 0.2s;
-    }
-
-    .support-list li:hover {
-      transform: translateX(5px);
-    }
-
-    .support-list li i {
-      color: #27ae60;
-    }
-
-    .support-quote {
-      text-align: center;
-      font-style: italic;
-      font-weight: 600;
-      font-size: 0.85rem;
-      color: #d97706;
-      background: rgba(255, 255, 255, 0.7);
-      padding: 10px;
-      border-radius: 8px;
-    }
-
-    /* NEED HELP CARD */
-    .help-card {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      background: #fdf8e6;
-    }
-
-    .help-icon {
-      background: var(--primary-yellow);
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-
-    .help-info h3 { font-size: 0.95rem; font-weight: 600; }
-    .help-info p { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 8px; }
-    .contact-btn {
-      display: inline-block;
-      background: var(--primary-yellow);
-      color: #000;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-weight: 600;
-      font-size: 0.75rem;
-      text-decoration: none;
-    }
-
-    /* HERO BANNER */
-    .hero-banner {
-      background: linear-gradient(135deg, #fff2b2, #ffe66d);
-      border-radius: 12px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      position: relative;
-      min-height: 180px;
-      box-shadow: var(--shadow);
-      margin-bottom: 20px;
-    }
-
-    .hero-content {
-      padding: 25px;
-      flex: 1;
-      z-index: 2;
-    }
-
-    .hero-content h2 {
-      font-size: 1.6rem;
-      color: var(--dark-blue);
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-
-    .hero-content p {
-      font-size: 0.85rem;
-      color: #444;
-      margin-bottom: 12px;
-    }
-
-    .badge-tag {
-      display: inline-block;
-      background: rgba(255,255,255,0.8);
-      padding: 4px 12px;
-      border-radius: 15px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: #d97706;
-    }
-
-    .hero-img {
-      width: 40%;
-      height: 100%;
-      object-fit: cover;
-      position: absolute;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      mask-image: linear-gradient(to left, rgba(0,0,0,1) 60%, rgba(0,0,0,0));
-      -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 60%, rgba(0,0,0,0));
-    }
-
-    /* FORM STYLES */
-    .form-title-area {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 20px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    .form-title-area i {
-      background: var(--primary-yellow);
-      padding: 10px;
-      border-radius: 8px;
-      font-size: 18px;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px 20px;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .form-group.full-width {
-      grid-column: span 2;
-    }
-
-    .form-group label {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--text-dark);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .form-group label i {
-      color: #666;
-      font-size: 0.85rem;
-    }
-
-    .form-control {
-      width: 100%;
-      padding: 10px 12px;
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      font-size: 0.85rem;
-      outline: none;
-      transition: border-color 0.3s;
-      background: #fafafa;
-    }
-
-    .form-control:focus {
-      border-color: var(--accent-yellow);
-      background: #fff;
-    }
-
-    textarea.form-control {
-      resize: vertical;
-      min-height: 80px;
-    }
-
-    /* FILE UPLOAD DRAG & DROP */
-    .file-upload-box {
-      border: 2px dashed #cbd5e1;
-      border-radius: 8px;
-      padding: 20px;
-      text-align: center;
-      background: #f8fafc;
-      cursor: pointer;
-      transition: all 0.3s;
-      position: relative;
-    }
-
-    .file-upload-box:hover {
-      border-color: var(--accent-yellow);
-      background: #fffdf0;
-    }
-
-    .file-upload-box input[type="file"] {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      opacity: 0;
-      cursor: pointer;
-    }
-
-    .upload-icon {
-      font-size: 24px;
-      color: var(--accent-yellow);
-      margin-bottom: 6px;
-    }
-
-    .upload-text {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .file-name {
-      margin-top: 8px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: #2563eb;
-    }
-
-    .btn-submit {
-      width: 100%;
-      background: var(--primary-yellow);
-      color: #000;
-      border: none;
-      padding: 12px;
-      border-radius: 6px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: background 0.3s;
-      margin-top: 15px;
-    }
-
-    .btn-submit:hover {
-      background: var(--accent-yellow);
-    }
-
-    /* POPUP MODAL */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-    }
-
-    .modal-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .modal-box {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      text-align: center;
-      max-width: 400px;
-      width: 90%;
-      transform: scale(0.8);
-      transition: transform 0.3s ease;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    }
-
-    .modal-overlay.active .modal-box {
-      transform: scale(1);
-    }
-
-    .modal-icon {
-      width: 60px;
-      height: 60px;
-      background: #dcfce7;
-      color: #16a34a;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      margin: 0 auto 15px;
-    }
-
-    .modal-box h3 {
-      font-size: 1.2rem;
-      margin-bottom: 8px;
-      color: var(--dark-blue);
-    }
-
-    .modal-box p {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 20px;
-    }
-
-    .modal-btn {
-      background: var(--primary-yellow);
-      color: #000;
-      border: none;
-      padding: 8px 30px;
-      border-radius: 20px;
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 0.9rem;
-      transition: background 0.2s;
-    }
-
-    .modal-btn:hover {
-      background: var(--accent-yellow);
-    }
-
-    /* RESPONSIVE MOBILE MEDIA QUERIES */
-    @media (max-width: 768px) {
-      .main-grid {
-        display: flex;
-        flex-direction: column;
-      }
-
-      /* Mobile Section Reordering */
-      .right-panel {
-        display: flex;
-        flex-direction: column;
-        order: 1;
-      }
-
-      .left-panel {
-        order: 2; /* "We Support You In" shows below Hero Banner & above Form */
-      }
-
-      .hero-banner {
-        order: 1; /* First element in Mobile */
-      }
-
-      .form-card {
-        order: 3; /* Form placed below We Support You In */
-      }
-
-      /* Single Column Fields in Mobile */
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .form-group.full-width {
-        grid-column: span 1;
-      }
-
-      .hero-img {
-        opacity: 0.25;
-        width: 100%;
-      }
-
-      .header-title h1 {
-        font-size: 1rem;
-      }
-      
-      .header-title p {
-        font-size: 0.65rem;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TNSF Kadapa Parliament</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #fffdf0;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* --- LOADING SCREEN --- */
+        #loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff9d6;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .loader-logo {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.8);
+            animation: pulseLogo 1.2s infinite alternate;
+            margin-bottom: 30px;
+        }
+
+        .spinner {
+            width: 45px;
+            height: 45px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #ffcc00;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 40px;
+        }
+
+        .loader-footer {
+            position: absolute;
+            bottom: 30px;
+            font-size: 12px;
+            color: #555;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pulseLogo {
+            0% { transform: scale(1); box-shadow: 0 0 15px rgba(255, 204, 0, 0.5); }
+            100% { transform: scale(1.08); box-shadow: 0 0 30px rgba(255, 204, 0, 1); }
+        }
+
+        .loaded #loader-wrapper {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-100%);
+        }
+
+        /* --- PAGE ENTRANCE --- */
+        #main-content {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease 0.3s, transform 1s ease 0.3s;
+        }
+
+        .loaded #main-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Header */
+        header {
+            background-color: #ffcc00;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+        }
+
+        .brand-text h1 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #000;
+            line-height: 1.2;
+        }
+
+        .brand-text span {
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* Desktop Nav Links */
+        .nav-links {
+            display: none;
+            list-style: none;
+            gap: 18px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #000;
+            font-size: 13px;
+            font-weight: 500;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        /* Hamburger Menu Toggle Button */
+        .menu-toggle {
+            font-size: 24px;
+            cursor: pointer;
+            color: #000;
+            z-index: 101;
+            transition: transform 0.3s;
+        }
+
+        .menu-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* --- MOBILE ANIMATED FULL-SCREEN MENU (TOP ALIGNED) --- */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 252, 235, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Aligns content to top */
+            align-items: flex-start;    /* Left aligns content wrapper */
+            padding: 80px 30px 40px 30px; /* Top padding for header space */
+            overflow-y: auto;             /* Allows scrolling if items overflow */
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-20px);
+            transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .close-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #333;
+            transition: transform 0.3s;
+        }
+
+        .close-menu:hover {
+            transform: rotate(90deg);
+            color: #ff9900;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .mobile-nav-links li {
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            border-bottom: 1px solid rgba(255, 204, 0, 0.3);
+            padding-bottom: 12px;
+        }
+
+        /* Staggered animation effect from top */
+        .mobile-menu-overlay.active .mobile-nav-links li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(1) { transition-delay: 0.05s; }
+        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(2) { transition-delay: 0.1s; }
+        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(3) { transition-delay: 0.15s; }
+        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(4) { transition-delay: 0.2s; }
+        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(5) { transition-delay: 0.25s; }
+        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(6) { transition-delay: 0.3s; }
+        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(7) { transition-delay: 0.35s; }
+        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(8) { transition-delay: 0.4s; }
+        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(9) { transition-delay: 0.45s; }
+        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(10) { transition-delay: 0.5s; }
+
+        .mobile-nav-links a {
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 600;
+            color: #222;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .mobile-nav-links a i {
+            color: #ff9900;
+            font-size: 18px;
+            width: 25px;
+            text-align: center;
+        }
+
+        .mobile-nav-links a:hover {
+            color: #d4a000;
+            transform: translateX(5px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        /* --- HERO SLIDER --- */
+        .hero-slider-container {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+            margin-bottom: 25px;
+            height: 240px;
+            background-color: #2c3e50;
+        }
+
+        .slider-wrapper {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 2;
+            padding: 20px 30px;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+        }
+
+        .slide-content h2 {
+            font-size: clamp(20px, 4vw, 32px);
+            font-weight: 700;
+            color: #ffcc00;
+        }
+
+        .slide-content p {
+            font-size: clamp(12px, 2vw, 16px);
+            font-weight: 500;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #333;
+            z-index: 10;
+        }
+
+        .prev-btn { left: 12px; }
+        .next-btn { right: 12px; }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background 0.3s, width 0.3s;
+        }
+
+        .dot.active {
+            background: #ffcc00;
+            width: 20px;
+            border-radius: 4px;
+        }
+
+        /* --- PASSPORT CARD --- */
+        .passport-card {
+            background: linear-gradient(135deg, #fffcf0 0%, #fff4b8 100%);
+            border: 2px solid #ffe680;
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+        }
+
+        .passport-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .passport-title-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .passport-title-area img {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            border: 2px solid #ffd700;
+        }
+
+        .passport-title-area h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #111;
+        }
+
+        .points-badge {
+            background-color: #fff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+            color: #222;
+        }
+
+        .points-badge i {
+            color: #ffaa00;
+        }
+
+        .passport-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .passport-tags {
+            font-size: 12px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .view-passport-btn {
+            background-color: #ffcc00;
+            color: #000;
+            padding: 8px 18px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .view-passport-btn:hover {
+            background-color: #e6b800;
+            transform: translateX(3px);
+        }
+
+        /* --- TNSF HUB SECTION --- */
+        .hub-section {
+            background: #fff;
+            border-radius: 15px;
+            padding: 25px 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        .hub-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 10px;
+            border-left: 4px solid #ffcc00;
+        }
+
+        .hub-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px 10px;
+            justify-items: center;
+        }
+
+        .hub-item {
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            text-align: center;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .hub-item:hover {
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        .hub-icon-circle {
+            width: 60px;
+            height: 60px;
+            background-color: #fffdf0;
+            border: 2px solid #ffcc00;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #333;
+            box-shadow: 0 3px 8px rgba(255, 204, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .hub-item:hover .hub-icon-circle {
+            background-color: #ffcc00;
+            box-shadow: 0 6px 15px rgba(255, 204, 0, 0.5);
+        }
+
+        .hub-item span {
+            font-size: 12px;
+            font-weight: 600;
+            color: #222;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 11px;
+            color: #666;
+            background: #fffae6;
+            border-top: 1px solid #f0e6b2;
+        }
+
+        /* --- RESPONSIVE MEDIA QUERIES --- */
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+            .menu-toggle {
+                display: none;
+            }
+            .mobile-menu-overlay {
+                display: none !important;
+            }
+            .hub-grid {
+                grid-template-columns: repeat(6, 1fr);
+                gap: 25px;
+            }
+            .hero-slider-container {
+                height: 360px;
+            }
+            .brand-text h1 {
+                font-size: 18px;
+            }
+        }
+    </style>
 </head>
-<body>
+<body class="">
 
-  <!-- HEADER -->
-  <header>
-    <div class="header-left">
-      <!-- Updatable Header Logo -->
-      <img src="https://via.placeholder.com/45/FFD700/000000?text=TNSF" alt="TNSF Logo" class="header-logo">
-      <div class="header-title">
-        <h1>TNSF</h1>
-        <p>KADAPA PARLIAMENT</p>
-      </div>
+    <!-- LOADING SCREEN -->
+    <div id="loader-wrapper">
+        <img src="image/images (3).jpeg" alt="TNSF Logo" class="loader-logo" onerror="this.src='https://via.placeholder.com/130?text=TNSF'">
+        <div class="spinner"></div>
+        <div class="loader-footer">©2026 TNSF KADAPA PARLIAMENT. All Rights Reserved.</div>
     </div>
-    <div class="header-right">
-      <a href="#" class="home-btn">
-        <i class="fa-solid fa-house"></i>
-        <span>Home</span>
-      </a>
-    </div>
-  </header>
 
-  <!-- MAIN CONTENT CONTAINER -->
-  <div class="container">
-    <div class="main-grid">
-
-      <!-- LEFT SIDE PANEL (Desktop: Left, Mobile: Placed below Hero Banner) -->
-      <div class="left-panel">
-        
-        <!-- WE SUPPORT YOU IN (Animated Section) -->
-        <div class="card support-card">
-          <div class="support-header">
-            <div class="support-icon-wrapper">
-              <i class="fa-solid fa-graduation-cap"></i>
-            </div>
-            <h2>We Support You In</h2>
-          </div>
-          <ul class="support-list">
-            <li><i class="fa-solid fa-circle-check"></i> Scholarship Guidance</li>
-            <li><i class="fa-solid fa-circle-check"></i> Education Support</li>
-            <li><i class="fa-solid fa-circle-check"></i> Study Materials</li>
-            <li><i class="fa-solid fa-circle-check"></i> Career Guidance</li>
-            <li><i class="fa-solid fa-circle-check"></i> Hostel & Accommodation</li>
-            <li><i class="fa-solid fa-circle-check"></i> Financial Assistance</li>
-            <li><i class="fa-solid fa-circle-check"></i> And More...</li>
-          </ul>
-          <div class="support-quote">
-            "Together We Can Build a Brighter Future"
-          </div>
-        </div>
-
-        <!-- NEED HELP -->
-        <div class="card help-card">
-          <div class="help-icon">
-            <i class="fa-solid fa-headset"></i>
-          </div>
-          <div class="help-info">
-            <h3>Need Help?</h3>
-            <p>Our support team is always ready to assist you.</p>
-            <a href="#" class="contact-btn">Contact Us <i class="fa-solid fa-chevron-right"></i></a>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- RIGHT SIDE PANEL -->
-      <div class="right-panel">
-
-        <!-- HERO BANNER (Image Link UPDATABLE) -->
-        <div class="hero-banner">
-          <div class="hero-content">
-            <h2>Resolution Desk</h2>
-            <p>Raise your issue. We're here to help.<br>Fill the form below with your details and issue information.</p>
-            <span class="badge-tag">Your Voice Matters</span>
-          </div>
-          <!-- Updatable Hero Banner Image URL -->
-          <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80" alt="Students Banner" class="hero-img" id="heroImage">
-        </div>
-
-        <!-- RESOLUTION DESK FORM -->
-        <div class="card form-card">
-          <div class="form-title-area">
-            <i class="fa-solid fa-list-check"></i>
-            <div>
-              <h2 style="font-size: 1.1rem; color: var(--dark-blue);">Resolution Desk Form</h2>
-              <p style="font-size: 0.75rem; color: var(--text-muted);">Please fill in the details below. Our team will get back to you soon.</p>
-            </div>
-          </div>
-
-          <form id="resolutionForm">
-            <div class="form-grid">
-              
-              <!-- Full Name -->
-              <div class="form-group">
-                <label><i class="fa-regular fa-user"></i> Full Name *</label>
-                <input type="text" class="form-control" placeholder="Enter your full name" required>
-              </div>
-
-              <!-- Mobile Number -->
-              <div class="form-group">
-                <label><i class="fa-solid fa-phone"></i> Mobile Number *</label>
-                <input type="tel" class="form-control" placeholder="Enter your mobile number" required>
-              </div>
-
-              <!-- Email Address -->
-              <div class="form-group">
-                <label><i class="fa-regular fa-envelope"></i> Email Address</label>
-                <input type="email" class="form-control" placeholder="Enter your email address">
-              </div>
-
-              <!-- Education Level -->
-              <div class="form-group">
-                <label><i class="fa-solid fa-graduation-cap"></i> Education Level *</label>
-                <select class="form-control" required>
-                  <option value="">Select your education level</option>
-                  <option value="school">Schooling</option>
-                  <option value="intermediate">Intermediate / Diploma</option>
-                  <option value="undergraduate">Undergraduate (UG)</option>
-                  <option value="postgraduate">Postgraduate (PG)</option>
-                </select>
-              </div>
-
-              <!-- College Name -->
-              <div class="form-group">
-                <label><i class="fa-solid fa-building-columns"></i> College / Institution Name *</label>
-                <input type="text" class="form-control" placeholder="Enter your college/institution name" required>
-              </div>
-
-              <!-- Course / Branch -->
-              <div class="form-group">
-                <label><i class="fa-solid fa-book-open"></i> Course / Branch *</label>
-                <input type="text" class="form-control" placeholder="Enter your course/branch" required>
-              </div>
-
-              <!-- Year of Study -->
-              <div class="form-group">
-                <label><i class="fa-regular fa-calendar-days"></i> Year of Study *</label>
-                <select class="form-control" required>
-                  <option value="">Select your year of study</option>
-                  <option value="1">1st Year</option>
-                  <option value="2">2nd Year</option>
-                  <option value="3">3rd Year</option>
-                  <option value="4">4th Year</option>
-                </select>
-              </div>
-
-              <!-- Description / Message -->
-              <div class="form-group full-width">
-                <label><i class="fa-regular fa-comment-dots"></i> Description / Message *</label>
-                <textarea class="form-control" placeholder="Please describe your issue or requirement in detail..." required></textarea>
-              </div>
-
-              <!-- Real File Upload Section -->
-              <div class="form-group full-width">
-                <label><i class="fa-solid fa-paperclip"></i> Upload Document (Optional)</label>
-                <div class="file-upload-box">
-                  <input type="file" id="fileInput" onchange="showFileName(this)">
-                  <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
-                  <div class="upload-text">Choose a file or drag and drop<br><small>(PDF, JPG, PNG - Max 5MB)</small></div>
-                  <div id="fileNameDisplay" class="file-name"></div>
+    <!-- MAIN CONTENT -->
+    <div id="main-content">
+        <!-- Header -->
+        <header>
+            <div class="brand">
+                <img src="https://i.ibb.co/3yk71Q9/logo.png" alt="Logo" onerror="this.src='https://via.placeholder.com/45?text=L'">
+                <div class="brand-text">
+                    <h1>TNSF</h1>
+                    <span>KADAPA PARLIAMENT</span>
                 </div>
-              </div>
-
             </div>
+            
+            <!-- Desktop Navbar Menu -->
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="resolution.html">Resolution Desk</a></li>
+                <li><a href="#">Gallery</a></li>
+                <li><a href="#">Inbox</a></li>
+                <li><a href="#">Constituencies</a></li>
+                <li><a href="#">Leadership</a></li>
+                <li><a href="#">Events</a></li>
+                <li><a href="#">Feedback</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Donate</a></li>
+            </ul>
 
-            <!-- Submit Button -->
-            <button type="submit" class="btn-submit">
-              <i class="fa-regular fa-paper-plane"></i> Submit Request
-            </button>
-          </form>
+            <!-- Mobile Hamburger Button -->
+            <div class="menu-toggle" id="menuToggleBtn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </header>
+
+        <!-- MOBILE ANIMATED OVERLAY MENU (TOP ALIGNED) -->
+        <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+            <div class="close-menu" id="closeMenuBtn">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            <ul class="mobile-nav-links">
+                <li><a href="#"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="resolution.html"><i class="fa-solid fa-graduation-cap"></i> Resolution Desk</a></li>
+                <li><a href="#"><i class="fa-solid fa-images"></i> Gallery</a></li>
+                <li><a href="#"><i class="fa-solid fa-envelope"></i> Inbox</a></li>
+                <li><a href="#"><i class="fa-solid fa-map-location-dot"></i> Constituencies</a></li>
+                <li><a href="#"><i class="fa-solid fa-user-tie"></i> Leadership</a></li>
+                <li><a href="#"><i class="fa-solid fa-calendar-days"></i> Events</a></li>
+                <li><a href="#"><i class="fa-solid fa-comments"></i> Feedback</a></li>
+                <li><a href="#"><i class="fa-solid fa-headset"></i> Contact Us</a></li>
+                <li><a href="#"><i class="fa-solid fa-hand-holding-heart"></i> Donate Us</a></li>
+            </ul>
         </div>
 
-      </div>
+        <div class="container">
+            <!-- HERO AUTO-SCROLLING BANNER SLIDER -->
+            <div class="hero-slider-container">
+                <div class="slider-wrapper" id="sliderWrapper">
+                    <div class="slide">
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80" alt="Banner 1">
+                        <div class="slide-content">
+                            <h2>Empowering Students</h2>
+                            <p>Building a Better Tomorrow</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1200&q=80" alt="Banner 2">
+                        <div class="slide-content">
+                            <h2>United for Rights</h2>
+                            <p>Striving for Student Welfare & Education</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=1200&q=80" alt="Banner 3">
+                        <div class="slide-content">
+                            <h2>Join the Movement</h2>
+                            <p>Be a Part of TNSF Kadapa Parliament</p>
+                        </div>
+                    </div>
+                </div>
 
+                <button class="slider-btn prev-btn" id="prevBtn"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="slider-btn next-btn" id="nextBtn"><i class="fa-solid fa-chevron-right"></i></button>
+
+                <div class="slider-dots" id="sliderDots">
+                  <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                </div>
+            </div>
+
+            <!-- My TNSF Passport Card -->
+            <div class="passport-card">
+                <div class="passport-top">
+                    <div class="passport-title-area">
+                        <img src="image/images (3).jpeg" alt="Passport" onerror="this.src='https://via.placeholder.com/55?text=P'">
+                        <h2>My TNSF Passport</h2>
+                    </div>
+                    <div class="points-badge">
+                        <i class="fa-solid fa-star"></i> 450.6 Points
+                    </div>
+                </div>
+                <div class="passport-footer">
+                    <div class="passport-tags">Your Journey &nbsp;•&nbsp; Your Points &nbsp;•&nbsp; Your Growth</div>
+                    <a href="#" class="view-passport-btn">View My Passport <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- TNSF Hub Section -->
+            <div class="hub-section">
+                <div class="hub-title">TNSF Hub</div>
+                
+                <div class="hub-grid">
+                    <a href="#" class="hub-item">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-user-plus"></i></div>
+                        <span>Refer</span>
+                    </a>
+                    <a href="#" class="hub-item">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-graduation-cap"></i></div>
+                        <span>Resolution Desk</span>
+                    </a>
+                    <a href="#" class="hub-item">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-images"></i></div>
+                        <span>Gallery</span>
+                    </a>
+                    <a href="#" class="hub-item">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-envelope"></i></div>
+                        <span>Inbox</span>
+                    </a>
+                    <a href="#" class="hub-item">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-map-location-dot"></i></div>
+                        <span>Constituencies</span>
+                    </a>
+                    <a href="#" class="hub-item">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-user-tie"></i></div>
+                        <span>Leadership</span>
+                    </a>
+                    <a href="#" class="hub-item">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-calendar-days"></i></div>
+                        <span>Events</span>
+                    </a>
+                    <a href="#" class="hub-item">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-comments"></i></div>
+                        <span>Feedback</span>
+                    </a>
+                    <a href="#" class="hub-item">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-headset"></i></div>
+                        <span>Contact Us</span>
+                    </a>
+                    <a href="#" class="hub-item">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-hand-holding-heart"></i></div>
+                        <span>Donate Us</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Copy 2026 TNSF KADAPA PARLIAMENT all rights reserved</p>
+        </footer>
     </div>
-  </div>
 
-  <!-- SUCCESS POPUP MODAL -->
-  <div class="modal-overlay" id="successModal">
-    <div class="modal-box">
-      <div class="modal-icon">
-        <i class="fa-solid fa-circle-check"></i>
-      </div>
-      <h3>Submitted Successfully!</h3>
-      <p>Your request has been received. Our team will review your application and contact you soon.</p>
-      <button class="modal-btn" onclick="closeModal()">OK</button>
-    </div>
-  </div>
+    <!-- JavaScript -->
+    <script>
+        // 1. Loading Screen
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.body.classList.add('loaded');
+            }, 2000);
+        });
 
-  <!-- JAVASCRIPT -->
-  <script>
-    // Real File Upload Preview Display
-    function showFileName(input) {
-      const display = document.getElementById('fileNameDisplay');
-      if (input.files && input.files[0]) {
-        display.innerText = "Selected File: " + input.files[0].name;
-      } else {
-        display.innerText = "";
-      }
-    }
+        // 2. Mobile Menu Toggle Logic
+        const menuToggleBtn = document.getElementById('menuToggleBtn');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const mobileLinks = document.querySelectorAll('.mobile-nav-links a');
 
-    // Form Submission & Popup Modal Control
-    const form = document.getElementById('resolutionForm');
-    const modal = document.getElementById('successModal');
+        menuToggleBtn.addEventListener('click', () => {
+            mobileMenuOverlay.classList.add('active');
+        });
 
-    form.addEventListener('submit', function(e) {
-      e.preventDefaullt(); // Prevent form reload
-      
-      // Show Popup Modal
-      modal.classList.add('active');
-    });
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenuOverlay.classList.remove('active');
+        });
 
-    // Close/Minimize Modal Function
-    function closeModal() {
-      modal.classList.remove('active');
-      form.reset(); // Reset Form Fields
-      document.getElementById('fileNameDisplay').innerText = ""; // Clear file preview
-    }
-  </script>
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuOverlay.classList.remove('active');
+            });
+        });
 
+        // 3. Hero Auto Slider Logic
+        const sliderWrapper = document.getElementById('sliderWrapper');
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+        let autoSlideInterval;
+
+        function updateSlider() {
+            sliderWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlider();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        }
+
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetTimer();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetTimer();
+        });
+
+        dots.forEach(dot => {
+            dot.addEventListener('click', (e) => {
+                currentIndex = parseInt(e.target.getAttribute('data-index'));
+                updateSlider();
+                resetTimer();
+            });
+        });
+
+        function startTimer() {
+            autoSlideInterval = setInterval(nextSlide, 3500);
+        }
+
+        function resetTimer() {
+            clearInterval(autoSlideInterval);
+            startTimer();
+        }
+
+        startTimer();
+    </script>
 </body>
 </html>
