@@ -96,21 +96,23 @@
       background: #fdfdfd;
     }
 
-    /* Edge-to-Edge Full Width Hero Section */
-    .hero-wrapper {
+    /* HERO BANNER - Exact Design Matching Reference */
+    .hero-container {
       width: 100%;
-      background: linear-gradient(180deg, #fffdf2 0%, #fff9e6 100%);
-      border-bottom: 1px solid #f3e6bd;
-      margin-bottom: 20px;
+      background: linear-gradient(180deg, #fffcf0 0%, #fff6d9 100%);
+      border-bottom: 1px solid #f3e5b8;
+      position: relative;
+      overflow: hidden;
     }
 
     .hero-content {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 24px 20px;
+      padding: 30px 20px 20px;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      position: relative;
+      min-height: 220px;
     }
 
     @media (min-width: 768px) {
@@ -118,76 +120,82 @@
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        padding: 32px 24px;
-        min-height: 220px;
+        padding: 40px 32px 30px;
+        min-height: 260px;
       }
     }
 
-    .hero-text {
-      flex: 1;
+    .hero-left {
+      z-index: 2;
+      max-width: 500px;
     }
 
-    .hero-title-badge {
+    .gallery-title-wrapper {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 10px;
+      gap: 14px;
+      margin-bottom: 12px;
     }
 
-    .hero-icon {
-      background: var(--primary);
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
+    .camera-icon-badge {
+      background: #000;
+      color: #fff;
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #000;
-      flex-shrink: 0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     }
 
-    .hero h2 {
-      font-size: 2rem;
-      font-weight: 800;
+    .gallery-title-wrapper h2 {
+      font-size: 2.4rem;
+      font-weight: 900;
       color: #000;
+      letter-spacing: -0.5px;
     }
 
-    .hero-text p {
-      color: var(--text-muted);
-      max-width: 480px;
+    .hero-left p {
+      color: #4a4a4a;
+      font-size: 0.95rem;
       line-height: 1.5;
-      font-size: 0.9rem;
+      font-weight: 500;
     }
 
-    /* Responsive Hero Banner Image */
-    .hero-image-box {
+    /* Hero Banner Dynamic Image Area */
+    .hero-right-img {
+      position: relative;
       width: 100%;
-      max-width: 480px;
-      height: 180px;
+      max-width: 420px;
+      height: 200px;
+      margin-top: 20px;
+      align-self: center;
+      z-index: 1;
       border-radius: 12px;
       overflow: hidden;
-      flex-shrink: 0;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
 
     @media (min-width: 768px) {
-      .hero-image-box {
-        height: 200px;
+      .hero-right-img {
+        margin-top: 0;
+        height: 240px;
+        max-width: 460px;
       }
     }
 
-    .hero-image-box img {
+    .hero-right-img img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center;
+      object-position: center top;
       display: block;
     }
 
     /* Category Filters */
     .filters-wrapper {
       max-width: 1200px;
-      margin: 0 auto 20px;
+      margin: 20px auto;
       padding: 0 20px;
       width: 100%;
     }
@@ -203,7 +211,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 16px;
+      padding: 9px 18px;
       background: #f1f3f5;
       border: none;
       border-radius: 20px;
@@ -351,7 +359,6 @@
       width: fit-content;
     }
 
-    /* Expandable Details Area */
     .card-details {
       max-height: 0;
       overflow: hidden;
@@ -402,22 +409,22 @@
     </button>
   </header>
 
-  <!-- Full-Width Responsive Hero Banner -->
-  <div class="hero-wrapper">
+  <!-- Hero Banner matching reference image exactly -->
+  <div class="hero-container">
     <section class="hero-content">
-      <div class="hero-text">
-        <div class="hero-title-badge">
-          <div class="hero-icon">
-            <i data-lucide="camera" size="20"></i>
+      <div class="hero-left">
+        <div class="gallery-title-wrapper">
+          <div class="camera-icon-badge">
+            <i data-lucide="camera" size="22"></i>
           </div>
           <h2>Gallery</h2>
         </div>
         <p>Moments of unity, action and change. Explore our journey through photos.</p>
       </div>
 
-      <!-- Updatable Banner Image Link -->
-      <div class="hero-image-box">
-        <img id="heroBannerImg" src="" alt="Gallery Banner" />
+      <!-- Updatable Hero Image Link (Loaded from JavaScript) -->
+      <div class="hero-right-img">
+        <img id="heroBannerImg" src="" alt="TNSF Banner" />
       </div>
     </section>
   </div>
@@ -429,6 +436,7 @@
       <button class="filter-btn" onclick="filterCategory('events', event)"><i data-lucide="calendar" size="16"></i> Events</button>
       <button class="filter-btn" onclick="filterCategory('meetings', event)"><i data-lucide="users" size="16"></i> Meetings</button>
       <button class="filter-btn" onclick="filterCategory('activities', event)"><i data-lucide="activity" size="16"></i> Activities</button>
+      <button class="filter-btn" onclick="filterCategory('campus', event)"><i data-lucide="graduation-cap" size="16"></i> Campus Programs</button>
       <button class="filter-btn" onclick="filterCategory('others', event)"><i data-lucide="image" size="16"></i> Others</button>
     </div>
   </div>
@@ -447,7 +455,7 @@
   </footer>
 
   <script>
-    // Configurable Hero Banner Image Link (Set by Admin via backend/code)
+    // Updatable Hero Banner Image Link (Can be updated dynamically by admin/API)
     let HERO_BANNER_IMAGE_URL = "https://picsum.photos/id/1015/800/400";
 
     const galleryItems = [
@@ -469,6 +477,14 @@
       },
       {
         id: 3,
+        title: "Campus Visit",
+        category: "campus",
+        date: "02 May 2025",
+        img: "https://picsum.photos/id/1040/600/400",
+        description: "Interactive campus tour interacting with students to resolve educational and infrastructure queries."
+      },
+      {
+        id: 4,
         title: "Blood Donation Camp",
         category: "events",
         date: "28 Apr 2025",
@@ -476,7 +492,7 @@
         description: "Annual blood donation camp organized with active participation from local youth and volunteers."
       },
       {
-        id: 4,
+        id: 5,
         title: "Youth Discussion Meet",
         category: "meetings",
         date: "21 Apr 2025",
@@ -484,7 +500,7 @@
         description: "A platform for young minds to express, discuss, and deliberate on regional progress and initiatives."
       },
       {
-        id: 5,
+        id: 6,
         title: "Community Service",
         category: "activities",
         date: "12 Apr 2025",
@@ -492,7 +508,7 @@
         description: "Cleanliness and service drive undertaken across key public spots to promote environmental civic duty."
       },
       {
-        id: 6,
+        id: 7,
         title: "Group Photo",
         category: "others",
         date: "05 Apr 2025",
@@ -500,7 +516,7 @@
         description: "Commemorative group photograph of core organizational representatives and active members."
       },
       {
-        id: 7,
+        id: 8,
         title: "Felicitation Program",
         category: "events",
         date: "28 Mar 2025",
@@ -508,7 +524,7 @@
         description: "Honoring outstanding achievers and key contributors for their selfless services to society."
       },
       {
-        id: 8,
+        id: 9,
         title: "Candle March",
         category: "activities",
         date: "20 Mar 2025",
