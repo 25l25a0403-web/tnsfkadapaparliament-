@@ -1,524 +1,596 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TNSF KADAPA PARLIAMENT</title>
-  <!-- Font Awesome for Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-  <style>
-    /* ==================== GLOBAL STYLES ==================== */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TNSF KADAPA PARLIAMENT</title>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-yellow: #ffeb3b;
+            --dark-yellow: #fbc02d;
+            --bg-yellow: #fffde7;
+            --text-dark: #212121;
+        }
 
-    body {
-      background-color: #f8f9fa;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-    /* Container to match mobile/desktop viewport nicely */
-    .app-container {
-      width: 100%;
-      max-width: 600px; /* Limits width on large screens to match layout */
-      background-color: #ffffff;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    }
+        body {
+            background-color: var(--bg-yellow);
+            color: var(--text-dark);
+        }
 
-    /* ==================== HEADER ==================== */
-    header {
-      background-color: #FFD700; /* Yellow Theme */
-      padding: 15px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
+        /* --- LOADING SCREEN --- */
+        #loader-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fffde7;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px 20px;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
 
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+        .loader-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
 
-    .logo {
-      width: 50px;
-      height: 50px;
-      background-color: #d00000;
-      border: 3px solid #ffd700;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-weight: bold;
-      font-size: 10px;
-      text-align: center;
-      line-height: 1.1;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    }
+        .loader-logo {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 193, 7, 0.6);
+            border: 4px solid #fff;
+            animation: pulse 1.5s infinite;
+        }
 
-    .header-title h1 {
-      font-size: 20px;
-      font-weight: 800;
-      color: #000;
-      line-height: 1;
-    }
+        .spinner {
+            margin-top: 30px;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #fbc02d;
+            border-top: 4px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
 
-    .header-title h2 {
-      font-size: 14px;
-      font-weight: 700;
-      color: #000;
-      margin-top: 2px;
-      letter-spacing: 0.5px;
-    }
+        .loader-footer {
+            font-size: 12px;
+            color: #555;
+            letter-spacing: 0.5px;
+        }
 
-    .menu-btn {
-      background-color: #e0a800;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      border: none;
-      color: #fff;
-      font-size: 20px;
-    }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
-    /* ==================== MAIN CONTENT ==================== */
-    main {
-      padding: 15px;
-      flex: 1;
-    }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
 
-    /* Hero Banner / Slider */
-    .hero-slider {
-      position: relative;
-      width: 100%;
-      height: 220px;
-      border-radius: 16px;
-      overflow: hidden;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), 
-                  url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
-    }
+        /* --- MAIN APP CONTAINER --- */
+        #app-container {
+            display: none; /* Shown after loader */
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            min-height: 100vh;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+        }
 
-    .hero-content {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      color: #fff;
-      max-width: 70%;
-    }
+        /* --- HEADER --- */
+        header {
+            background-color: var(--primary-yellow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            border-bottom: 2px solid #fbc02d;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-    .hero-content h3 {
-      font-size: 16px;
-      font-style: italic;
-      font-weight: 600;
-      color: #333;
-    }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
-    .hero-content h2 {
-      font-size: 32px;
-      font-weight: 900;
-      color: #FF9900;
-      text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
-      line-height: 1.1;
-      margin-bottom: 5px;
-    }
+        .brand img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+        }
 
-    .hero-content p {
-      font-size: 18px;
-      font-weight: 800;
-      color: #111;
-    }
+        .brand-text h1 {
+            font-size: 16px;
+            font-weight: 800;
+            color: #000;
+            line-height: 1.2;
+        }
 
-    .slider-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 30px;
-      height: 30px;
-      background-color: rgba(255, 255, 255, 0.8);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #333;
-      cursor: pointer;
-      font-size: 12px;
-    }
+        .brand-text p {
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+        }
 
-    .slider-arrow.left { left: 10px; }
-    .slider-arrow.right { right: 10px; }
+        /* Desktop Nav */
+        .desktop-nav {
+            display: none;
+            gap: 15px;
+        }
 
-    .slider-dots {
-      position: absolute;
-      bottom: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 6px;
-    }
+        .desktop-nav a {
+            text-decoration: none;
+            color: #212121;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 6px 10px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
 
-    .dot {
-      width: 8px;
-      height: 8px;
-      background-color: rgba(255, 255, 255, 0.6);
-      border-radius: 50%;
-    }
+        .desktop-nav a:hover, .desktop-nav a.active {
+            background-color: #fbc02d;
+        }
 
-    .dot.active {
-      background-color: #fff;
-      width: 20px;
-      border-radius: 4px;
-    }
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            background: var(--dark-yellow);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            color: #000;
+        }
 
-    /* Passport Card Section */
-    .passport-card {
-      background: linear-gradient(135deg, #fffde7 0%, #fff59d 100%);
-      border: 1px solid #fff59d;
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      position: relative;
-    }
+        /* --- HERO BANNER CAROUSEL --- */
+        .hero-section {
+            padding: 15px;
+            background-color: var(--bg-yellow);
+        }
 
-    .passport-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-    }
+        .banner-card {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            height: 220px;
+        }
 
-    .passport-title-group {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+        .banner-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-    .passport-badge {
-      width: 60px;
-      height: 60px;
-      background-color: #fff;
-      border: 2px solid #ffd700;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
+        .banner-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #f57c00;
+        }
 
-    .passport-title-group h3 {
-      font-size: 24px;
-      font-weight: 800;
-      color: #222;
-      line-height: 1.1;
-    }
+        .prev-btn { left: 10px; }
+        .next-btn { right: 10px; }
 
-    .points-tag {
-      background-color: #ffffff;
-      border: 1px solid #ffe082;
-      padding: 6px 14px;
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-weight: 700;
-      font-size: 14px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    }
+        .banner-dots {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+        }
 
-    .points-tag i {
-      color: #ffc107;
-    }
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 50%;
+        }
 
-    .passport-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 20px;
-    }
+        .dot.active {
+            background: #fff;
+            width: 20px;
+            border-radius: 4px;
+        }
 
-    .passport-breadcrumbs {
-      font-size: 12px;
-      color: #666;
-      font-weight: 600;
-    }
+        /* --- PASSPORT SECTION --- */
+        .passport-section {
+            padding: 0 15px 15px 15px;
+            background-color: var(--bg-yellow);
+        }
 
-    .passport-breadcrumbs span {
-      color: #ffb300;
-      margin: 0 4px;
-    }
+        .passport-card {
+            background: linear-gradient(135deg, #fffff8 0%/*#fff9c4*/, #fffde7 100%);
+            border: 2px solid #ffe082;
+            border-radius: 16px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 4px 12px rgba(255, 193, 7, 0.15);
+        }
 
-    .view-btn {
-      background-color: #ffca28;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-weight: 700;
-      font-size: 13px;
-      color: #222;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: background-color 0.2s;
-    }
+        .passport-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    .view-btn:hover {
-      background-color: #ffb300;
-    }
+        .passport-title-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
-    /* Hub Section */
-    .hub-container {
-      background-color: #ffffff;
-      border: 1px solid #eaeaea;
-      border-radius: 16px;
-      padding: 20px 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-    }
+        .passport-title-area img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
 
-    .hub-title {
-      font-size: 22px;
-      font-weight: 800;
-      margin-bottom: 20px;
-      color: #111;
-      position: relative;
-    }
+        .passport-title-area h2 {
+            font-size: 20px;
+            font-weight: 800;
+            color: #111;
+        }
 
-    .hub-title::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 50px;
-      height: 4px;
-      background-color: #ffd700;
-      border-radius: 2px;
-    }
+        .points-badge {
+            background: #fff;
+            border: 1px solid #ffe082;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #333;
+        }
 
-    /* Responsive Grid for Icons (9 items now) */
-    .hub-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px 10px;
-    }
+        .points-badge i {
+            color: #fbc02d;
+        }
 
-    .hub-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-decoration: none;
-      color: #333;
-    }
+        .passport-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #666;
+            font-weight: 600;
+        }
 
-    .icon-circle {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background-color: #fffde7;
-      border: 2px solid #ffe082;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 8px;
-      font-size: 22px;
-      color: #1a237e;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-      transition: transform 0.2s, background-color 0.2s;
-    }
+        .view-passport-btn {
+            background: var(--primary-yellow);
+            border: none;
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: background 0.2s;
+        }
 
-    .hub-item:hover .icon-circle {
-      transform: translateY(-3px);
-      background-color: #fff59d;
-    }
+        .view-passport-btn:hover {
+            background: var(--dark-yellow);
+        }
 
-    .hub-item span {
-      font-size: 12px;
-      font-weight: 700;
-      text-align: center;
-      line-height: 1.2;
-    }
+        /* --- TNSF HUB GRID --- */
+        .hub-section {
+            padding: 20px 15px;
+            background-color: #ffffff;
+        }
 
-    /* ==================== FOOTER ==================== */
-    footer {
-      background-color: #FFD700;
-      padding: 15px;
-      text-align: center;
-      font-size: 11px;
-      font-weight: 700;
-      color: #222;
-      margin-top: auto;
-    }
+        .hub-container {
+            background: #fffde7;
+            border: 2px solid #ffe082;
+            border-radius: 16px;
+            padding: 20px 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
 
-    /* Desktop View Adjustments */
-    @media (min-width: 768px) {
-      body {
-        padding: 20px 0;
-      }
-      .app-container {
-        border-radius: 20px;
-        overflow: hidden;
-        min-height: calc(100vh - 40px);
-      }
-    }
-  </style>
+        .hub-title {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #111;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hub-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 40px;
+            height: 3px;
+            background: #fbc02d;
+            border-radius: 2px;
+        }
+
+        .hub-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px 10px;
+        }
+
+        .hub-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #333;
+            gap: 8px;
+        }
+
+        .hub-icon-circle {
+            width: 60px;
+            height: 60px;
+            background: #ffffff;
+            border: 2px solid #fbc02d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: #333;
+            box-shadow: 0 3px 8px rgba(251, 192, 45, 0.2);
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .hub-item:hover .hub-icon-circle {
+            transform: translateY(-3px);
+            background: var(--primary-yellow);
+        }
+
+        .hub-item span {
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--primary-yellow);
+            text-align: center;
+            padding: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            border-top: 2px solid #fbc02d;
+            color: #333;
+        }
+
+        /* --- MEDIA QUERIES FOR RESPONSIVENESS --- */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (min-width: 768px) {
+            .desktop-nav {
+                display: flex;
+            }
+            .menu-toggle {
+                display: none;
+            }
+            .hub-grid {
+                grid-template-columns: repeat(6, 1fr);
+                gap: 25px 15px;
+            }
+            .hero-section {
+                padding: 25px;
+            }
+            .banner-card {
+                height: 350px;
+            }
+            .passport-section {
+                padding: 0 25px 25px 25px;
+            }
+            .hub-section {
+                padding: 25px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <div class="app-container">
-    <!-- Header -->
-    <header>
-      <div class="header-left">
-        <div class="logo">
-          TNSF
+    <!-- LOADING SCREEN -->
+    <div id="loader-screen">
+        <div></div> <!-- Spacer -->
+        <div class="loader-content">
+            <img src="https://raw.githubusercontent.com/your-repo/path/main/logo.png" onerror="this.src='https://via.placeholder.com/140?text=TNSF'" alt="TNSF Logo" class="loader-logo">
+            <div class="spinner"></div>
         </div>
-        <div class="header-title">
-          <h1>TNSF</h1>
-          <h2>KADAPA PARLIAMENT</h2>
+        <div class="loader-footer">
+            ©2026 TNSF KADAPA PARLIAMENT. All Rights Reserved.
         </div>
-      </div>
-      <button class="menu-btn" aria-label="Toggle Navigation Menu">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-    </header>
+    </div>
 
-    <!-- Main Content Body -->
-    <main>
-      <!-- Hero Banner Slider -->
-      <section class="hero-slider">
-        <div class="hero-content">
-          <h3>Empowering</h3>
-          <h2>Students</h2>
-          <p>Building a<br>Better Tomorrow</p>
-        </div>
-        <div class="slider-arrow left"><i class="fa-solid fa-chevron-left"></i></div>
-        <div class="slider-arrow right"><i class="fa-solid fa-chevron-right"></i></div>
-        <div class="slider-dots">
-          <div class="dot active"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-        </div>
-      </section>
-
-      <!-- Passport Points Section -->
-      <section class="passport-card">
-        <div class="passport-header">
-          <div class="passport-title-group">
-            <div class="passport-badge">
-              <i class="fa-solid fa-id-card-clip" style="font-size: 30px; color: #d00000;"></i>
+    <!-- MAIN APP WRAPPER -->
+    <div id="app-container">
+        
+        <!-- HEADER -->
+        <header>
+            <div class="brand">
+                <img src="https://via.placeholder.com/45?text=TNSF" alt="Logo">
+                <div class="brand-text">
+                    <h1>TNSF</h1>
+                    <p>KADAPA PARLIAMENT</p>
+                </div>
             </div>
-            <h3>My TNSF<br>Passport</h3>
-          </div>
-          <div class="points-tag">
-            <i class="fa-solid fa-star"></i>
-            <span>450.6 Points</span>
-          </div>
-        </div>
-        <div class="passport-footer">
-          <div class="passport-breadcrumbs">
-            Your Journey <span>•</span> Your Points <span>•</span> Your Growth
-          </div>
-          <button class="view-btn">
-            View My Passport <i class="fa-solid fa-arrow-right"></i>
-          </button>
-        </div>
-      </section>
 
-      <!-- TNSF Hub Section (Join TNSF Removed) -->
-      <section class="hub-container">
-        <h2 class="hub-title">TNSF Hub</h2>
-        <div class="hub-grid">
-          
-          <a href="#" class="hub-item">
-            <div class="icon-circle">
-              <i class="fa-solid fa-graduation-cap"></i>
+            <!-- Desktop Navigation links -->
+            <nav class="desktop-nav">
+                <a href="#" class="active">Home</a>
+                <a href="#">Student Help</a>
+                <a href="#">Gallery</a>
+                <a href="#">Inbox</a>
+                <a href="#">Constituencies</a>
+                <a href="#">Leadership</a>
+                <a href="#">Events</a>
+                <a href="#">Feedback</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Donate</a>
+            </nav>
+
+            <!-- Mobile Menu Hamburger Button -->
+            <button class="menu-toggle" aria-label="Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </header>
+
+        <!-- HERO CAROUSEL SECTION -->
+        <section class="hero-section">
+            <div class="banner-card">
+                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1000&q=80" alt="Empowering Students">
+                <button class="banner-nav-btn prev-btn"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="banner-nav-btn next-btn"><i class="fa-solid fa-chevron-right"></i></button>
+                <div class="banner-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
             </div>
-            <span>Student<br>Help</span>
-          </a>
+        </section>
 
-          <a href="#" class="hub-item">
-            <div class="icon-circle">
-              <i class="fa-regular fa-image"></i>
+        <!-- MY TNSF PASSPORT SECTION -->
+        <section class="passport-section">
+            <div class="passport-card">
+                <div class="passport-top">
+                    <div class="passport-title-area">
+                        <img src="https://via.placeholder.com/50?text=TNSF" alt="Passport Logo">
+                        <h2>My TNSF<br>Passport</h2>
+                    </div>
+                    <div class="points-badge">
+                        <i class="fa-solid fa-star"></i> 450.6 Points
+                    </div>
+                </div>
+                <div class="passport-details">
+                    <span>Your Journey</span>
+                    <span>•</span>
+                    <span>Your Points</span>
+                    <span>•</span>
+                    <span>Your Growth</span>
+                </div>
+                <button class="view-passport-btn">View My Passport &rarr;</button>
             </div>
-            <span>Gallery</span>
-          </a>
+        </section>
 
-          <a href="#" class="hub-item">
-            <div class="icon-circle">
-              <i class="fa-regular fa-envelope"></i>
+        <!-- TNSF HUB GRID SECTION -->
+        <section class="hub-section">
+            <div class="hub-container">
+                <h3 class="hub-title">TNSF Hub</h3>
+                <div class="hub-grid">
+                    <!-- Changed Join TNSF to Refer -->
+                    <a href="#" class="hub-item">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-user-plus"></i></div>
+                        <span>Refer</span>
+                    </a>
+                    <a href="#" class="hub-item">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-graduation-cap"></i></div>
+                        <span>Student Help</span>
+                    </a>
+                    <a href="#" class="hub-item">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-images"></i></div>
+                        <span>Gallery</span>
+                    </a>
+                    <a href="#" class="hub-item">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-envelope"></i></div>
+                        <span>Inbox</span>
+                    </a>
+                    <a href="#" class="hub-item">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-map-location-dot"></i></div>
+                        <span>Constituencies</span>
+                    </a>
+                    <a href="#" class="hub-item">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-user-tie"></i></div>
+                        <span>Leadership</span>
+                    </a>
+                    <a href="#" class="hub-item">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-calendar-days"></i></div>
+                        <span>Events</span>
+                    </a>
+                    <a href="#" class="hub-item">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-comments"></i></div>
+                        <span>Feedback</span>
+                    </a>
+                    <a href="#" class="hub-item">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-phone-volume"></i></div>
+                        <span>Contact Us</span>
+                    </a>
+                    <a href="#" class="hub-item">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-hand-holding-heart"></i></div>
+                        <span>Donate</span>
+                    </a>
+                </div>
             </div>
-            <span>Inbox</span>
-          </a>
+        </section>
 
-          <a href="#" class="hub-item">
-            <div class="icon-circle">
-              <i class="fa-solid fa-location-dot"></i>
-            </div>
-            <span>Constituencies</span>
-          </a>
+        <!-- FOOTER -->
+        <footer>
+            Copy 2026 TNSF KADAPA PARLIAMENT all rights reserved
+        </footer>
 
-          <a href="#" class="hub-item">
-            <div class="icon-circle">
-              <i class="fa-solid fa-podium"></i>
-            </div>
-            <span>Leadership</span>
-          </a>
+    </div>
 
-          <a href="#" class="hub-item">
-            <div class="icon-circle">
-              <i class="fa-regular fa-calendar-check"></i>
-            </div>
-            <span>Events</span>
-          </a>
-
-          <a href="#" class="hub-item">
-            <div class="icon-circle">
-              <i class="fa-regular fa-comment-dots"></i>
-            </div>
-            <span>Feedback</span>
-          </a>
-
-          <a href="#" class="hub-item">
-            <div class="icon-circle">
-              <i class="fa-solid fa-phone"></i>
-            </div>
-            <span>Contact Us</span>
-          </a>
-
-          <a href="#" class="hub-item">
-            <div class="icon-circle">
-              <i class="fa-solid fa-hand-holding-heart"></i>
-            </div>
-            <span>Donate</span>
-          </a>
-
-        </div>
-      </section>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-      Copy 2026 TNSF KADAPA PARLIAMENT all rights reserved
-    </footer>
-  </div>
-
+    <!-- JAVASCRIPT TO HANDLE LOADER AND INTERACTIONS -->
+    <script>
+        // Simulate Loading Screen for 2 seconds, then show main app
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const loader = document.getElementById('loader-screen');
+                const appContainer = document.getElementById('app-container');
+                
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                    appContainer.style.display = 'block';
+                }, 500); // match transition timing
+            }, 1500); // 1.5 seconds delay
+        });
+    </script>
 </body>
 </html>
