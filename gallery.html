@@ -44,6 +44,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
+      width: 100%;
     }
 
     .brand {
@@ -72,7 +73,7 @@
       color: #333;
     }
 
-    /* Home Button matching reference */
+    /* Home Button */
     .home-btn {
       background: #ffffff;
       border: none;
@@ -95,85 +96,87 @@
       background: #fdfdfd;
     }
 
-    /* Hero Banner matching original reference layout */
-    .hero {
-      position: relative;
-      background: linear-gradient(135deg, #ffffff 0%, #fffbf0 60%, #fff8e1 100%);
-      padding: 30px 24px;
-      margin: 0 auto;
-      max-width: 1200px;
+    /* Edge-to-Edge Full Width Hero Section */
+    .hero-wrapper {
       width: 100%;
+      background: linear-gradient(180deg, #fffdf2 0%, #fff9e6 100%);
+      border-bottom: 1px solid #f3e6bd;
+      margin-bottom: 20px;
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 20px;
       display: flex;
       flex-direction: column;
       gap: 20px;
-      overflow: hidden;
     }
 
     @media (min-width: 768px) {
-      .hero {
+      .hero-content {
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        padding: 40px 32px;
-        min-height: 240px;
+        padding: 32px 24px;
+        min-height: 220px;
       }
     }
 
-    .hero-text-content {
+    .hero-text {
       flex: 1;
-      z-index: 2;
     }
 
-    .hero-title {
+    .hero-title-badge {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
-    .hero-title-icon {
+    .hero-icon {
       background: var(--primary);
-      width: 44px;
-      height: 44px;
+      width: 40px;
+      height: 40px;
       border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #000;
+      flex-shrink: 0;
     }
 
     .hero h2 {
-      font-size: 2.2rem;
+      font-size: 2rem;
       font-weight: 800;
       color: #000;
     }
 
-    .hero p {
+    .hero-text p {
       color: var(--text-muted);
-      max-width: 460px;
+      max-width: 480px;
       line-height: 1.5;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
     }
 
-    /* Hero Banner Image (Updatable Link / Mobile-Desktop Responsive) */
-    .hero-image-container {
+    /* Responsive Hero Banner Image */
+    .hero-image-box {
       width: 100%;
-      max-width: 500px;
-      height: 200px;
+      max-width: 480px;
+      height: 180px;
       border-radius: 12px;
       overflow: hidden;
-      z-index: 1;
       flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
 
     @media (min-width: 768px) {
-      .hero-image-container {
-        height: 220px;
-        max-width: 480px;
+      .hero-image-box {
+        height: 200px;
       }
     }
 
-    .hero-image-container img {
+    .hero-image-box img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -181,10 +184,10 @@
       display: block;
     }
 
-    /* Category Filters (Campus Programs Removed) */
+    /* Category Filters */
     .filters-wrapper {
       max-width: 1200px;
-      margin: 10px auto 20px;
+      margin: 0 auto 20px;
       padding: 0 20px;
       width: 100%;
     }
@@ -200,11 +203,12 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 10px 18px;
+      padding: 8px 16px;
       background: #f1f3f5;
       border: none;
       border-radius: 20px;
       font-weight: 600;
+      font-size: 0.88rem;
       color: #495057;
       cursor: pointer;
       transition: var(--transition);
@@ -227,12 +231,10 @@
 
     .gallery-grid {
       display: grid;
-      /* Mobile responsive: 1 card per row */
       grid-template-columns: 1fr;
-      gap: 24px;
+      gap: 20px;
     }
 
-    /* Desktop responsive: 3 or 4 cards per row */
     @media (min-width: 768px) {
       .gallery-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -241,37 +243,37 @@
 
     @media (min-width: 1100px) {
       .gallery-grid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
       }
     }
 
-    /* Card Styling & Animated Transitions */
+    /* Card Styling */
     .card {
       background: var(--card-bg);
       border-radius: var(--border-radius);
       overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
       transition: var(--transition);
       display: flex;
       flex-direction: column;
       position: relative;
-      border: 2px solid transparent;
+      border: 1px solid #eee;
     }
 
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      transform: translateY(-4px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
     }
 
     .card.highlighted {
       border-color: var(--primary);
-      box-shadow: 0 0 20px rgba(254, 193, 7, 0.5);
+      box-shadow: 0 0 15px rgba(254, 193, 7, 0.5);
     }
 
     .card-img-wrapper {
       position: relative;
       width: 100%;
-      height: 200px;
+      height: 190px;
       overflow: hidden;
       cursor: pointer;
     }
@@ -284,17 +286,17 @@
     }
 
     .card:hover .card-img-wrapper img {
-      transform: scale(1.05);
+      transform: scale(1.04);
     }
 
     .date-badge {
       position: absolute;
-      bottom: 12px;
-      left: 12px;
+      bottom: 10px;
+      left: 10px;
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(4px);
       padding: 4px 10px;
-      border-radius: 12px;
+      border-radius: 8px;
       font-size: 0.75rem;
       font-weight: 700;
       display: flex;
@@ -304,12 +306,12 @@
 
     .share-btn {
       position: absolute;
-      top: 12px;
-      right: 12px;
+      top: 10px;
+      right: 10px;
       background: rgba(255, 255, 255, 0.95);
       border: none;
-      width: 36px;
-      height: 36px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -317,16 +319,16 @@
       cursor: pointer;
       transition: var(--transition);
       z-index: 2;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
 
     .share-btn:hover {
       background: var(--primary);
-      transform: scale(1.1);
+      transform: scale(1.08);
     }
 
     .card-content {
-      padding: 16px;
+      padding: 14px;
       cursor: pointer;
       flex-grow: 1;
       display: flex;
@@ -335,39 +337,39 @@
     }
 
     .card-title {
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 700;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .card-tag {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: var(--text-muted);
       background: #f1f3f5;
-      padding: 3px 8px;
+      padding: 2px 8px;
       border-radius: 6px;
       width: fit-content;
     }
 
-    /* Expandable Animated Text Transition */
+    /* Expandable Details Area */
     .card-details {
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.4s cubic-bezier(0, 1, 0, 1), padding 0.3s ease;
       background: #fffbe6;
       border-top: 0px solid var(--primary);
-      padding: 0 16px;
+      padding: 0 14px;
     }
 
     .card.active .card-details {
       max-height: 300px;
-      padding: 14px 16px;
+      padding: 12px 14px;
       border-top-width: 2px;
       transition: max-height 0.4s ease-in-out, padding 0.3s ease;
     }
 
     .card-details p {
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       color: #333;
       line-height: 1.5;
     }
@@ -394,32 +396,33 @@
         <span>KADAPA PARLIAMENT</span>
       </div>
     </div>
-    <!-- Home Button -->
     <button class="home-btn" title="Home" onclick="goHome()">
       <i data-lucide="home" size="16"></i>
       <span>Home</span>
     </button>
   </header>
 
-  <!-- Hero Banner matching reference image -->
-  <section class="hero">
-    <div class="hero-text-content">
-      <div class="hero-title">
-        <div class="hero-title-icon">
-          <i data-lucide="camera" size="22"></i>
+  <!-- Full-Width Responsive Hero Banner -->
+  <div class="hero-wrapper">
+    <section class="hero-content">
+      <div class="hero-text">
+        <div class="hero-title-badge">
+          <div class="hero-icon">
+            <i data-lucide="camera" size="20"></i>
+          </div>
+          <h2>Gallery</h2>
         </div>
-        <h2>Gallery</h2>
+        <p>Moments of unity, action and change. Explore our journey through photos.</p>
       </div>
-      <p>Moments of unity, action and change. Explore our journey through photos.</p>
-    </div>
 
-    <!-- Responsive Hero Banner Image (Updatable Image Link) -->
-    <div class="hero-image-container">
-      <img id="heroBannerImg" src="" alt="Gallery Hero Banner" />
-    </div>
-  </section>
+      <!-- Updatable Banner Image Link -->
+      <div class="hero-image-box">
+        <img id="heroBannerImg" src="" alt="Gallery Banner" />
+      </div>
+    </section>
+  </div>
 
-  <!-- Category Filters (Campus Programs Removed) -->
+  <!-- Category Filters -->
   <div class="filters-wrapper">
     <div class="filters">
       <button class="filter-btn active" onclick="filterCategory('all', event)"><i data-lucide="grid" size="16"></i> All</button>
@@ -444,7 +447,7 @@
   </footer>
 
   <script>
-    // Configurable Hero Banner Image URL (Admin updated URL appears here)
+    // Configurable Hero Banner Image Link (Set by Admin via backend/code)
     let HERO_BANNER_IMAGE_URL = "https://picsum.photos/id/1015/800/400";
 
     const galleryItems = [
@@ -516,18 +519,11 @@
 
     let currentOpenCardId = null;
 
-    // Load Banner Image Link
     function loadHeroBanner() {
       const bannerImgEl = document.getElementById('heroBannerImg');
       if (bannerImgEl) {
         bannerImgEl.src = HERO_BANNER_IMAGE_URL;
       }
-    }
-
-    // Function to dynamically update Hero Banner image from backend/API if needed
-    function updateHeroBannerUrl(newUrl) {
-      HERO_BANNER_IMAGE_URL = newUrl;
-      loadHeroBanner();
     }
 
     function renderGallery(filter = 'all') {
@@ -547,7 +543,7 @@
             <img src="${item.img}" alt="${item.title}" loading="lazy" />
             <div class="date-badge"><i data-lucide="calendar" size="12"></i> ${item.date}</div>
             <button class="share-btn" title="Share Image & Text" onclick="shareCard(event, ${item.id})">
-              <i data-lucide="share-2" size="16"></i>
+              <i data-lucide="share-2" size="15"></i>
             </button>
           </div>
           <div class="card-content" onclick="toggleCard(${item.id})">
