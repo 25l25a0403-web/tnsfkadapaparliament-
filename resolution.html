@@ -3,280 +3,425 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TNSF Resolution Desk</title>
+  <title>TNSF Kadapa Parliament - Resolution Desk</title>
+  <!-- FontAwesome Icons & Google Fonts -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
   <style>
-    /* Global Styles */
+    :root {
+      --primary-yellow: #FFD700;
+      --secondary-yellow: #FFF8D6;
+      --accent-yellow: #FFC107;
+      --dark-blue: #1A1C2e;
+      --text-dark: #333333;
+      --text-muted: #666666;
+      --light-gray: #f4f6f9;
+      --white: #ffffff;
+      --border-color: #e2e8f0;
+      --shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Poppins', sans-serif;
     }
 
     body {
-      background-color: #f4f6f8;
-      color: #333;
+      background-color: #f8fafc;
+      color: var(--text-dark);
     }
 
-    /* Top Navigation Bar */
-    .header {
-      background-color: #ffcc00;
+    /* HEADER */
+    header {
+      background-color: var(--primary-yellow);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 12px 24px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 12px 5%;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
-    .header .logo {
+    .header-left {
       display: flex;
       align-items: center;
       gap: 12px;
-      font-weight: bold;
-      font-size: 1.1rem;
     }
 
-    .header .logo img {
+    .header-logo {
       width: 45px;
       height: 45px;
       border-radius: 50%;
+      background-color: white;
+      padding: 2px;
+      object-fit: contain;
     }
 
-    .header .nav-icons {
-      display: flex;
-      gap: 18px;
+    .header-title h1 {
       font-size: 1.2rem;
+      font-weight: 700;
+      color: #000;
+      line-height: 1.1;
     }
 
-    /* Main Container Layout (Desktop First) */
-    .main-container {
-      max-width: 1300px;
+    .header-title p {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #333;
+      letter-spacing: 0.5px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .home-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .home-btn:hover {
+      background-color: var(--dark-blue);
+      color: white;
+    }
+
+    /* MAIN CONTAINER */
+    .container {
+      max-width: 1250px;
       margin: 20px auto;
       padding: 0 15px;
-      display: flex;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 320px 1fr;
       gap: 20px;
     }
 
-    /* Left Sidebar Section (Moved Support Section Here) */
-    .left-sidebar {
-      flex: 0 0 300px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
+    /* CARD STYLES */
     .card {
-      background: #ffffff;
+      background: var(--white);
       border-radius: 12px;
       padding: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-color);
+      margin-bottom: 20px;
     }
 
-    /* Support Section Styles */
+    /* WE SUPPORT YOU IN (LEFT PANEL / ANIMATED) */
     .support-card {
-      background: linear-gradient(135deg, #fffde7 0%, #ffffff 100%);
-      border: 1px solid #ffe082;
-      text-align: center;
-    }
-
-    .support-card .icon-hat {
-      font-size: 2.5rem;
-      color: #1a237e;
-      margin-bottom: 10px;
-    }
-
-    .support-card h3 {
-      font-size: 1.2rem;
-      margin-bottom: 15px;
-      color: #1a237e;
-    }
-
-    .support-list {
-      list-style: none;
-      text-align: left;
-      margin-bottom: 15px;
-    }
-
-    .support-list li {
-      margin-bottom: 8px;
-      font-size: 0.9rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: #444;
-    }
-
-    .support-list li i {
-      color: #ffb300;
-      font-size: 0.8rem;
-    }
-
-    .support-quote {
-      font-style: italic;
-      color: #0d47a1;
-      font-weight: bold;
-      margin: 15px 0;
-      font-size: 0.95rem;
-    }
-
-    .need-help-card {
-      text-align: center;
-      border: 1px solid #e0e0e0;
-    }
-
-    .need-help-card .help-icon {
-      background: #fff59d;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 10px auto;
-      color: #f57f17;
-    }
-
-    .btn-contact {
-      display: inline-block;
-      width: 100%;
-      padding: 10px;
-      background-color: #ffcc00;
-      border: none;
-      border-radius: 20px;
-      font-weight: bold;
-      color: #333;
-      cursor: pointer;
-      margin-top: 10px;
-      text-decoration: none;
-    }
-
-    /* Main Content Area */
-    .main-content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    /* Hero Banner */
-    .hero-banner {
-      background: linear-gradient(135deg, #e8eaf6 0%, #e1f5fe 100%);
-      border-radius: 12px;
-      padding: 25px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      background: linear-gradient(180deg, #FFFFFF 0%, var(--secondary-yellow) 100%);
+      border: 2px solid var(--accent-yellow);
+      animation: floatCard 4s ease-in-out infinite;
       position: relative;
       overflow: hidden;
     }
 
-    .hero-text h2 {
-      font-size: 1.8rem;
-      color: #1a237e;
-      margin-bottom: 8px;
+    @keyframes floatCard {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+      100% { transform: translateY(0px); }
     }
 
-    .hero-text p {
-      font-size: 0.9rem;
-      color: #555;
-      max-width: 400px;
+    .support-header {
+      text-align: center;
+      margin-bottom: 15px;
     }
 
-    .hero-tagline {
-      margin-top: 15px;
-      font-weight: bold;
-      color: #d81b60;
-      font-style: italic;
-    }
-
-    /* Form Section */
-    .form-header {
+    .support-icon-wrapper {
+      background: var(--primary-yellow);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
-      gap: 10px;
+      justify-content: center;
+      margin: 0 auto 10px;
+      font-size: 24px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .support-header h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--dark-blue);
+    }
+
+    .support-list {
+      list-style: none;
       margin-bottom: 20px;
     }
 
-    .form-header i {
-      background: #fff59d;
+    .support-list li {
+      padding: 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      border-bottom: 1px dashed rgba(0,0,0,0.08);
+      transition: transform 0.2s;
+    }
+
+    .support-list li:hover {
+      transform: translateX(5px);
+    }
+
+    .support-list li i {
+      color: #27ae60;
+    }
+
+    .support-quote {
+      text-align: center;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: #d97706;
+      background: rgba(255, 255, 255, 0.7);
       padding: 10px;
       border-radius: 8px;
-      color: #f57f17;
+    }
+
+    /* NEED HELP CARD */
+    .help-card {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      background: #fdf8e6;
+    }
+
+    .help-icon {
+      background: var(--primary-yellow);
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .help-info h3 { font-size: 0.95rem; font-weight: 600; }
+    .help-info p { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 8px; }
+    .contact-btn {
+      display: inline-block;
+      background: var(--primary-yellow);
+      color: #000;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-decoration: none;
+    }
+
+    /* HERO BANNER */
+    .hero-banner {
+      background: linear-gradient(135deg, #fff2b2, #ffe66d);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      position: relative;
+      min-height: 180px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+    }
+
+    .hero-content {
+      padding: 25px;
+      flex: 1;
+      z-index: 2;
+    }
+
+    .hero-content h2 {
+      font-size: 1.6rem;
+      color: var(--dark-blue);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .hero-content p {
+      font-size: 0.85rem;
+      color: #444;
+      margin-bottom: 12px;
+    }
+
+    .badge-tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.8);
+      padding: 4px 12px;
+      border-radius: 15px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #d97706;
+    }
+
+    .hero-img {
+      width: 40%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      mask-image: linear-gradient(to left, rgba(0,0,0,1) 60%, rgba(0,0,0,0));
+      -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 60%, rgba(0,0,0,0));
+    }
+
+    /* FORM STYLES */
+    .form-title-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .form-title-area i {
+      background: var(--primary-yellow);
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 18px;
     }
 
     .form-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 15px;
+      gap: 15px 20px;
     }
 
     .form-group {
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 6px;
     }
 
     .form-group.full-width {
-      grid-column: 1 / -1;
+      grid-column: span 2;
     }
 
     .form-group label {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 600;
-      color: #444;
+      color: var(--text-dark);
       display: flex;
       align-items: center;
       gap: 6px;
     }
 
-    .form-group input, 
-    .form-group select, 
-    .form-group textarea {
-      padding: 10px;
-      border: 1px solid #ccc;
+    .form-group label i {
+      color: #666;
+      font-size: 0.85rem;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border-color);
       border-radius: 6px;
+      font-size: 0.85rem;
       outline: none;
-      font-size: 0.9rem;
-    }
-
-    .form-group input:focus, 
-    .form-group select:focus, 
-    .form-group textarea:focus {
-      border-color: #ffcc00;
-    }
-
-    .file-upload {
-      border: 2px dashed #ccc;
-      border-radius: 6px;
-      padding: 15px;
-      text-align: center;
+      transition: border-color 0.3s;
       background: #fafafa;
+    }
+
+    .form-control:focus {
+      border-color: var(--accent-yellow);
+      background: #fff;
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    /* FILE UPLOAD DRAG & DROP */
+    .file-upload-box {
+      border: 2px dashed #cbd5e1;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      background: #f8fafc;
       cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .file-upload-box:hover {
+      border-color: var(--accent-yellow);
+      background: #fffdf0;
+    }
+
+    .file-upload-box input[type="file"] {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .upload-icon {
+      font-size: 24px;
+      color: var(--accent-yellow);
+      margin-bottom: 6px;
+    }
+
+    .upload-text {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .file-name {
+      margin-top: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #2563eb;
     }
 
     .btn-submit {
       width: 100%;
-      padding: 12px;
-      background-color: #ffcc00;
+      background: var(--primary-yellow);
+      color: #000;
       border: none;
+      padding: 12px;
       border-radius: 6px;
-      font-size: 1rem;
-      font-weight: bold;
-      color: #333;
+      font-weight: 700;
+      font-size: 0.95rem;
       cursor: pointer;
-      margin-top: 15px;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       gap: 8px;
+      transition: background 0.3s;
+      margin-top: 15px;
     }
 
     .btn-submit:hover {
-      background-color: #e6b800;
+      background: var(--accent-yellow);
     }
 
-    /* Modal Popup */
+    /* POPUP MODAL */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -285,12 +430,12 @@
       height: 100%;
       background: rgba(0, 0, 0, 0.5);
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      z-index: 1000;
       opacity: 0;
       visibility: hidden;
       transition: all 0.3s ease;
-      z-index: 1000;
     }
 
     .modal-overlay.active {
@@ -299,15 +444,15 @@
     }
 
     .modal-box {
-      background: #fff;
+      background: white;
       padding: 30px;
       border-radius: 12px;
       text-align: center;
       max-width: 400px;
       width: 90%;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
       transform: scale(0.8);
-      transition: all 0.3s ease;
+      transition: transform 0.3s ease;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     }
 
     .modal-overlay.active .modal-box {
@@ -315,231 +460,313 @@
     }
 
     .modal-icon {
-      font-size: 3rem;
-      color: #4caf50;
-      margin-bottom: 15px;
+      width: 60px;
+      height: 60px;
+      background: #dcfce7;
+      color: #16a34a;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin: 0 auto 15px;
     }
 
     .modal-box h3 {
-      font-size: 1.4rem;
-      margin-bottom: 10px;
-      color: #333;
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+      color: var(--dark-blue);
     }
 
     .modal-box p {
-      font-size: 0.9rem;
-      color: #666;
+      font-size: 0.85rem;
+      color: var(--text-muted);
       margin-bottom: 20px;
     }
 
-    .btn-ok {
-      padding: 8px 30px;
-      background-color: #ffcc00;
+    .modal-btn {
+      background: var(--primary-yellow);
+      color: #000;
       border: none;
+      padding: 8px 30px;
       border-radius: 20px;
-      font-weight: bold;
+      font-weight: 600;
       cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.2s;
     }
 
-    /* MOBILE RESPONSIVE MEDIA QUERY */
+    .modal-btn:hover {
+      background: var(--accent-yellow);
+    }
+
+    /* RESPONSIVE MOBILE MEDIA QUERIES */
     @media (max-width: 768px) {
-      .main-container {
+      .main-grid {
+        display: flex;
         flex-direction: column;
       }
 
-      /* Hero Banner stays on Top */
-      .hero-banner {
+      /* Mobile Section Reordering */
+      .right-panel {
+        display: flex;
+        flex-direction: column;
         order: 1;
       }
 
-      /* Support Sidebar moved directly below Hero Banner */
-      .left-sidebar {
-        order: 2;
-        flex: 1 1 auto;
+      .left-panel {
+        order: 2; /* "We Support You In" shows below Hero Banner & above Form */
       }
 
-      /* Form Section moved below Support Section */
-      .main-content {
-        order: 3;
+      .hero-banner {
+        order: 1; /* First element in Mobile */
       }
 
-      /* Single Column Form Fields for Mobile */
+      .form-card {
+        order: 3; /* Form placed below We Support You In */
+      }
+
+      /* Single Column Fields in Mobile */
       .form-grid {
         grid-template-columns: 1fr;
+      }
+
+      .form-group.full-width {
+        grid-column: span 1;
+      }
+
+      .hero-img {
+        opacity: 0.25;
+        width: 100%;
+      }
+
+      .header-title h1 {
+        font-size: 1rem;
+      }
+      
+      .header-title p {
+        font-size: 0.65rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Header -->
-  <header class="header">
-    <div class="logo">
-      <i class="fa-solid fa-graduation-cap fa-2x"></i>
-      <div>
-        <div>TNSF</div>
-        <div style="font-size: 0.75rem; font-weight: normal;">KADAPA PARLIAMENT</div>
+  <!-- HEADER -->
+  <header>
+    <div class="header-left">
+      <!-- Updatable Header Logo -->
+      <img src="image/images (3).jpeg" alt="TNSF Logo" class="header-logo">
+      <div class="header-title">
+        <h1>TNSF</h1>
+        <p>KADAPA PARLIAMENT</p>
       </div>
     </div>
-    <div class="nav-icons">
-      <i class="fa-regular fa-bell"></i>
-      <i class="fa-regular fa-user"></i>
+    <div class="header-right">
+      <a href="#" class="home-btn">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+      </a>
     </div>
   </header>
 
-  <div class="main-container">
-    
-    <!-- Left Sidebar (Desktop: Left | Mobile: 2nd place below Hero) -->
-    <aside class="left-sidebar">
-      
-      <!-- We Support You In Section -->
-      <div class="card support-card">
-        <i class="fa-solid fa-user-graduate icon-hat"></i>
-        <h3>We Support You In</h3>
-        <ul class="support-list">
-          <li><i class="fa-solid fa-check"></i> Scholarship Guidance</li>
-          <li><i class="fa-solid fa-check"></i> Education Support</li>
-          <li><i class="fa-solid fa-check"></i> Study Materials</li>
-          <li><i class="fa-solid fa-check"></i> Career Guidance</li>
-          <li><i class="fa-solid fa-check"></i> Hostel & Accommodation</li>
-          <li><i class="fa-solid fa-check"></i> Financial Assistance</li>
-          <li><i class="fa-solid fa-check"></i> And More...</li>
-        </ul>
-        <div class="support-quote">"Together We Can Build a Brighter Future"</div>
-      </div>
+  <!-- MAIN CONTENT CONTAINER -->
+  <div class="container">
+    <div class="main-grid">
 
-      <!-- Need Help Section -->
-      <div class="card need-help-card">
-        <div class="help-icon">
-          <i class="fa-solid fa-headset"></i>
-        </div>
-        <h4>Need Help?</h4>
-        <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">Our support team is always ready to assist you.</p>
-        <a href="#" class="btn-contact">Contact Us ></a>
-      </div>
-
-    </aside>
-
-    <!-- Main Content (Desktop: Right | Mobile: Split between 1st & 3rd place) -->
-    <main class="main-content">
-      
-      <!-- Resolution Desk Hero Banner (Mobile: 1st place) -->
-      <section class="hero-banner">
-        <div class="hero-text">
-          <h2><i class="fa-solid fa-headset" style="color: #f57f17;"></i> Resolution Desk</h2>
-          <p><strong>Raise your issue. We're here to help.</strong><br>Fill the form below with your details and issue information. Our team will review and get back to you soon.</p>
-          <div class="hero-tagline">Your Voice Matters</div>
-        </div>
-      </section>
-
-      <!-- Form Section (Mobile: 3rd place below Support) -->
-      <section class="card">
-        <div class="form-header">
-          <i class="fa-solid fa-list-check"></i>
-          <div>
-            <h3>Resolution Desk Form</h3>
-            <p style="font-size: 0.8rem; color: #666;">Please fill in the details below. Our team will get back to you soon.</p>
+      <!-- LEFT SIDE PANEL (Desktop: Left, Mobile: Placed below Hero Banner) -->
+      <div class="left-panel">
+        
+        <!-- WE SUPPORT YOU IN (Animated Section) -->
+        <div class="card support-card">
+          <div class="support-header">
+            <div class="support-icon-wrapper">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <h2>We Support You In</h2>
+          </div>
+          <ul class="support-list">
+            <li><i class="fa-solid fa-circle-check"></i> Scholarship Guidance</li>
+            <li><i class="fa-solid fa-circle-check"></i> Education Support</li>
+            <li><i class="fa-solid fa-circle-check"></i> Study Materials</li>
+            <li><i class="fa-solid fa-circle-check"></i> Career Guidance</li>
+            <li><i class="fa-solid fa-circle-check"></i> Hostel & Accommodation</li>
+            <li><i class="fa-solid fa-circle-check"></i> Financial Assistance</li>
+            <li><i class="fa-solid fa-circle-check"></i> And More...</li>
+          </ul>
+          <div class="support-quote">
+            "Together We Can Build a Brighter Future"
           </div>
         </div>
 
-        <form id="resolutionForm">
-          <div class="form-grid">
-            
-            <div class="form-group">
-              <label><i class="fa-regular fa-user"></i> Full Name *</label>
-              <input type="text" placeholder="Enter your full name" required>
-            </div>
+        <!-- NEED HELP -->
+        <div class="card help-card">
+          <div class="help-icon">
+            <i class="fa-solid fa-headset"></i>
+          </div>
+          <div class="help-info">
+            <h3>Need Help?</h3>
+            <p>Our support team is always ready to assist you.</p>
+            <a href="#" class="contact-btn">Contact Us <i class="fa-solid fa-chevron-right"></i></a>
+          </div>
+        </div>
 
-            <div class="form-group">
-              <label><i class="fa-solid fa-phone"></i> Mobile Number *</label>
-              <input type="tel" placeholder="Enter your mobile number" required>
-            </div>
+      </div>
 
-            <div class="form-group">
-              <label><i class="fa-regular fa-envelope"></i> Email Address</label>
-              <input type="email" placeholder="Enter your email address">
-            </div>
+      <!-- RIGHT SIDE PANEL -->
+      <div class="right-panel">
 
-            <div class="form-group">
-              <label><i class="fa-solid fa-graduation-cap"></i> Education Level *</label>
-              <select required>
-                <option value="">Select your education level</option>
-                <option value="school">School</option>
-                <option value="undergraduate">Undergraduate</option>
-                <option value="postgraduate">Postgraduate</option>
-              </select>
-            </div>
+        <!-- HERO BANNER (Image Link UPDATABLE) -->
+        <div class="hero-banner">
+          <div class="hero-content">
+            <h2>Resolution Desk</h2>
+            <p>Raise your issue. We're here to help.<br>Fill the form below with your details and issue information.</p>
+            <span class="badge-tag">Your Voice Matters</span>
+          </div>
+          <!-- Updatable Hero Banner Image URL -->
+          <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80" alt="Students Banner" class="hero-img" id="heroImage">
+        </div>
 
-            <div class="form-group">
-              <label><i class="fa-solid fa-building-columns"></i> College / Institution Name *</label>
-              <input type="text" placeholder="Enter your college / institution name" required>
+        <!-- RESOLUTION DESK FORM -->
+        <div class="card form-card">
+          <div class="form-title-area">
+            <i class="fa-solid fa-list-check"></i>
+            <div>
+              <h2 style="font-size: 1.1rem; color: var(--dark-blue);">Resolution Desk Form</h2>
+              <p style="font-size: 0.75rem; color: var(--text-muted);">Please fill in the details below. Our team will get back to you soon.</p>
             </div>
+          </div>
 
-            <div class="form-group">
-              <label><i class="fa-solid fa-book"></i> Course / Branch *</label>
-              <input type="text" placeholder="Enter your course / branch" required>
-            </div>
-
-            <div class="form-group">
-              <label><i class="fa-regular fa-calendar"></i> Year of Study *</label>
-              <select required>
-                <option value="">Select your year of study</option>
-                <option value="1">1st Year</option>
-                <option value="2">2nd Year</option>
-                <option value="3">3rd Year</option>
-                <option value="4">4th Year</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label><i class="fa-regular fa-file-lines"></i> Description / Message *</label>
-              <textarea rows="3" placeholder="Please describe your issue or requirement in detail..." required></textarea>
-            </div>
-
-            <div class="form-group full-width">
-              <label><i class="fa-solid fa-paperclip"></i> Upload Document (Optional)</label>
-              <div class="file-upload">
-                <i class="fa-solid fa-cloud-arrow-up" style="font-size: 1.5rem; color: #f57f17;"></i>
-                <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">Choose a file or drag and drop (PDF, JPG, PNG - Max 5MB)</p>
+          <form id="resolutionForm">
+            <div class="form-grid">
+              
+              <!-- Full Name -->
+              <div class="form-group">
+                <label><i class="fa-regular fa-user"></i> Full Name *</label>
+                <input type="text" class="form-control" placeholder="Enter your full name" required>
               </div>
+
+              <!-- Mobile Number -->
+              <div class="form-group">
+                <label><i class="fa-solid fa-phone"></i> Mobile Number *</label>
+                <input type="tel" class="form-control" placeholder="Enter your mobile number" required>
+              </div>
+
+              <!-- Email Address -->
+              <div class="form-group">
+                <label><i class="fa-regular fa-envelope"></i> Email Address</label>
+                <input type="email" class="form-control" placeholder="Enter your email address">
+              </div>
+
+              <!-- Education Level -->
+              <div class="form-group">
+                <label><i class="fa-solid fa-graduation-cap"></i> Education Level *</label>
+                <select class="form-control" required>
+                  <option value="">Select your education level</option>
+                  <option value="school">Schooling</option>
+                  <option value="intermediate">Intermediate / Diploma</option>
+                  <option value="undergraduate">Undergraduate (UG)</option>
+                  <option value="postgraduate">Postgraduate (PG)</option>
+                </select>
+              </div>
+
+              <!-- College Name -->
+              <div class="form-group">
+                <label><i class="fa-solid fa-building-columns"></i> College / Institution Name *</label>
+                <input type="text" class="form-control" placeholder="Enter your college/institution name" required>
+              </div>
+
+              <!-- Course / Branch -->
+              <div class="form-group">
+                <label><i class="fa-solid fa-book-open"></i> Course / Branch *</label>
+                <input type="text" class="form-control" placeholder="Enter your course/branch" required>
+              </div>
+
+              <!-- Year of Study -->
+              <div class="form-group">
+                <label><i class="fa-regular fa-calendar-days"></i> Year of Study *</label>
+                <select class="form-control" required>
+                  <option value="">Select your year of study</option>
+                  <option value="1">1st Year</option>
+                  <option value="2">2nd Year</option>
+                  <option value="3">3rd Year</option>
+                  <option value="4">4th Year</option>
+                </select>
+              </div>
+
+              <!-- Description / Message -->
+              <div class="form-group full-width">
+                <label><i class="fa-regular fa-comment-dots"></i> Description / Message *</label>
+                <textarea class="form-control" placeholder="Please describe your issue or requirement in detail..." required></textarea>
+              </div>
+
+              <!-- Real File Upload Section -->
+              <div class="form-group full-width">
+                <label><i class="fa-solid fa-paperclip"></i> Upload Document (Optional)</label>
+                <div class="file-upload-box">
+                  <input type="file" id="fileInput" onchange="showFileName(this)">
+                  <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                  <div class="upload-text">Choose a file or drag and drop<br><small>(PDF, JPG, PNG - Max 5MB)</small></div>
+                  <div id="fileNameDisplay" class="file-name"></div>
+                </div>
+              </div>
+
             </div>
 
-          </div>
+            <!-- Submit Button -->
+            <button type="submit" class="btn-submit">
+              <i class="fa-regular fa-paper-plane"></i> Submit Request
+            </button>
+          </form>
+        </div>
 
-          <button type="submit" class="btn-submit">
-            <i class="fa-solid fa-paper-plane"></i> Submit Request
-          </button>
-        </form>
-      </section>
+      </div>
 
-    </main>
-  </div>
-
-  <!-- Success Popup Modal -->
-  <div class="modal-overlay" id="successModal">
-    <div class="modal-box">
-      <i class="fa-regular fa-circle-check modal-icon"></i>
-      <h3>Submitted Successfully!</h3>
-      <p>Thank you. Your request has been submitted to the Resolution Desk. We will get back to you shortly.</p>
-      <button class="btn-ok" onclick="closePopup()">OK</button>
     </div>
   </div>
 
+  <!-- SUCCESS POPUP MODAL -->
+  <div class="modal-overlay" id="successModal">
+    <div class="modal-box">
+      <div class="modal-icon">
+        <i class="fa-solid fa-circle-check"></i>
+      </div>
+      <h3>Submitted Successfully!</h3>
+      <p>Your request has been received. Our team will review your application and contact you soon.</p>
+      <button class="modal-btn" onclick="closeModal()">OK</button>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT -->
   <script>
+    // Real File Upload Preview Display
+    function showFileName(input) {
+      const display = document.getElementById('fileNameDisplay');
+      if (input.files && input.files[0]) {
+        display.innerText = "Selected File: " + input.files[0].name;
+      } else {
+        display.innerText = "";
+      }
+    }
+
+    // Form Submission & Popup Modal Control
     const form = document.getElementById('resolutionForm');
     const modal = document.getElementById('successModal');
 
-    // Handle Form Submit Event
     form.addEventListener('submit', function(e) {
-      e.preventDefault(); // Prevent page refresh
-      modal.classList.add('active'); // Show Success Popup
+      e.preventDefaullt(); // Prevent form reload
+      
+      // Show Popup Modal
+      modal.classList.add('active');
     });
 
-    // Close/Minimise Popup Action
-    function closePopup() {
-      modal.classList.remove('active'); // Hide Popup
-      form.reset(); // Reset form fields
+    // Close/Minimize Modal Function
+    function closeModal() {
+      modal.classList.remove('active');
+      form.reset(); // Reset Form Fields
+      document.getElementById('fileNameDisplay').innerText = ""; // Clear file preview
     }
   </script>
+
 </body>
 </html>
