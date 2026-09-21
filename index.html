@@ -157,7 +157,7 @@
             font-size: 24px;
             cursor: pointer;
             color: #000;
-            z-index: 1001;
+            z-index: 101;
             transition: transform 0.3s;
         }
 
@@ -165,126 +165,102 @@
             transform: scale(1.1);
         }
 
-        /* --- MOBILE RIGHT-SIDE SLIDING DRAWER MENU --- */
+        /* --- MOBILE ANIMATED FULL-SCREEN MENU (TOP ALIGNED) --- */
         .mobile-menu-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4); /* Dark background fade */
+            background: rgba(255, 252, 235, 0.98);
+            backdrop-filter: blur(10px);
             z-index: 999;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.4s ease, visibility 0.4s;
-        }
-
-        .mobile-drawer {
-            position: fixed;
-            top: 0;
-            right: -280px; /* Hidden completely to the right */
-            width: 280px;
-            height: 100%;
-            background: #fffdf0;
-            box-shadow: -5px 0 20px rgba(0,0,0,0.15);
-            z-index: 1000;
             display: flex;
             flex-direction: column;
-            padding: 25px 20px;
-            transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+            justify-content: flex-start; /* Aligns content to top */
+            align-items: flex-start;    /* Left aligns content wrapper */
+            padding: 80px 30px 40px 30px; /* Top padding for header space */
+            overflow-y: auto;             /* Allows scrolling if items overflow */
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-20px);
+            transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
         }
 
-        /* When active, show overlay and slide drawer to 0 */
         .mobile-menu-overlay.active {
             opacity: 1;
             visibility: visible;
-        }
-
-        .mobile-menu-overlay.active .mobile-drawer {
-            right: 0;
-        }
-
-        .drawer-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #ffcc00;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-        }
-
-        .drawer-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #000;
+            transform: translateY(0);
         }
 
         .close-menu {
-            font-size: 22px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 28px;
             cursor: pointer;
             color: #333;
-            transition: transform 0.3s, color 0.3s;
+            transition: transform 0.3s;
         }
 
         .close-menu:hover {
             transform: rotate(90deg);
-            color: #d4a000;
+            color: #ff9900;
         }
 
         .mobile-nav-links {
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            overflow-y: auto;
-            flex-grow: 1;
+            gap: 20px;
+            width: 100%;
         }
 
         .mobile-nav-links li {
             opacity: 0;
-            transform: translateX(30px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            transform: translateX(-20px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            border-bottom: 1px solid rgba(255, 204, 0, 0.3);
+            padding-bottom: 12px;
         }
 
-        /* Cascade animation from right for list items */
+        /* Staggered animation effect from top */
         .mobile-menu-overlay.active .mobile-nav-links li {
             opacity: 1;
             transform: translateX(0);
         }
 
-        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(1) { transition-delay: 0.1s; }
-        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(2) { transition-delay: 0.15s; }
-        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(3) { transition-delay: 0.2s; }
-        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(4) { transition-delay: 0.25s; }
-        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(5) { transition-delay: 0.3s; }
-        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(6) { transition-delay: 0.35s; }
-        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(7) { transition-delay: 0.4s; }
-        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(8) { transition-delay: 0.45s; }
-        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(9) { transition-delay: 0.5s; }
-        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(10) { transition-delay: 0.55s; }
+        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(1) { transition-delay: 0.05s; }
+        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(2) { transition-delay: 0.1s; }
+        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(3) { transition-delay: 0.15s; }
+        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(4) { transition-delay: 0.2s; }
+        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(5) { transition-delay: 0.25s; }
+        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(6) { transition-delay: 0.3s; }
+        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(7) { transition-delay: 0.35s; }
+        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(8) { transition-delay: 0.4s; }
+        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(9) { transition-delay: 0.45s; }
+        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(10) { transition-delay: 0.5s; }
 
         .mobile-nav-links a {
             text-decoration: none;
-            font-size: 15px;
+            font-size: 17px;
             font-weight: 600;
-            color: #333;
+            color: #222;
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 8px 10px;
-            border-radius: 8px;
-            transition: background 0.3s, color 0.3s, transform 0.2s;
+            gap: 15px;
+            transition: color 0.3s, transform 0.3s;
         }
 
         .mobile-nav-links a i {
-            color: #d4a000;
-            width: 20px;
+            color: #ff9900;
+            font-size: 18px;
+            width: 25px;
             text-align: center;
         }
 
         .mobile-nav-links a:hover {
-            background-color: #fff4b8;
-            color: #000;
+            color: #d4a000;
             transform: translateX(5px);
         }
 
@@ -622,28 +598,23 @@
             </div>
         </header>
 
-        <!-- MOBILE RIGHT-SIDE SLIDING DRAWER MENU -->
+        <!-- MOBILE ANIMATED OVERLAY MENU (TOP ALIGNED) -->
         <div class="mobile-menu-overlay" id="mobileMenuOverlay">
-            <div class="mobile-drawer" id="mobileDrawer">
-                <div class="drawer-header">
-                    <span class="drawer-title">Menu</span>
-                    <div class="close-menu" id="closeMenuBtn">
-                        <i class="fa-solid fa-xmark"></i>
-                    </div>
-                </div>
-                <ul class="mobile-nav-links">
-                    <li><a href="#"><i class="fa-solid fa-house"></i> Home</a></li>
-                    <li><a href="#"><i class="fa-solid fa-graduation-cap"></i> Student Help</a></li>
-                    <li><a href="#"><i class="fa-solid fa-images"></i> Gallery</a></li>
-                    <li><a href="#"><i class="fa-solid fa-envelope"></i> Inbox</a></li>
-                    <li><a href="#"><i class="fa-solid fa-map-location-dot"></i> Constituencies</a></li>
-                    <li><a href="#"><i class="fa-solid fa-user-tie"></i> Leadership</a></li>
-                    <li><a href="#"><i class="fa-solid fa-calendar-days"></i> Events</a></li>
-                    <li><a href="#"><i class="fa-solid fa-comments"></i> Feedback</a></li>
-                    <li><a href="#"><i class="fa-solid fa-headset"></i> Contact Us</a></li>
-                    <li><a href="#"><i class="fa-solid fa-hand-holding-heart"></i> Donate Us</a></li>
-                </ul>
+            <div class="close-menu" id="closeMenuBtn">
+                <i class="fa-solid fa-xmark"></i>
             </div>
+            <ul class="mobile-nav-links">
+                <li><a href="#"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="#"><i class="fa-solid fa-graduation-cap"></i> Student Help</a></li>
+                <li><a href="#"><i class="fa-solid fa-images"></i> Gallery</a></li>
+                <li><a href="#"><i class="fa-solid fa-envelope"></i> Inbox</a></li>
+                <li><a href="#"><i class="fa-solid fa-map-location-dot"></i> Constituencies</a></li>
+                <li><a href="#"><i class="fa-solid fa-user-tie"></i> Leadership</a></li>
+                <li><a href="#"><i class="fa-solid fa-calendar-days"></i> Events</a></li>
+                <li><a href="#"><i class="fa-solid fa-comments"></i> Feedback</a></li>
+                <li><a href="#"><i class="fa-solid fa-headset"></i> Contact Us</a></li>
+                <li><a href="#"><i class="fa-solid fa-hand-holding-heart"></i> Donate Us</a></li>
+            </ul>
         </div>
 
         <div class="container">
@@ -754,7 +725,7 @@
         </footer>
     </div>
 
-    <!-- JavaScript for Right-Side Menu Animation and Auto Slider -->
+    <!-- JavaScript -->
     <script>
         // 1. Loading Screen
         window.addEventListener('DOMContentLoaded', () => {
@@ -763,7 +734,7 @@
             }, 2000);
         });
 
-        // 2. Right-Side Sliding Menu Logic
+        // 2. Mobile Menu Toggle Logic
         const menuToggleBtn = document.getElementById('menuToggleBtn');
         const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
         const closeMenuBtn = document.getElementById('closeMenuBtn');
@@ -777,14 +748,6 @@
             mobileMenuOverlay.classList.remove('active');
         });
 
-        // Close menu when clicking anywhere on the dark background overlay
-        mobileMenuOverlay.addEventListener('click', (e) => {
-            if (e.target === mobileMenuOverlay) {
-                mobileMenuOverlay.classList.remove('active');
-            }
-        });
-
-        // Close menu when clicking any link inside the drawer
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenuOverlay.classList.remove('active');
