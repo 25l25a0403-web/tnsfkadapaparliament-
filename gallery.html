@@ -10,7 +10,7 @@
     :root {
       --primary: #fec107;
       --primary-dark: #e0a800;
-      --bg: #f8f9fa;
+      --bg: #ffffff;
       --card-bg: #ffffff;
       --text-dark: #1a1a1a;
       --text-muted: #6c757d;
@@ -72,7 +72,7 @@
       color: #333;
     }
 
-    /* Updated Home Button styled exactly as per reference image */
+    /* Home Button matching reference */
     .home-btn {
       background: #ffffff;
       border: none;
@@ -95,33 +95,36 @@
       background: #fdfdfd;
     }
 
-    /* Updatable Hero Banner Styling */
-    .hero {
+    /* Full-bleed Hero Banner matching reference image */
+    .hero-container {
+      width: 100%;
       position: relative;
-      background: linear-gradient(135deg, #fff 0%, #fff8e1 100%);
-      padding: 24px;
-      margin: 20px auto;
-      border-radius: 16px;
+      background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+      overflow: hidden;
+      border-bottom: 1px solid #eee;
+    }
+
+    .hero-content-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px 20px 0;
       display: flex;
       flex-direction: column;
-      gap: 20px;
-      max-width: 1200px;
-      width: 90%;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-      overflow: hidden;
+      position: relative;
     }
 
     @media (min-width: 768px) {
-      .hero {
+      .hero-content-wrapper {
         flex-direction: row;
-        align-items: center;
+        align-items: flex-end;
         justify-content: space-between;
-        padding: 32px;
+        min-height: 320px;
       }
     }
 
-    .hero-text-content {
-      flex: 1;
+    .hero-text {
+      padding-bottom: 30px;
+      z-index: 2;
     }
 
     .hero-title {
@@ -131,51 +134,59 @@
       margin-bottom: 10px;
     }
 
-    .hero-title i {
-      background: var(--primary);
+    .hero-title-icon {
+      background: #000;
+      color: #fff;
       padding: 10px;
-      border-radius: 10px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .hero h2 {
-      font-size: 2rem;
-      font-weight: 800;
+    .hero-text h2 {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: #111;
+      letter-spacing: -0.5px;
     }
 
-    .hero p {
+    .hero-text p {
       color: var(--text-muted);
-      max-width: 500px;
-      line-height: 1.5;
+      font-size: 1rem;
+      max-width: 400px;
+      line-height: 1.4;
+      margin-top: 8px;
     }
 
-    .hero-image-wrapper {
+    /* Updatable Hero Banner Image Container */
+    .hero-image-box {
       position: relative;
       width: 100%;
-      max-width: 450px;
-      height: 220px;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-      flex-shrink: 0;
+      max-width: 550px;
+      height: 280px;
+      align-self: flex-end;
     }
 
-    .hero-image-wrapper img {
+    .hero-image-box img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: var(--transition);
+      object-position: top center;
+      display: block;
     }
 
-    .hero-img-upload-btn {
+    /* Admin Hero Image Upload Overlay */
+    .admin-upload-btn {
       position: absolute;
-      bottom: 12px;
+      top: 12px;
       right: 12px;
       background: rgba(0, 0, 0, 0.75);
       color: #fff;
       border: none;
-      padding: 8px 14px;
-      border-radius: 20px;
-      font-size: 0.8rem;
+      padding: 6px 12px;
+      border-radius: 16px;
+      font-size: 0.75rem;
       font-weight: 600;
       cursor: pointer;
       display: flex;
@@ -183,17 +194,18 @@
       gap: 6px;
       backdrop-filter: blur(4px);
       transition: var(--transition);
+      z-index: 10;
     }
 
-    .hero-img-upload-btn:hover {
+    .admin-upload-btn:hover {
       background: var(--primary);
       color: #000;
     }
 
-    /* Category Filters (Campus Programs Removed) */
+    /* Filters (Campus Programs Removed) */
     .filters-wrapper {
       max-width: 1200px;
-      margin: 0 auto 20px;
+      margin: 24px auto 20px;
       padding: 0 20px;
       width: 100%;
     }
@@ -225,7 +237,7 @@
       color: #000;
     }
 
-    /* Gallery Grid Layout */
+    /* Grid Layout */
     .gallery-container {
       max-width: 1200px;
       margin: 0 auto;
@@ -236,12 +248,12 @@
 
     .gallery-grid {
       display: grid;
-      /* Mobile responsive: 1 card per row */
+      /* Mobile: 1 card per row */
       grid-template-columns: 1fr;
       gap: 24px;
     }
 
-    /* Desktop responsive: 3 or 4 cards per row */
+    /* Desktop: 3 or 4 cards per row */
     @media (min-width: 768px) {
       .gallery-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -254,7 +266,7 @@
       }
     }
 
-    /* Card Styling & Animated Transitions */
+    /* Cards Styling & Animated Transitions */
     .card {
       background: var(--card-bg);
       border-radius: var(--border-radius);
@@ -264,7 +276,7 @@
       display: flex;
       flex-direction: column;
       position: relative;
-      border: 2px solid transparent;
+      border: 1px solid #eee;
     }
 
     .card:hover {
@@ -282,6 +294,7 @@
       width: 100%;
       height: 200px;
       overflow: hidden;
+      cursor: pointer;
     }
 
     .card-img-wrapper img {
@@ -357,7 +370,7 @@
       width: fit-content;
     }
 
-    /* Expandable Animated Text Matter */
+    /* Accordion Expandable Details Transition */
     .card-details {
       max-height: 0;
       overflow: hidden;
@@ -402,34 +415,41 @@
         <span>KADAPA PARLIAMENT</span>
       </div>
     </div>
-    <!-- Updated Home Button matching reference image -->
+    <!-- Home button with home icon in right side -->
     <button class="home-btn" title="Home" onclick="goHome()">
       <i data-lucide="home" size="16"></i>
       <span>Home</span>
     </button>
   </header>
 
-  <!-- Hero Banner -->
-  <section class="hero">
-    <div class="hero-text-content">
-      <div class="hero-title">
-        <i data-lucide="camera"></i>
-        <h2>Gallery</h2>
+  <!-- Hero Section (Matches Reference Image) -->
+  <section class="hero-container">
+    <div class="hero-content-wrapper">
+      <div class="hero-text">
+        <div class="hero-title">
+          <div class="hero-title-icon">
+            <i data-lucide="camera" size="20"></i>
+          </div>
+          <h2>Gallery</h2>
+        </div>
+        <p>Moments of unity, action and change. Explore our journey through photos.</p>
       </div>
-      <p>Moments of unity, action and change. Explore our journey through photos.</p>
-    </div>
 
-    <!-- Updatable Image Box -->
-    <div class="hero-image-wrapper">
-      <img id="heroImage" src="https://picsum.photos/id/1015/800/400" alt="Hero Banner Image" />
-      <button class="hero-img-upload-btn" onclick="document.getElementById('heroImageInput').click()">
-        <i data-lucide="upload" size="14"></i> Update Image
-      </button>
-      <input type="file" id="heroImageInput" accept="image/*" style="display: none;" onchange="handleHeroImageUpload(event)" />
+      <!-- Updatable Banner Image Box -->
+      <div class="hero-image-box">
+        <!-- Default Hero Image Link (Updatable via code variable, admin button, or localStorage) -->
+        <img id="heroBannerImg" src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1000&q=80" alt="Hero Banner" />
+        
+        <!-- Optional Admin Image Upload Button -->
+        <button class="admin-upload-btn" onclick="document.getElementById('adminHeroUpload').click()">
+          <i data-lucide="upload" size="14"></i> Change Banner
+        </button>
+        <input type="file" id="adminHeroUpload" accept="image/*" style="display:none" onchange="uploadHeroBanner(event)" />
+      </div>
     </div>
   </section>
 
-  <!-- Category Filters -->
+  <!-- Category Filters (Campus Programs Removed) -->
   <div class="filters-wrapper">
     <div class="filters">
       <button class="filter-btn active" onclick="filterCategory('all', event)"><i data-lucide="grid" size="16"></i> All</button>
@@ -454,6 +474,9 @@
   </footer>
 
   <script>
+    // Configurable Hero Banner URL Variable (Update link here directly)
+    let DEFAULT_HERO_IMAGE_URL = "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1000&q=80";
+
     const galleryItems = [
       {
         id: 1,
@@ -523,17 +546,38 @@
 
     let currentOpenCardId = null;
 
-    function handleHeroImageUpload(e) {
+    // Load Banner Image (from LocalStorage if updated by Admin, or fallback to default variable)
+    function initHeroBanner() {
+      const savedBanner = localStorage.getItem('tnsf_hero_banner');
+      const imgElement = document.getElementById('heroBannerImg');
+      if (savedBanner) {
+        imgElement.src = savedBanner;
+      } else {
+        imgElement.src = DEFAULT_HERO_IMAGE_URL;
+      }
+    }
+
+    // Admin Image Upload Handler
+    function uploadHeroBanner(e) {
       const file = e.target.files[0];
       if (file) {
         const reader = new FileReader();
         reader.onload = function(event) {
-          document.getElementById('heroImage').src = event.target.result;
+          const newImgData = event.target.result;
+          document.getElementById('heroBannerImg').src = newImgData;
+          localStorage.setItem('tnsf_hero_banner', newImgData);
         };
         reader.readAsDataURL(file);
       }
     }
 
+    // Function to update banner via URL programmatically
+    function setHeroBannerUrl(url) {
+      document.getElementById('heroBannerImg').src = url;
+      localStorage.setItem('tnsf_hero_banner', url);
+    }
+
+    // Render Gallery
     function renderGallery(filter = 'all') {
       const grid = document.getElementById('galleryGrid');
       grid.innerHTML = '';
@@ -568,6 +612,7 @@
       lucide.createIcons();
     }
 
+    // Toggle Accordion Details with Transition
     function toggleCard(id) {
       const targetCard = document.getElementById(`card-${id}`);
 
@@ -587,6 +632,7 @@
       }
     }
 
+    // Filter Categories
     function filterCategory(category, event) {
       document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
       event.currentTarget.classList.add('active');
@@ -594,6 +640,7 @@
       renderGallery(category);
     }
 
+    // Share Card Image & Text
     async function shareCard(e, id) {
       e.stopPropagation();
       const item = galleryItems.find(i => i.id === id);
@@ -628,12 +675,14 @@
       }
     }
 
+    // Home Action
     function goHome() {
       window.history.pushState({}, document.title, window.location.pathname);
       filterCategory('all', { currentTarget: document.querySelector('.filter-btn') });
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    // Open item directly from shared URL link
     function handleSharedUrl() {
       const urlParams = new URLSearchParams(window.location.search);
       const itemId = urlParams.get('item');
@@ -649,6 +698,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+      initHeroBanner();
       renderGallery('all');
       handleSharedUrl();
     });
