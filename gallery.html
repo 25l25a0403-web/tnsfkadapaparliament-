@@ -33,7 +33,7 @@
       min-height: 100vh;
     }
 
-    /* Header */
+    /* Header Bar */
     header {
       background: var(--primary);
       padding: 10px 24px;
@@ -73,7 +73,7 @@
       color: #333;
     }
 
-    /* Home Button */
+    /* Home Pill Button */
     .home-btn {
       background: #ffffff;
       border: none;
@@ -96,106 +96,111 @@
       background: #fdfdfd;
     }
 
-    /* HERO BANNER - Exact Design Matching Reference */
-    .hero-container {
+    /* Hero Banner exact replication of desktop reference */
+    .hero-banner-outer {
       width: 100%;
-      background: linear-gradient(180deg, #fffcf0 0%, #fff6d9 100%);
-      border-bottom: 1px solid #f3e5b8;
-      position: relative;
+      background: linear-gradient(135deg, #fffdf2 0%, #fff6d6 50%, #fee896 100%);
+      border-bottom: 1px solid #f2e2a0;
       overflow: hidden;
+      position: relative;
     }
 
-    .hero-content {
+    .hero-banner-inner {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 30px 20px 20px;
+      padding: 24px 20px;
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
       position: relative;
-      min-height: 220px;
+      min-height: 200px;
     }
 
     @media (min-width: 768px) {
-      .hero-content {
+      .hero-banner-inner {
         flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        padding: 40px 32px 30px;
-        min-height: 260px;
+        padding: 30px 32px;
+        min-height: 240px;
       }
     }
 
-    .hero-left {
+    .hero-left-content {
+      flex: 1;
       z-index: 2;
-      max-width: 500px;
+      max-width: 520px;
     }
 
-    .gallery-title-wrapper {
+    .hero-header-badge {
       display: flex;
       align-items: center;
       gap: 14px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
-    .camera-icon-badge {
-      background: #000;
-      color: #fff;
+    .hero-camera-icon {
+      background: var(--primary);
       width: 46px;
       height: 46px;
       border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      color: #000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      flex-shrink: 0;
     }
 
-    .gallery-title-wrapper h2 {
-      font-size: 2.4rem;
-      font-weight: 900;
+    .hero-left-content h2 {
+      font-size: 2.3rem;
+      font-weight: 800;
       color: #000;
       letter-spacing: -0.5px;
     }
 
-    .hero-left p {
-      color: #4a4a4a;
+    .hero-left-content p {
+      color: #555555;
       font-size: 0.95rem;
       line-height: 1.5;
-      font-weight: 500;
+      margin-top: 4px;
     }
 
-    /* Hero Banner Dynamic Image Area */
-    .hero-right-img {
-      position: relative;
+    /* Updatable Hero Banner Image Container */
+    .hero-right-image {
       width: 100%;
-      max-width: 420px;
-      height: 200px;
-      margin-top: 20px;
-      align-self: center;
-      z-index: 1;
+      max-width: 480px;
+      height: 180px;
+      margin-top: 16px;
+      position: relative;
       border-radius: 12px;
       overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
     }
 
     @media (min-width: 768px) {
-      .hero-right-img {
+      .hero-right-image {
         margin-top: 0;
-        height: 240px;
-        max-width: 460px;
+        height: 220px;
+        max-width: 450px;
       }
     }
 
-    .hero-right-img img {
+    .hero-right-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center top;
+      object-position: center;
       display: block;
+      border-radius: 12px;
     }
 
-    /* Category Filters */
+    /* Category Filters Wrapper */
     .filters-wrapper {
       max-width: 1200px;
-      margin: 20px auto;
+      margin: 20px auto 20px;
       padding: 0 20px;
       width: 100%;
     }
@@ -211,7 +216,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 9px 18px;
+      padding: 8px 18px;
       background: #f1f3f5;
       border: none;
       border-radius: 20px;
@@ -228,7 +233,7 @@
       color: #000;
     }
 
-    /* Gallery Grid Layout */
+    /* Gallery Grid Container */
     .gallery-container {
       max-width: 1200px;
       margin: 0 auto;
@@ -359,6 +364,7 @@
       width: fit-content;
     }
 
+    /* Expandable Text Transition */
     .card-details {
       max-height: 0;
       overflow: hidden;
@@ -394,7 +400,7 @@
 </head>
 <body>
 
-  <!-- Header -->
+  <!-- Header Navigation -->
   <header>
     <div class="brand">
       <img src="https://via.placeholder.com/45" alt="TNSF Logo" />
@@ -409,12 +415,12 @@
     </button>
   </header>
 
-  <!-- Hero Banner matching reference image exactly -->
-  <div class="hero-container">
-    <section class="hero-content">
-      <div class="hero-left">
-        <div class="gallery-title-wrapper">
-          <div class="camera-icon-badge">
+  <!-- Exact Hero Banner Section matching reference design -->
+  <div class="hero-banner-outer">
+    <section class="hero-banner-inner">
+      <div class="hero-left-content">
+        <div class="hero-header-badge">
+          <div class="hero-camera-icon">
             <i data-lucide="camera" size="22"></i>
           </div>
           <h2>Gallery</h2>
@@ -422,29 +428,28 @@
         <p>Moments of unity, action and change. Explore our journey through photos.</p>
       </div>
 
-      <!-- Updatable Hero Image Link (Loaded from JavaScript) -->
-      <div class="hero-right-img">
-        <img id="heroBannerImg" src="" alt="TNSF Banner" />
+      <!-- Updatable Banner Image Box (Mobile & Desktop Responsive) -->
+      <div class="hero-right-image">
+        <img id="heroBannerImg" src="" alt="TNSF Banner Illustration" />
       </div>
     </section>
   </div>
 
-  <!-- Category Filters -->
+  <!-- Category Filter Buttons -->
   <div class="filters-wrapper">
     <div class="filters">
       <button class="filter-btn active" onclick="filterCategory('all', event)"><i data-lucide="grid" size="16"></i> All</button>
       <button class="filter-btn" onclick="filterCategory('events', event)"><i data-lucide="calendar" size="16"></i> Events</button>
       <button class="filter-btn" onclick="filterCategory('meetings', event)"><i data-lucide="users" size="16"></i> Meetings</button>
       <button class="filter-btn" onclick="filterCategory('activities', event)"><i data-lucide="activity" size="16"></i> Activities</button>
-      <button class="filter-btn" onclick="filterCategory('campus', event)"><i data-lucide="graduation-cap" size="16"></i> Campus Programs</button>
       <button class="filter-btn" onclick="filterCategory('others', event)"><i data-lucide="image" size="16"></i> Others</button>
     </div>
   </div>
 
-  <!-- Cards Grid -->
+  <!-- Main Gallery Grid -->
   <main class="gallery-container">
     <div class="gallery-grid" id="galleryGrid">
-      <!-- Generated Dynamically -->
+      <!-- Cards rendered dynamically -->
     </div>
   </main>
 
@@ -455,7 +460,7 @@
   </footer>
 
   <script>
-    // Updatable Hero Banner Image Link (Can be updated dynamically by admin/API)
+    // Configurable Hero Banner Image URL (Admin updated URL appears here)
     let HERO_BANNER_IMAGE_URL = "https://picsum.photos/id/1015/800/400";
 
     const galleryItems = [
@@ -477,14 +482,6 @@
       },
       {
         id: 3,
-        title: "Campus Visit",
-        category: "campus",
-        date: "02 May 2025",
-        img: "https://picsum.photos/id/1040/600/400",
-        description: "Interactive campus tour interacting with students to resolve educational and infrastructure queries."
-      },
-      {
-        id: 4,
         title: "Blood Donation Camp",
         category: "events",
         date: "28 Apr 2025",
@@ -492,7 +489,7 @@
         description: "Annual blood donation camp organized with active participation from local youth and volunteers."
       },
       {
-        id: 5,
+        id: 4,
         title: "Youth Discussion Meet",
         category: "meetings",
         date: "21 Apr 2025",
@@ -500,7 +497,7 @@
         description: "A platform for young minds to express, discuss, and deliberate on regional progress and initiatives."
       },
       {
-        id: 6,
+        id: 5,
         title: "Community Service",
         category: "activities",
         date: "12 Apr 2025",
@@ -508,7 +505,7 @@
         description: "Cleanliness and service drive undertaken across key public spots to promote environmental civic duty."
       },
       {
-        id: 7,
+        id: 6,
         title: "Group Photo",
         category: "others",
         date: "05 Apr 2025",
@@ -516,7 +513,7 @@
         description: "Commemorative group photograph of core organizational representatives and active members."
       },
       {
-        id: 8,
+        id: 7,
         title: "Felicitation Program",
         category: "events",
         date: "28 Mar 2025",
@@ -524,7 +521,7 @@
         description: "Honoring outstanding achievers and key contributors for their selfless services to society."
       },
       {
-        id: 9,
+        id: 8,
         title: "Candle March",
         category: "activities",
         date: "20 Mar 2025",
