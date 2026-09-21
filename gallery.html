@@ -95,35 +95,32 @@
       background: #fdfdfd;
     }
 
-    /* Full-bleed Hero Banner matching reference image */
-    .hero-container {
-      width: 100%;
+    /* Hero Banner matching original reference layout */
+    .hero {
       position: relative;
-      background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
-      overflow: hidden;
-      border-bottom: 1px solid #eee;
-    }
-
-    .hero-content-wrapper {
-      max-width: 1200px;
+      background: linear-gradient(135deg, #ffffff 0%, #fffbf0 60%, #fff8e1 100%);
+      padding: 30px 24px;
       margin: 0 auto;
-      padding: 30px 20px 0;
+      max-width: 1200px;
+      width: 100%;
       display: flex;
       flex-direction: column;
-      position: relative;
+      gap: 20px;
+      overflow: hidden;
     }
 
     @media (min-width: 768px) {
-      .hero-content-wrapper {
+      .hero {
         flex-direction: row;
-        align-items: flex-end;
+        align-items: center;
         justify-content: space-between;
-        min-height: 320px;
+        padding: 40px 32px;
+        min-height: 240px;
       }
     }
 
-    .hero-text {
-      padding-bottom: 30px;
+    .hero-text-content {
+      flex: 1;
       z-index: 2;
     }
 
@@ -131,81 +128,63 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     .hero-title-icon {
-      background: #000;
-      color: #fff;
-      padding: 10px;
-      border-radius: 12px;
+      background: var(--primary);
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-
-    .hero-text h2 {
-      font-size: 2.8rem;
-      font-weight: 900;
-      color: #111;
-      letter-spacing: -0.5px;
-    }
-
-    .hero-text p {
-      color: var(--text-muted);
-      font-size: 1rem;
-      max-width: 400px;
-      line-height: 1.4;
-      margin-top: 8px;
-    }
-
-    /* Updatable Hero Banner Image Container */
-    .hero-image-box {
-      position: relative;
-      width: 100%;
-      max-width: 550px;
-      height: 280px;
-      align-self: flex-end;
-    }
-
-    .hero-image-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: top center;
-      display: block;
-    }
-
-    /* Admin Hero Image Upload Overlay */
-    .admin-upload-btn {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: rgba(0, 0, 0, 0.75);
-      color: #fff;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 16px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      backdrop-filter: blur(4px);
-      transition: var(--transition);
-      z-index: 10;
-    }
-
-    .admin-upload-btn:hover {
-      background: var(--primary);
       color: #000;
     }
 
-    /* Filters (Campus Programs Removed) */
+    .hero h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #000;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      max-width: 460px;
+      line-height: 1.5;
+      font-size: 0.95rem;
+    }
+
+    /* Hero Banner Image (Updatable Link / Mobile-Desktop Responsive) */
+    .hero-image-container {
+      width: 100%;
+      max-width: 500px;
+      height: 200px;
+      border-radius: 12px;
+      overflow: hidden;
+      z-index: 1;
+      flex-shrink: 0;
+    }
+
+    @media (min-width: 768px) {
+      .hero-image-container {
+        height: 220px;
+        max-width: 480px;
+      }
+    }
+
+    .hero-image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    /* Category Filters (Campus Programs Removed) */
     .filters-wrapper {
       max-width: 1200px;
-      margin: 24px auto 20px;
+      margin: 10px auto 20px;
       padding: 0 20px;
       width: 100%;
     }
@@ -237,7 +216,7 @@
       color: #000;
     }
 
-    /* Grid Layout */
+    /* Gallery Grid Layout */
     .gallery-container {
       max-width: 1200px;
       margin: 0 auto;
@@ -248,12 +227,12 @@
 
     .gallery-grid {
       display: grid;
-      /* Mobile: 1 card per row */
+      /* Mobile responsive: 1 card per row */
       grid-template-columns: 1fr;
       gap: 24px;
     }
 
-    /* Desktop: 3 or 4 cards per row */
+    /* Desktop responsive: 3 or 4 cards per row */
     @media (min-width: 768px) {
       .gallery-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -266,7 +245,7 @@
       }
     }
 
-    /* Cards Styling & Animated Transitions */
+    /* Card Styling & Animated Transitions */
     .card {
       background: var(--card-bg);
       border-radius: var(--border-radius);
@@ -276,7 +255,7 @@
       display: flex;
       flex-direction: column;
       position: relative;
-      border: 1px solid #eee;
+      border: 2px solid transparent;
     }
 
     .card:hover {
@@ -370,7 +349,7 @@
       width: fit-content;
     }
 
-    /* Accordion Expandable Details Transition */
+    /* Expandable Animated Text Transition */
     .card-details {
       max-height: 0;
       overflow: hidden;
@@ -415,37 +394,28 @@
         <span>KADAPA PARLIAMENT</span>
       </div>
     </div>
-    <!-- Home button with home icon in right side -->
+    <!-- Home Button -->
     <button class="home-btn" title="Home" onclick="goHome()">
       <i data-lucide="home" size="16"></i>
       <span>Home</span>
     </button>
   </header>
 
-  <!-- Hero Section (Matches Reference Image) -->
-  <section class="hero-container">
-    <div class="hero-content-wrapper">
-      <div class="hero-text">
-        <div class="hero-title">
-          <div class="hero-title-icon">
-            <i data-lucide="camera" size="20"></i>
-          </div>
-          <h2>Gallery</h2>
+  <!-- Hero Banner matching reference image -->
+  <section class="hero">
+    <div class="hero-text-content">
+      <div class="hero-title">
+        <div class="hero-title-icon">
+          <i data-lucide="camera" size="22"></i>
         </div>
-        <p>Moments of unity, action and change. Explore our journey through photos.</p>
+        <h2>Gallery</h2>
       </div>
+      <p>Moments of unity, action and change. Explore our journey through photos.</p>
+    </div>
 
-      <!-- Updatable Banner Image Box -->
-      <div class="hero-image-box">
-        <!-- Default Hero Image Link (Updatable via code variable, admin button, or localStorage) -->
-        <img id="heroBannerImg" src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1000&q=80" alt="Hero Banner" />
-        
-        <!-- Optional Admin Image Upload Button -->
-        <button class="admin-upload-btn" onclick="document.getElementById('adminHeroUpload').click()">
-          <i data-lucide="upload" size="14"></i> Change Banner
-        </button>
-        <input type="file" id="adminHeroUpload" accept="image/*" style="display:none" onchange="uploadHeroBanner(event)" />
-      </div>
+    <!-- Responsive Hero Banner Image (Updatable Image Link) -->
+    <div class="hero-image-container">
+      <img id="heroBannerImg" src="" alt="Gallery Hero Banner" />
     </div>
   </section>
 
@@ -474,8 +444,8 @@
   </footer>
 
   <script>
-    // Configurable Hero Banner URL Variable (Update link here directly)
-    let DEFAULT_HERO_IMAGE_URL = "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1000&q=80";
+    // Configurable Hero Banner Image URL (Admin updated URL appears here)
+    let HERO_BANNER_IMAGE_URL = "https://picsum.photos/id/1015/800/400";
 
     const galleryItems = [
       {
@@ -546,38 +516,20 @@
 
     let currentOpenCardId = null;
 
-    // Load Banner Image (from LocalStorage if updated by Admin, or fallback to default variable)
-    function initHeroBanner() {
-      const savedBanner = localStorage.getItem('tnsf_hero_banner');
-      const imgElement = document.getElementById('heroBannerImg');
-      if (savedBanner) {
-        imgElement.src = savedBanner;
-      } else {
-        imgElement.src = DEFAULT_HERO_IMAGE_URL;
+    // Load Banner Image Link
+    function loadHeroBanner() {
+      const bannerImgEl = document.getElementById('heroBannerImg');
+      if (bannerImgEl) {
+        bannerImgEl.src = HERO_BANNER_IMAGE_URL;
       }
     }
 
-    // Admin Image Upload Handler
-    function uploadHeroBanner(e) {
-      const file = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(event) {
-          const newImgData = event.target.result;
-          document.getElementById('heroBannerImg').src = newImgData;
-          localStorage.setItem('tnsf_hero_banner', newImgData);
-        };
-        reader.readAsDataURL(file);
-      }
+    // Function to dynamically update Hero Banner image from backend/API if needed
+    function updateHeroBannerUrl(newUrl) {
+      HERO_BANNER_IMAGE_URL = newUrl;
+      loadHeroBanner();
     }
 
-    // Function to update banner via URL programmatically
-    function setHeroBannerUrl(url) {
-      document.getElementById('heroBannerImg').src = url;
-      localStorage.setItem('tnsf_hero_banner', url);
-    }
-
-    // Render Gallery
     function renderGallery(filter = 'all') {
       const grid = document.getElementById('galleryGrid');
       grid.innerHTML = '';
@@ -612,7 +564,6 @@
       lucide.createIcons();
     }
 
-    // Toggle Accordion Details with Transition
     function toggleCard(id) {
       const targetCard = document.getElementById(`card-${id}`);
 
@@ -632,7 +583,6 @@
       }
     }
 
-    // Filter Categories
     function filterCategory(category, event) {
       document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
       event.currentTarget.classList.add('active');
@@ -640,7 +590,6 @@
       renderGallery(category);
     }
 
-    // Share Card Image & Text
     async function shareCard(e, id) {
       e.stopPropagation();
       const item = galleryItems.find(i => i.id === id);
@@ -675,14 +624,12 @@
       }
     }
 
-    // Home Action
     function goHome() {
       window.history.pushState({}, document.title, window.location.pathname);
       filterCategory('all', { currentTarget: document.querySelector('.filter-btn') });
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Open item directly from shared URL link
     function handleSharedUrl() {
       const urlParams = new URLSearchParams(window.location.search);
       const itemId = urlParams.get('item');
@@ -698,7 +645,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      initHeroBanner();
+      loadHeroBanner();
       renderGallery('all');
       handleSharedUrl();
     });
