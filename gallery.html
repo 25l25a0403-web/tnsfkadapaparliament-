@@ -72,12 +72,7 @@
       color: #333;
     }
 
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
+    /* Home Button on the Right Side of Header */
     .icon-btn {
       background: #fff;
       border: none;
@@ -90,18 +85,20 @@
       cursor: pointer;
       transition: var(--transition);
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      color: #000;
     }
 
     .icon-btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      background: #f8f9fa;
     }
 
     /* Hero Banner */
     .hero {
       position: relative;
       background: linear-gradient(135deg, #fff 0%, #fff8e1 100%);
-      padding: 40px 20px;
+      padding: 30px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -124,7 +121,7 @@
     }
 
     .hero h2 {
-      font-size: 2.2rem;
+      font-size: 2rem;
       font-weight: 800;
     }
 
@@ -133,7 +130,7 @@
       max-width: 450px;
     }
 
-    /* Category Filters */
+    /* Category Filters (Campus Programs Removed) */
     .filters-wrapper {
       max-width: 1200px;
       margin: 0 auto 20px;
@@ -168,7 +165,7 @@
       color: #000;
     }
 
-    /* Grid Layout */
+    /* Gallery Grid Layout */
     .gallery-container {
       max-width: 1200px;
       margin: 0 auto;
@@ -179,12 +176,12 @@
 
     .gallery-grid {
       display: grid;
-      /* Mobile default: 1 card per row */
-      grid-template-columns: 1fr; 
+      /* Mobile responsive: 1 card per row */
+      grid-template-columns: 1fr;
       gap: 24px;
     }
 
-    /* Desktop Responsive: 3 or 4 cards per row */
+    /* Desktop responsive: 3 or 4 cards per row */
     @media (min-width: 768px) {
       .gallery-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -197,7 +194,7 @@
       }
     }
 
-    /* Card Component */
+    /* Card Styling & Animated Transitions */
     .card {
       background: var(--card-bg);
       border-radius: var(--border-radius);
@@ -207,11 +204,17 @@
       display: flex;
       flex-direction: column;
       position: relative;
+      border: 2px solid transparent;
     }
 
     .card:hover {
       transform: translateY(-5px);
       box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+
+    .card.highlighted {
+      border-color: var(--primary);
+      box-shadow: 0 0 20px rgba(254, 193, 7, 0.5);
     }
 
     .card-img-wrapper {
@@ -236,7 +239,7 @@
       position: absolute;
       bottom: 12px;
       left: 12px;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(4px);
       padding: 4px 10px;
       border-radius: 12px;
@@ -251,10 +254,10 @@
       position: absolute;
       top: 12px;
       right: 12px;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.95);
       border: none;
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -262,6 +265,7 @@
       cursor: pointer;
       transition: var(--transition);
       z-index: 2;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     }
 
     .share-btn:hover {
@@ -293,96 +297,27 @@
       width: fit-content;
     }
 
-    /* Expandable Accordion Text Transition */
+    /* Expandable Animated Text Matter */
     .card-details {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.4s ease-out, padding 0.3s ease;
+      transition: max-height 0.4s cubic-bezier(0, 1, 0, 1), padding 0.3s ease;
       background: #fffbe6;
       border-top: 0px solid var(--primary);
       padding: 0 16px;
     }
 
     .card.active .card-details {
-      max-height: 200px; /* Adjust according to text length */
-      padding: 12px 16px;
+      max-height: 300px;
+      padding: 14px 16px;
       border-top-width: 2px;
+      transition: max-height 0.4s ease-in-out, padding 0.3s ease;
     }
 
     .card-details p {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       color: #333;
       line-height: 1.5;
-    }
-
-    /* Share Modal Options */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: var(--transition);
-      z-index: 1000;
-    }
-
-    .modal-overlay.active {
-      opacity: 1;
-      pointer-events: all;
-    }
-
-    .modal-content {
-      background: white;
-      padding: 24px;
-      border-radius: 16px;
-      width: 90%;
-      max-width: 400px;
-      transform: translateY(20px);
-      transition: var(--transition);
-      text-align: center;
-    }
-
-    .modal-overlay.active .modal-content {
-      transform: translateY(0);
-    }
-
-    .modal-preview {
-      width: 100%;
-      height: 150px;
-      border-radius: 8px;
-      object-fit: cover;
-      margin: 12px 0;
-    }
-
-    .share-options {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      margin-top: 16px;
-    }
-
-    .share-option-btn {
-      border: none;
-      background: #f1f3f5;
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .share-option-btn:hover {
-      background: var(--primary);
-      transform: translateY(-3px);
     }
 
     /* Footer */
@@ -398,28 +333,23 @@
 </head>
 <body>
 
-  <!-- Header -->
+  <!-- Header without menu button -->
   <header>
     <div class="brand">
-      <img src="https://via.placeholder.com/45" alt="Logo" />
+      <img src="https://via.placeholder.com/45" alt="TNSF Logo" />
       <div class="brand-text">
         <h1>TNSF</h1>
         <span>KADAPA PARLIAMENT</span>
       </div>
     </div>
-    <div class="header-actions">
-      <!-- Home Button with Home Icon on the Right Side of Header -->
-      <button class="icon-btn" title="Home" onclick="window.location.href='#'">
-        <i data-lucide="home"></i>
-      </button>
-      <button class="icon-btn" title="Menu">
-        <i data-lucide="menu"></i>
-      </button>
-    </div>
+    <!-- Home button with home icon in right side of header -->
+    <button class="icon-btn" title="Home" onclick="goHome()">
+      <i data-lucide="home"></i>
+    </button>
   </header>
 
   <!-- Hero Section -->
-  <section class="hero">
+  section class="hero">
     <div>
       <div class="hero-title">
         <i data-lucide="camera"></i>
@@ -432,18 +362,18 @@
   <!-- Category Filters (Campus Programs Removed) -->
   <div class="filters-wrapper">
     <div class="filters">
-      <button class="filter-btn active" onclick="filterCategory('all')"><i data-lucide="grid" size="16"></i> All</button>
-      <button class="filter-btn" onclick="filterCategory('events')"><i data-lucide="calendar" size="16"></i> Events</button>
-      <button class="filter-btn" onclick="filterCategory('meetings')"><i data-lucide="users" size="16"></i> Meetings</button>
-      <button class="filter-btn" onclick="filterCategory('activities')"><i data-lucide="activity" size="16"></i> Activities</button>
-      <button class="filter-btn" onclick="filterCategory('others')"><i data-lucide="image" size="16"></i> Others</button>
+      <button class="filter-btn active" onclick="filterCategory('all', event)"><i data-lucide="grid" size="16"></i> All</button>
+      <button class="filter-btn" onclick="filterCategory('events', event)"><i data-lucide="calendar" size="16"></i> Events</button>
+      <button class="filter-btn" onclick="filterCategory('meetings', event)"><i data-lucide="users" size="16"></i> Meetings</button>
+      <button class="filter-btn" onclick="filterCategory('activities', event)"><i data-lucide="activity" size="16"></i> Activities</button>
+      <button class="filter-btn" onclick="filterCategory('others', event)"><i data-lucide="image" size="16"></i> Others</button>
     </div>
   </div>
 
-  <!-- Cards Gallery Grid -->
+  <!-- Responsive Cards Grid -->
   <main class="gallery-container">
     <div class="gallery-grid" id="galleryGrid">
-      <!-- Cards rendered via JavaScript -->
+      <!-- Generated Dynamically -->
     </div>
   </main>
 
@@ -453,30 +383,15 @@
     <em>Together We Can Build a Brighter Future</em>
   </footer>
 
-  <!-- Share Modal -->
-  <div class="modal-overlay" id="shareModal" onclick="closeModal(event)">
-    <div class="modal-content" onclick="event.stopPropagation()">
-      <h3 id="modalTitle">Share Item</h3>
-      <img id="modalImg" class="modal-preview" src="" alt="Share Preview" />
-      <p id="modalText" style="font-size: 0.85rem; color: #555;"></p>
-      
-      <div class="share-options">
-        <button class="share-option-btn" onclick="copyShareLink()" title="Copy Link"><i data-lucide="link"></i></button>
-        <button class="share-option-btn" onclick="shareToWhatsApp()" title="Share to WhatsApp"><i data-lucide="message-circle"></i></button>
-        <button class="share-option-btn" onclick="shareNative()" title="More Options"><i data-lucide="share-2"></i></button>
-      </div>
-    </div>
-  </div>
-
   <script>
-    // Data definition excluding 'Campus Programs'
+    // Gallery Data Exclude Campus Programs
     const galleryItems = [
       {
         id: 1,
         title: "Student Awareness Rally",
         category: "events",
         date: "15 May 2025",
-        img: "https://picsum.photos/400/300?random=1",
+        img: "https://picsum.photos/id/1018/600/400",
         description: "A large rally organized to raise awareness among students regarding rights and educational opportunities."
       },
       {
@@ -484,7 +399,7 @@
         title: "Career Guidance Session",
         category: "meetings",
         date: "10 May 2025",
-        img: "https://picsum.photos/400/300?random=2",
+        img: "https://picsum.photos/id/1025/600/400",
         description: "Interactive session with industry experts helping young aspirants plan their future career paths."
       },
       {
@@ -492,7 +407,7 @@
         title: "Blood Donation Camp",
         category: "events",
         date: "28 Apr 2025",
-        img: "https://picsum.photos/400/300?random=3",
+        img: "https://picsum.photos/id/1050/600/400",
         description: "Annual blood donation camp organized with active participation from local youth and volunteers."
       },
       {
@@ -500,7 +415,7 @@
         title: "Youth Discussion Meet",
         category: "meetings",
         date: "21 Apr 2025",
-        img: "https://picsum.photos/400/300?random=4",
+        img: "https://picsum.photos/id/1062/600/400",
         description: "A platform for young minds to express, discuss, and deliberate on regional progress and initiatives."
       },
       {
@@ -508,7 +423,7 @@
         title: "Community Service",
         category: "activities",
         date: "12 Apr 2025",
-        img: "https://picsum.photos/400/300?random=5",
+        img: "https://picsum.photos/id/1074/600/400",
         description: "Cleanliness and service drive undertaken across key public spots to promote environmental civic duty."
       },
       {
@@ -516,7 +431,7 @@
         title: "Group Photo",
         category: "others",
         date: "05 Apr 2025",
-        img: "https://picsum.photos/400/300?random=6",
+        img: "https://picsum.photos/id/1084/600/400",
         description: "Commemorative group photograph of core organizational representatives and active members."
       },
       {
@@ -524,7 +439,7 @@
         title: "Felicitation Program",
         category: "events",
         date: "28 Mar 2025",
-        img: "https://picsum.photos/400/300?random=7",
+        img: "https://picsum.photos/id/1069/600/400",
         description: "Honoring outstanding achievers and key contributors for their selfless services to society."
       },
       {
@@ -532,15 +447,14 @@
         title: "Candle March",
         category: "activities",
         date: "20 Mar 2025",
-        img: "https://picsum.photos/400/300?random=8",
+        img: "https://picsum.photos/id/1051/600/400",
         description: "Peaceful evening candle march organized to stand in solidarity for community social causes."
       }
     ];
 
     let currentOpenCardId = null;
-    let currentShareItem = null;
 
-    // Render Cards Grid
+    // Render Gallery Cards
     function renderGallery(filter = 'all') {
       const grid = document.getElementById('galleryGrid');
       grid.innerHTML = '';
@@ -554,10 +468,10 @@
         card.className = 'card';
         card.id = `card-${item.id}`;
         card.innerHTML = `
-          <div class="card-img-wrapper">
+          <div class="card-img-wrapper" onclick="toggleCard(${item.id})">
             <img src="${item.img}" alt="${item.title}" loading="lazy" />
             <div class="date-badge"><i data-lucide="calendar" size="12"></i> ${item.date}</div>
-            <button class="share-btn" title="Share" onclick="openShareModal(event, ${item.id})">
+            <button class="share-btn" title="Share Image & Text" onclick="shareCard(event, ${item.id})">
               <i data-lucide="share-2" size="16"></i>
             </button>
           </div>
@@ -575,11 +489,11 @@
       lucide.createIcons();
     }
 
-    // Single-card Accordion Toggle Transition
+    // Toggle Card Matter with Animated Transition
     function toggleCard(id) {
       const targetCard = document.getElementById(`card-${id}`);
 
-      // Close previous open card if it is different
+      // Close previous open card if it exists and is different
       if (currentOpenCardId !== null && currentOpenCardId !== id) {
         const prevCard = document.getElementById(`card-${currentOpenCardId}`);
         if (prevCard) {
@@ -587,7 +501,7 @@
         }
       }
 
-      // Toggle current card
+      // Toggle current card matter
       if (targetCard.classList.contains('active')) {
         targetCard.classList.remove('active');
         currentOpenCardId = null;
@@ -597,63 +511,84 @@
       }
     }
 
-    // Category Filter Handler
-    function filterCategory(category) {
+    // Category Filter Function
+    function filterCategory(category, event) {
       document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
       event.currentTarget.classList.add('active');
       currentOpenCardId = null;
       renderGallery(category);
     }
 
-    // Share Modal Functionality
-    function openShareModal(e, id) {
-      e.stopPropagation(); // Prevent card accordion click
+    // Direct Share Image with Text Functionality
+    async function shareCard(e, id) {
+      e.stopPropagation(); // Avoid triggering card accordion toggle
       const item = galleryItems.find(i => i.id === id);
-      currentShareItem = item;
+      if (!item) return;
 
-      document.getElementById('modalTitle').innerText = item.title;
-      document.getElementById('modalImg').src = item.img;
-      document.getElementById('modalText').innerText = item.description;
+      // Construct direct shareable URL pointing specifically to this card image
+      const shareUrl = `${window.location.origin}${window.location.pathname}?item=${item.id}`;
 
-      document.getElementById('shareModal').classList.add('active');
-    }
+      try {
+        // Fetch image to share as an actual File object
+        const response = await fetch(item.img);
+        const blob = await response.blob();
+        const file = new File([blob], `${item.title.replace(/\s+/g, '_')}.jpg`, { type: 'image/jpeg' });
 
-    function closeModal(e) {
-      document.getElementById('shareModal').classList.remove('active');
-    }
-
-    function copyShareLink() {
-      if (currentShareItem) {
-        const textToCopy = `${currentShareItem.title} - ${currentShareItem.description} ${window.location.href}`;
-        navigator.clipboard.writeText(textToCopy);
-        alert('Link and card details copied to clipboard!');
+        // Use Web Share API if supported
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          await navigator.share({
+            title: item.title,
+            text: `${item.title}\n${item.description}\n\nView details:`,
+            url: shareUrl,
+            files: [file]
+          });
+        } else if (navigator.share) {
+          // Fallback Web Share for browsers that share URL & Text
+          await navigator.share({
+            title: item.title,
+            text: `${item.title}\n${item.description}`,
+            url: shareUrl
+          });
+        } else {
+          // Fallback copy link to clipboard
+          await navigator.clipboard.writeText(`${item.title}\n${item.description}\n${shareUrl}`);
+          alert('Share link and details copied to clipboard!');
+        }
+      } catch (err) {
+        console.error('Error sharing:', err);
+        // Fallback option in case fetch fails
+        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(item.title + ' - ' + item.description + ' ' + shareUrl)}`, '_blank');
       }
     }
 
-    function shareToWhatsApp() {
-      if (currentShareItem) {
-        const text = encodeURIComponent(`*${currentShareItem.title}*\n${currentShareItem.description}\n\nImage: ${currentShareItem.img}`);
-        window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+    // Home Icon Action
+    function goHome() {
+      // Clear URL parameters and reset gallery
+      window.history.pushState({}, document.title, window.location.pathname);
+      filterCategory('all', { currentTarget: document.querySelector('.filter-btn') });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Handle incoming shared links targeting a specific image card
+    function handleSharedUrl() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const itemId = urlParams.get('item');
+
+      if (itemId) {
+        const card = document.getElementById(`card-${itemId}`);
+        if (card) {
+          card.classList.add('highlighted');
+          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          toggleCard(parseInt(itemId));
+        }
       }
     }
 
-    function shareNative() {
-      if (navigator.share && currentShareItem) {
-        navigator.share({
-          title: currentShareItem.title,
-          text: currentShareItem.description,
-          url: window.location.href
-        }).catch(() => {});
-      } else {
-        copyShareLink();
-      }
-    }
-
-    // Initial Load
+    // Initial Execution
     document.addEventListener('DOMContentLoaded', () => {
       renderGallery('all');
+      handleSharedUrl();
     });
   </script>
 </body>
-  </html>
-  
+</html>
