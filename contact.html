@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TNSF KADAPA PARLIAMENT - Contact Us</title>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Caveat:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================
+       VARIABLES & UPDATABLE ASSETS
+       ========================================================== */
+    :root {
+      --primary-yellow: #FFC800;
+      --light-yellow-bg: #FFFDF0;
+      --card-bg: #FFFFFF;
+      --text-dark: #1E1E1E;
+      --text-muted: #666666;
+      --border-color: #E5E5E5;
+      --radius-lg: 16px;
+      --radius-md: 10px;
+
+      /* Easily update these image URLs anytime */
+      --logo-url: url('https://via.placeholder.com/80/FFC800/000000?text=TNSF'); 
+      --hero-image-url: url('https://via.placeholder.com/400x300/FFFDF0/FFC800?text=Hero+Graphic');
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: var(--light-yellow-bg);
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ==========================================================
+       HEADER / NAVBAR (FULL WIDTH)
+       ========================================================== */
+    header {
+      width: 100%;
+      background-color: var(--primary-yellow);
+      padding: 12px 5%;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand img {
+      width: 65px;
+      height: 65px;
+      object-fit: contain;
+      border-radius: 50%;
+      background: #fff;
+    }
+
+    .brand-text h1 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #000;
+      line-height: 1.1;
+    }
+
+    .brand-text span {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    /* Replaced Menu button with Home Button */
+    .home-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #000;
+      color: #FFF;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    .home-btn:hover {
+      background-color: #333;
+      transform: translateY(-2px);
+    }
+
+    /* ==========================================================
+       FULL WIDTH HERO BANNER SECTION
+       ========================================================== */
+    .hero-banner {
+      width: 100%;
+      background: linear-gradient(180deg, var(--primary-yellow) 0%, var(--light-yellow-bg) 100%);
+      padding: 40px 5% 20px;
+    }
+
+    .hero-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .hero-text {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .hero-text h3 {
+      font-family: 'Caveat', cursive;
+      font-size: 2.2rem;
+      color: #333;
+      margin-bottom: -10px;
+    }
+
+    .hero-text h2 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      color: var(--primary-yellow);
+      -webkit-text-stroke: 1.5px #000;
+      text-shadow: 2px 2px 0px #000;
+      margin-bottom: 10px;
+    }
+
+    .hero-text p {
+      font-size: 1rem;
+      color: var(--text-dark);
+      font-weight: 500;
+      max-width: 350px;
+      line-height: 1.4;
+    }
+
+    .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      min-width: 280px;
+    }
+
+    .hero-image img {
+      max-width: 100%;
+      height: auto;
+      max-height: 220px;
+      object-fit: contain;
+    }
+
+    /* ==========================================================
+       MAIN CONTENT CONTAINER
+       ========================================================== */
+    main {
+      max-width: 1100px;
+      width: 90%;
+      margin: 0 auto 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* ==========================================================
+       CONTACT CARDS GRID
+       ========================================================== */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+      border: 1px solid #F0F0F0;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    .icon-box {
+      width: 48px;
+      height: 48px;
+      background-color: var(--primary-yellow);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: #000;
+      flex-shrink: 0;
+    }
+
+    .card-content h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--text-dark);
+    }
+
+    .card-content p, .card-content a {
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      font-weight: 500;
+      word-break: break-word;
+    }
+
+    .card-content small {
+      display: block;
+      margin-top: 4px;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    /* Social Icons inside Card */
+    .social-links {
+      display: flex;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .social-links a {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFF;
+      font-size: 1.1rem;
+      transition: opacity 0.2s;
+    }
+
+    .social-links a:hover {
+      opacity: 0.85;
+    }
+
+    .btn-instagram { background: #E1306C; }
+    .btn-facebook  { background: #1877F2; }
+    .btn-youtube   { background: #FF0000; }
+
+    /* ==========================================================
+       CONTACT FORM SECTION
+       ========================================================== */
+    .form-card {
+      background-color: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 30px 24px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+      border: 1px solid #F0F0F0;
+    }
+
+    .form-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .form-header h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .form-header p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 16px;
+    }
+
+    .input-group i {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .input-group.textarea-group i {
+      top: 20px;
+    }
+
+    .input-group input,
+    .input-group textarea {
+      width: 100%;
+      padding: 12px 16px 12px 48px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+      background-color: #FAFAFA;
+    }
+
+    .input-group input:focus,
+    .input-group textarea:focus {
+      border-color: var(--primary-yellow);
+      background-color: #FFF;
+    }
+
+    .input-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background-color: var(--primary-yellow);
+      border: none;
+      padding: 14px;
+      border-radius: var(--radius-md);
+      font-size: 1rem;
+      font-weight: 700;
+      color: #000;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: background-color 0.2s ease;
+    }
+
+    .submit-btn:hover {
+      background-color: #e5b400;
+    }
+
+    /* Success Message Box */
+    .success-message {
+      display: none;
+      background-color: #D4EDDA;
+      color: #155724;
+      border: 1px solid #C3E6CB;
+      padding: 14px;
+      border-radius: var(--radius-md);
+      text-align: center;
+      margin-top: 16px;
+      font-weight: 600;
+    }
+
+    /* ==========================================================
+       FOOTER
+       ========================================================== */
+    footer {
+      margin-top: auto;
+      background-color: var(--primary-yellow);
+      text-align: center;
+      padding: 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      border-top-left-radius: 30px;
+      border-top-right-radius: 30px;
+    }
+
+    /* ==========================================================
+       RESPONSIVE DESIGN (MOBILE ADAPTATION)
+       ========================================================== */
+    @media (max-width: 600px) {
+      .brand-text h1 { font-size: 1.2rem; }
+      .brand-text span { font-size: 0.9rem; }
+      .hero-text h2 { font-size: 2.5rem; }
+      .hero-text h3 { font-size: 1.8rem; }
+      .hero-container { text-align: center; }
+      .hero-text p { margin: 0 auto; }
+      .card { flex-direction: row; }
+      .form-card { padding: 20px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="nav-container">
+      <div class="brand">
+        <!-- Updatable Logo Image -->
+        <img id="app-logo" src="https://via.placeholder.com/80/FFC800/000000?text=TNSF" alt="TNSF Logo">
+        <div class="brand-text">
+          <h1>TNSF</h1>
+          <span>KADAPA PARLIAMENT</span>
+        </div>
+      </div>
+      
+      <!-- Home Button replacing Menu Button -->
+      <a href="#" class="home-btn">
+        <i class="fa-solid fa-house"></i> Home
+      </a>
+    </div>
+  </header>
+
+  <!-- FULL WIDTH HERO BANNER -->
+  <section class="hero-banner">
+    <div class="hero-container">
+      <div class="hero-text">
+        <h3>Get in Touch</h3>
+        <h2>Contact Us</h2>
+        <p>We are here to help you. Reach out to us anytime!</p>
+      </div>
+      <div class="hero-image">
+        <!-- Updatable Hero Banner Image -->
+        <img id="hero-img" src="https://via.placeholder.com/400x250/FFFDF0/FFC800?text=Contact+Graphic" alt="Contact Illustration">
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTACT CONTENT -->
+  <main>
+    <!-- Contact Info Cards -->
+    <div class="contact-grid">
+      
+      <!-- Phone Card -->
+      <div class="card" onclick="window.location.href='tel:+919346812345';">
+        <div class="icon-box">
+          <i class="fa-solid fa-phone"></i>
+        </div>
+        <div class="card-content">
+          <h4>Phone</h4>
+          <p>+91 93468 12345</p>
+          <small>Mon - Sat | 9:00 AM - 6:00 PM</small>
+        </div>
+      </div>
+
+      <!-- Email Card -->
+      <div class="card" onclick="window.location.href='mailto:tnsf.kadapa@gmail.com';">
+        <div class="icon-box">
+          <i class="fa-solid fa-envelope"></i>
+        </div>
+        <div class="card-content">
+          <h4>Email</h4>
+          <p>tnsf.kadapa@gmail.com</p>
+          <small>We reply within 24 hours</small>
+        </div>
+      </div>
+
+      <!-- Address Card -->
+      <div class="card" onclick="window.open('https://maps.google.com/?q=TNSF+Kadapa+Parliament,+Kadapa,+Andhra+Pradesh+-+516001', '_blank');">
+        <div class="icon-box">
+          <i class="fa-solid fa-location-dot"></i>
+        </div>
+        <div class="card-content">
+          <h4>Address</h4>
+          <p>TNSF Kadapa Parliament<br>Kadapa, Andhra Pradesh - 516001</p>
+        </div>
+      </div>
+
+      <!-- Social Media Card -->
+      <div class="card" style="cursor: default;">
+        <div class="icon-box">
+          <i class="fa-solid fa-users"></i>
+        </div>
+        <div class="card-content">
+          <h4>Follow Us</h4>
+          <small>Stay connected with us on social media</small>
+          <div class="social-links">
+            <!-- Redirectable Social Links -->
+            <a href="https://instagram.com" target="_blank" class="btn-instagram" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" class="btn-facebook" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://youtube.com" target="_blank" class="btn-youtube" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Contact Form -->
+    <div class="form-card">
+      <div class="form-header">
+        <div class="icon-box">
+          <i class="fa-solid fa-paper-plane"></i>
+        </div>
+        <div>
+          <h3>Send Us a Message</h3>
+          <p>Have a question, suggestion or just want to say hello? We'd love to hear from you!</p>
+        </div>
+      </div>
+
+      <form id="contactForm" onsubmit="handleFormSubmit(event)">
+        <div class="input-group">
+          <i class="fa-solid fa-user"></i>
+          <input type="text" id="name" placeholder="Your Name *" required>
+        </div>
+
+        <div class="input-group">
+          <i class="fa-solid fa-envelope"></i>
+          <input type="email" id="email" placeholder="Your Email (Optional)">
+        </div>
+
+        <div class="input-group">
+          <i class="fa-solid fa-phone"></i>
+          <input type="tel" id="mobile" placeholder="Your Mobile Number (Optional)">
+        </div>
+
+        <div class="input-group textarea-group">
+          <i class="fa-solid fa-comment"></i>
+          <textarea id="message" placeholder="Your Message *" required></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          <i class="fa-solid fa-paper-plane"></i> Send Message
+        </button>
+
+        <div id="successMessage" class="success-message">
+          <i class="fa-solid fa-circle-check"></i> Thank you! Your message has been sent successfully.
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    Copy 2026 TNSF KADAPA PARLIAMENT all rights reserved
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    // Easy configuration to update image URLs dynamically
+    const config = {
+      logoUrl: "https://via.placeholder.com/80/FFC800/000000?text=TNSF",
+      heroBannerUrl: "https://via.placeholder.com/400x250/FFFDF0/FFC800?text=Contact+Graphic"
+    };
+
+    // Apply configuration image links
+    document.getElementById('app-logo').src = config.logoUrl;
+    document.getElementById('hero-img').src = config.heroBannerUrl;
+
+    // Handle Form Submit and Show Success Message
+    function handleFormSubmit(event) {
+      event.preventDefault(); // Prevent page reload
+
+      const successBox = document.getElementById('successMessage');
+      successBox.style.display = 'block';
+
+      // Reset the form
+      document.getElementById('contactForm').reset();
+
+      // Hide success message automatically after 5 seconds
+      setTimeout(() => {
+        successBox.style.display = 'none';
+      }, 5000);
+    }
+  </script>
+</body>
+</html>
