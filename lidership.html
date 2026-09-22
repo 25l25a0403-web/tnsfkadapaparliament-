@@ -71,18 +71,27 @@
             letter-spacing: 1px;
         }
 
-        .menu-btn {
+        /* Home Button in place of Menu Button */
+        .home-btn {
             background: var(--dark-navy);
             color: white;
             border: none;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            font-size: 1.2rem;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .home-btn:hover {
+            background: #1e293b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
         /* --- HERO BANNER (Full Width) --- */
@@ -94,13 +103,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 280px;
+            min-height: 250px;
         }
 
         .hero-banner img {
             width: 100%;
             height: auto;
-            max-height: 400px;
+            max-height: 450px;
             object-fit: cover;
             display: block;
         }
@@ -155,10 +164,10 @@
             font-size: 0.95rem;
         }
 
-        /* --- LEADERSHIP GRID --- */
+        /* --- LEADERSHIP GRID (3 Per Row Desktop) --- */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 cards per row on Desktop */
+            grid-template-columns: repeat(3, 1fr); /* Default Desktop: 3 Cards per row */
             gap: 25px;
         }
 
@@ -474,9 +483,10 @@
             }
         }
 
+        /* Mobile View Rules */
         @media (max-width: 600px) {
             .cards-grid {
-                grid-template-columns: 1fr; /* 1 card per row on mobile */
+                grid-template-columns: 1fr !important; /* 1 card per row on mobile */
             }
 
             .modal-container {
@@ -493,10 +503,15 @@
             }
 
             .header-title h1 {
-                font-size: 1.3rem;
+                font-size: 1.2rem;
             }
 
             .header-title p {
+                font-size: 0.75rem;
+            }
+
+            .home-btn {
+                padding: 8px 14px;
                 font-size: 0.85rem;
             }
 
@@ -517,7 +532,12 @@
                 <p>KADAPA PARLIAMENT</p>
             </div>
         </div>
-        <button class="menu-btn"><i class="fa-solid fa-bars"></i></button>
+        
+        <!-- Home Button (Replaced Menu Button) -->
+        <a href="#" class="home-btn">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
     </header>
 
     <!-- HERO BANNER (FULL WIDTH) -->
@@ -644,8 +664,8 @@
             // Update your Logo Image Link here
             LOGO_URL: "https://via.placeholder.com/120x120/FFCB05/0F172A?text=TNSF+LOGO",
             
-            // Update your Full-Width Hero Banner Image Link here (Leave "" for text banner)
-            HERO_BANNER_URL: "", 
+            // Update your Full-Width Hero Banner Image Link here (Replace the link below with your image link)
+            HERO_BANNER_URL: "https://via.placeholder.com/1200x400/FFCB05/0F172A?text=TNSF+KADAPA+PARLIAMENT+HERO+BANNER", 
 
             // Global Social Links (Used for redirects)
             SOCIAL_LINKS: {
@@ -782,7 +802,7 @@
             }
         ];
 
-        // Dynamic Data Mapping for Constituencies
+        // Constituency Dynamic Data Mapping
         const constituencyData = {
             "Kadapa": [
                 {
@@ -922,7 +942,7 @@
             // Render Hero Banner
             const heroBanner = document.getElementById("heroBanner");
             if (CONFIG.HERO_BANNER_URL.trim() !== "") {
-                heroBanner.innerHTML = `<img src="${CONFIG.HERO_BANNER_URL}" alt="Hero Banner">`;
+                heroBanner.innerHTML = `<img src="${CONFIG.HERO_BANNER_URL}" alt="Full Width Hero Banner">`;
             } else {
                 heroBanner.innerHTML = `
                     <div class="hero-text-fallback">
@@ -939,7 +959,7 @@
             renderConstituencyFilters();
         });
 
-        // Function to build HTML for Card (WITHOUT Social Icons on main card UI)
+        // Function to build HTML for Card
         function createCardHTML(leader) {
             return `
                 <div class="card" onclick='openModal(${JSON.stringify(leader).replace(/'/g, "&apos;")})'>
@@ -952,7 +972,6 @@
                 </div>
             `;
         }
-
         // Render Parliamentary Cards
         function renderParliamentCards() {
             const grid = document.getElementById("parliamentGrid");
