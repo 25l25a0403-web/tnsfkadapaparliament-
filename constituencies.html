@@ -70,24 +70,27 @@
       letter-spacing: 0.5px;
     }
 
-    .home-btn {
+    /* Header Nav Button (Home / Back) */
+    .nav-btn {
       background: #ffffff;
       color: #000;
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
+      padding: 8px 16px;
+      border-radius: 20px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      text-decoration: none;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 0.85rem;
       box-shadow: 0 2px 5px rgba(0,0,0,0.15);
       cursor: pointer;
       border: none;
-      transition: transform 0.2s;
+      transition: transform 0.2s, background 0.2s;
+      text-decoration: none;
     }
 
-    .home-btn:hover {
-      transform: scale(1.05);
+    .nav-btn:hover {
+      transform: scale(1.03);
+      background: #f1f1f1;
     }
 
     /* ==================== HERO BANNERS ==================== */
@@ -620,8 +623,12 @@
           <p>KADAPA PARLIAMENT</p>
         </div>
       </div>
-      <!-- Home Button -->
-      <button class="home-btn" id="homeBtn" onclick="showOverview()"><i class="fa-solid fa-house"></i></button>
+      
+      <!-- Dynamic Header Button (Home on Main Page / Back on Detail Page) -->
+      <button class="nav-btn" id="navBtn" onclick="handleNavClick()">
+        <i class="fa-solid fa-house" id="navBtnIcon"></i>
+        <span id="navBtnText">Home</span>
+      </button>
     </header>
 
     <!-- ==================== PAGE 1: OVERVIEW SCREEN ==================== -->
@@ -793,6 +800,9 @@
       overviewBannerUrl: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80"
     };
 
+    // Current page state tracker ('overview' or 'detail')
+    let currentPageState = 'overview';
+
     // Apply Global Links
     document.getElementById('headerLogo').src = GLOBAL_CONFIG.logoUrl;
     document.getElementById('overviewHeroBanner').style.backgroundImage = `url('${GLOBAL_CONFIG.overviewBannerUrl}')`;
@@ -803,7 +813,7 @@
         id: "badvel",
         name: "Badvel",
         tagline: "Unity in Diversity",
-        image: "https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=600&q=80",
+      image: "https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=600&q=80",
         heroBanner: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80",
         heroSubtitle: "Unity | Education | Progress",
         stats: { total: "1,250+", students: "860+", colleges: "32+", teams: "12+" },
@@ -983,16 +993,37 @@
       });
     }
 
+    /* Handle Nav Button Clicks */
+    function handleNavClick() {
+      if (currentPageState === 'detail') {
+        showOverview();
+      } else {
+        window.scrollTo(0, 0);
+      }
+    }
+
     /* Switch Views Functions */
     function showOverview() {
+      currentPageState = 'overview';
       document.getElementById('overviewView').style.display = 'block';
       document.getElementById('detailView').style.display = 'none';
+
+      // Set Header Button to "Home"
+      document.getElementById('navBtnIcon').className = 'fa-solid fa-house';
+      document.getElementById('navBtnText').innerText = 'Home';
+
       window.scrollTo(0, 0);
     }
 
     function showDetail(id) {
       const data = constituenciesData.find(c => c.id === id);
       if (!data) return;
+
+      currentPageState = 'detail';
+
+      // Set Header Button to "Back"
+      document.getElementById('navBtnIcon').className = 'fa-solid fa-arrow-left';
+      document.getElementById('navBtnText').innerText = 'Back';
 
       // Update Hero
       document.getElementById('detailHeroBanner').style.backgroundImage = `url('${data.heroBanner}')`;
@@ -1058,6 +1089,7 @@
 
     // Initialize Page
     renderCards();
+    showOverview();
   </script>
 </body>
 </html>
