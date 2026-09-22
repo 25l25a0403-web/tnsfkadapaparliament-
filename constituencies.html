@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TNSF KADAPA PARLIAMENT</title>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #faf9f5;
+      color: #1a1a1a;
+      padding-bottom: 20px;
+    }
+
+    /* HEADER */
+    header {
+      background-color: #FFCC00;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 5%;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: #e31b23;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 11px;
+      text-align: center;
+      border: 2px solid white;
+    }
+
+    .brand-text h1 {
+      font-size: 20px;
+      font-weight: 800;
+      color: #0d0d0d;
+      line-height: 1;
+    }
+
+    .brand-text p {
+      font-size: 13px;
+      font-weight: 700;
+      color: #222;
+      letter-spacing: 0.5px;
+    }
+
+    .home-btn {
+      background: #ffffff;
+      color: #0d0d0d;
+      padding: 8px 18px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .home-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* HERO SECTION */
+    .hero {
+      position: relative;
+      background: linear-gradient(135deg, #ffffff 0%, #fffbf0 100%);
+      padding: 40px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      overflow: hidden;
+      border-bottom: 1px solid #f0e6c8;
+    }
+
+    .hero-content {
+      max-width: 500px;
+      z-index: 2;
+    }
+
+    .hero-title {
+      font-size: 42px;
+      font-weight: 800;
+      color: #1a1a1a;
+      line-height: 1.1;
+    }
+
+    .hero-title span {
+      color: #f5a623;
+      display: block;
+      font-size: 48px;
+    }
+
+    .hero-subtitle {
+      font-size: 20px;
+      font-weight: 700;
+      color: #222;
+      margin-top: 5px;
+    }
+
+    .hero-pills {
+      margin-top: 25px;
+      display: inline-block;
+      background: #fff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #555;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .hero-banner-flag {
+      position: relative;
+      width: 320px;
+      height: 200px;
+      background: #FFCC00;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      transform: rotate(2deg);
+    }
+
+    /* SECTION TITLE */
+    .section-header {
+      padding: 30px 5% 10px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 24px;
+      font-weight: 800;
+      color: #1a1a1a;
+    }
+
+    .section-title-icon {
+      background: #FFCC00;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .section-subtitle {
+      color: #777;
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    /* GRID & CARDS */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px 5%;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1px solid #f0f0f0;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+
+    .card-img-wrapper {
+      position: relative;
+      height: 160px;
+      width: 100%;
+      background: #e0e0e0;
+      overflow: hidden;
+    }
+
+    .card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 16px;
+      position: relative;
+    }
+
+    .card-location {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .location-pin {
+      background: #FFCC00;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+
+    .card-tagline {
+      font-size: 12px;
+      color: #777;
+      margin-top: 4px;
+      margin-left: 32px;
+    }
+
+    .card-arrow {
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+      background: #FFCC00;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-centered {
+      grid-column: 1 / -1;
+      max-width: 400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #FFCC00;
+      margin-top: 40px;
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* MODAL WINDOW */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-container {
+      background: white;
+      width: 90%;
+      max-width: 900px;
+      max-height: 90vh;
+      border-radius: 20px;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    .modal-header {
+      background: #FFCC00;
+      padding: 20px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-title {
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .close-btn {
+      background: white;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .modal-content {
+      padding: 24px;
+    }
+
+    .modal-section {
+      margin-bottom: 30px;
+    }
+
+    .modal-section-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      border-left: 4px solid #FFCC00;
+      padding-left: 10px;
+    }
+
+    /* STATS GRID */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+    }
+
+    .stat-card {
+      background: #fffbf0;
+      border: 1px solid #ffe899;
+      padding: 15px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 24px;
+      font-weight: 800;
+      color: #d9a000;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: #666;
+    }
+
+    /* TEAM GRID */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+    }
+
+    .team-card {
+      text-align: center;
+      background: #fdfdfd;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      padding: 12px;
+    }
+
+    .team-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 8px;
+    }
+
+    /* ACTIVITIES GALLERY */
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+
+    .activity-card {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .activity-card img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+    }
+
+    .activity-card p {
+      padding: 8px;
+      font-size: 12px;
+      text-align: center;
+      background: #fff;
+    }
+
+    /* CONTACT / SOCIAL */
+    .contact-links {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .social-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #f0f0f0;
+      padding: 8px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      color: #333;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+      }
+      .hero-title {
+        font-size: 32px;
+      }
+      .hero-title span {
+        font-size: 36px;
+      }
+      .card-centered {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <div class="logo">TNSF</div>
+      <div class="brand-text">
+        <h1>TNSF</h1>
+        <p>KADAPA PARLIAMENT</p>
+      </div>
+    </div>
+    <!-- Replaced Menu Button with Home Button -->
+    <a href="#" class="home-btn">
+      <i data-lucide="home" size="16"></i> Home
+    </a>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2 class="hero-title">
+        Stronger
+        <span>Together</span>
+      </h2>
+      <p class="hero-subtitle">Across All Constituencies</p>
+      <div class="hero-pills">
+        7 Constituencies &nbsp;|&nbsp; 1 Vision &nbsp;|&nbsp; A Better Future
+      </div>
+    </div>
+    <div class="hero-banner-flag">
+      <div style="text-align: center; color: #1a1a1a;">
+        <i data-lucide="flag" size="48"></i>
+        <h3 style="margin-top: 8px; font-weight: 800;">TNSF KADAPA</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONSTITUENCIES SECTION -->
+  <section class="section-header">
+    <div class="section-title">
+      <div class="section-title-icon">
+        <i data-lucide="map-pin" size="18"></i>
+      </div>
+      Our Constituencies
+    </div>
+    <p class="section-subtitle">Seven constituencies. Countless dreams. One strong movement.</p>
+  </section>
+
+  <!-- CARDS GRID -->
+  <div class="grid">
+    <!-- Badvel -->
+    <div class="card" onclick="openModal('Badvel', 'Unity in Diversity', '2,450', 'Badvel is a major constituency known for its cultural heritage and educational unity.')">
+      <div class="card-img-wrapper">
+        <img class="card-img" src="https://images.unsplash.com/photo-1596176530529-78163a4f7af2?auto=format&fit=crop&w=600&q=80" alt="Badvel">
+      </div>
+      <div class="card-body">
+        <div class="card-location">
+          <div class="location-pin"><i data-lucide="map-pin" size="14"></i></div>
+          <span class="card-name">Badvel</span>
+        </div>
+        <p class="card-tagline">Unity in Diversity</p>
+        <div class="card-arrow"><i data-lucide="arrow-right" size="16"></i></div>
+      </div>
+    </div>
+
+    <!-- Kadapa -->
+    <div class="card" onclick="openModal('Kadapa', 'Education Drives Progress', '4,100', 'Kadapa urban center leads youth movements and student welfare programs.')">
+      <div class="card-img-wrapper">
+        <img class="card-img" src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80" alt="Kadapa">
+      </div>
+      <div class="card-body">
+        <div class="card-location">
+          <div class="location-pin"><i data-lucide="map-pin" size="14"></i></div>
+          <span class="card-name">Kadapa</span>
+        </div>
+        <p class="card-tagline">Education Drives Progress</p>
+        <div class="card-arrow"><i data-lucide="arrow-right" size="16"></i></div>
+      </div>
+    </div>
+
+    <!-- Pulivendla -->
+    <div class="card" onclick="openModal('Pulivendla', 'People Power Change', '3,200', 'Pulivendla exhibits high student participation across technical and arts institutions.')">
+      <div class="card-img-wrapper">
+        <img class="card-img" src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=600&q=80" alt="Pulivendla">
+      </div>
+      <div class="card-body">
+        <div class="card-location">
+          <div class="location-pin"><i data-lucide="map-pin" size="14"></i></div>
+          <span class="card-name">Pulivendla</span>
+        </div>
+        <p class="card-tagline">People Power Change</p>
+        <div class="card-arrow"><i data-lucide="arrow-right" size="16"></i></div>
+      </div>
+    </div>
+
+    <!-- Kamalapuram -->
+    <div class="card" onclick="openModal('Kamalapuram', 'Rooted in Culture', '1,850', 'Kamalapuram focuses on grassroots student leadership and career empowerment.')">
+      <div class="card-img-wrapper">
+        <img class="card-img" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="Kamalapuram">
+      </div>
+      <div class="card-body">
+        <div class="card-location">
+          <div class="location-pin"><i data-lucide="map-pin" size="14"></i></div>
+          <span class="card-name">Kamalapuram</span>
+        </div>
+        <p class="card-tagline">Rooted in Culture</p>
+        <div class="card-arrow"><i data-lucide="arrow-right" size="16"></i></div>
+      </div>
+    </div>
+
+    <!-- Jammalamadugu -->
+    <div class="card" onclick="openModal('Jammalamadugu', 'Tradition to Tomorrow', '2,900', 'Jammalamadugu bridges traditional values with modern educational reforms.')">
+      <div class="card-img-wrapper">
+        <img class="card-img" src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80" alt="Jammalamadugu">
+      </div>
+      <div class="card-body">
+        <div class="card-location">
+          <div class="location-pin"><i data-lucide="map-pin" size="14"></i></div>
+          <span class="card-name">Jammalamadugu</span>
+        </div>
+        <p class="card-tagline">Tradition to Tomorrow</p>
+        <div class="card-arrow"><i data-lucide="arrow-right" size="16"></i></div>
+      </div>
+    </div>
+
+    <!-- Proddatur -->
+    <div class="card" onclick="openModal('Proddatur', 'Progress Together', '3,800', 'Proddatur is a vibrant commercial hub driving student scholarship drives.')">
+      <div class="card-img-wrapper">
+        <img class="card-img" src="https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?auto=format&fit=crop&w=600&q=80" alt="Proddatur">
+      </div>
+      <div class="card-body">
+        <div class="card-location">
+          <div class="location-pin"><i data-lucide="map-pin" size="14"></i></div>
+          <span class="card-name">Proddatur</span>
+        </div>
+        <p class="card-tagline">Progress Together</p>
+        <div class="card-arrow"><i data-lucide="arrow-right" size="16"></i></div>
+      </div>
+    </div>
+
+    <!-- Mydukur (Centered single card) -->
+    <div class="card card-centered" onclick="openModal('Mydukur', 'Learning Today Leading Tomorrow', '2,100', 'Mydukur is dedicated to youth empowerment and educational guidance.')">
+      <div class="card-img-wrapper">
+        <img class="card-img" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Mydukur">
+      </div>
+      <div class="card-body">
+        <div class="card-location">
+          <div class="location-pin"><i data-lucide="map-pin" size="14"></i></div>
+          <span class="card-name">Mydukur</span>
+        </div>
+        <p class="card-tagline">Learning Today Leading Tomorrow</p>
+        <div class="card-arrow"><i data-lucide="arrow-right" size="16"></i></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>Together We Can Build a Brighter Future</div>
+    <div>Copy 2026 TNSF KADAPA PARLIAMENT all rights reserved</div>
+  </footer>
+
+  <!-- CONSTITUENCY DETAILS MODAL -->
+  <div class="modal-overlay" id="constituencyModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-title" id="modalTitle">Constituency Name</div>
+        <button class="close-btn" onclick="closeModal()">✕</button>
+      </div>
+
+      <div class="modal-content">
+        <!-- 1. Stats of Members Count -->
+        <div class="modal-section">
+          <div class="modal-section-title">Members Statistics</div>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-number" id="statMembers">0</div>
+              <div class="stat-label">Active Members</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">12+</div>
+              <div class="stat-label">College Units</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">85%</div>
+              <div class="stat-label">Resolution Rate</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. About Constituency -->
+        <div class="modal-section">
+          <div class="modal-section-title">About Constituency</div>
+          <p id="modalAboutText" style="font-size: 14px; color: #555; line-height: 1.6;">
+            Details regarding the selected constituency will appear here.
+          </p>
+        </div>
+
+        <!-- 3. Leadership Details -->
+        <div class="modal-section">
+          <div class="modal-section-title">Leadership Details</div>
+          <div style="background: #fdfdfd; padding: 15px; border-radius: 12px; border: 1px solid #eee; display: flex; align-items: center; gap: 15px;">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" style="width:60px; height:60px; border-radius:50%; object-fit:cover;" alt="Incharge">
+            <div>
+              <h4 style="font-size: 16px; margin-bottom: 2px;">Constituency President</h4>
+              <p style="font-size: 13px; color: #666;">In-charge Leader & Coordinator</p>
+              <p style="font-size: 12px; color: #888;">Contact: +91 98765 43210</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Our Team Images & Details -->
+        <div class="modal-section">
+          <div class="modal-section-title">Our Team</div>
+          <div class="team-grid">
+            <div class="team-card">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" class="team-img" alt="Member">
+              <h5 style="font-size:14px;">Ramesh Kumar</h5>
+              <p style="font-size:11px; color:#777;">Youth Coordinator</p>
+            </div>
+            <div class="team-card">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80" class="team-img" alt="Member">
+              <h5 style="font-size:14px;">Suresh Reddy</h5>
+              <p style="font-size:11px; color:#777;">Student Representative</p>
+            </div>
+            <div class="team-card">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80" class="team-img" alt="Member">
+              <h5 style="font-size:14px;">Anitha Sharma</h5>
+              <p style="font-size:11px; color:#777;">General Secretary</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Activities with Images -->
+        <div class="modal-section">
+          <div class="modal-section-title">Recent Activities</div>
+          <div class="activities-grid">
+            <div class="activity-card">
+              <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=400&q=80" alt="Activity 1">
+             <p>Scholarship Awareness Drive</p>
+            </div>
+            <div class="activity-card">
+              <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=400&q=80" alt="Activity 2">
+              <p>Youth Empowerment Campaign</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Contact & Social Media -->
+        <div class="modal-section">
+          <div class="modal-section-title">Contact & Social Media</div>
+          <div class="contact-links">
+            <a href="#" class="social-btn"><i data-lucide="phone" size="16"></i> Contact Support</a>
+            <a href="#" class="social-btn"><i data-lucide="facebook" size="16"></i> Facebook</a>
+            <a href="#" class="social-btn"><i data-lucide="twitter" size="16"></i> Twitter</a>
+            <a href="#" class="social-btn"><i data-lucide="instagram" size="16"></i> Instagram</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Modal Control Logic
+    function openModal(name, tagline, members, about) {
+      document.getElementById('modalTitle').innerText = name + ' - ' + tagline;
+      document.getElementById('statMembers').innerText = members;
+      document.getElementById('modalAboutText').innerText = about;
+      document.getElementById('constituencyModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('constituencyModal').style.display = 'none';
+    }
+
+    // Close modal when clicking outside content
+    window.onclick = function(event) {
+      const modal = document.getElementById('constituencyModal');
+      if (event.target === modal) {
+        closeModal();
+      }
+    };
+  </script>
+</body>
+</html>
