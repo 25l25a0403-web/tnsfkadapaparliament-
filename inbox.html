@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TNSF Kadapa Parliament - Inbox</title>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f7f9fc;
+      color: #333;
+    }
+
+    /* --- HEADER --- */
+    header {
+      background-color: #ffd000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 5%;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-img {
+      width: 45px;
+      height: 45px;
+      background-color: #d32f2f;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: bold;
+      font-size: 14px;
+      border: 2px solid #fff;
+    }
+
+    .brand-text {
+      font-weight: 800;
+      font-size: 18px;
+      color: #000;
+      line-height: 1.2;
+    }
+
+    .brand-text span {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .home-btn {
+      background-color: #fff;
+      color: #000;
+      text-decoration: none;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      transition: background 0.2s;
+    }
+
+    .home-btn:hover {
+      background-color: #f0f0f0;
+    }
+
+    /* --- HERO BANNER --- */
+    .hero-banner {
+      background: linear-gradient(135deg, #fff7d6 0%, #ffeaa7 100%);
+      margin: 20px 5%;
+      border-radius: 16px;
+      padding: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      max-width: 60%;
+      z-index: 2;
+    }
+
+    .hero-title {
+      font-size: 32px;
+      font-weight: 900;
+      color: #1a1a1a;
+      line-height: 1.2;
+    }
+
+    .hero-title span {
+      color: #ff9800;
+      font-style: italic;
+    }
+
+    .hero-subtitle {
+      margin-top: 10px;
+      font-size: 15px;
+      color: #555;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-image-placeholder {
+      width: 120px;
+      height: 120px;
+      background-color: #ffd000;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 50px;
+      color: #000;
+      z-index: 2;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    /* --- CONTAINER --- */
+    .main-container {
+      max-width: 1100px;
+      margin: 0 auto 40px auto;
+      padding: 0 20px;
+    }
+
+    .inbox-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+
+    /* --- INBOX HEADER & SEARCH --- */
+    .inbox-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .inbox-title-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .inbox-icon {
+      background: #ffd000;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #000;
+    }
+
+    .inbox-title-area h2 {
+      font-size: 22px;
+      color: #1a1a1a;
+    }
+
+    .inbox-title-area p {
+      font-size: 13px;
+      color: #777;
+    }
+
+    .search-box {
+      position: relative;
+      min-width: 260px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 10px 16px 10px 38px;
+      border-radius: 20px;
+      border: 1px solid #e0e0e0;
+      outline: none;
+      font-size: 13px;
+      background-color: #f9f9f9;
+      transition: all 0.2s;
+    }
+
+    .search-box input:focus {
+      border-color: #ffd000;
+      background-color: #fff;
+    }
+
+    .search-box i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #999;
+      font-size: 13px;
+    }
+
+    /* --- TABS --- */
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #f0f0f0;
+      padding-bottom: 15px;
+    }
+
+    .tab-btn {
+      border: none;
+      background: #f0f0f0;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #555;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .tab-btn .badge {
+      background: #666;
+      color: #fff;
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 10px;
+    }
+
+    .tab-btn.active {
+      background: #ffd000;
+      color: #000;
+    }
+
+    .tab-btn.active .badge {
+      background: #000;
+      color: #fff;
+    }
+
+    /* --- MESSAGE LIST --- */
+    .message-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .message-item {
+      display: flex;
+      align-items: center;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid #f0f0f0;
+      background: #fff;
+      transition: all 0.2s;
+      cursor: pointer;
+      gap: 14px;
+    }
+
+    .message-item:hover {
+      border-color: #ffe066;
+      background-color: #fffdf5;
+      transform: translateY(-1px);
+    }
+
+    .msg-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #ffd000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .msg-content {
+      flex: 1;
+    }
+
+    .msg-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .sender-name {
+      font-weight: 700;
+      font-size: 14px;
+      color: #222;
+    }
+
+    .official-tag {
+      background: #fff3cd;
+      color: #856404;
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+      border: 1px solid #ffeeba;
+    }
+
+    .msg-subject {
+      font-weight: 600;
+      font-size: 13px;
+      color: #333;
+      margin-bottom: 2px;
+    }
+
+    .msg-snippet {
+      font-size: 12px;
+      color: #777;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 500px;
+    }
+
+    .msg-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+      font-size: 12px;
+      color: #888;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #ffd000;
+    }
+
+    .status-dot.read {
+      background-color: #007bff;
+    }
+
+    /* --- PAGINATION --- */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .page-btn {
+      width: 32px;
+      height: 32px;
+      border: 1px solid #e0e0e0;
+      background: #fff;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 13px;
+      color: #555;
+      transition: all 0.2s;
+    }
+
+    .page-btn.active {
+      background: #ffd000;
+      border-color: #ffd000;
+      font-weight: bold;
+      color: #000;
+    }
+
+    .page-btn:hover:not(.active) {
+      background: #f5f5f5;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 12px;
+      color: #666;
+      background: #ffd000;
+      font-weight: 600;
+    }
+
+    /* --- RESPONSIVE DESIGN --- */
+    @media (max-width: 768px) {
+      .hero-banner {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+      }
+
+      .hero-content {
+        max-width: 100%;
+      }
+
+      .hero-title {
+        font-size: 24px;
+      }
+
+      .inbox-header {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .search-box {
+        width: 100%;
+      }
+
+      .msg-snippet {
+        max-width: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER WITH HOME BUTTON -->
+  <header>
+    <div class="brand">
+      <div class="logo-img">TNSF</div>
+      <div class="brand-text">
+        TNSF
+        <span>KADAPA PARLIAMENT</span>
+      </div>
+    </div>
+    <a href="#" class="home-btn">
+      <i class="fa-solid fa-house"></i> Home
+    </a>
+  </header>
+
+  <!-- HERO BANNER -->
+  <div class="hero-banner">
+    <div class="hero-content">
+      <h1 class="hero-title">Stay Connected <span>With TNSF</span></h1>
+      <p class="hero-subtitle">Messages • Updates • Opportunities</p>
+    </div>
+    <div class="hero-image-placeholder">
+      <i class="fa-solid fa-flag"></i>
+    </div>
+  </div>
+
+  <!-- MAIN INBOX CONTAINER -->
+  <div class="main-container">
+    <div class="inbox-card">
+      
+      <!-- INBOX TOP HEADER & SEARCH -->
+      <div class="inbox-header">
+        <div class="inbox-title-area">
+          <div class="inbox-icon">
+            <i class="fa-solid fa-envelope"></i>
+          </div>
+          <div>
+            <h2>Inbox</h2>
+            <p>View and manage your messages, updates and notifications from TNSF Kadapa Parliament.</p>
+          </div>
+        </div>
+        
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="searchInput" placeholder="Search messages...">
+        </div>
+      </div>
+
+      <!-- TABS -->
+      <div class="tabs">
+        <button class="tab-btn active" onclick="filterTab('all', this)">All <span class="badge">12</span></button>
+        <button class="tab-btn" onclick="filterTab('unread', this)">Unread <span class="badge">7</span></button>
+        <button class="tab-btn" onclick="filterTab('read', this)">Read <span class="badge">5</span></button>
+      </div>
+
+      <!-- MESSAGE LIST -->
+      <div class="message-list" id="messageList">
+        
+        <!-- Item 1 -->
+        <div class="message-item" data-status="unread">
+          <div class="msg-icon"><i class="fa-solid fa-landmark"></i></div>
+          <div class="msg-content">
+            <div class="msg-header">
+              <span class="sender-name">TNSF Kadapa Parliament</span>
+              <span class="official-tag">Official</span>
+            </div>
+            <div class="msg-subject">Upcoming Student Meet - Kadapa</div>
+            <div class="msg-snippet">Dear Students, We are happy to inform you about the upcoming student meet...</div>
+          </div>
+          <div class="msg-meta">
+            <span>26 Aug 2025</span>
+            <span class="status-dot"></span>
+            <i class="fa-solid fa-chevron-right"></i>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="message-item" data-status="read">
+          <div class="msg-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+          <div class="msg-content">
+            <div class="msg-header">
+              <span class="sender-name">Student Coordinator</span>
+              <span class="official-tag">Official</span>
+            </div>
+            <div class="msg-subject">Scholarship Application Update</div>
+            <div class="msg-snippet">The scholarship application dates have been extended till 5th September 2025...</div>
+          </div>
+          <div class="msg-meta">
+            <span>24 Aug 2025</span>
+            <span class="status-dot read"></span>
+            <i class="fa-solid fa-chevron-right"></i>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="message-item" data-status="unread">
+          <div class="msg-icon"><i class="fa-solid fa-users"></i></div>
+          <div class="msg-content">
+            <div class="msg-header">
+              <span class="sender-name">TNSF Kadapa Parliament</span>
+              <span class="official-tag">Official</span>
+            </div>
+            <div class="msg-subject">Volunteers Needed - Blood Donation Camp</div>
+            <div class="msg-snippet">We need 50 volunteers for the upcoming blood donation camp on 28th August 2025...</div>
+          </div>
+          <div class="msg-meta">
+            <span>22 Aug 2025</span>
+            <span class="status-dot"></span>
+            <i class="fa-solid fa-chevron-right"></i>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="message-item" data-status="unread">
+          <div class="msg-icon"><i class="fa-solid fa-bullhorn"></i></div>
+          <div class="msg-content">
+            <div class="msg-header">
+              <span class="sender-name">TNSF Kadapa Parliament</span>
+              <span class="official-tag">Official</span>
+            </div>
+            <div class="msg-subject">Career Guidance Session Invitation</div>
+            <div class="msg-snippet">We are organizing a career guidance session for all students on 21st August 2025 at Government College...</div>
+          </div>
+          <div class="msg-meta">
+            <span>20 Aug 2025</span>
+            <span class="status-dot"></span>
+            <i class="fa-solid fa-chevron-right"></i>
+          </div>
+        </div>
+
+        <!-- Item 5 -->
+        <div class="message-item" data-status="read">
+          <div class="msg-icon"><i class="fa-solid fa-envelope"></i></div>
+          <div class="msg-content">
+            <div class="msg-header">
+              <span class="sender-name">TNSF Kadapa Parliament</span>
+              <span class="official-tag">Official</span>
+            </div>
+            <div class="msg-subject">TNSF Membership Confirmation</div>
+            <div class="msg-snippet">Thank you for joining TNSF. Your membership has been successfully confirmed.</div>
+          </div>
+          <div class="msg-meta">
+            <span>18 Aug 2025</span>
+            <span class="status-dot read"></span>
+            <i class="fa-solid fa-chevron-right"></i>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- PAGINATION -->
+      <div class="pagination">
+        <button class="page-btn"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    Copy 2026 TNSF KADAPA PARLIAMENT all rights reserved
+  </footer>
+
+  <!-- SEARCH & FILTER INTERACTIVITY -->
+  <script>
+    // Search Functionality
+    document.getElementById('searchInput').addEventListener('keyup', function() {
+      let filterValue = this.value.toLowerCase();
+      let messages = document.querySelectorAll('.message-item');
+
+      messages.forEach(function(msg) {
+        let text = msg.textContent.toLowerCase();
+        if (text.includes(filterValue)) {
+          msg.style.display = 'flex';
+        } else {
+          msg.style.display = 'none';
+        }
+      });
+    });
+
+    // Tab Filter Functionality
+    function filterTab(type, btn) {
+      // Toggle Active Class on Buttons
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Filter Messages
+      let messages = document.querySelectorAll('.message-item');
+      messages.forEach(msg => {
+        let status = msg.getAttribute('data-status');
+        if (type === 'all') {
+          msg.style.display = 'flex';
+        } else if (type === status) {
+          msg.style.display = 'flex';
+        } else {
+          msg.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
+
