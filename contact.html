@@ -6,7 +6,7 @@
   <title>TNSF Kadapa Parliament - Contact Us</title>
   <!-- Font Awesome CDN for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Google Fonts for modern typography -->
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
@@ -74,7 +74,7 @@
       display: block;
     }
 
-    /* Home Button instead of Menu */
+    /* Home Button replacing Menu */
     .home-btn {
       display: flex;
       align-items: center;
@@ -106,7 +106,7 @@
     }
 
     .hero-content {
-      max-width: 500px;
+      max-width: 550px;
     }
 
     .hero-subtitle {
@@ -132,14 +132,20 @@
       line-height: 1.4;
     }
 
+    /* Hero Banner Image Container */
     .hero-image-container {
-      max-width: 250px;
+      max-width: 320px;
       width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .hero-image {
       width: 100%;
       height: auto;
+      max-height: 250px;
+      object-fit: contain;
       display: block;
     }
 
@@ -151,7 +157,7 @@
       width: 100%;
     }
 
-    /* Grid for Contact Info */
+    /* Contact Grid */
     .contact-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -368,15 +374,15 @@
   <!-- Header -->
   <header>
     <div class="brand-container">
-      <!-- UPDATABLE LOGO IMAGE -->
-      <img id="logo-img" class="brand-logo" src="https://via.placeholder.com/60/FFC700/000000?text=LOGO" alt="TNSF Logo">
+      <!-- UPDATABLE LOGO IMAGE LINK BELOW -->
+      <img id="logo-img" class="brand-logo" src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Telugu_Nadu_Students_Federation_Flag.png" alt="TNSF Logo">
       <div>
         <div class="brand-title">TNSF</div>
         <span class="brand-subtitle">KADAPA PARLIAMENT</span>
       </div>
     </div>
     
-    <!-- Home Navigation Button -->
+    <!-- Home Icon & Button -->
     <a href="/" class="home-btn">
       <i class="fa-solid fa-house"></i> Home
     </a>
@@ -393,18 +399,18 @@
       </p>
     </div>
     <div class="hero-image-container">
-      <!-- UPDATABLE HERO BANNER GRAPHIC -->
-      <img id="hero-img" class="hero-image" src="https://cdni.iconscout.com/illustration/premium/thumb/contact-us-illustration-download-in-svg-png-gif-file-formats--call-customer-service-support-center-telemarketing-digital-marketing-illustrations-3779261.png" alt="Contact Illustration">
+      <!-- UPDATABLE HERO BANNER IMAGE LINK BELOW -->
+      <img id="hero-img" class="hero-image" src="https://cdni.iconscout.com/illustration/premium/thumb/contact-us-illustration-download-in-svg-png-gif-file-formats--call-customer-service-support-center-telemarketing-digital-marketing-illustrations-3779261.png" alt="Contact Hero Banner Image">
     </div>
   </section>
 
-  <!-- Main Content -->
+  <!-- Container -->
   <main class="container">
     
-    <!-- Quick Contact Links -->
+    <!-- Contact Info Cards -->
     <div class="contact-grid">
       
-      <!-- Phone Card (Clickable to Call) -->
+      <!-- Phone Link -->
       <a href="tel:+919346812345" class="info-card">
         <div class="card-icon"><i class="fa-solid fa-phone"></i></div>
         <div class="card-details">
@@ -414,7 +420,7 @@
         </div>
       </a>
 
-      <!-- Email Card (Clickable to Email) -->
+      <!-- Email Link -->
       <a href="mailto:tnsf.kadapa@gmail.com" class="info-card">
         <div class="card-icon"><i class="fa-solid fa-envelope"></i></div>
         <div class="card-details">
@@ -424,7 +430,7 @@
         </div>
       </a>
 
-      <!-- Address Card (Clickable to Google Maps) -->
+      <!-- Address Link (Google Maps Redirect) -->
       <a href="https://maps.google.com/?q=Kadapa,+Andhra+Pradesh+-+516001" target="_blank" class="info-card">
         <div class="card-icon"><i class="fa-solid fa-location-dot"></i></div>
         <div class="card-details">
@@ -433,7 +439,7 @@
         </div>
       </a>
 
-      <!-- Social Media Card -->
+      <!-- Social Media Links -->
       <div class="info-card">
         <div class="card-icon"><i class="fa-solid fa-users"></i></div>
         <div class="card-details">
@@ -449,7 +455,7 @@
 
     </div>
 
-    <!-- Contact Form Section -->
+    <!-- Message Form -->
     <div class="form-card">
       <div class="form-header">
         <div class="card-icon"><i class="fa-solid fa-paper-plane"></i></div>
@@ -459,7 +465,7 @@
         </div>
       </div>
 
-      <!-- Success Notification Message -->
+      <!-- Success Notification Box -->
       <div id="success-msg" class="success-message">
         <i class="fa-solid fa-circle-check"></i> Thank you! Your message has been sent successfully.
       </div>
@@ -499,25 +505,26 @@
   </footer>
 
   <script>
-    // Form submission & success message logic
+    // OPTIONAL: Update Hero Banner Image or Logo dynamically using JavaScript links
+    const bannerImageURL = "https://cdni.iconscout.com/illustration/premium/thumb/contact-us-illustration-download-in-svg-png-gif-file-formats--call-customer-service-support-center-telemarketing-digital-marketing-illustrations-3779261.png";
+    const logoImageURL = "https://upload.wikimedia.org/wikipedia/commons/2/2c/Telugu_Nadu_Students_Federation_Flag.png";
+
+    // Set updated image links on load
+    document.getElementById('hero-img').src = bannerImageURL;
+    document.getElementById('logo-img').src = logoImageURL;
+
+    // Contact Form Handler
     document.getElementById('contact-form').addEventListener('submit', function(e) {
       e.preventDefault();
       
       const successMsg = document.getElementById('success-msg');
       successMsg.style.display = 'block';
-      
-      // Clear form inputs
       this.reset();
 
-      // Automatically hide success message after 5 seconds
       setTimeout(() => {
         successMsg.style.display = 'none';
       }, 5000);
     });
-
-    // Easily update images using JavaScript (Optional):
-    // document.getElementById('logo-img').src = 'YOUR_NEW_LOGO_URL';
-    // document.getElementById('hero-img').src = 'YOUR_NEW_HERO_IMAGE_URL';
   </script>
 </body>
 </html>
