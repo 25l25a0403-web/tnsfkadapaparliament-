@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TNSF KADAPA PARLIAMENT - Leadership</title>
-    <!-- Font Awesome for icons -->
+    <title>TNSF KADAPA PARLIAMENT - Leadership Portal</title>
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
@@ -13,13 +13,13 @@
         /* --- CSS VARIABLES FOR EASY UPDATES --- */
         :root {
             --primary-yellow: #FFCB05;
-            --accent-yellow: #FFF099;
             --badge-yellow: #FBC02D;
             --dark-navy: #0F172A;
             --text-dark: #1E293B;
             --text-muted: #64748B;
             --bg-light: #F8FAFC;
             --card-bg: #FFFFFF;
+            --wiki-border: #CBD5E1;
         }
 
         * {
@@ -158,7 +158,7 @@
         /* --- LEADERSHIP GRID --- */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 per row desktop */
+            grid-template-columns: repeat(3, 1fr); /* 3 cards per row on Desktop */
             gap: 25px;
         }
 
@@ -174,7 +174,6 @@
             border: 1px solid #E2E8F0;
             cursor: pointer;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
-            position: relative;
         }
 
         .card:hover {
@@ -269,18 +268,18 @@
             color: var(--dark-navy);
         }
 
-        /* --- FULL SCREEN OVERVIEW MODAL --- */
+        /* --- FULL SCREEN OVERVIEW MODAL (Wikipedia Style) --- */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             display: none;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
+            z-index: 2000;
             padding: 20px;
             opacity: 0;
             transition: opacity 0.3s ease;
@@ -294,67 +293,155 @@
         .modal-container {
             background: white;
             width: 100%;
-            max-width: 900px;
-            max-height: 90vh;
-            border-radius: 16px;
+            max-width: 1000px;
+            height: 92vh;
+            border-radius: 12px;
             overflow-y: auto;
             position: relative;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
 
         .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: #F1F5F9;
+            position: fixed;
+            top: 35px;
+            right: 45px;
+            background: var(--dark-navy);
+            color: white;
             border: none;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--dark-navy);
-            transition: background 0.2s;
+            z-index: 2100;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.2s, background 0.2s;
         }
 
         .close-modal:hover {
-            background: #E2E8F0;
-        }
-
-        .modal-header-profile {
-            display: flex;
-            gap: 25px;
-            align-items: center;
-            border-bottom: 2px solid #F1F5F9;
-            padding-bottom: 20px;
-            margin-bottom: 20px;
-        }
-
-        .modal-profile-img {
-            width: 130px;
-            height: 130px;
-            border-radius: 12px;
-            object-fit: cover;
-        }
-
-        .modal-header-info h2 {
-            font-size: 1.8rem;
+            background: var(--badge-yellow);
             color: var(--dark-navy);
+            transform: scale(1.1);
         }
 
-        .modal-social-links {
+        .wiki-header {
+            border-bottom: 2px solid var(--dark-navy);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        .wiki-header h1 {
+            font-size: 2.2rem;
+            color: var(--dark-navy);
+            font-weight: 800;
+        }
+
+        .wiki-header p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Wiki Main Layout */
+        .wiki-layout {
             display: flex;
-            gap: 12px;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .wiki-main-content {
+            flex: 1;
+        }
+
+        /* Wikipedia Side Infobox */
+        .wiki-infobox {
+            width: 320px;
+            background: #F8FAFC;
+            border: 1px solid var(--wiki-border);
+            border-radius: 8px;
+            padding: 15px;
+            flex-shrink: 0;
+        }
+
+        .wiki-infobox-title {
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            background: var(--primary-yellow);
+            color: var(--dark-navy);
+            padding: 6px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+        }
+
+        .wiki-infobox-img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border: 1px solid var(--wiki-border);
+        }
+
+        .wiki-infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        .wiki-infobox-table tr {
+            border-bottom: 1px solid #E2E8F0;
+        }
+
+        .wiki-infobox-table th {
+            text-align: left;
+            padding: 8px 4px;
+            color: var(--text-muted);
+            width: 40%;
+            vertical-align: top;
+        }
+
+        .wiki-infobox-table td {
+            padding: 8px 4px;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        /* Detailed Paragraph Styling */
+        .wiki-section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark-navy);
+            border-bottom: 2px solid var(--primary-yellow);
+            padding-bottom: 5px;
+            margin: 25px 0 12px 0;
+        }
+
+        .wiki-paragraph {
+            font-size: 0.95rem;
+            color: #334155;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        /* Social Icons Box inside Overview */
+        .modal-socials-box {
             margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--wiki-border);
+            display: flex;
+            justify-content: center;
+            gap: 12px;
         }
 
         .social-icon-btn {
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             background: var(--dark-navy);
             color: white;
@@ -362,7 +449,7 @@
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             transition: transform 0.2s, background 0.2s;
         }
 
@@ -372,43 +459,37 @@
             color: var(--dark-navy);
         }
 
-        .wiki-section {
-            margin-bottom: 20px;
-        }
-
-        .wiki-section h3 {
-            font-size: 1.1rem;
-            color: var(--dark-navy);
-            border-left: 4px solid var(--primary-yellow);
-            padding-left: 10px;
-            margin-bottom: 8px;
-        }
-
-        .wiki-section p {
-            color: var(--text-dark);
-            font-size: 0.95rem;
-            text-align: justify;
-        }
-
         /* --- RESPONSIVE MEDIA QUERIES --- */
         @media (max-width: 992px) {
             .cards-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            .wiki-layout {
+                flex-direction: column-reverse;
+            }
+
+            .wiki-infobox {
+                width: 100%;
+            }
         }
 
         @media (max-width: 600px) {
             .cards-grid {
-                grid-template-columns: 1fr; /* 1 per row mobile */
+                grid-template-columns: 1fr; /* 1 card per row on mobile */
             }
 
-            .modal-header-profile {
-                flex-direction: column;
-                text-align: center;
+            .modal-container {
+                padding: 20px;
+                height: 96vh;
             }
 
-            .modal-social-links {
-                justify-content: center;
+            .close-modal {
+                top: 15px;
+                right: 15px;
+                width: 38px;
+                height: 38px;
+                font-size: 1rem;
             }
 
             .header-title h1 {
@@ -441,7 +522,7 @@
 
     <!-- HERO BANNER (FULL WIDTH) -->
     <section class="hero-banner" id="heroBanner">
-        <!-- JS dynamically renders banner or fallback text -->
+        <!-- Dynamic Hero Content Rendered via JS -->
     </section>
 
     <!-- PARLIAMENTARY GRADE LEADERSHIP -->
@@ -455,7 +536,7 @@
         </div>
 
         <div class="cards-grid" id="parliamentGrid">
-            <!-- Parliamentary Cards Rendered by JS -->
+            <!-- Cards rendered dynamically -->
         </div>
     </div>
 
@@ -466,18 +547,14 @@
                 <i class="fa-solid fa-sitemap"></i>
                 <span>Constituency Grade Leadership</span>
             </div>
-            <p class="section-desc">Select a constituency to view local leadership.</p>
+            <p class="section-desc">Select a constituency to view regional leaders.</p>
         </div>
 
-        <!-- Constituency Buttons -->
-        <div class="constituency-filter" id="constituencyBtns">
-            <!-- Buttons dynamically generated -->
-        </div>
+        <!-- Constituency Filter Buttons -->
+        <div class="constituency-filter" id="constituencyBtns"></div>
 
         <!-- Constituency Cards Grid -->
-        <div class="cards-grid" id="constituencyGrid">
-            <!-- Constituency Cards Rendered by JS -->
-        </div>
+        <div class="cards-grid" id="constituencyGrid"></div>
 
         <!-- Motivational Quote Banner -->
         <div class="quote-banner">
@@ -492,36 +569,68 @@
 
     <!-- WIKIPEDIA STYLE FULL SCREEN OVERVIEW MODAL -->
     <div class="modal-overlay" id="overviewModal">
+        <button class="close-modal" id="closeModalBtn"><i class="fa-solid fa-xmark"></i></button>
+        
         <div class="modal-container">
-            <button class="close-modal" id="closeModalBtn"><i class="fa-solid fa-xmark"></i></button>
-            
-            <div class="modal-header-profile">
-                <img id="modalImg" src="" alt="Leader" class="modal-profile-img">
-                <div class="modal-header-info">
-                    <span class="role-badge" id="modalRole">Role</span>
-                    <h2 id="modalName">Leader Name</h2>
-                    <p style="color: var(--text-muted); font-size: 0.9rem;" id="modalDept">Department Details</p>
+            <!-- Header Title -->
+            <div class="wiki-header">
+                <h1 id="modalName">Leader Full Name</h1>
+                <p id="modalDept">Designation & Department</p>
+            </div>
+
+            <div class="wiki-layout">
+                <!-- Main Detailed Paragraphs -->
+                <div class="wiki-main-content">
+                    <div class="wiki-section-title">Early Life & Education</div>
+                    <p class="wiki-paragraph" id="modalEarlyLife">Loading...</p>
+
+                    <div class="wiki-section-title">Political Career & TNSF Activism</div>
+                    <p class="wiki-paragraph" id="modalPoliticalCareer">Loading...</p>
+
+                    <div class="wiki-section-title">Key Contributions & Achievements</div>
+                    <p class="wiki-paragraph" id="modalAchievements">Loading...</p>
+
+                    <div class="wiki-section-title">Vision for Youth & Education</div>
+                    <p class="wiki-paragraph" id="modalVision">Loading...</p>
+                </div>
+
+                <!-- Right Side Wikipedia Infobox / Highlights -->
+                <div class="wiki-infobox">
+                    <div class="wiki-infobox-title" id="modalRoleBadge">Role Title</div>
+                    <img id="modalImg" src="" alt="Leader Profile Image" class="wiki-infobox-img">
                     
-                    <!-- Social Links inside Overview -->
-                    <div class="modal-social-links" id="modalSocials">
-                        <!-- Clickable icons rendered here -->
+                    <table class="wiki-infobox-table">
+                        <tr>
+                            <th>Born:</th>
+                            <td id="modalDob">--</td>
+                        </tr>
+                        <tr>
+                            <th>Native Village:</th>
+                            <td id="modalVillage">--</td>
+                        </tr>
+                        <tr>
+                            <th>Education:</th>
+                            <td id="modalEdu">--</td>
+                        </tr>
+                        <tr>
+                            <th>Family:</th>
+                            <td id="modalFamily">--</td>
+                        </tr>
+                        <tr>
+                            <th>Organization:</th>
+                            <td>TNSF Kadapa</td>
+                        </tr>
+                        <tr>
+                            <th>Constituency:</th>
+                            <td id="modalConstituency">Kadapa Region</td>
+                        </tr>
+                    </table>
+
+                    <!-- Social Redirect Icons Inside Modal -->
+                    <div class="modal-socials-box" id="modalSocials">
+                        <!-- Clickable Social Icons Rendered via JS -->
                     </div>
                 </div>
-            </div>
-
-            <div class="wiki-section">
-                <h3>Biography Overview</h3>
-                <p id="modalBio">Biography details loading...</p>
-            </div>
-
-            <div class="wiki-section">
-                <h3>Political & Social Contributions</h3>
-                <p id="modalContributions">Contributions details loading...</p>
-            </div>
-
-            <div class="wiki-section">
-                <h3>Contact & Constituency Office</h3>
-                <p id="modalContact">Office details loading...</p>
             </div>
         </div>
     </div>
@@ -529,16 +638,16 @@
     <!-- JAVASCRIPT LOGIC -->
     <script>
         /* ===================================================
-           1. CONFIGURATION & UPDATABLE LINKS
+           1. UPDATABLE LOGO, HERO BANNER & SOCIAL LINKS
            =================================================== */
         const CONFIG = {
-            // Update your Logo Image URL here
+            // Update your Logo Image Link here
             LOGO_URL: "https://via.placeholder.com/120x120/FFCB05/0F172A?text=TNSF+LOGO",
             
-            // Update your Hero Banner Image URL here (leave empty "" for stylish text banner)
+            // Update your Full-Width Hero Banner Image Link here (Leave "" for text banner)
             HERO_BANNER_URL: "", 
 
-            // Social Redirect Links Base/Default
+            // Global Social Links (Used for redirects)
             SOCIAL_LINKS: {
                 twitter: "https://x.com",
                 instagram: "https://instagram.com",
@@ -549,7 +658,7 @@
         };
 
         /* ===================================================
-           2. LEADERSHIP DATA
+           2. DETAILED LEADERSHIP DATA (WIKIPEDIA STYLE)
            =================================================== */
         const parliamentaryLeaders = [
             {
@@ -557,10 +666,16 @@
                 name: "Sri. Ch. Sairam",
                 role: "President",
                 dept: "TNSF Kadapa Parliament President",
-                image: "https://via.placeholder.com/150",
-                bio: "Sri. Ch. Sairam has been actively serving as the President of TNSF Kadapa Parliament. He has led multiple student movements fighting for fee reimbursement and university infrastructure.",
-                contributions: "Organized state-level student rallies, established youth wings across all constituencies in Kadapa.",
-                contact: "TNSF Main Office, Seven Roads Circle, Kadapa.",
+                image: "https://via.placeholder.com/250",
+                dob: "14 August 1994",
+                village: "Ramarajupalle, Kadapa",
+                education: "M.Tech in Structural Engineering",
+                family: "Son of Ch. Venkata Subbaiah & Latha",
+                constituency: "Kadapa Parliament",
+                earlyLife: "Sri. Ch. Sairam was born in Ramarajupalle village, Kadapa district. Raised in a family dedicated to public welfare, he demonstrated leadership skills from an early age. He completed his schooling at Kadapa High School and pursued higher technical education in Engineering with high academic honors.",
+                politicalCareer: "Joining Telugu Nadu Students Federation (TNSF) during his college years, Sairam quickly rose through the ranks due to his energetic mobilization of student rights rallies. In recent years, he was appointed President of the TNSF Kadapa Parliament, where he actively coordinates student protests for fee reimbursement and university infrastructure improvements.",
+                achievements: "Organized historic district-level student rallies for scholarship releases, established TNSF committees across all 7 assembly constituencies in Kadapa, and led successful campaigns for hostel maintenance.",
+                vision: "Driven by the conviction that education is the ultimate equalizer, Sairam aims to ensure every deserving student in Kadapa district gains access to quality modern infrastructure, technical tools, and timely government support.",
                 socials: CONFIG.SOCIAL_LINKS
             },
             {
@@ -568,10 +683,16 @@
                 name: "Sri. K. Mahesh",
                 role: "General Secretary",
                 dept: "TNSF Kadapa Parliament General Secretary",
-                image: "https://via.placeholder.com/150",
-                bio: "Sri. K. Mahesh handles organizational operations and coordinate activities across all constituencies in Kadapa district.",
-                contributions: "Spearheaded student enrollment drives and organized educational workshops.",
-                contact: "TNSF Office, Kadapa.",
+                image: "https://via.placeholder.com/250",
+                dob: "22 November 1995",
+                village: "Proddatur, Kadapa District",
+                education: "M.A. Political Science",
+                family: "Son of K. Ramana & Parvathi",
+                constituency: "Kadapa Parliament",
+                earlyLife: "Born and brought up in Proddatur, Sri. K. Mahesh showed a deep interest in social welfare and regional political affairs during his university days.",
+                politicalCareer: "As General Secretary, Mahesh manages internal organizational structure, student registrations, and administrative communication across all constituency divisions.",
+                achievements: "Successfully spearheaded the digital membership drive in Kadapa and hosted state-level educational seminars.",
+                vision: "To establish structured student welfare centers in every major municipality of Kadapa district.",
                 socials: CONFIG.SOCIAL_LINKS
             },
             {
@@ -579,10 +700,16 @@
                 name: "Sri. P. Arun",
                 role: "Joint Secretary",
                 dept: "TNSF Kadapa Parliament Joint Secretary",
-                image: "https://via.placeholder.com/150",
-                bio: "Sri. P. Arun works closely with student unions and youth representation forums across Kadapa.",
-                contributions: "Advocated for hostel facility upgrades and student welfare funds.",
-                contact: "TNSF Office, Kadapa.",
+                image: "https://via.placeholder.com/250",
+                dob: "10 June 1996",
+                village: "Mydukur, Kadapa",
+                education: "B.Tech Computer Science",
+                family: "Son of P. Nageswara Rao",
+                constituency: "Kadapa Parliament",
+                earlyLife: "Growing up in Mydukur, Sri. P. Arun engaged actively with local youth clubs and technical student forums.",
+                politicalCareer: "Joined TNSF as a campus representative and worked through regional wings to assume the Joint Secretary role.",
+                achievements: "Facilitated skill development workshops and legal help forums for underprivileged degree students.",
+                vision: "Empowering rural youth with modern technical skills alongside academic growth.",
                 socials: CONFIG.SOCIAL_LINKS
             },
             {
@@ -590,10 +717,16 @@
                 name: "Sri. B. Naveen",
                 role: "Treasurer",
                 dept: "TNSF Kadapa Parliament Treasurer",
-                image: "https://via.placeholder.com/150",
-                bio: "Sri. B. Naveen oversees financial allocations and event funding management for student programs.",
-                contributions: "Maintains full transparency in organizational funding and event sponsorships.",
-                contact: "TNSF Office, Kadapa.",
+                image: "https://via.placeholder.com/250",
+                dob: "05 March 1994",
+                village: "Jammalamadugu, Kadapa",
+                education: "M.Com (Finance)",
+                family: "Son of B. Subbarayudu",
+                constituency: "Kadapa Parliament",
+                earlyLife: "Sri. B. Naveen completed his Master's in Commerce from Yogi Vemana University, specializing in financial planning.",
+                politicalCareer: "Serves as the financial backbone of TNSF Kadapa, ensuring transparent execution of large rallies and aid programs.",
+                achievements: "Managed multi-event student relief funds and organized transparency audits for student union funding.",
+                vision: "To build sustainable community welfare funds for students facing acute financial hardship.",
                 socials: CONFIG.SOCIAL_LINKS
             },
             {
@@ -601,10 +734,16 @@
                 name: "Sri. M. Praveen",
                 role: "Media Incharge",
                 dept: "TNSF Kadapa Parliament Media Incharge",
-                image: "https://via.placeholder.com/150",
-                bio: "Sri. M. Praveen manages public relations, digital media campaigns, and press releases for TNSF.",
-                contributions: "Built strong digital communication channels for rapid news dissemination to students.",
-                contact: "TNSF Media Cell, Kadapa.",
+                image: "https://via.placeholder.com/250",
+                dob: "18 September 1997",
+                village: "Pulivendula, Kadapa",
+                education: "B.A. Mass Communication",
+                family: "Son of M. Krishna",
+                constituency: "Kadapa Parliament",
+                earlyLife: "Passionate about media and digital communications, Praveen joined social movements during his journalism studies.",
+                politicalCareer: "Directs media outreach, press coverage, and digital campaigns for TNSF Kadapa.",
+                achievements: "Expanded TNSF Kadapa digital reach with dynamic youth campaigns and transparent updates.",
+                vision: "Ensure student concerns and educational grievances reach mainstream media platforms rapidly.",
                 socials: CONFIG.SOCIAL_LINKS
             },
             {
@@ -612,10 +751,16 @@
                 name: "Sri. Sk. Rafi",
                 role: "Event Coordinator",
                 dept: "TNSF Kadapa Parliament Event Coordinator",
-                image: "https://via.placeholder.com/150",
-                bio: "Sri. Sk. Rafi specializes in organizing large-scale rallies, educational seminars, and youth conventions.",
-                contributions: "Successfully coordinated over 50+ district-level student meetings.",
-                contact: "TNSF Office, Kadapa.",
+                image: "https://via.placeholder.com/250",
+                dob: "12 April 1995",
+                village: "Kamalapuram, Kadapa",
+                education: "B.Sc (Physics)",
+                family: "Son of Sk. Khader Basha",
+                constituency: "Kadapa Parliament",
+                earlyLife: "Organized sports tournaments and youth cultural meets in Kamalapuram prior to his full political activation.",
+                politicalCareer: "Coordinates major rallies, youth conventions, and awareness summits across Kadapa Parliament.",
+                achievements: "Coordinated the 2025 Kadapa Youth Convention with over 5,000 student attendees.",
+                vision: "To foster unity, leadership, and athletic development among student communities.",
                 socials: CONFIG.SOCIAL_LINKS
             },
             {
@@ -623,24 +768,37 @@
                 name: "Sri. V. Lokesh",
                 role: "Executive Member",
                 dept: "TNSF Kadapa Parliament Executive Member",
-                image: "https://via.placeholder.com/150",
-                bio: "Sri. V. Lokesh actively participates in policy advocacy and grassroots community engagement.",
-                contributions: "Key driving force behind campus awareness drives.",
-                contact: "TNSF Office, Kadapa.",
+                image: "https://via.placeholder.com/250",
+                dob: "29 December 1996",
+                village: "Badvel, Kadapa",
+                education: "B.A. Economics",
+                family: "Son of V. Ramaiah",
+                constituency: "Kadapa Parliament",
+                earlyLife: "Focused on grassroots socio-economic activism in Badvel division.",
+                politicalCareer: "Serves as key executive coordinator connecting rural constituency student units to the central board.",
+                achievements: "Conducted over 30 awareness camps regarding government educational schemes.",
+                vision: "Strengthening grassroots connectivity to leave no student unheard.",
                 socials: CONFIG.SOCIAL_LINKS
             }
         ];
 
+        // Dynamic Data Mapping for Constituencies
         const constituencyData = {
             "Kadapa": [
                 {
                     name: "Sri. R. Rajesh",
                     role: "Constituency Incharge",
-                    dept: "Kadapa City TNSF Incharge",
-                    image: "https://via.placeholder.com/150",
-                    bio: "Dedicated leader focusing on urban college student rights in Kadapa city.",
-                    contributions: "Resolved public library facilities and transport concession issues.",
-                    contact: "Kadapa Town Office.",
+                    dept: "Kadapa City TNSF Unit",
+                    image: "https://via.placeholder.com/250",
+                    dob: "08 July 1996",
+                    village: "Seven Roads, Kadapa",
+                    education: "B.Tech Mechanical",
+                    family: "Son of R. Narayana",
+                    constituency: "Kadapa Assembly",
+                    earlyLife: "Raised in Kadapa urban center, Rajesh closely witnessed campus challenges in local colleges.",
+                    politicalCareer: "Leading local student campaigns in Kadapa urban degree and junior colleges.",
+                    achievements: "Initiated municipal transport assistance drives for college commuters.",
+                    vision: "Modernizing urban campus safety and library facilities.",
                     socials: CONFIG.SOCIAL_LINKS
                 }
             ],
@@ -648,11 +806,17 @@
                 {
                     name: "Sri. T. Suresh",
                     role: "Constituency President",
-                    dept: "Pulivendula TNSF Incharge",
-                    image: "https://via.placeholder.com/150",
-                    bio: "Active leader driving student welfare programs in Pulivendula region.",
-                    contributions: "Organized career guidance programs for rural students.",
-                    contact: "Pulivendula Center.",
+                    dept: "Pulivendula TNSF Unit",
+                    image: "https://via.placeholder.com/250",
+                    dob: "19 January 1995",
+                    village: "Pulivendula Town",
+                    education: "M.Sc Organic Chemistry",
+                    family: "Son of T. Mallikarjuna",
+                    constituency: "Pulivendula Assembly",
+                    earlyLife: "A bright student activist dedicated to rural educational advancement in Pulivendula.",
+                    politicalCareer: "Appointed constituency head after leading student wing initiatives in college.",
+                    achievements: "Organized scholarship guidance centers helping hundreds of local farmers' children.",
+                    vision: "Creating higher education opportunities locally to prevent rural student migration.",
                     socials: CONFIG.SOCIAL_LINKS
                 }
             ],
@@ -660,11 +824,17 @@
                 {
                     name: "Sri. K. Vamsi",
                     role: "Constituency President",
-                    dept: "Proddatur TNSF Incharge",
-                    image: "https://via.placeholder.com/150",
-                    bio: "Championing technical student concerns and polytechnic college welfare.",
-                    contributions: "Led protests for lab equipment modernization.",
-                    contact: "Proddatur Main Road.",
+                    dept: "Proddatur TNSF Unit",
+                    image: "https://via.placeholder.com/250",
+                    dob: "03 May 1997",
+                    village: "Proddatur Town",
+                    education: "B.Com Honors",
+                    family: "Son of K. Srinivasulu",
+                    constituency: "Proddatur Assembly",
+                    earlyLife: "Brought up in the commercial hub of Proddatur with active participation in student debate clubs.",
+                    politicalCareer: "Directing TNSF operations across polytechnic and degree institutes in Proddatur.",
+                    achievements: "Successfully led protests securing laboratory upgrade funds for local colleges.",
+                    vision: "Promoting entrepreneurship and career placement wings in colleges.",
                     socials: CONFIG.SOCIAL_LINKS
                 }
             ],
@@ -672,11 +842,17 @@
                 {
                     name: "Sri. M. Anjaneyulu",
                     role: "Constituency Incharge",
-                    dept: "Jammalamadugu TNSF Incharge",
-                    image: "https://via.placeholder.com/150",
-                    bio: "Grassroots worker connected with degree and junior college students.",
-                    contributions: "Organized blood donation and educational support drives.",
-                    contact: "Jammalamadugu Unit.",
+                    dept: "Jammalamadugu TNSF Unit",
+                    image: "https://via.placeholder.com/250",
+                    dob: "25 August 1996",
+                    village: "Muddanur, Kadapa",
+                    education: "B.Sc Agricultural Sciences",
+                    family: "Son of M. Gangadhar",
+                    constituency: "Jammalamadugu Assembly",
+                    earlyLife: "Native of Muddanur, deeply connected to youth issues in agricultural communities.",
+                    politicalCareer: "Serves as the key organizing voice in Jammalamadugu division.",
+                    achievements: "Distributed educational supplies and organized free career counseling meets.",
+                    vision: "Enhancing agricultural and technical education centers in the region.",
                     socials: CONFIG.SOCIAL_LINKS
                 }
             ],
@@ -684,11 +860,17 @@
                 {
                     name: "Sri. P. Siva",
                     role: "Constituency President",
-                    dept: "Mydukur TNSF Incharge",
-                    image: "https://via.placeholder.com/150",
-                    bio: "Working to enhance scholarship availability and awareness.",
-                    contributions: "Assisted over 1,000+ students with online scholarship applications.",
-                    contact: "Mydukur Office.",
+                    dept: "Mydukur TNSF Unit",
+                    image: "https://via.placeholder.com/250",
+                    dob: "11 November 1994",
+                    village: "Duvvur, Kadapa",
+                    education: "B.Ed & M.A.",
+                    family: "Son of P. Ramachandra",
+                    constituency: "Mydukur Assembly",
+                    earlyLife: "Educated in Duvvur and Mydukur, specializing in educational pedagogy.",
+                    politicalCareer: "Advocating for teacher-student ratios and college infrastructure across Mydukur.",
+                    achievements: "Helped over 1,000+ rural students complete online scholarship paperwork.",
+                    vision: "Ensuring zero dropout rates in rural high schools and colleges.",
                     socials: CONFIG.SOCIAL_LINKS
                 }
             ],
@@ -696,11 +878,17 @@
                 {
                     name: "Sri. D. Kalyan",
                     role: "Constituency Incharge",
-                    dept: "Kamalapuram TNSF Incharge",
-                    image: "https://via.placeholder.com/150",
-                    bio: "Representing student voices across Kamalapuram division.",
-                    contributions: "Conducted youth leadership development camps.",
-                    contact: "Kamalapuram Town.",
+                    dept: "Kamalapuram TNSF Unit",
+                    image: "https://via.placeholder.com/250",
+                    dob: "30 March 1997",
+                    village: "Vallur, Kadapa",
+                    education: "B.Tech Civil Engineering",
+                    family: "Son of D. Prasad",
+                    constituency: "Kamalapuram Assembly",
+                    earlyLife: "Active in youth technical societies in Vallur before joining full-scale student activism.",
+                    politicalCareer: "Incharge of youth welfare and college wing coordination in Kamalapuram.",
+                    achievements: "Spearheaded youth sports meets and anti-ragging campus campaigns.",
+                    vision: "Building healthy campus environments with active sports & education balance.",
                     socials: CONFIG.SOCIAL_LINKS
                 }
             ],
@@ -708,21 +896,27 @@
                 {
                     name: "Sri. S. Hari",
                     role: "Constituency President",
-                    dept: "Badvel TNSF Incharge",
-                    image: "https://via.placeholder.com/150",
-                    bio: "Focusing on rural education development and student welfare.",
-                    contributions: "Distributed free educational study materials to underprivileged youth.",
-                    contact: "Badvel Center.",
+                    dept: "Badvel TNSF Unit",
+                    image: "https://via.placeholder.com/250",
+                    dob: "04 October 1995",
+                    village: "Badvel Town",
+                    education: "M.Sc Mathematics",
+                    family: "Son of S. Venkatasubbaiah",
+                    constituency: "Badvel Assembly",
+                    earlyLife: "Dedicated math scholar from Badvel passionate about rural coaching.",
+                    politicalCareer: "Leads TNSF Badvel division with a focus on student aid and scholarship rights.",
+                    achievements: "Set up free evening study centers for underprivileged competitive exam aspirants.",
+                    vision: "Establishing modern coaching facilities accessible to rural students.",
                     socials: CONFIG.SOCIAL_LINKS
                 }
             ]
         };
 
         /* ===================================================
-           3. INITIALIZATION & DOM RENDERING
+           3. DOM INITIALIZATION & CARD RENDERING
            =================================================== */
         document.addEventListener("DOMContentLoaded", () => {
-            // Apply Updatable Images
+            // Set Updatable Logo
             document.getElementById("mainLogo").src = CONFIG.LOGO_URL;
 
             // Render Hero Banner
@@ -738,14 +932,14 @@
                 `;
             }
 
-            // Render Parliamentary Cards
+            // Render Main Parliamentary Leadership Grid
             renderParliamentCards();
 
-            // Render Constituency Filter & Initial Cards
+            // Render Constituency Buttons and Initial Constituency Data
             renderConstituencyFilters();
         });
 
-        // Function to create card HTML (WITHOUT social icons on card UI)
+        // Function to build HTML for Card (WITHOUT Social Icons on main card UI)
         function createCardHTML(leader) {
             return `
                 <div class="card" onclick='openModal(${JSON.stringify(leader).replace(/'/g, "&apos;")})'>
@@ -765,7 +959,7 @@
             grid.innerHTML = parliamentaryLeaders.map(leader => createCardHTML(leader)).join('');
         }
 
-        // Render Constituency Filters & Content
+        // Render Constituency Filter Buttons
         function renderConstituencyFilters() {
             const btnContainer = document.getElementById("constituencyBtns");
             const keys = Object.keys(constituencyData);
@@ -776,17 +970,14 @@
                 </button>
             `).join('');
 
-            // Render initial first constituency
             if (keys.length > 0) {
                 renderConstituencyCards(keys[0]);
             }
         }
 
         function filterConstituency(constituencyName, btnElement) {
-            // Highlight active button
             document.querySelectorAll('.btn-constituency').forEach(b => b.classList.remove('active'));
             btnElement.classList.add('active');
-
             renderConstituencyCards(constituencyName);
         }
 
@@ -794,28 +985,37 @@
             const grid = document.getElementById("constituencyGrid");
             const leaders = constituencyData[constituencyName] || [];
             if (leaders.length === 0) {
-                grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">No leaders listed for this constituency yet.</p>`;
+                grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">No leaders currently listed for this constituency.</p>`;
             } else {
                 grid.innerHTML = leaders.map(leader => createCardHTML(leader)).join('');
             }
         }
 
         /* ===================================================
-           4. FULL SCREEN MODAL / OVERVIEW LOGIC
+           4. WIKIPEDIA STYLE FULL-SCREEN MODAL / OVERVIEW LOGIC
            =================================================== */
         const modal = document.getElementById("overviewModal");
         const closeModalBtn = document.getElementById("closeModalBtn");
 
         function openModal(leader) {
+            // Fill Highlights / Infobox
             document.getElementById("modalImg").src = leader.image;
             document.getElementById("modalName").innerText = leader.name;
-            document.getElementById("modalRole").innerText = leader.role;
+            document.getElementById("modalRoleBadge").innerText = leader.role;
             document.getElementById("modalDept").innerText = leader.dept;
-            document.getElementById("modalBio").innerText = leader.bio;
-            document.getElementById("modalContributions").innerText = leader.contributions;
-            document.getElementById("modalContact").innerText = leader.contact;
+            document.getElementById("modalDob").innerText = leader.dob || "N/A";
+            document.getElementById("modalVillage").innerText = leader.village || "N/A";
+            document.getElementById("modalEdu").innerText = leader.education || "N/A";
+            document.getElementById("modalFamily").innerText = leader.family || "N/A";
+            document.getElementById("modalConstituency").innerText = leader.constituency || "Kadapa Region";
 
-            // Render Social Redirect Icons in Overview Modal
+            // Fill Paragraphs (Wikipedia Style Data)
+            document.getElementById("modalEarlyLife").innerText = leader.earlyLife || "Information regarding early life and academic background is currently being updated.";
+            document.getElementById("modalPoliticalCareer").innerText = leader.politicalCareer || "Active leadership track record within TNSF Kadapa Parliament.";
+            document.getElementById("modalAchievements").innerText = leader.achievements || "Significant contributions to student rights, rallies, and educational empowerment drives.";
+            document.getElementById("modalVision").innerText = leader.vision || "Committed to creating a brighter educational future for students in Kadapa.";
+
+            // Render Clickable Social Icons inside Overview Modal
             const socials = leader.socials || CONFIG.SOCIAL_LINKS;
             const socialsContainer = document.getElementById("modalSocials");
             
@@ -827,8 +1027,9 @@
                 <a href="${socials.youtube || '#'}" target="_blank" class="social-icon-btn" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
             `;
 
+            // Open Modal & Lock Scroll
             modal.classList.add("active");
-            document.body.style.overflow = "hidden"; // Prevent background scroll
+            document.body.style.overflow = "hidden";
         }
 
         closeModalBtn.addEventListener("click", closeModal);
