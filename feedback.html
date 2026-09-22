@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TNSF KADAPA PARLIAMENT - Feedback</title>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary-yellow: #FFC107;
+      --dark-yellow: #E6A100;
+      --accent-yellow: #FFF8E1;
+      --text-dark: #1A1A1A;
+      --text-gray: #666666;
+      --border-color: #E0E0E0;
+      --bg-light: #FAFAFA;
+      
+      /* ==========================================================
+         EASILY UPDATABLE IMAGE LINKS
+         ========================================================== */
+      --logo-url: url('https://via.placeholder.com/60x60/FFC107/FFFFFF?text=TNSF'); 
+      --hero-student-img: url('https://img.freepik.com/free-vector/back-school-concept-illustration_114360-1282.jpg');
+      --watermark-logo-url: url('https://via.placeholder.com/80x80/FFC107/FFFFFF?text=TNSF');
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #F8F9FA;
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      align-items: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #FFFFFF;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ---------------- Navbar ---------------- */
+    header {
+      background-color: var(--primary-yellow);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .brand-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      background-image: var(--logo-url);
+      background-size: cover;
+      background-position: center;
+      border: 2px solid #FFF;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .brand-title {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title h1 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      line-height: 1.1;
+      letter-spacing: 0.5px;
+    }
+
+    .brand-title h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      letter-spacing: 0.5px;
+    }
+
+    /* Home Link replacing Hamburger Menu */
+    .home-nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #FFFFFF;
+      color: var(--text-dark);
+      padding: 8px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: all 0.2s ease;
+    }
+
+    .home-nav-btn:hover {
+      background-color: #f0f0f0;
+      transform: translateY(-1px);
+    }
+
+    .home-nav-btn i {
+      color: var(--dark-yellow);
+    }
+
+    /* ---------------- Full Width Hero Banner ---------------- */
+    .hero-banner {
+      width: 100%;
+      background: linear-gradient(135deg, #FFFDE7 0%, #FFF59D 100%);
+      padding: 25px 20px;
+      position: relative;
+      border-bottom-left-radius: 24px;
+      border-bottom-right-radius: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      flex: 1;
+      z-index: 2;
+    }
+
+    .hero-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .hero-title span {
+      color: #D84315;
+      display: block;
+      font-style: italic;
+    }
+
+    .hero-subtitle {
+      font-size: 0.95rem;
+      color: #424242;
+      font-weight: 500;
+    }
+
+    .hero-illustration {
+      position: relative;
+      width: 180px;
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .student-img {
+      width: 100%;
+      height: 100%;
+      background-image: var(--hero-student-img);
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      z-index: 2;
+    }
+
+    .badge-watermark {
+      position: absolute;
+      top: 10px;
+      right: -10px;
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      background-image: var(--watermark-logo-url);
+      background-size: cover;
+      border: 2px solid #FFF;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      z-index: 3;
+    }
+
+    /* ---------------- Feedback Section ---------------- */
+    .content-area {
+      padding: 20px;
+      flex: 1;
+    }
+
+    .feedback-card {
+      border: 1px solid #E2E8F0;
+      border-radius: 16px;
+      padding: 24px;
+      background: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+
+    .feedback-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .feedback-icon-bg {
+      background-color: var(--primary-yellow);
+      padding: 10px;
+      border-radius: 12px;
+      color: #FFF;
+      font-size: 1.2rem;
+    }
+
+    .feedback-header-text h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.2;
+    }
+
+    .feedback-header-text p {
+      font-size: 0.88rem;
+      color: var(--text-gray);
+      margin-top: 4px;
+    }
+
+    /* Form Styles */
+    .form-group {
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-wrapper i {
+      position: absolute;
+      left: 14px;
+      color: var(--primary-yellow);
+      font-size: 1.1rem;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 14px 12px 42px;
+      border: 1.5px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      outline: none;
+    }
+
+    textarea.form-control {
+      padding-top: 12px;
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary-yellow);
+      box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.2);
+    }
+
+    /* Star Rating System */
+    .rating-container {
+      margin: 20px 0;
+      text-align: center;
+      background-color: var(--accent-yellow);
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    .rating-label {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      color: var(--text-dark);
+    }
+
+    .star-rating {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-direction: row-reverse;
+    }
+
+    .star-rating input {
+      display: none;
+    }
+
+    .star-rating label {
+      font-size: 1.8rem;
+      color: #DDD;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .star-rating label:hover,
+    .star-rating label:hover ~ label,
+    .star-rating input:checked ~ label {
+      color: var(--primary-yellow);
+    }
+
+    /* Submit Button */
+    .btn-submit {
+      width: 100%;
+      background-color: var(--primary-yellow);
+      color: var(--text-dark);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      transition: background 0.2s ease, transform 0.1s ease;
+      box-shadow: 0 4px 10px rgba(255, 193, 7, 0.3);
+    }
+
+    .btn-submit:hover {
+      background-color: var(--dark-yellow);
+    }
+
+    .btn-submit:active {
+      transform: scale(0.99);
+    }
+
+    .sub-footer-text {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.85rem;
+      color: var(--text-gray);
+      font-weight: 500;
+    }
+
+    /* ---------------- Footer ---------------- */
+    footer {
+      background-color: var(--primary-yellow);
+      padding: 14px;
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-top: auto;
+    }
+
+    /* ---------------- Success Modal Popup ---------------- */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-box {
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      text-align: center;
+      max-width: 380px;
+      width: 90%;
+      transform: scale(0.8);
+      transition: transform 0.3s ease;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .modal-overlay.active .modal-box {
+      transform: scale(1);
+    }
+
+    .modal-icon {
+      width: 60px;
+      height: 60px;
+      background: #E8F5E9;
+      color: #2E7D32;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin: 0 auto 15px;
+    }
+
+    .modal-box h4 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      color: var(--text-dark);
+    }
+
+    .modal-box p {
+      font-size: 0.9rem;
+      color: var(--text-gray);
+      margin-bottom: 20px;
+    }
+
+    .btn-close {
+      background-color: var(--primary-yellow);
+      border: none;
+      padding: 10px 24px;
+      border-radius: 20px;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--text-dark);
+    }
+
+    /* Media Queries for Desktop responsiveness */
+    @media (min-width: 768px) {
+      .container {
+        margin: 20px auto;
+        border-radius: 16px;
+        overflow: hidden;
+        min-height: auto;
+      }
+      .hero-title {
+        font-size: 2.6rem;
+      }
+      .hero-illustration {
+        width: 220px;
+        height: 180px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header/Navbar -->
+    <header>
+      <div class="brand-container">
+        <!-- Updatable Logo Icon -->
+        <div class="logo"></div>
+        <div class="brand-title">
+          <h1>TNSF</h1>
+          <h2>KADAPA PARLIAMENT</h2>
+        </div>
+      </div>
+      <!-- Replaced Menu Button with Home Link -->
+      <a href="#home" class="home-nav-btn">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+      </a>
+    </header>
+
+    <!-- Full-Width Hero Banner -->
+    <section class="hero-banner">
+      <div class="hero-content">
+        <h2 class="hero-title">Your Voice <span>Matters</span></h2>
+        <p class="hero-subtitle">Share your thoughts, help us grow!</p>
+      </div>
+      <div class="hero-illustration">
+        <div class="student-img"></div>
+        <div class="badge-watermark"></div>
+      </div>
+    </section>
+
+    <!-- Main Content Area / Form -->
+    <main class="content-area">
+      <div class="feedback-card">
+        
+        <div class="feedback-header">
+          <div class="feedback-icon-bg">
+            <i class="fa-solid fa-comment-dots"></i>
+          </div>
+          <div class="feedback-header-text">
+            <h3>Feedback</h3>
+            <p>We value your opinion! Please share your feedback, suggestions or any concerns with us.</p>
+          </div>
+        </div>
+
+        <form id="feedbackForm">
+          <!-- Name Input -->
+          <div class="form-group">
+            <div class="input-wrapper">
+              <i class="fa-solid fa-user"></i>
+              <input type="text" class="form-control" placeholder="Your Name *" required>
+            </div>
+          </div>
+
+          <!-- Email Input -->
+          <div class="form-group">
+            <div class="input-wrapper">
+              <i class="fa-solid fa-envelope"></i>
+              <input type="email" class="form-control" placeholder="Your Email (Optional)">
+            </div>
+          </div>
+
+          <!-- Mobile Input -->
+          <div class="form-group">
+            <div class="input-wrapper">
+              <i class="fa-solid fa-phone"></i>
+              <input type="tel" class="form-control" placeholder="Your Mobile Number (Optional)">
+            </div>
+          </div>
+
+          <!-- Feedback Textarea -->
+          <div class="form-group">
+            <div class="input-wrapper">
+              <i class="fa-solid fa-comment-alt" style="top: 14px;"></i>
+              <textarea class="form-control" rows="3" placeholder="Your Feedback / Suggestion *" required></textarea>
+            </div>
+          </div>
+
+          <!-- Star Rating Option -->
+          <div class="rating-container">
+            <div class="rating-label">Rate your experience</div>
+            <div class="star-rating">
+              <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 stars"><i class="fa-solid fa-star"></i></label>
+              <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 stars"><i class="fa-solid fa-star"></i></label>
+              <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 stars"><i class="fa-solid fa-star"></i></label>
+              <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 stars"><i class="fa-solid fa-star"></i></label>
+              <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 star"><i class="fa-solid fa-star"></i></label>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn-submit">
+            <i class="fa-solid fa-paper-plane"></i> Submit Feedback
+          </button>
+        </form>
+
+        <p class="sub-footer-text">
+          <i class="fa-solid fa-heart" style="color: #FFC107;"></i> 
+          Your feedback helps us build a stronger and better TNSF community!
+        </p>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      Copy 2026 TNSF KADAPA PARLIAMENT all rights reserved
+    </footer>
+  </div>
+
+  <!-- Success Message Popup Modal -->
+  <div class="modal-overlay" id="successModal">
+    <div class="modal-box">
+      <div class="modal-icon">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <h4>Thank You!</h4>
+      <p>Your feedback has been submitted successfully.</p>
+      <button class="btn-close" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    // Handle Form Submission & Show Popup
+    document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+      e.preventDefault(); // Prevent page refresh
+      
+      // Show Success Modal
+      document.getElementById('successModal').classList.add('active');
+      
+      // Clear form inputs
+      this.reset();
+    });
+
+    // Close Modal Function
+    function closeModal() {
+      document.getElementById('successModal').classList.remove('active');
+    }
+  </script>
+</body>
+</html>
+
