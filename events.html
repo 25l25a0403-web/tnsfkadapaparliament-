@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TNSF KADAPA PARLIAMENT - Events</title>
+  <!-- Google Fonts & FontAwesome Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* ==========================================
+       GLOBAL STYLES & VARIABLES
+       ========================================== */
+    :root {
+      --primary-yellow: #FFD100;
+      --primary-dark-yellow: #e6bd00;
+      --light-yellow: #FFF9D2;
+      --text-dark: #1E1E1E;
+      --text-muted: #666666;
+      --bg-light: #FAFAFA;
+      --card-border: #EEEEEE;
+      --white: #FFFFFF;
+      --border-radius: 12px;
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      line-height: 1.5;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ==========================================
+       HEADER & NAVIGATION
+       ========================================== */
+    header {
+      background-color: var(--primary-yellow);
+      padding: 12px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-brand {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo-img {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: white;
+    }
+
+    .brand-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+
+    /* Home Button Navigation (Replaced Menu Button) */
+    .home-nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background-color: var(--white);
+      color: var(--text-dark);
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: var(--transition);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .home-nav-btn:hover {
+      background-color: var(--text-dark);
+      color: var(--white);
+    }
+
+    /* ==========================================
+       FULL-WIDTH HERO BANNER
+       ========================================== */
+    .hero-banner {
+      width: 100%;
+      height: 380px;
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                  url('https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--white);
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 700px;
+      padding: 20px;
+    }
+
+    .hero-title-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 10px;
+    }
+
+    .hero-calendar-icon {
+      font-size: 3rem;
+      color: var(--primary-yellow);
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      font-style: italic;
+      letter-spacing: 1px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-top: 5px;
+      opacity: 0.9;
+    }
+
+    /* ==========================================
+       MAIN CONTENT & SECTION HEADINGS
+       ========================================== */
+    main {
+      padding: 40px 0;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+
+    .section-title i {
+      color: var(--primary-yellow);
+      font-size: 1.8rem;
+    }
+
+    .past-events-btn {
+      background-color: var(--light-yellow);
+      color: var(--text-dark);
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(0,0,0,0.05);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .past-events-btn:hover {
+      background-color: var(--primary-yellow);
+    }
+
+    /* ==========================================
+       EVENT CARDS LIST
+       ========================================== */
+    .events-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 50px;
+    }
+
+    .event-card {
+      background: var(--white);
+      border-radius: var(--border-radius);
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .event-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      border-color: var(--primary-yellow);
+    }
+
+    /* Date Badge Box */
+    .date-badge {
+      background-color: var(--primary-yellow);
+      min-width: 90px;
+      height: 90px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-weight: 800;
+      color: var(--text-dark);
+      flex-shrink: 0;
+    }
+
+    .date-badge .month {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .date-badge .day {
+      font-size: 1.8rem;
+      line-height: 1;
+      margin: 2px 0;
+    }
+
+    .date-badge .year {
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    /* Event Thumbnail */
+    .event-image {
+      width: 140px;
+      height: 90px;
+      border-radius: 8px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    /* Event Information */
+    .event-info {
+      flex-grow: 1;
+    }
+
+    .event-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--text-dark);
+    }
+
+    .event-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .event-meta {
+      display: flex;
+      gap: 15px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+    }
+
+    .event-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .event-meta-item i {
+      color: var(--primary-yellow);
+    }
+
+    /* Card View Button */
+    .view-btn {
+      background-color: var(--primary-yellow);
+      color: var(--text-dark);
+      padding: 10px 18px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+
+    .view-btn:hover {
+      background-color: var(--primary-dark-yellow);
+    }
+
+    /* ==========================================
+       PERSONAL SCHEDULES & CALENDAR SECTION
+       ========================================== */
+    .personal-schedule-section {
+      background: var(--white);
+      border-radius: var(--border-radius);
+      padding: 25px;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      margin-top: 40px;
+    }
+
+    .schedule-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+      margin-top: 20px;
+    }
+
+    .calendar-card, .add-schedule-card {
+      background: var(--bg-light);
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid #E5E5E5;
+    }
+
+    .calendar-card h3, .add-schedule-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .calendar-card h3 i, .add-schedule-card h3 i {
+      color: var(--primary-yellow);
+    }
+
+    /* Simple Form Styles */
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #CCC;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .form-group input:focus, .form-group textarea:focus {
+      border-color: var(--primary-yellow);
+    }
+
+    .add-btn {
+      background-color: var(--primary-yellow);
+      color: var(--text-dark);
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      font-weight: 600;
+      width: 100%;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .add-btn:hover {
+      background-color: var(--primary-dark-yellow);
+    }
+
+    /* Saved Items List */
+    .schedule-list {
+      list-style: none;
+      max-height: 220px;
+      overflow-y: auto;
+    }
+
+    .schedule-item {
+      background: var(--white);
+      padding: 10px 12px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      border-left: 4px solid var(--primary-yellow);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+    }
+
+    .schedule-item-info strong {
+      display: block;
+      color: var(--text-dark);
+    }
+
+    .schedule-item-info span {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================
+       MODAL OVERVIEW POPUP
+       ========================================== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-card {
+      background: var(--white);
+      border-radius: var(--border-radius);
+      max-width: 600px;
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      transform: translateY(20px);
+      transition: var(--transition);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .modal-overlay.active .modal-card {
+      transform: translateY(0);
+    }
+
+    .modal-header-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--white);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .modal-body {
+      padding: 25px;
+    }
+
+    .modal-title {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+
+    .modal-meta {
+      display: flex;
+      gap: 15px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 15px;
+    }
+
+    .modal-desc {
+      font-size: 0.95rem;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    /* ==========================================
+       FOOTER
+       ========================================== */
+    footer {
+      background-color: var(--primary-yellow);
+      text-align: center;
+      padding: 15px 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-top: 50px;
+    }
+
+    /* ==========================================
+       RESPONSIVE DESIGN (MOBILE ADAPTATIONS)
+       ========================================== */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.2rem;
+      }
+      .hero-calendar-icon {
+        font-size: 2.2rem;
+      }
+      .brand-title {
+        font-size: 1.1rem;
+      }
+      .event-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .date-badge {
+        width: 100%;
+        height: 50px;
+        flex-direction: row;
+        gap: 10px;
+      }
+      .event-image {
+        width: 100%;
+        height: 160px;
+      }
+      .view-btn {
+        width: 100%;
+        justify-content: center;
+      }
+      .schedule-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container header-container">
+      <a href="#" class="logo-brand">
+        <!-- Updatable Logo Link -->
+        <img id="site-logo" src="https://via.placeholder.com/100/FFD100/000000?text=TNSF" alt="TNSF Logo" class="logo-img">
+        <span class="brand-title">TNSF<br>KADAPA PARLIAMENT</span>
+      </a>
+
+      <!-- Replaced Menu Button with Home Icon + Text -->
+      <a href="#" class="home-nav-btn">
+        <i class="fa-solid fa-house"></i> Home
+      </a>
+    </div>
+  </header>
+
+  <!-- FULL-WIDTH HERO BANNER -->
+  <section class="hero-banner">
+    <div class="hero-content">
+      <div class="hero-title-group">
+        <i class="fa-regular fa-calendar-days hero-calendar-icon"></i>
+        <h1 class="hero-title">Events</h1>
+      </div>
+      <p class="hero-subtitle">Together for a Brighter Future</p>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="container">
+    
+    <!-- SECTION HEADER -->
+    <div class="section-header">
+      <div class="section-title">
+        <i class="fa-solid fa-calendar-day"></i>
+        <h2>Upcoming Events</h2>
+      </div>
+      <button class="past-events-btn">
+        <i class="fa-solid fa-rotate-left"></i> Past Events
+      </button>
+    </div>
+
+    <!-- UPCOMING EVENTS CONTAINER (Populated dynamically) -->
+    <div class="events-list" id="events-container">
+      <!-- Cards rendered via JS -->
+    </div>
+
+    <!-- PERSONAL SCHEDULES & IMPORTANTS BY CALENDAR SECTION -->
+    <section class="personal-schedule-section">
+      <div class="section-title">
+        <i class="fa-solid fa-calendar-check"></i>
+        <h2>Personal Schedules & Important Dates</h2>
+      </div>
+
+      <div class="schedule-grid">
+        <!-- Schedule Add Form -->
+        <div class="add-schedule-card">
+          <h3><i class="fa-solid fa-plus-circle"></i> Add Personal Schedule</h3>
+          <form id="schedule-form">
+            <div class="form-group">
+              <label for="sched-title">Event Title</label>
+              <input type="text" id="sched-title" placeholder="e.g. Study Group Meeting" required>
+            </div>
+            <div class="form-group">
+              <label for="sched-date">Date</label>
+              <input type="date" id="sched-date" required>
+            </div>
+            <div class="form-group">
+              <label for="sched-notes">Notes</label>
+              <textarea id="sched-notes" rows="2" placeholder="Important details..."></textarea>
+            </div>
+            <button type="submit" class="add-btn">Save to Calendar</button>
+          </form>
+        </div>
+
+        <!-- Saved Schedules List -->
+        <div class="calendar-card">
+          <h3><i class="fa-solid fa-list-check"></i> My Important Schedules</h3>
+          <ul class="schedule-list" id="schedule-list">
+            <!-- Saved schedules rendered dynamically -->
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- OVERVIEW POPUP MODAL -->
+  <div class="modal-overlay" id="event-modal">
+    <div class="modal-card">
+      <button class="modal-close-btn" id="close-modal"><i class="fa-solid fa-xmark"></i></button>
+      <img id="modal-img" src="" alt="Event Image" class="modal-header-img">
+      <div class="modal-body">
+        <h3 id="modal-title" class="modal-title"></h3>
+        <div class="modal-meta">
+          <span id="modal-location"><i class="fa-solid fa-location-dot"></i> <span></span></span>
+          <span id="modal-date"><i class="fa-solid fa-calendar"></i> <span></span></span>
+        </div>
+        <p id="modal-desc" class="modal-desc"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    Copyright © 2026 TNSF KADAPA PARLIAMENT. All rights reserved.
+  </footer>
+
+  <!-- JAVASCRIPT FOR LOGIC AND EASY LINK UPDATES -->
+  <script>
+    /* ==========================================
+       UPDATABLE LINKS & DATA CONFIGURATION
+       ========================================== */
+    
+    // Updatable Logo Image Link
+    const LOGO_URL = "https://via.placeholder.com/100/FFD100/000000?text=TNSF"; 
+    document.getElementById('site-logo').src = LOGO_URL;
+
+    // Updatable Events Data
+    const eventsData = [
+      {
+        id: 1,
+        month: "AUG",
+        day: "29",
+        year: "2025",
+        title: "TNSF Kadapa Parliament Cricket Tournament",
+        description: "More than a game... It's a movement! Join us for the TNSF Kadapa Parliament Cricket Tournament.",
+        location: "YVU College Grounds, Proddatur",
+        dateRange: "29 Aug 2025 – 01 Sep 2025",
+        // Updatable Image Link
+        image: "https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 2,
+        month: "SEP",
+        day: "05",
+        year: "2025",
+        title: "Student Membership Drive",
+        description: "Let's build a stronger student community. Join TNSF and be a part of the change.",
+        location: "Proddatur",
+        dateRange: "05 Sep 2025",
+        // Updatable Image Link
+        image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 3,
+        month: "SEP",
+        day: "12",
+        year: "2025",
+        title: "Blood Donation Camp",
+        description: "Donate Blood, Save Lives. Be a Hero, Be a Donor!",
+        location: "Proddatur",
+        dateRange: "12 Sep 2025",
+        // Updatable Image Link
+        image: "https://images.unsplash.com/photo-1615461066841-6116e61058f4?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 4,
+        month: "SEP",
+        day: "20",
+        year: "2025",
+        title: "Debate & Essay Competition",
+        description: "Think. Speak. Create. Show your ideas and make a difference.",
+        location: "YVU College, Proddatur",
+        dateRange: "20 Sep 2025",
+        // Updatable Image Link
+        image: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 5,
+        month: "OCT",
+        day: "02",
+        year: "2025",
+        title: "Tree Plantation Drive",
+        description: "Green Today, Clean Tomorrow. Let's plant for a better future.",
+        location: "Proddatur",
+        dateRange: "02 Oct 2025",
+        // Updatable Image Link
+        image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=600&q=80"
+      }
+    ];
+
+    /* ==========================================
+       RENDER EVENTS
+       ========================================== */
+    const eventsContainer = document.getElementById('events-container');
+
+    function renderEvents() {
+      eventsContainer.innerHTML = eventsData.map(event => `
+        <div class="event-card" onclick="openModal(${event.id})">
+          <div class="date-badge">
+            <span class="month">${event.month}</span>
+            <span class="day">${event.day}</span>
+            <span class="year">${event.year}</span>
+          </div>
+          <img src="${event.image}" alt="${event.title}" class="event-image">
+          <div class="event-info">
+            <h3 class="event-title">${event.title}</h3>
+            <p class="event-desc">${event.description}</p>
+            <div class="event-meta">
+              <div class="event-meta-item">
+                <i class="fa-solid fa-location-dot"></i>
+                <span>${event.location}</span>
+              </div>
+              <div class="event-meta-item">
+                <i class="fa-regular fa-calendar"></i>
+                <span>${event.dateRange}</span>
+              </div>
+            </div>
+          </div>
+          <button class="view-btn">View Details <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      `).join('');
+    }
+
+    /* ==========================================
+       MODAL OVERVIEW POPUP LOGIC
+       ========================================== */
+    const modal = document.getElementById('event-modal');
+    const closeModalBtn = document.getElementById('close-modal');
+
+    function openModal(eventId) {
+      const selectedEvent = eventsData.find(e => e.id === eventId);
+      if (!selectedEvent) return;
+
+      document.getElementById('modal-img').src = selectedEvent.image;
+      document.getElementById('modal-title').textContent = selectedEvent.title;
+      document.getElementById('modal-location').querySelector('span').textContent = selectedEvent.location;
+      document.getElementById('modal-date').querySelector('span').textContent = selectedEvent.dateRange;
+      document.getElementById('modal-desc').textContent = selectedEvent.description;
+
+      modal.classList.add('active');
+    }
+
+    closeModalBtn.addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+      }
+    });
+
+    /* ==========================================
+       PERSONAL SCHEDULE LOGIC
+       ========================================== */
+    const scheduleForm = document.getElementById('schedule-form');
+    const scheduleList = document.getElementById('schedule-list');
+
+    let personalSchedules = [
+      { title: "Exam Preparation Meeting", date: "2025-09-10", notes: "At Central Library" }
+    ];
+
+    function renderSchedules() {
+      if (personalSchedules.length === 0) {
+        scheduleList.innerHTML = '<li style="font-size: 0.85rem; color: #888;">No personal schedules added yet.</li>';
+        return;
+      }
+
+      scheduleList.innerHTML = personalSchedules.map((item, index) => `
+        <li class="schedule-item">
+          <div class="schedule-item-info">
+            <strong>${item.title}</strong>
+            <span><i class="fa-regular fa-calendar"></i> ${item.date} ${item.notes ? '• ' + item.notes : ''}</span>
+          </div>
+          <i class="fa-solid fa-trash" style="cursor:pointer; color:#e74c3c;" onclick="deleteSchedule(${index})"></i>
+        </li>
+      `).join('');
+    }
+
+    scheduleForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const title = document.getElementById('sched-title').value;
+      const date = document.getElementById('sched-date').value;
+      const notes = document.getElementById('sched-notes').value;
+
+      personalSchedules.push({ title, date, notes });
+      renderSchedules();
+      scheduleForm.reset();
+    });
+
+    function deleteSchedule(index) {
+      personalSchedules.splice(index, 1);
+      renderSchedules();
+    }
+
+    // Initial Load
+    renderEvents();
+    renderSchedules();
+  </script>
+</body>
+</html>
