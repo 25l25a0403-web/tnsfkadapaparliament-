@@ -3,28 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TNSF KADAPA PARLIAMENT - Feedback</title>
-  <!-- Font Awesome Icons -->
+  <title>TNSF Kadapa Parliament - Feedback</title>
+  <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Google Fonts -->
+  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --primary-yellow: #FFC107;
-      --dark-yellow: #E6A100;
-      --accent-yellow: #FFF8E1;
-      --text-dark: #1A1A1A;
-      --text-gray: #666666;
-      --border-color: #E0E0E0;
-      --bg-light: #FAFAFA;
-      
-      /* ==========================================================
-         EASILY UPDATABLE IMAGE LINKS
-         ========================================================== */
-      --logo-url: url('https://via.placeholder.com/60x60/FFC107/FFFFFF?text=TNSF'); 
-      --hero-student-img: url('https://img.freepik.com/free-vector/back-school-concept-illustration_114360-1282.jpg');
-      --watermark-logo-url: url('https://via.placeholder.com/80x80/FFC107/FFFFFF?text=TNSF');
+      --primary-yellow: #FFCB05;
+      --primary-yellow-hover: #e5b600;
+      --bg-gradient-start: #FFFCF0;
+      --bg-gradient-end: #FFF5CE;
+      --card-bg: #FFFFFF;
+      --text-dark: #1E293B;
+      --text-muted: #64748B;
+      --border-color: #E2E8F0;
+      --star-color: #FFB800;
     }
 
     * {
@@ -35,214 +30,183 @@
     }
 
     body {
-      background-color: #F8F9FA;
+      background-color: #F8FAFC;
       color: var(--text-dark);
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      align-items: center;
     }
 
-    .container {
-      width: 100%;
-      max-width: 800px;
-      margin: 0 auto;
-      background-color: #FFFFFF;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* ---------------- Navbar ---------------- */
+    /* ---------------- HEADER ---------------- */
     header {
-      background-color: var(--primary-yellow);
-      padding: 12px 20px;
+      background: var(--primary-yellow);
+      padding: 12px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      width: 100%;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
-    .brand-container {
+    .header-brand {
       display: flex;
       align-items: center;
       gap: 12px;
     }
 
-    .logo {
-      width: 55px;
-      height: 55px;
+    .header-logo {
+      height: 50px;
+      width: 50px;
+      object-fit: contain;
       border-radius: 50%;
-      background-image: var(--logo-url);
-      background-size: cover;
-      background-position: center;
-      border: 2px solid #FFF;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      background: #fff;
     }
 
-    .brand-title {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .brand-title h1 {
-      font-size: 1.4rem;
+    .header-title h1 {
+      font-size: 1.1rem;
       font-weight: 800;
-      color: var(--text-dark);
       line-height: 1.1;
-      letter-spacing: 0.5px;
+      color: #000;
     }
 
-    .brand-title h2 {
-      font-size: 1rem;
+    .header-title p {
+      font-size: 0.85rem;
       font-weight: 700;
-      color: var(--text-dark);
+      color: #1E293B;
       letter-spacing: 0.5px;
     }
 
-    /* Home Link replacing Hamburger Menu */
-    .home-nav-btn {
+    .home-btn {
       display: flex;
       align-items: center;
-      gap: 6px;
-      background: #FFFFFF;
-      color: var(--text-dark);
+      gap: 8px;
+      background: #ffffff;
+      color: #000;
       padding: 8px 16px;
       border-radius: 20px;
       text-decoration: none;
       font-weight: 600;
-      font-size: 0.95rem;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      font-size: 0.9rem;
       transition: all 0.2s ease;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
-    .home-nav-btn:hover {
-      background-color: #f0f0f0;
+    .home-btn:hover {
+      background: #f1f1f1;
       transform: translateY(-1px);
     }
 
-    .home-nav-btn i {
-      color: var(--dark-yellow);
-    }
-
-    /* ---------------- Full Width Hero Banner ---------------- */
-    .hero-banner {
+    /* ---------------- FULL-WIDTH HERO BANNER ---------------- */
+    .hero-container {
       width: 100%;
-      background: linear-gradient(135deg, #FFFDE7 0%, #FFF59D 100%);
-      padding: 25px 20px;
-      position: relative;
-      border-bottom-left-radius: 24px;
-      border-bottom-right-radius: 24px;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      padding: 40px 20px;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
-      overflow: hidden;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
 
     .hero-content {
+      max-width: 1000px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .hero-text {
       flex: 1;
-      z-index: 2;
     }
 
-    .hero-title {
-      font-size: 2.2rem;
+    .hero-text h2 {
+      font-size: 2.8rem;
       font-weight: 800;
-      color: var(--text-dark);
       line-height: 1.1;
-      margin-bottom: 8px;
+      color: #000;
     }
 
-    .hero-title span {
-      color: #D84315;
+    .hero-text h2 span {
+      color: #E6A100;
       display: block;
-      font-style: italic;
+      font-size: 3.2rem;
     }
 
-    .hero-subtitle {
-      font-size: 0.95rem;
-      color: #424242;
+    .hero-text p {
+      margin-top: 12px;
+      font-size: 1.1rem;
+      color: var(--text-muted);
       font-weight: 500;
     }
 
-    .hero-illustration {
-      position: relative;
-      width: 180px;
-      height: 160px;
+    .hero-image-wrapper {
+      flex: 1;
       display: flex;
-      align-items: center;
       justify-content: center;
     }
 
-    .student-img {
-      width: 100%;
-      height: 100%;
-      background-image: var(--hero-student-img);
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-      z-index: 2;
+    .hero-image {
+      max-width: 100%;
+      max-height: 280px;
+      object-fit: contain;
     }
 
-    .badge-watermark {
-      position: absolute;
-      top: 10px;
-      right: -10px;
-      width: 65px;
-      height: 65px;
-      border-radius: 50%;
-      background-image: var(--watermark-logo-url);
-      background-size: cover;
-      border: 2px solid #FFF;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-      z-index: 3;
+    /* ---------------- MAIN CONTAINER ---------------- */
+    main {
+      max-width: 680px;
+      width: 90%;
+      margin: -30px auto 40px auto;
+      position: relative;
+      z-index: 10;
     }
 
-    /* ---------------- Feedback Section ---------------- */
-    .content-area {
-      padding: 20px;
-      flex: 1;
-    }
-
+    /* ---------------- CARD & FORM ---------------- */
     .feedback-card {
-      border: 1px solid #E2E8F0;
+      background: var(--card-bg);
       border-radius: 16px;
-      padding: 24px;
-      background: #FFFFFF;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      padding: 32px 28px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border-color);
     }
 
-    .feedback-header {
+    .card-title-group {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       gap: 12px;
-      margin-bottom: 20px;
+      margin-bottom: 6px;
     }
 
-    .feedback-icon-bg {
-      background-color: var(--primary-yellow);
-      padding: 10px;
-      border-radius: 12px;
-      color: #FFF;
+    .title-icon {
+      background: var(--primary-yellow);
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 1.2rem;
+      color: #000;
     }
 
-    .feedback-header-text h3 {
-      font-size: 1.5rem;
+    .card-title-group h3 {
+      font-size: 1.6rem;
       font-weight: 700;
-      color: var(--text-dark);
-      line-height: 1.2;
+      border-left: 4px solid var(--primary-yellow);
+      padding-left: 10px;
     }
 
-    .feedback-header-text p {
-      font-size: 0.88rem;
-      color: var(--text-gray);
-      margin-top: 4px;
+    .card-subtitle {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 24px;
+      padding-left: 2px;
     }
 
-    /* Form Styles */
     .form-group {
-      margin-bottom: 16px;
+      margin-bottom: 18px;
       position: relative;
     }
 
@@ -252,121 +216,120 @@
       align-items: center;
     }
 
-    .input-wrapper i {
+    .input-icon {
       position: absolute;
       left: 14px;
-      color: var(--primary-yellow);
+      color: var(--primary-yellow-hover);
       font-size: 1.1rem;
+      pointer-events: none;
     }
 
     .form-control {
       width: 100%;
       padding: 12px 14px 12px 42px;
-      border: 1.5px solid var(--border-color);
+      border: 1px solid var(--border-color);
       border-radius: 8px;
       font-size: 0.95rem;
-      transition: all 0.3s ease;
       outline: none;
-    }
-
-    textarea.form-control {
-      padding-top: 12px;
-      resize: vertical;
-      min-height: 90px;
+      transition: border-color 0.2s;
     }
 
     .form-control:focus {
       border-color: var(--primary-yellow);
-      box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.2);
     }
 
-    /* Star Rating System */
-    .rating-container {
-      margin: 20px 0;
+    textarea.form-control {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    /* Star Rating Styling */
+    .star-rating-container {
+      margin-bottom: 20px;
       text-align: center;
-      background-color: var(--accent-yellow);
-      padding: 15px;
-      border-radius: 10px;
+      background: #FFFDF5;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px dashed var(--primary-yellow);
     }
 
-    .rating-label {
+    .star-rating-label {
+      font-size: 0.9rem;
       font-weight: 600;
-      font-size: 0.95rem;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
+      display: block;
       color: var(--text-dark);
     }
 
-    .star-rating {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
+    .stars {
+      display: inline-flex;
       flex-direction: row-reverse;
+      gap: 6px;
     }
 
-    .star-rating input {
+    .stars input {
       display: none;
     }
 
-    .star-rating label {
-      font-size: 1.8rem;
-      color: #DDD;
+    .stars label {
+      font-size: 1.6rem;
+      color: #CBD5E1;
       cursor: pointer;
-      transition: color 0.2s;
+      transition: color 0.2s ease;
     }
 
-    .star-rating label:hover,
-    .star-rating label:hover ~ label,
-    .star-rating input:checked ~ label {
-      color: var(--primary-yellow);
+    .stars label:hover,
+    .stars label:hover ~ label,
+    .stars input:checked ~ label {
+      color: var(--star-color);
     }
 
     /* Submit Button */
-    .btn-submit {
+    .submit-btn {
       width: 100%;
-      background-color: var(--primary-yellow);
-      color: var(--text-dark);
-      font-weight: 700;
-      font-size: 1rem;
-      padding: 14px;
+      background: var(--primary-yellow);
+      color: #000;
       border: none;
+      padding: 14px;
+      font-size: 1rem;
+      font-weight: 700;
       border-radius: 8px;
       cursor: pointer;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       gap: 10px;
-      transition: background 0.2s ease, transform 0.1s ease;
-      box-shadow: 0 4px 10px rgba(255, 193, 7, 0.3);
+      transition: background 0.2s;
     }
 
-    .btn-submit:hover {
-      background-color: var(--dark-yellow);
+    .submit-btn:hover {
+      background: var(--primary-yellow-hover);
     }
 
-    .btn-submit:active {
-      transform: scale(0.99);
-    }
-
-    .sub-footer-text {
+    .card-footer-text {
       text-align: center;
       margin-top: 20px;
       font-size: 0.85rem;
-      color: var(--text-gray);
+      color: var(--text-muted);
       font-weight: 500;
     }
 
-    /* ---------------- Footer ---------------- */
-    footer {
-      background-color: var(--primary-yellow);
-      padding: 14px;
-      text-align: center;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--text-dark);
-      margin-top: auto;
+    .card-footer-text i {
+      color: #E6A100;
     }
 
-    /* ---------------- Success Modal Popup ---------------- */
+    /* ---------------- FOOTER ---------------- */
+    footer {
+      margin-top: auto;
+      background: var(--primary-yellow);
+      text-align: center;
+      padding: 14px 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #000;
+    }
+
+    /* ---------------- MODAL POPUP ---------------- */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -375,8 +338,8 @@
       height: 100%;
       background: rgba(0, 0, 0, 0.5);
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       opacity: 0;
       visibility: hidden;
       transition: all 0.3s ease;
@@ -389,15 +352,15 @@
     }
 
     .modal-box {
-      background: white;
+      background: #fff;
       padding: 30px;
       border-radius: 16px;
       text-align: center;
-      max-width: 380px;
+      max-width: 400px;
       width: 90%;
       transform: scale(0.8);
       transition: transform 0.3s ease;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
     }
 
     .modal-overlay.active .modal-box {
@@ -407,195 +370,219 @@
     .modal-icon {
       width: 60px;
       height: 60px;
-      background: #E8F5E9;
-      color: #2E7D32;
+      background: #DEF7EC;
+      color: #0E9F6E;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1.8rem;
-      margin: 0 auto 15px;
+      margin: 0 auto 16px auto;
     }
 
     .modal-box h4 {
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       margin-bottom: 8px;
-      color: var(--text-dark);
     }
 
     .modal-box p {
+      color: var(--text-muted);
       font-size: 0.9rem;
-      color: var(--text-gray);
       margin-bottom: 20px;
     }
 
-    .btn-close {
-      background-color: var(--primary-yellow);
+    .modal-close-btn {
+      background: var(--primary-yellow);
       border: none;
       padding: 10px 24px;
-      border-radius: 20px;
-      font-weight: 600;
+      border-radius: 6px;
+      font-weight: 700;
       cursor: pointer;
-      color: var(--text-dark);
     }
 
-    /* Media Queries for Desktop responsiveness */
-    @media (min-width: 768px) {
-      .container {
-        margin: 20px auto;
-        border-radius: 16px;
-        overflow: hidden;
-        min-height: auto;
+    /* ---------------- RESPONSIVE MEDIA QUERIES ---------------- */
+    @media (max-width: 768px) {
+      .hero-content {
+        flex-direction: column;
+        text-align: center;
       }
-      .hero-title {
-        font-size: 2.6rem;
+
+      .hero-text h2 {
+        font-size: 2.2rem;
       }
-      .hero-illustration {
-        width: 220px;
-        height: 180px;
+
+      .hero-text h2 span {
+        font-size: 2.5rem;
+      }
+
+      .hero-image {
+        max-height: 200px;
+      }
+
+      main {
+        margin-top: -15px;
+      }
+
+      .feedback-card {
+        padding: 24px 18px;
       }
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <!-- Header/Navbar -->
-    <header>
-      <div class="brand-container">
-        <!-- Updatable Logo Icon -->
-        <div class="logo"></div>
-        <div class="brand-title">
-          <h1>TNSF</h1>
-          <h2>KADAPA PARLIAMENT</h2>
+  <!-- HEADER -->
+  <header>
+    <div class="header-brand">
+      <!-- UPDATABLE LOGO LINK -->
+      <img id="app-logo" src="https://via.placeholder.com/100/FFCB05/000000?text=TNSF" alt="TNSF Logo" class="header-logo">
+      <div class="header-title">
+        <h1>TNSF</h1>
+        <p>KADAPA PARLIAMENT</p>
+      </div>
+    </div>
+    
+    <!-- HOME ICON & TEXT LINK -->
+    <a href="#" class="home-btn">
+      <i class="fa-solid fa-house"></i>
+      <span>Home</span>
+    </a>
+  </header>
+
+  <!-- FULL-WIDTH HERO BANNER -->
+  <section class="hero-container">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h2>Your Voice <span>Matters</span></h2>
+        <p>Share your thoughts, help us grow!</p>
+      </div>
+      <div class="hero-image-wrapper">
+        <!-- UPDATABLE HERO BANNER IMAGE LINK -->
+        <img id="hero-banner-img" src="https://via.placeholder.com/400x250/FFFCF0/FFCB05?text=Illustration+Image" alt="Hero Banner Illustration" class="hero-image">
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN FEEDBACK CARD -->
+  <main>
+    <div class="feedback-card">
+      <div class="card-title-group">
+        <div class="title-icon"><i class="fa-regular fa-comment-dots"></i></div>
+        <h3>Feedback</h3>
+      </div>
+      <p class="card-subtitle">We value your opinion! Please share your feedback, suggestions or any concerns with us.</p>
+
+      <form id="feedback-form">
+        <!-- Name -->
+        <div class="form-group">
+          <div class="input-wrapper">
+            <i class="fa-solid fa-user input-icon"></i>
+            <input type="text" class="form-control" placeholder="Your Name *" required>
+          </div>
         </div>
-      </div>
-      <!-- Replaced Menu Button with Home Link -->
-      <a href="#home" class="home-nav-btn">
-        <i class="fa-solid fa-house"></i>
-        <span>Home</span>
-      </a>
-    </header>
 
-    <!-- Full-Width Hero Banner -->
-    <section class="hero-banner">
-      <div class="hero-content">
-        <h2 class="hero-title">Your Voice <span>Matters</span></h2>
-        <p class="hero-subtitle">Share your thoughts, help us grow!</p>
-      </div>
-      <div class="hero-illustration">
-        <div class="student-img"></div>
-        <div class="badge-watermark"></div>
-      </div>
-    </section>
-
-    <!-- Main Content Area / Form -->
-    <main class="content-area">
-      <div class="feedback-card">
-        
-        <div class="feedback-header">
-          <div class="feedback-icon-bg">
-            <i class="fa-solid fa-comment-dots"></i>
-          </div>
-          <div class="feedback-header-text">
-            <h3>Feedback</h3>
-            <p>We value your opinion! Please share your feedback, suggestions or any concerns with us.</p>
+        <!-- Email -->
+        <div class="form-group">
+          <div class="input-wrapper">
+            <i class="fa-solid fa-envelope input-icon"></i>
+            <input type="email" class="form-control" placeholder="Your Email (Optional)">
           </div>
         </div>
 
-        <form id="feedbackForm">
-          <!-- Name Input -->
-          <div class="form-group">
-            <div class="input-wrapper">
-              <i class="fa-solid fa-user"></i>
-              <input type="text" class="form-control" placeholder="Your Name *" required>
-            </div>
+        <!-- Mobile Number -->
+        <div class="form-group">
+          <div class="input-wrapper">
+            <i class="fa-solid fa-phone input-icon"></i>
+            <input type="tel" class="form-control" placeholder="Your Mobile Number (Optional)">
           </div>
+        </div>
 
-          <!-- Email Input -->
-          <div class="form-group">
-            <div class="input-wrapper">
-              <i class="fa-solid fa-envelope"></i>
-              <input type="email" class="form-control" placeholder="Your Email (Optional)">
-            </div>
+        <!-- STAR RATING OPTION -->
+        <div class="star-rating-container">
+          <span class="star-rating-label">Rate your experience</span>
+          <div class="stars">
+            <input type="radio" name="rating" id="star5" value="5"><label for="star5" class="fa-solid fa-star"></label>
+            <input type="radio" name="rating" id="star4" value="4"><label for="star4" class="fa-solid fa-star"></label>
+            <input type="radio" name="rating" id="star3" value="3"><label for="star3" class="fa-solid fa-star"></label>
+            <input type="radio" name="rating" id="star2" value="2"><label for="star2" class="fa-solid fa-star"></label>
+            <input type="radio" name="rating" id="star1" value="1"><label for="star1" class="fa-solid fa-star"></label>
           </div>
+        </div>
 
-          <!-- Mobile Input -->
-          <div class="form-group">
-            <div class="input-wrapper">
-              <i class="fa-solid fa-phone"></i>
-              <input type="tel" class="form-control" placeholder="Your Mobile Number (Optional)">
-            </div>
+        <!-- Feedback Textarea -->
+        <div class="form-group">
+          <div class="input-wrapper">
+            <i class="fa-solid fa-message input-icon" style="top: 16px;"></i>
+            <textarea class="form-control" placeholder="Your Feedback / Suggestion *" required></textarea>
           </div>
+        </div>
 
-          <!-- Feedback Textarea -->
-          <div class="form-group">
-            <div class="input-wrapper">
-              <i class="fa-solid fa-comment-alt" style="top: 14px;"></i>
-              <textarea class="form-control" rows="3" placeholder="Your Feedback / Suggestion *" required></textarea>
-            </div>
-          </div>
+        <!-- Submit Button -->
+        <button type="submit" class="submit-btn">
+          <i class="fa-solid fa-paper-plane"></i> Submit Feedback
+        </button>
+      </form>
 
-          <!-- Star Rating Option -->
-          <div class="rating-container">
-            <div class="rating-label">Rate your experience</div>
-            <div class="star-rating">
-              <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 stars"><i class="fa-solid fa-star"></i></label>
-              <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 stars"><i class="fa-solid fa-star"></i></label>
-              <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 stars"><i class="fa-solid fa-star"></i></label>
-              <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 stars"><i class="fa-solid fa-star"></i></label>
-              <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 star"><i class="fa-solid fa-star"></i></label>
-            </div>
-          </div>
-
-          <!-- Submit Button -->
-          <button type="submit" class="btn-submit">
-            <i class="fa-solid fa-paper-plane"></i> Submit Feedback
-          </button>
-        </form>
-
-        <p class="sub-footer-text">
-          <i class="fa-solid fa-heart" style="color: #FFC107;"></i> 
-          Your feedback helps us build a stronger and better TNSF community!
-        </p>
+      <div class="card-footer-text">
+        <i class="fa-solid fa-hands-clapping"></i> Your feedback helps us build a stronger and better TNSF community!
       </div>
-    </main>
+    </div>
+  </main>
 
-    <!-- Footer -->
-    <footer>
-      Copy 2026 TNSF KADAPA PARLIAMENT all rights reserved
-    </footer>
-  </div>
+  <!-- FOOTER -->
+  <footer>
+    Copy 2026 TNSF KADAPA PARLIAMENT all rights reserved
+  </footer>
 
-  <!-- Success Message Popup Modal -->
+  <!-- SUCCESS MESSAGE POPUP MODAL -->
   <div class="modal-overlay" id="successModal">
     <div class="modal-box">
       <div class="modal-icon">
         <i class="fa-solid fa-check"></i>
       </div>
       <h4>Thank You!</h4>
-      <p>Your feedback has been submitted successfully.</p>
-      <button class="btn-close" onclick="closeModal()">Close</button>
+      <p>Your feedback has been successfully submitted. We appreciate your response.</p>
+      <button class="modal-close-btn" id="closeModalBtn">Close</button>
     </div>
   </div>
 
+  <!-- JAVASCRIPT LOGIC -->
   <script>
-    // Handle Form Submission & Show Popup
-    document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+    // --- UPDATABLE IMAGE LINKS CONFIGURATION ---
+    const CONFIG = {
+      logoUrl: "https://via.placeholder.com/100/FFCB05/000000?text=TNSF", // Paste your custom Logo image URL here
+      heroImageUrl: "https://via.placeholder.com/400x250/FFFCF0/FFCB05?text=Illustration+Image" // Paste your custom Hero Banner image URL here
+    };
+
+    // Set images on load
+    document.getElementById('app-logo').src = CONFIG.logoUrl;
+    document.getElementById('hero-banner-img').src = CONFIG.heroImageUrl;
+
+    // --- FORM SUBMISSION & MODAL POPUP ---
+    const feedbackForm = document.getElementById('feedback-form');
+    const successModal = document.getElementById('successModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+
+    feedbackForm.addEventListener('submit', function(e) {
       e.preventDefault(); // Prevent page refresh
       
-      // Show Success Modal
-      document.getElementById('successModal').classList.add('active');
+      // Show success modal
+      successModal.classList.add('active');
       
-      // Clear form inputs
-      this.reset();
+      // Reset form
+      feedbackForm.reset();
     });
 
-    // Close Modal Function
-    function closeModal() {
-      document.getElementById('successModal').classList.remove('active');
-    }
+    closeModalBtn.addEventListener('click', function() {
+      successModal.classList.remove('active');
+    });
+
+    // Close modal on clicking outside box
+    successModal.addEventListener('click', function(e) {
+      if (e.target === successModal) {
+        successModal.classList.remove('active');
+      }
+    });
   </script>
 </body>
 </html>
-
