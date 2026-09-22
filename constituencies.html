@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TNSF Kadapa Parliament - Constituency Overview</title>
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TNSF Kadapa Parliament</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
-    /* Global Resets & Fonts */
+    /* ==================== GLOBAL STYLES ==================== */
     * {
       margin: 0;
       padding: 0;
@@ -17,42 +16,43 @@
 
     body {
       background-color: #f8f9fa;
-      color: #222;
-      overflow-x: hidden;
+      color: #333;
     }
 
-    /* Container for layout */
-    .app-container {
+    .container {
       max-width: 1100px;
       margin: 0 auto;
       background: #ffffff;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+      min-height: 100vh;
+      box-shadow: 0 0 20px rgba(0,0,0,0.05);
+      position: relative;
     }
 
-    /* Header */
+    /* ==================== HEADER ==================== */
     header {
       background-color: #ffd200;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 20px;
+      padding: 12px 20px;
       position: sticky;
       top: 0;
       z-index: 100;
     }
 
-    .logo-box {
+    .logo-container {
       display: flex;
       align-items: center;
       gap: 12px;
     }
 
     .logo-img {
-      width: 48px;
-      height: 48px;
+      width: 45px;
+      height: 45px;
       border-radius: 50%;
       object-fit: cover;
-      background: #fff;
+      background: #e50000;
+      border: 2px solid #fff;
     }
 
     .logo-text h1 {
@@ -64,23 +64,25 @@
     }
 
     .logo-text p {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 800;
-      color: #111;
+      color: #222;
       letter-spacing: 0.5px;
     }
 
     .home-btn {
       background: #ffffff;
-      color: #ffd200;
-      width: 40px;
-      height: 40px;
+      color: #000;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       text-decoration: none;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      cursor: pointer;
+      border: none;
       transition: transform 0.2s;
     }
 
@@ -88,35 +90,72 @@
       transform: scale(1.05);
     }
 
-    .home-btn i {
-      font-size: 1.2rem;
-      color: #e5a100;
-    }
-
-    /* Hero Banner */
+    /* ==================== HERO BANNERS ==================== */
     .hero-banner {
-      width: 100%;
       position: relative;
-      background: #f0f4f8;
+      width: 100%;
+      min-height: 220px;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      padding: 30px 25px;
+      overflow: hidden;
     }
 
-    .hero-banner img {
-      width: 100%;
-      height: auto;
-      max-height: 380px;
-      object-fit: cover;
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(90deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.4) 60%, rgba(255,255,255,0) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 550px;
+    }
+
+    .hero-title-main {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #1a2b4c;
+      font-style: italic;
+      line-height: 1.1;
+    }
+
+    .hero-title-main span {
+      color: #f39c12;
+      font-size: 2.6rem;
       display: block;
     }
 
-    /* Shared Section Header */
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 20px 20px 10px 20px;
+    .hero-subtitle {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #2c3e50;
+      margin-top: 6px;
     }
 
-    .icon-badge {
+    .hero-pills {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 12px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #333;
+    }
+
+    /* ==================== SECTIONS ==================== */
+    .section-header {
+      padding: 20px 20px 5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-icon-badge {
       background: #ffd200;
       width: 32px;
       height: 32px;
@@ -124,51 +163,125 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: #000;
-      flex-shrink: 0;
     }
 
-    .section-title-group h2 {
-      font-size: 1.15rem;
+    .section-title {
+      font-size: 1.3rem;
       font-weight: 800;
       color: #111;
-      line-height: 1.2;
     }
 
-    .section-title-group p {
-      font-size: 0.78rem;
-      color: #666;
+    .section-subtext {
+      padding: 0 20px 15px;
+      color: #777;
+      font-size: 0.82rem;
       font-weight: 500;
     }
 
-    /* 1. Our Members / Stats Section */
+    /* ==================== CONSTITUENCY GRID (PAGE 1) ==================== */
+    .constituency-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 10px 20px 30px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      cursor: pointer;
+      transition: transform 0.2s;
+      border: 1px solid #f0f0f0;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card-img-container {
+      height: 150px;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .card-img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-details {
+      padding: 14px;
+      position: relative;
+    }
+
+    .card-title-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title {
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: #111;
+    }
+
+    .card-subtitle {
+      font-size: 0.78rem;
+      color: #777;
+      margin-top: 4px;
+      margin-left: 32px;
+    }
+
+    .card-arrow {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      background: #ffd200;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      color: #000;
+    }
+
+    .constituency-grid .card:last-child:nth-child(3n + 1) {
+      grid-column: 2 / span 1;
+    }
+
+    /* ==================== DETAIL PAGE VIEW (PAGE 2) ==================== */
+    #detailView {
+      display: none;
+    }
+
+    /* Stats Banner */
     .stats-container {
-      background: #fff8d6;
-      margin: 10px 20px 20px;
-      border-radius: 12px;
-      padding: 15px;
+      background: #fffdf0;
+      border-top: 1px solid #ffe885;
+      border-bottom: 1px solid #ffe885;
+      padding: 15px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 15px;
-      border: 1px solid #ffeb85;
     }
 
-    .stats-header-info {
+    .stats-left {
       display: flex;
       align-items: center;
-      gap: 10px;
-      min-width: 180px;
+      gap: 12px;
     }
 
     .stats-grid {
       display: flex;
-      gap: 20px;
-      flex-grow: 1;
-      justify-content: space-around;
-      flex-wrap: wrap;
+      gap: 25px;
     }
 
     .stat-box {
@@ -177,74 +290,70 @@
 
     .stat-box i {
       font-size: 1.1rem;
-      color: #111;
-      margin-bottom: 2px;
+      color: #333;
+      margin-bottom: 3px;
     }
 
-    .stat-box .number {
-      font-size: 1.2rem;
+    .stat-number {
+      font-size: 1.25rem;
       font-weight: 900;
-      color: #000;
+      color: #111;
     }
 
-    .stat-box .label {
+    .stat-label {
       font-size: 0.72rem;
-      color: #555;
+      color: #666;
       font-weight: 600;
     }
 
-    /* 2. About Constituency */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 280px;
+    /* About Section Layout */
+    .about-layout {
+      display: flex;
       gap: 20px;
       padding: 0 20px 20px;
     }
 
     .about-text {
-      font-size: 0.85rem;
-      line-height: 1.5;
-      color: #444;
+      flex: 1;
+      font-size: 0.88rem;
+      color: #555;
+      line-height: 1.6;
     }
 
-    .about-card {
-      background: #fff;
-      border-radius: 10px;
+    .about-img-card {
+      width: 280px;
+      border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      flex-shrink: 0;
       border: 1px solid #eee;
     }
 
-    .about-card img {
+    .about-img-card img {
       width: 100%;
-      height: 130px;
+      height: 120px;
       object-fit: cover;
     }
 
-    .about-card-info {
+    .about-img-caption {
       padding: 8px 12px;
+      background: #fff;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
-    .about-card-info .location-icon {
-      color: #e5a100;
+    .about-img-caption h5 {
+      font-size: 0.85rem;
+      font-weight: 800;
     }
 
-    .about-card-info div {
-      font-size: 0.8rem;
-      font-weight: 700;
-    }
-
-    .about-card-info span {
-      display: block;
-      font-size: 0.7rem;
+    .about-img-caption p {
+      font-size: 0.72rem;
       color: #777;
-      font-weight: normal;
     }
 
-    /* 3. Leadership Cards */
+    /* Leadership Cards */
     .leadership-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -254,48 +363,41 @@
 
     .leader-card {
       background: #fff;
+      border: 1px solid #eee;
       border-radius: 12px;
-      padding: 12px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+      padding: 10px;
       display: flex;
       align-items: center;
       gap: 12px;
-      border: 1px solid #eee;
-      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
       position: relative;
-      transition: transform 0.2s;
     }
 
-    .leader-card:hover {
-      transform: translateY(-2px);
-    }
-
-    .leader-card img {
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
+    .leader-img {
+      width: 50px;
+      height: 50px;
+      border-radius: 8px;
       object-fit: cover;
-      background: #eee;
     }
 
-    .leader-info .role {
-      font-size: 0.68rem;
+    .leader-info h5 {
+      font-size: 0.75rem;
       color: #777;
       font-weight: 600;
     }
 
-    .leader-info .name {
-      font-size: 0.85rem;
+    .leader-info h4 {
+      font-size: 0.9rem;
       font-weight: 800;
       color: #111;
     }
 
-    .leader-info .sub {
-      font-size: 0.68rem;
-      color: #888;
+    .leader-info p {
+      font-size: 0.72rem;
+      color: #999;
     }
 
-    .arrow-icon-btn {
+    .leader-arrow {
       position: absolute;
       right: 10px;
       background: #ffd200;
@@ -306,10 +408,9 @@
       align-items: center;
       justify-content: center;
       font-size: 0.65rem;
-      color: #000;
     }
 
-    /* 4. Our Team Cards */
+    /* Team Grid */
     .team-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -319,39 +420,34 @@
 
     .team-card {
       background: #fff;
-      border-radius: 10px;
-      padding: 10px;
-      text-align: center;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.06);
       border: 1px solid #eee;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    .team-card:hover {
-      transform: translateY(-2px);
+      border-radius: 12px;
+      overflow: hidden;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
     }
 
     .team-card img {
       width: 100%;
       height: 110px;
       object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 8px;
     }
 
-    .team-card .name {
-      font-size: 0.8rem;
+    .team-card-info {
+      padding: 8px;
+    }
+
+    .team-card-info h4 {
+      font-size: 0.85rem;
       font-weight: 800;
-      color: #111;
     }
 
-    .team-card .role {
-      font-size: 0.7rem;
+    .team-card-info p {
+      font-size: 0.72rem;
       color: #777;
     }
 
-    /* 5. Recent Activities Cards */
+    /* Activities Grid */
     .activities-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -361,16 +457,10 @@
 
     .activity-card {
       background: #fff;
+      border: 1px solid #eee;
       border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.06);
-      border: 1px solid #eee;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    .activity-card:hover {
-      transform: translateY(-2px);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
     }
 
     .activity-card img {
@@ -379,590 +469,595 @@
       object-fit: cover;
     }
 
-    .activity-card-info {
-      padding: 8px;
+    .activity-info {
+      padding: 8px 10px;
     }
 
-    .activity-card-info h4 {
-      font-size: 0.75rem;
+    .activity-info h4 {
+      font-size: 0.8rem;
       font-weight: 800;
-      color: #111;
-      margin-bottom: 4px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      line-height: 1.2;
     }
 
     .activity-date {
-      font-size: 0.65rem;
+      font-size: 0.7rem;
       color: #888;
+      margin-top: 4px;
       display: flex;
       align-items: center;
       gap: 4px;
     }
 
-    .activity-date i {
-      color: #ffd200;
-    }
-
-    /* Footer & Contact Section */
-    .footer-section {
+    /* ==================== FOOTER ==================== */
+    footer {
       background: #ffd200;
-      padding: 20px;
-      margin-top: 20px;
-    }
-
-    .footer-content {
+      padding: 15px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 15px;
+      margin-top: 20px;
     }
 
-    .contact-box h4, .social-box h4 {
-      font-size: 0.85rem;
-      font-weight: 800;
-      color: #000;
+    .footer-left p {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #222;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-center {
+      text-align: center;
+    }
+
+    .footer-center span {
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: block;
       margin-bottom: 5px;
     }
 
-    .contact-box p {
-      font-size: 0.75rem;
-      color: #222;
-      font-weight: 600;
-      margin-bottom: 3px;
-    }
-
-    .social-icons {
+    .social-links {
       display: flex;
-      gap: 10px;
-      margin-top: 5px;
+      gap: 8px;
+      justify-content: center;
     }
 
-    .social-icon {
-      width: 30px;
-      height: 30px;
+    .social-btn {
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
-      background: #000;
-      color: #fff;
+      background: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
+      color: #000;
+      font-size: 0.75rem;
       text-decoration: none;
-      font-size: 0.8rem;
     }
 
     .social-handle {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       font-weight: 700;
-      color: #000;
       margin-top: 4px;
+      color: #000;
     }
 
-    .slogan-box {
+    .footer-right {
       text-align: right;
     }
 
-    .slogan-box h3 {
-      font-size: 0.95rem;
+    .footer-right h5 {
+      font-size: 0.85rem;
       font-weight: 800;
-      color: #000;
-    }
-
-    .slogan-box p {
-      font-size: 1.1rem;
-      font-weight: 900;
-      color: #000;
       font-style: italic;
     }
 
-    .copyright {
+    .copyright-bar {
+      background: #ffd200;
+      border-top: 1px solid rgba(0,0,0,0.08);
       text-align: center;
-      font-size: 0.7rem;
-      color: #333;
-      margin-top: 15px;
-      padding-top: 10px;
-      border-top: 1px solid rgba(0,0,0,0.1);
+      padding: 6px;
+      font-size: 0.68rem;
+      color: #444;
+      font-weight: 600;
     }
 
-    /* Modal Popup */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6);
-      z-index: 1000;
-      overflow-y: auto;
-    }
-
-    .modal-content {
-      background: #fff;
-      max-width: 500px;
-      margin: 80px auto 20px;
-      border-radius: 12px;
-      padding: 20px;
-      position: relative;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-    }
-
-    .close-modal {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: #666;
-    }
-
-    .modal-body img {
-      width: 100%;
-      max-height: 250px;
-      object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 12px;
-    }
-
-    .modal-body h3 {
-      font-size: 1.1rem;
-      color: #111;
-      margin-bottom: 5px;
-    }
-
-    .modal-body p {
-      font-size: 0.85rem;
-      color: #555;
-      line-height: 1.5;
-    }
-
-    /* Mobile Responsive Adjustments */
+    /* ==================== RESPONSIVE DESIGN ==================== */
     @media (max-width: 768px) {
-      .about-grid {
+      .constituency-grid {
         grid-template-columns: 1fr;
+      }
+      .constituency-grid .card:last-child:nth-child(3n + 1) {
+        grid-column: auto;
+      }
+
+      .about-layout {
+        flex-direction: column;
+      }
+      .about-img-card {
+        width: 100%;
       }
 
       .leadership-grid {
         grid-template-columns: 1fr;
       }
 
-      .team-grid {
+      .team-grid, .activities-grid {
         grid-template-columns: repeat(2, 1fr);
       }
 
-      .activities-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .footer-content {
+      .stats-container {
         flex-direction: column;
+        gap: 15px;
         align-items: flex-start;
       }
 
-      .slogan-box {
-        text-align: left;
+      footer {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
       }
-    }
 
-    @media (max-width: 480px) {
-      .team-grid, .activities-grid {
-        grid-template-columns: 1fr;
+      .footer-right {
+        text-align: center;
       }
     }
   </style>
 </head>
 <body>
 
-  <div class="app-container">
-    <!-- Header -->
+  <div class="container">
+    
+    <!-- HEADER -->
     <header>
-      <div class="logo-box">
-        <img id="logoImg" src="" alt="TNSF Logo" class="logo-img" />
+      <div class="logo-container">
+        <!-- Updatable Logo Image -->
+        <img id="headerLogo" src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=100&q=80" alt="Logo" class="logo-img">
         <div class="logo-text">
           <h1>TNSF</h1>
           <p>KADAPA PARLIAMENT</p>
         </div>
       </div>
-      <a href="#" id="homeBtn" class="home-btn" title="Home">
-        <i class="fa-solid fa-house"></i>
-      </a>
+      <!-- Home Button -->
+      <button class="home-btn" id="homeBtn" onclick="showOverview()"><i class="fa-solid fa-house"></i></button>
     </header>
 
-    <!-- Hero Banner -->
-    <div class="hero-banner">
-      <img id="heroBannerImg" src="" alt="Badvel Constituency Banner" />
-    </div>
+    <!-- ==================== PAGE 1: OVERVIEW SCREEN ==================== -->
+    <div id="overviewView">
+      
+      <!-- Full Width Hero Banner -->
+      <div class="hero-banner" id="overviewHeroBanner" style="background-image: url('https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80');">
+        <div class="hero-content">
+          <h2 class="hero-title-main">Stronger <span>Together</span></h2>
+          <p class="hero-subtitle">Across All Constituencies</p>
+          <div class="hero-pills">
+            <span>7 Constituencies</span> | <span>1 Vision</span> | <span>A Better Future</span>
+          </div>
+        </div>
+      </div>
 
-    <!-- 1. Our Members Section -->
-    <div class="section-header">
-      <div class="icon-badge"><i class="fa-solid fa-user-group"></i></div>
-      <div class="section-title-group">
-        <h2>Our Members</h2>
-        <p>Together We Are Stronger</p>
+      <!-- Title Section -->
+      <div class="section-header">
+        <div class="section-icon-badge"><i class="fa-solid fa-location-dot"></i></div>
+        <h2 class="section-title">Our Constituencies</h2>
+      </div>
+      <p class="section-subtext">Seven constituencies. Countless dreams. One strong movement.</p>
+
+      <!-- Grid Layout (3 cards/row desktop, 1 card/row mobile) -->
+      <div class="constituency-grid" id="constituencyGrid">
+        <!-- Rendered via JS -->
       </div>
     </div>
 
-    <div class="stats-container">
-      <div class="stats-grid">
-        <div class="stat-box">
-          <i class="fa-solid fa-users"></i>
-          <div class="number" id="statTotalMembers">1,250+</div>
-          <div class="label">Total Members</div>
-        </div>
-        <div class="stat-box">
-          <i class="fa-solid fa-graduation-cap"></i>
-          <div class="number" id="statStudents">860+</div>
-          <div class="label">Students</div>
-        </div>
-        <div class="stat-box">
-          <i class="fa-solid fa-building-columns"></i>
-          <div class="number" id="statColleges">32+</div>
-          <div class="label">Colleges</div>
-        </div>
-        <div class="stat-box">
-          <i class="fa-solid fa-people-roof"></i>
-          <div class="number" id="statActiveTeams">12+</div>
-          <div class="label">Active Teams</div>
+    <!-- ==================== PAGE 2: CONSTITUENCY DETAIL VIEW ==================== -->
+    <div id="detailView">
+      
+      <!-- Detail Hero Banner -->
+      <div class="hero-banner" id="detailHeroBanner" style="background-image: url('');">
+        <div class="hero-content">
+          <h2 class="hero-title-main" id="detailHeroTitle">Badvel <span>Constituency</span></h2>
+          <p class="hero-subtitle" id="detailHeroSubtitle">Unity | Education | Progress</p>
         </div>
       </div>
-    </div>
 
-    <!-- 2. About Constituency -->
-    <div class="section-header">
-      <div class="icon-badge"><i class="fa-solid fa-location-dot"></i></div>
-      <div class="section-title-group">
-        <h2 id="aboutTitle">About Badvel Constituency</h2>
-        <p>A Region of Talent, Tradition and Progress</p>
-      </div>
-    </div>
-
-    <div class="about-grid">
-      <div class="about-text" id="aboutTextDescription">
-        Badvel is one of the important constituencies in Kadapa district, known for its rich cultural heritage, educational institutions and hardworking youth. TNSF works here to support students, create awareness, and build a stronger future through education, unity and social responsibility.
-      </div>
-      <div class="about-card">
-        <img id="aboutCardImg" src="" alt="Badvel Temple" />
-        <div class="about-card-info">
-          <i class="fa-solid fa-location-dot location-icon"></i>
+      <!-- Members Counter Bar -->
+      <div class="stats-container">
+        <div class="stats-left">
+          <div class="section-icon-badge"><i class="fa-solid fa-users"></i></div>
           <div>
-            <span id="aboutCardTitle">Badvel</span>
-            <span>Kadapa District</span>
+            <h3 style="font-size:1.1rem; font-weight:800;">Our Members</h3>
+            <p style="font-size:0.75rem; color:#666;">Together We Are Stronger</p>
+          </div>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <i class="fa-solid fa-users"></i>
+            <div class="stat-number" id="statTotal">1,250+</div>
+            <div class="stat-label">Total Members</div>
+          </div>
+          <div class="stat-box">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <div class="stat-number" id="statStudents">860+</div>
+            <div class="stat-label">Students</div>
+          </div>
+          <div class="stat-box">
+            <i class="fa-solid fa-building-columns"></i>
+            <div class="stat-number" id="statColleges">32+</div>
+            <div class="stat-label">Colleges</div>
+          </div>
+          <div class="stat-box">
+            <i class="fa-solid fa-user-group"></i>
+            <div class="stat-number" id="statTeams">12+</div>
+            <div class="stat-label">Active Teams</div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- 3. Our Leadership -->
-    <div class="section-header">
-      <div class="icon-badge"><i class="fa-solid fa-user-tie"></i></div>
-      <div class="section-title-group">
-        <h2>Our Leadership</h2>
-        <p>Guiding the Youth, Building the Future</p>
+      <!-- About Section -->
+      <div class="section-header">
+        <div class="section-icon-badge"><i class="fa-solid fa-location-dot"></i></div>
+        <h2 class="section-title" id="aboutTitle">About Badvel Constituency</h2>
       </div>
-    </div>
+      <p class="section-subtext" id="aboutSubtitle">A Region of Talent, Tradition and Progress</p>
 
-    <div class="leadership-grid" id="leadershipGrid">
-      <!-- Injected dynamically -->
-    </div>
-
-    <!-- 4. Our Team -->
-    <div class="section-header">
-      <div class="icon-badge"><i class="fa-solid fa-users-gear"></i></div>
-      <div class="section-title-group">
-        <h2>Our Team</h2>
-        <p>Dedicated People | Stronger Together</p>
-      </div>
-    </div>
-
-    <div class="team-grid" id="teamGrid">
-      <!-- Injected dynamically -->
-    </div>
-
-    <!-- 5. Recent Activities -->
-    <div class="section-header">
-      <div class="icon-badge"><i class="fa-solid fa-calendar-check"></i></div>
-      <div class="section-title-group">
-        <h2>Recent Activities</h2>
-        <p>Creating Awareness | Empowering Students</p>
-      </div>
-    </div>
-
-    <div class="activities-grid" id="activitiesGrid">
-      <!-- Injected dynamically -->
-    </div>
-
-    <!-- Footer & Contact -->
-    <div class="footer-section">
-      <div class="footer-content">
-        <div class="contact-box">
-          <h4>Contact Us</h4>
-          <p id="contactPhone">9908180194 / 8125727668</p>
-          <p id="contactAddress">Proddatur, Kadapa District</p>
+      <div class="about-layout">
+        <div class="about-text" id="aboutText">
+          <!-- Text inserted via JS -->
         </div>
-
-        <div class="social-box">
-          <h4>Follow Us</h4>
-          <div class="social-icons">
-            <a href="#" id="linkInsta" class="social-icon" style="background: #e1306c;"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" id="linkWhatsapp" class="social-icon" style="background: #25d366;"><i class="fa-brands fa-whatsapp"></i></a>
-            <a href="#" id="linkFb" class="social-icon" style="background: #1877f2;"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" id="linkTwitter" class="social-icon" style="background: #000000;"><i class="fa-brands fa-x-twitter"></i></a>
-          </div>
-          <div class="social-handle" id="socialHandle">@tnsfkadapa</div>
-        </div>
-
-        <div class="slogan-box">
-          <h3>Stay Connected</h3>
-          <p>For a Brighter Future</p>
-        </div>
-      </div>
-
-      <div class="copyright">
-        ©2026 TNSF Kadapa. All Rights Reserved.
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal Popup Component -->
-  <div class="modal" id="popupModal">
-    <div class="modal-content">
-      <span class="close-modal" id="closeModalBtn">&times;</span>
-      <div class="modal-body" id="modalBody">
-        <!-- Injected dynamically on click -->
-      </div>
-    </div>
-  </div>
-
-  <script>
-    /******************************************************************
-     * EASY UPDATABLE LINKS & DATA CONFIGURATION OBJECT
-     ******************************************************************/
-    const pageConfig = {
-      // Header Links
-      logoUrl: "https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=150&q=80",
-      homeUrl: "#",
-
-      // Hero Banner Image
-      heroBannerImg: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1200&q=80",
-
-      // Stats
-      stats: {
-        totalMembers: "1,250+",
-        students: "860+",
-        colleges: "32+",
-        activeTeams: "12+"
-      },
-
-      // About Constituency
-      about: {
-        title: "About Badvel Constituency",
-        description: "Badvel is one of the important constituencies in Kadapa district, known for its rich cultural heritage, educational institutions and hardworking youth. TNSF works here to support students, create awareness, and build a stronger future through education, unity and social responsibility.",
-        cardTitle: "Badvel",
-        cardImg: "https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=600&q=80"
-      },
-
-      // Leadership Members
-      leadership: [
-        {
-          role: "District President",
-          name: "Rama Krishna Reddy",
-          sub: "TNSF - Badvel",
-          img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80",
-          details: "Leading TNSF initiatives across Badvel constituency to empower students and foster leadership."
-        },
-        {
-          role: "District Secretary",
-          name: "Suresh Kumar",
-          sub: "TNSF - Badvel",
-          img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80",
-          details: "Coordinating student welfare projects and administrative operations in the district."
-        },
-        {
-          role: "Youth Coordinator",
-          name: "Arun Kumar",
-          sub: "TNSF - Badvel",
-          img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80",
-          details: "Organizing youth engagement programs and student support helplines."
-        }
-      ],
-
-      // Team Members
-      team: [
-        {
-          name: "Lakshmi Prasanna",
-          role: "Team Member",
-          img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
-          details: "Active organizer for student guidance and female youth empowerment."
-        },
-        {
-          name: "Ravi Teja",
-          role: "Team Member",
-          img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=200&q=80",
-          details: "Manages college campus visits and student issue resolution."
-        },
-        {
-          name: "Pavani",
-          role: "Team Member",
-          img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80",
-          details: "Focuses on education support drives and study material distribution."
-        },
-        {
-          name: "Kiran",
-          role: "Team Member",
-          img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=200&q=80",
-          details: "Coordinates youth sports meets and social awareness events."
-        }
-      ],
-
-      // Recent Activities
-      activities: [
-        {
-          title: "College Awareness Program",
-          date: "15 Aug 2025",
-          img: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=400&q=80",
-          details: "Conducted interactive awareness sessions on educational schemes and scholarship guidance."
-        },
-        {
-          title: "Career Guidance Session",
-          date: "10 Aug 2025",
-          img: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=400&q=80",
-          details: "Invited experts to mentor students on higher education and employment opportunities."
-        },
-        {
-          title: "Plantation Drive",
-          date: "05 Aug 2025",
-          img: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=400&q=80",
-          details: "Planted over 500 saplings across college campuses to promote environmental sustainability."
-        },
-        {
-          title: "Student Rally",
-          date: "28 Jul 2025",
-          img: "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?auto=format&fit=crop&w=400&q=80",
-          details: "Organized a peaceful rally highlighting key educational rights and youth unity."
-        }
-      ],
-
-      // Contact & Social Media
-      contact: {
-        phone: "9908180194 / 8125727668",
-        address: "Proddatur, Kadapa District",
-        handle: "@tnsfkadapa",
-        instaLink: "https://instagram.com",
-        whatsappLink: "https://whatsapp.com",
-        fbLink: "https://facebook.com",
-        twitterLink: "https://twitter.com"
-      }
-    };
-
-    /******************************************************************
-     * INITIALIZATION AND DYNAMIC RENDERING
-     ******************************************************************/
-    document.addEventListener("DOMContentLoaded", () => {
-      // Load Updatable Images & Links
-      document.getElementById("logoImg").src = pageConfig.logoUrl;
-      document.getElementById("homeBtn").href = pageConfig.homeUrl;
-      document.getElementById("heroBannerImg").src = pageConfig.heroBannerImg;
-
-      // Stats
-      document.getElementById("statTotalMembers").innerText = pageConfig.stats.totalMembers;
-      document.getElementById("statStudents").innerText = pageConfig.stats.students;
-      document.getElementById("statColleges").innerText = pageConfig.stats.colleges;
-      document.getElementById("statActiveTeams").innerText = pageConfig.stats.activeTeams;
-
-      // About
-      document.getElementById("aboutTitle").innerText = pageConfig.about.title;
-      document.getElementById("aboutTextDescription").innerText = pageConfig.about.description;
-      document.getElementById("aboutCardTitle").innerText = pageConfig.about.cardTitle;
-      document.getElementById("aboutCardImg").src = pageConfig.about.cardImg;
-
-      // Render Leadership
-      const leadershipGrid = document.getElementById("leadershipGrid");
-      pageConfig.leadership.forEach(item => {
-        const card = document.createElement("div");
-        card.className = "leader-card";
-        card.onclick = () => openPopup(item.name, item.role, item.details, item.img);
-        card.innerHTML = `
-          <img src="${item.img}" alt="${item.name}" />
-          <div class="leader-info">
-            <div class="role">${item.role}</div>
-            <div class="name">${item.name}</div>
-            <div class="sub">${item.sub}</div>
-          </div>
-          <div class="arrow-icon-btn"><i class="fa-solid fa-arrow-right"></i></div>
-        `;
-        leadershipGrid.appendChild(card);
-      });
-
-      // Render Team
-      const teamGrid = document.getElementById("teamGrid");
-      pageConfig.team.forEach(item => {
-        const card = document.createElement("div");
-        card.className = "team-card";
-        card.onclick = () => openPopup(item.name, item.role, item.details, item.img);
-        card.innerHTML = `
-          <img src="${item.img}" alt="${item.name}" />
-          <div class="name">${item.name}</div>
-          <div class="role">${item.role}</div>
-        `;
-        teamGrid.appendChild(card);
-      });
-
-      // Render Recent Activities
-      const activitiesGrid = document.getElementById("activitiesGrid");
-      pageConfig.activities.forEach(item => {
-        const card = document.createElement("div");
-        card.className = "activity-card";
-        card.onclick = () => openPopup(item.title, item.date, item.details, item.img);
-        card.innerHTML = `
-          <img src="${item.img}" alt="${item.title}" />
-          <div class="activity-card-info">
-            <h4>${item.title}</h4>
-            <div class="activity-date">
-              <i class="fa-regular fa-calendar"></i> ${item.date}
+        <div class="about-img-card">
+          <img id="aboutImg" src="" alt="Constituency View">
+          <div class="about-img-caption">
+            <div class="section-icon-badge" style="width:24px; height:24px; font-size:0.65rem;"><i class="fa-solid fa-location-dot"></i></div>
+            <div>
+              <h5 id="aboutImgName">Badvel</h5>
+              <p>Kadapa District</p>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- Leadership Section -->
+      <div class="section-header">
+        <div class="section-icon-badge"><i class="fa-solid fa-user"></i></div>
+        <h2 class="section-title">Our Leadership</h2>
+      </div>
+      <p class="section-subtext">Guiding the Youth, Building the Future</p>
+      
+      <div class="leadership-grid" id="leadershipGrid">
+        <!-- Leaders loaded via JS -->
+      </div>
+
+      <!-- Our Team Section -->
+      <div class="section-header">
+        <div class="section-icon-badge"><i class="fa-solid fa-users"></i></div>
+        <h2 class="section-title">Our Team</h2>
+      </div>
+      <p class="section-subtext">Dedicated People | Stronger Together</p>
+
+      <div class="team-grid" id="teamGrid">
+        <!-- Team loaded via JS -->
+      </div>
+
+      <!-- Recent Activities Section -->
+      <div class="section-header">
+        <div class="section-icon-badge"><i class="fa-solid fa-calendar-days"></i></div>
+        <h2 class="section-title">Recent Activities</h2>
+      </div>
+      <p class="section-subtext">Creating Awareness | Empowering Students</p>
+
+      <div class="activities-grid" id="activitiesGrid">
+        <!-- Activities loaded via JS -->
+      </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-left">
+        <p><i class="fa-solid fa-phone"></i> Contact Us</p>
+        <p id="footerPhone" style="font-weight:normal; margin-top:2px;">9908180194 / 8125727668</p>
+        <p id="footerLocation" style="font-weight:normal; margin-top:2px;"><i class="fa-solid fa-location-dot"></i> Proddatur, Kadapa District</p>
+      </div>
+
+      <div class="footer-center">
+        <span>Follow Us</span>
+        <div class="social-links">
+          <a href="#" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+        <div class="social-handle">@tnsfkadapa</div>
+      </div>
+
+      <div class="footer-right">
+        <h5>Stay Connected</h5>
+        <h5 style="font-weight:400;">For a Brighter Future</h5>
+      </div>
+    </footer>
+
+    <div class="copyright-bar">
+      © 2026 TNSF Kadapa. All Rights Reserved.
+    </div>
+
+  </div>
+
+  <!-- ==================== JAVASCRIPT ==================== -->
+  <script>
+    /* Easily Update Global Links */
+    const GLOBAL_CONFIG = {
+      logoUrl: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=100&q=80",
+      overviewBannerUrl: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80"
+    };
+
+    // Apply Global Links
+    document.getElementById('headerLogo').src = GLOBAL_CONFIG.logoUrl;
+    document.getElementById('overviewHeroBanner').style.backgroundImage = `url('${GLOBAL_CONFIG.overviewBannerUrl}')`;
+
+    /* Constituencies Data */
+    const constituenciesData = [
+      {
+        id: "badvel",
+        name: "Badvel",
+        tagline: "Unity in Diversity",
+        image: "https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=600&q=80",
+        heroBanner: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80",
+        heroSubtitle: "Unity | Education | Progress",
+        stats: { total: "1,250+", students: "860+", colleges: "32+", teams: "12+" },
+        aboutSub: "A Region of Talent, Tradition and Progress",
+        aboutText: "Badvel is one of the important constituencies in Kadapa district, known for its rich cultural heritage, educational institutions and hardworking youth. TNSF works here to support students, create awareness, and build a stronger future through education, unity and social responsibility.",
+        aboutImage: "https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=600&q=80",
+        leaders: [
+          { role: "District President", name: "Rama Krishna Reddy", org: "TNSF - Badvel", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" },
+          { role: "District Secretary", name: "Suresh Kumar", org: "TNSF - Badvel", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80" },
+          { role: "Youth Coordinator", name: "Arun Kumar", org: "TNSF - Badvel", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80" }
+        ],
+        team: [
+          { name: "Lakshmi Prasanna", role: "Team Member", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" },
+          { name: "Ravi Teja", role: "Team Member", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=200&q=80" },
+          { name: "Pavani", role: "Team Member", img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80" },
+          { name: "Kiran", role: "Team Member", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=200&q=80" }
+        ],
+        activities: [
+          { title: "College Awareness Program", date: "15 Aug 2025", img: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=300&q=80" },
+          { title: "Career Guidance Session", date: "10 Aug 2025", img: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=300&q=80" },
+          { title: "Plantation Drive", date: "05 Aug 2025", img: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=300&q=80" },
+          { title: "Student Rally", date: "28 Jul 2025", img: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=300&q=80" }
+        ]
+      },
+      {
+        id: "kadapa",
+        name: "Kadapa",
+        tagline: "Education Drives Progress",
+        image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80",
+        heroBanner: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=80",
+        heroSubtitle: "Knowledge | Leadership | Growth",
+        stats: { total: "2,400+", students: "1,800+", colleges: "45+", teams: "20+" },
+        aboutSub: "The Central Hub of Student Movement",
+        aboutText: "Kadapa constituency serves as the central focal point for student welfare and career-building initiatives. TNSF actively organizes employment drives, academic mentoring, and scholarship guidance across institutions here.",
+        aboutImage: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80",
+        leaders: [
+          { role: "District President", name: "V. Mahesh", org: "TNSF - Kadapa", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" }
+        ],
+        team: [
+          { name: "Suresh", role: "Team Member", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80" }
+        ],
+        activities: [
+          { title: "Educational Seminar", date: "12 Aug 2025", img: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=300&q=80" }
+        ]
+      },
+      {
+        id: "pulivendla",
+        name: "Pulivendla",
+        tagline: "People Power Change",
+        image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80",
+        heroBanner: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80",
+        heroSubtitle: "Youth Power | Development",
+        stats: { total: "1,850+", students: "1,200+", colleges: "28+", teams: "15+" },
+        aboutSub: "Grassroots Organization and Youth Development",
+        aboutText: "Pulivendla constituency focuses on expanding educational access in rural regions, promoting digital literacy, and conducting regular student outreach drives.",
+        aboutImage: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80",
+        leaders: [
+          { role: "Convener", name: "K. Mohan", org: "TNSF - Pulivendla", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80" }
+        ],
+        team: [
+          { name: "Anitha", role: "Team Member", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" }
+        ],
+        activities: [
+          { title: "Blood Donation Camp", date: "02 Aug 2025", img: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=300&q=80" }
+        ]
+      },
+      {
+        id: "kamalapuram",
+        name: "Kamalapuram",
+        tagline: "Rooted in Culture",
+        image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80",
+        heroBanner: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+        heroSubtitle: "Heritage | Education",
+        stats: { total: "1,100+", students: "750+", colleges: "20+", teams: "10+" },
+        aboutSub: "Promoting Youth & Sports Development",
+        aboutText: "Kamalapuram emphasizes academic perfection along with youth engagement in sports, culture, and social welfare programs.",
+        aboutImage: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80",
+        leaders: [
+          { role: "President", name: "S. Naidu", org: "TNSF - Kamalapuram", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" }
+        ],
+        team: [
+          { name: "Prakash", role: "Team Member", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=200&q=80" }
+        ],
+        activities: [
+          { title: "Youth Sports Event", date: "20 Jul 2025", img: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=300&q=80" }
+        ]
+      },
+      {
+        id: "jammalamadugu",
+        name: "Jammalamadugu",
+        tagline: "Tradition to Tomorrow",
+        image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80",
+        heroBanner: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80",
+        heroSubtitle: "Tradition | Progress",
+        stats: { total: "1,400+", students: "920+", colleges: "25+", teams: "11+" },
+        aboutSub: "Building Brighter Academic Infrastructure",
+        aboutText: "Jammalamadugu TNSF unit works closely with government colleges to improve campus amenities, library resources, and student hostel facilities.",
+        aboutImage: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80",
+        leaders: [
+          { role: "In-charge", name: "B. Raju", org: "TNSF - Jammalamadugu", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80" }
+        ],
+        team: [
+          { name: "Gita", role: "Team Member", img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80" }
+        ],
+        activities: [
+          { title: "Hostel Facility Drive", date: "18 Jul 2025", img: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=300&q=80" }
+        ]
+      },
+      {
+        id: "proddatur",
+        name: "Proddatur",
+        tagline: "Progress Together",
+        image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80",
+        heroBanner: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=80",
+        heroSubtitle: "Innovation | Skill | Future",
+        stats: { total: "2,100+", students: "1,500+", colleges: "38+", teams: "18+" },
+        aboutSub: "Skill Development & Technical Learning",
+        aboutText: "Proddatur is a high-density student area where TNSF focuses on technical workshops, coding bootcamps, and career counseling sessions.",
+        aboutImage: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80",
+        leaders: [
+          { role: "District President", name: "C. Sekhar", org: "TNSF - Proddatur", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80" }
+        ],
+        team: [
+          { name: "Vamsi", role: "Team Member", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=200&q=80" }
+        ],
+        activities: [
+          { title: "Technical Skill Workshop", date: "25 Jul 2025", img: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=300&q=80" }
+        ]
+      },
+      {
+        id: "mydukur",
+        name: "Mydukur",
+        tagline: "Learning Today Leading Tomorrow",
+        image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=600&q=80",
+        heroBanner: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1200&q=80",
+        heroSubtitle: "Learning | Leadership",
+        stats: { total: "950+", students: "680+", colleges: "18+", teams: "8+" },
+        aboutSub: "Leadership Training for Emerging Youth",
+        aboutText: "Mydukur TNSF empowers school and college youth through leadership seminars, merit scholarship drives, and student assistance desks.",
+        aboutImage: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=600&q=80",
+        leaders: [
+          { role: "Youth Coordinator", name: "T. Kumar", org: "TNSF - Mydukur", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" }
+        ],
+        team: [
+          { name: "Sravani", role: "Team Member", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" }
+        ],
+        activities: [
+          { title: "Scholarship Distribution", date: "01 Aug 2025", img: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=300&q=80" }
+        ]
+      }
+    ];
+
+    /* Render Cards on Overview Page */
+    const grid = document.getElementById('constituencyGrid');
+
+    function renderCards() {
+      grid.innerHTML = '';
+      constituenciesData.forEach((item) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.onclick = () => showDetail(item.id);
+
+        card.innerHTML = `
+          <div class="card-img-container">
+            <img src="${item.image}" alt="${item.name}">
+          </div>
+          <div class="card-details">
+            <div class="card-title-line">
+              <div class="section-icon-badge" style="width:24px; height:24px; font-size:0.7rem;"><i class="fa-solid fa-location-dot"></i></div>
+              <div class="card-title">${item.name}</div>
+            </div>
+            <div class="card-subtitle">${item.tagline}</div>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+          </div>
         `;
-        activitiesGrid.appendChild(card);
+        grid.appendChild(card);
       });
-
-      // Footer Contacts & Socials
-      document.getElementById("contactPhone").innerText = pageConfig.contact.phone;
-      document.getElementById("contactAddress").innerText = pageConfig.contact.address;
-      document.getElementById("socialHandle").innerText = pageConfig.contact.handle;
-      document.getElementById("linkInsta").href = pageConfig.contact.instaLink;
-      document.getElementById("linkWhatsapp").href = pageConfig.contact.whatsappLink;
-      document.getElementById("linkFb").href = pageConfig.contact.fbLink;
-      document.getElementById("linkTwitter").href = pageConfig.contact.twitterLink;
-    });
-
-    /******************************************************************
-     * POPUP MODAL FUNCTIONALITY
-     ******************************************************************/
-    const modal = document.getElementById("popupModal");
-    const closeModalBtn = document.getElementById("closeModalBtn");
-    const modalBody = document.getElementById("modalBody");
-
-    function openPopup(title, subtitle, description, image) {
-      modalBody.innerHTML = `
-        <img src="${image}" alt="${title}">
-        <h3>${title}</h3>
-        <p style="color: #e5a100; font-weight: 700; font-size: 0.8rem; margin-bottom: 8px;">${subtitle}</p>
-        <p>${description}</p>
-      `;
-      modal.style.display = "block";
     }
 
-    closeModalBtn.onclick = () => {
-      modal.style.display = "none";
-    };
+    /* Switch Views Functions */
+    function showOverview() {
+      document.getElementById('overviewView').style.display = 'block';
+      document.getElementById('detailView').style.display = 'none';
+      window.scrollTo(0, 0);
+    }
 
-    window.onclick = (event) => {
-      if (event.target === modal) {
-        modal.style.display = "none";
-      }
-    };
+    function showDetail(id) {
+      const data = constituenciesData.find(c => c.id === id);
+      if (!data) return;
+
+      // Update Hero
+      document.getElementById('detailHeroBanner').style.backgroundImage = `url('${data.heroBanner}')`;
+      document.getElementById('detailHeroTitle').innerHTML = `${data.name} <span>Constituency</span>`;
+      document.getElementById('detailHeroSubtitle').innerText = data.heroSubtitle;
+
+      // Update Stats
+      document.getElementById('statTotal').innerText = data.stats.total;
+      document.getElementById('statStudents').innerText = data.stats.students;
+      document.getElementById('statColleges').innerText = data.stats.colleges;
+      document.getElementById('statTeams').innerText = data.stats.teams;
+
+      // Update About
+      document.getElementById('aboutTitle').innerText = `About ${data.name} Constituency`;
+      document.getElementById('aboutSubtitle').innerText = data.aboutSub;
+      document.getElementById('aboutText').innerHTML = `<p>${data.aboutText}</p>`;
+      document.getElementById('aboutImg').src = data.aboutImage;
+      document.getElementById('aboutImgName').innerText = data.name;
+
+      // Render Leadership
+      const lGrid = document.getElementById('leadershipGrid');
+      lGrid.innerHTML = data.leaders.map(l => `
+        <div class="leader-card">
+          <img src="${l.img}" alt="${l.name}" class="leader-img">
+          <div class="leader-info">
+            <h5>${l.role}</h5>
+            <h4>${l.name}</h4>
+            <p>${l.org}</p>
+          </div>
+          <div class="leader-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        </div>
+      `).join('');
+
+      // Render Team
+      const tGrid = document.getElementById('teamGrid');
+      tGrid.innerHTML = data.team.map(t => `
+        <div class="team-card">
+          <img src="${t.img}" alt="${t.name}">
+          <div class="team-card-info">
+            <h4>${t.name}</h4>
+            <p>${t.role}</p>
+          </div>
+        </div>
+      `).join('');
+
+      // Render Activities
+      const actGrid = document.getElementById('activitiesGrid');
+      actGrid.innerHTML = data.activities.map(a => `
+        <div class="activity-card">
+          <img src="${a.img}" alt="${a.title}">
+          <div class="activity-info">
+            <h4>${a.title}</h4>
+            <div class="activity-date"><i class="fa-solid fa-calendar"></i> ${a.date}</div>
+          </div>
+        </div>
+      `).join('');
+
+      // Show View
+      document.getElementById('overviewView').style.display = 'none';
+      document.getElementById('detailView').style.display = 'block';
+      window.scrollTo(0, 0);
+    }
+
+    // Initialize Page
+    renderCards();
   </script>
 </body>
 </html>
