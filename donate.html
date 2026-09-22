@@ -3,19 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TNSF Kadapa Parliament - Donation</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>TNSF Kadapa Parliament - Donation Portal</title>
   <style>
-    /* Global Styles */
+    /* Global Styles & Variables */
     :root {
-      --primary-yellow: #fbc02d;
-      --primary-dark-yellow: #f57f17;
-      --bg-gray: #f8f9fa;
-      --card-bg: #ffffff;
-      --text-dark: #212121;
+      --primary-yellow: #FFD200;
+      --primary-hover: #E6BD00;
+      --header-bg: #FFC800;
+      --text-main: #1C1C1C;
       --text-muted: #666666;
-      --border-color: #e0e0e0;
-      --border-radius: 12px;
+      --bg-light: #F8F9FA;
+      --border-color: #E2E8F0;
+      --card-bg: #FFFFFF;
+      --card-selected: #FFFBE6;
+      --success-green: #22C55E;
     }
 
     * {
@@ -26,217 +27,229 @@
     }
 
     body {
-      background-color: var(--bg-gray);
-      color: var(--text-dark);
+      background-color: var(--bg-light);
+      color: var(--text-main);
       display: flex;
       flex-direction: column;
       min-height: 100vh;
       align-items: center;
     }
 
+    /* Updatable Image Links (Managed via CSS Custom Properties or Config Object) */
+    :root {
+      --logo-url: 'https://via.placeholder.com/50/DC2626/FFFFFF?text=TNSF';
+      --hero-banner-url: 'https://via.placeholder.com/1200x400/FFF8DC/D97706?text=Small+Donations+Create+a+Big+Impact';
+    }
+
+    /* Container for max mobile/desktop layout constraint */
     .app-container {
       width: 100%;
-      max-width: 480px; /* Mobile wrapper appearance, expands responsively */
-      background: #ffffff;
+      max-width: 480px;
+      background-color: #FFFFFF;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 0 20px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
       position: relative;
     }
 
-    /* Header Styling */
+    /* Header Component */
     header {
-      background-color: var(--primary-yellow);
+      background-color: var(--header-bg);
       padding: 12px 16px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       position: sticky;
       top: 0;
       z-index: 100;
     }
 
-    .header-brand {
+    .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
-    .header-logo {
+    .brand-logo {
       width: 42px;
       height: 42px;
       border-radius: 50%;
-      object-fit: cover;
-      background: #fff;
+      background-image: url(var(--logo-url));
+      background-size: cover;
+      background-position: center;
+      border: 2px solid #FFFFFF;
     }
 
-    .header-title {
-      font-weight: 800;
+    .brand-title {
       font-size: 16px;
+      font-weight: 800;
       line-height: 1.1;
+      color: #000000;
       text-transform: uppercase;
-      color: #000;
     }
 
-    .header-title span {
-      display: block;
-      font-size: 11px;
-      font-weight: 600;
+    .brand-subtitle {
+      font-size: 10px;
+      font-weight: 700;
       letter-spacing: 0.5px;
+      color: #333333;
     }
 
-    /* Updated Header Action: Home Icon + Text */
     .home-btn {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
       background: rgba(255, 255, 255, 0.3);
-      border: none;
       padding: 6px 12px;
       border-radius: 20px;
-      font-weight: 700;
-      font-size: 14px;
-      color: #000;
+      border: none;
       cursor: pointer;
-      transition: background 0.2s;
+      font-weight: 600;
+      font-size: 13px;
+      color: #000000;
+      text-decoration: none;
     }
 
-    .home-btn:hover {
-      background: rgba(255, 255, 255, 0.5);
+    .home-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
     }
 
-    /* Back Navigation Link */
+    /* Full Width Hero Banner */
+    .hero-banner {
+      width: 100%;
+      height: 180px;
+      background-image: url(var(--hero-banner-url));
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* Main Content Body */
+    main {
+      flex: 1;
+      padding: 20px 16px;
+    }
+
     .back-nav {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      color: #333;
-      text-decoration: none;
-      font-weight: 600;
       font-size: 14px;
-      margin-bottom: 12px;
+      font-weight: 600;
+      color: var(--text-main);
       cursor: pointer;
+      margin-bottom: 16px;
+      background: none;
+      border: none;
     }
 
-    /* Full Width Hero Banner */
-    .hero-banner-container {
-      width: 100%;
-      overflow: hidden;
-    }
-
-    .hero-banner-img {
-      width: 100%;
-      height: auto;
-      display: block;
-      object-fit: cover;
-    }
-
-    /* Main Content Area */
-    .content {
-      padding: 20px 16px;
-      flex: 1;
-    }
-
-    .page {
-      display: none;
-    }
-
-    .page.active {
-      display: block;
-    }
-
-    /* Titles & Subtitles */
     h2 {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 700;
       margin-bottom: 4px;
-      color: #111;
     }
 
-    p.subtitle {
+    .subtitle {
       font-size: 13px;
       color: var(--text-muted);
       margin-bottom: 20px;
     }
 
-    /* Donation Grid */
+    /* Pages Container / View Switcher */
+    .page-step {
+      display: none;
+    }
+
+    .page-step.active {
+      display: block;
+    }
+
+    /* Page 1: Select Amount Grid */
     .amount-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
+      gap: 12px;
       margin-bottom: 20px;
     }
 
-    .amount-btn {
-      background: #fff;
-      border: 1px solid var(--border-color);
+    .amount-card {
+      border: 1.5px solid var(--border-color);
       border-radius: 8px;
       padding: 12px 8px;
-      font-size: 15px;
-      font-weight: 700;
       text-align: center;
+      font-weight: 700;
+      font-size: 15px;
       cursor: pointer;
-      transition: all 0.2s;
+      background-color: var(--card-bg);
+      transition: all 0.2s ease;
       position: relative;
     }
 
-    .amount-btn.selected {
-      background-color: var(--primary-yellow);
-      border-color: var(--primary-dark-yellow);
-      color: #000;
+    .amount-card.selected {
+      border-color: var(--primary-yellow);
+      background-color: var(--card-selected);
     }
 
-    .amount-btn.selected::after {
+    .amount-card.selected::after {
       content: "✓";
       position: absolute;
-      top: -6px;
-      right: -6px;
+      top: 4px;
+      right: 6px;
+      font-size: 10px;
       background: #000;
       color: #fff;
-      font-size: 10px;
-      width: 16px;
-      height: 16px;
       border-radius: 50%;
+      width: 14px;
+      height: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    /* Form Inputs */
-    .form-group {
-      margin-bottom: 16px;
+    .custom-amount-group {
+      margin-bottom: 24px;
     }
 
-    .form-group label {
+    .custom-amount-group label {
       display: block;
       font-size: 13px;
       font-weight: 600;
       margin-bottom: 6px;
-      color: #333;
     }
 
-    .input-field {
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-wrapper span {
+      position: absolute;
+      left: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .input-wrapper input {
       width: 100%;
-      padding: 12px 14px;
-      border: 1px solid var(--border-color);
+      padding: 12px 12px 12px 30px;
+      border: 1.5px solid var(--border-color);
       border-radius: 8px;
       font-size: 14px;
       outline: none;
-      transition: border-color 0.2s;
-      background: #fafafa;
     }
 
-    .input-field:focus {
-      border-color: var(--primary-dark-yellow);
-      background: #fff;
+    .input-wrapper input:focus {
+      border-color: var(--primary-yellow);
     }
 
     /* Buttons */
     .btn-primary {
       width: 100%;
       background-color: var(--primary-yellow);
-      color: #000;
+      color: #000000;
       border: none;
       padding: 14px;
       border-radius: 8px;
@@ -247,100 +260,60 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      transition: background-color 0.2s;
-      margin-top: 10px;
+      transition: background-color 0.2s ease;
     }
 
     .btn-primary:hover {
-      background-color: var(--primary-dark-yellow);
+      background-color: var(--primary-hover);
     }
 
-    /* Trust & Info Cards */
-    .info-card {
-      background-color: #fffde7;
-      border: 1px solid #fff59d;
-      border-radius: 10px;
-      padding: 14px;
-      margin-top: 16px;
+    .secure-notice {
       display: flex;
-      align-items: flex-start;
-      gap: 12px;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 12px;
     }
 
-    .info-card i {
-      color: var(--primary-dark-yellow);
-      font-size: 18px;
-      margin-top: 2px;
-    }
-
-    .info-card p {
-      font-size: 12px;
-      color: #444;
-      line-height: 1.4;
-    }
-
-    /* Payment Options Styling */
+    /* QR / Payment Section */
     .qr-container {
       text-align: center;
-      background: #fff;
       border: 1px solid var(--border-color);
       border-radius: 12px;
       padding: 16px;
       margin-bottom: 16px;
+      background: #FAFAFA;
     }
 
     .qr-code {
-      width: 160px;
-      height: 160px;
-      margin: 12px auto;
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 12px auto;
     }
 
     .app-icons {
       display: flex;
       justify-content: center;
       gap: 12px;
-      margin-top: 10px;
+      margin-top: 8px;
     }
 
-    .app-chip {
+    .app-badge {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 6px;
-      border: 1px solid var(--border-color);
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 600;
+      font-size: 10px;
+      color: var(--text-muted);
       cursor: pointer;
-      background: #fff;
-      text-decoration: none;
-      color: #333;
     }
 
-    .divider {
-      text-align: center;
-      margin: 16px 0;
-      position: relative;
-    }
-
-    .divider::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 0;
-      right: 0;
-      border-top: 1px solid var(--border-color);
-      z-index: 1;
-    }
-
-    .divider span {
-      background: #fff;
-      padding: 0 10px;
-      position: relative;
-      z-index: 2;
-      font-size: 12px;
-      color: #777;
-      font-weight: 600;
+    .app-badge img {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      margin-bottom: 2px;
     }
 
     .upi-box {
@@ -348,75 +321,151 @@
       border-radius: 8px;
       padding: 10px 14px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      background: #fafafa;
+      justify-content: space-between;
+      margin-top: 8px;
+      background: #FFF;
     }
 
-    .copy-btn {
-      background: none;
-      border: none;
-      color: #666;
-      cursor: pointer;
-    }
-
-    /* File Upload Box */
-    .file-upload-box {
-      border: 2px dashed var(--border-color);
-      border-radius: 8px;
-      padding: 24px 16px;
+    .divider {
       text-align: center;
-      background: #fafafa;
-      cursor: pointer;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin: 16px 0;
       position: relative;
     }
 
-    .file-upload-box i {
-      font-size: 28px;
-      color: #777;
-      margin-bottom: 8px;
-    }
-
-    .file-upload-box input[type="file"] {
+    .divider::before, .divider::after {
+      content: "";
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      cursor: pointer;
+      top: 50%;
+      width: 42%;
+      height: 1px;
+      background-color: var(--border-color);
+    }
+    .divider::before { left: 0; }
+    .divider::after { right: 0; }
+
+    /* Forms */
+    .form-group {
+      margin-bottom: 14px;
     }
 
-    /* Checkbox Container */
-    .checkbox-container {
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
+    .form-group label {
+      display: block;
       font-size: 12px;
-      color: #555;
-      margin: 14px 0;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      font-size: 13px;
+    }
+
+    .upload-box {
+      border: 2px dashed var(--border-color);
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      background: #FAFAFA;
+      margin-bottom: 16px;
+    }
+
+    .upload-box svg {
+      width: 32px;
+      height: 32px;
+      fill: #3B82F6;
+      margin-bottom: 6px;
+    }
+
+    .upload-box p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .file-name {
+      font-size: 11px;
+      color: var(--text-main);
+      margin-top: 4px;
+      font-weight: 600;
+    }
+
+    .info-card {
+      background-color: #FFFBE6;
+      border-radius: 8px;
+      padding: 14px;
+      margin-top: 16px;
+    }
+
+    .info-card h4 {
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .info-card p {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .checkbox-group {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .checkbox-group input {
+      margin-top: 2px;
+    }
+
+    .checkbox-group label {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.3;
+    }
+
+    /* Success Page */
+    .success-wrapper {
+      text-align: center;
+      padding: 30px 10px;
+    }
+
+    .success-icon {
+      width: 60px;
+      height: 60px;
+      background-color: #DCFCE7;
+      color: var(--success-green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px auto;
+    }
+
+    .success-icon svg {
+      width: 32px;
+      height: 32px;
+      fill: currentColor;
     }
 
     /* Footer */
     footer {
-      background-color: var(--primary-yellow);
+      background-color: var(--header-bg);
+      padding: 8px;
       text-align: center;
-      padding: 10px;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 600;
       color: #000;
-    }
-
-    /* Desktop View Adjustments */
-    @media (min-width: 768px) {
-      body {
-        padding: 20px 0;
-      }
-      .app-container {
-        border-radius: 16px;
-        min-height: auto;
-        overflow: hidden;
-      }
+      margin-top: auto;
     }
   </style>
 </head>
@@ -425,207 +474,213 @@
   <div class="app-container">
     <!-- Header -->
     <header>
-      <div class="header-brand">
-        <!-- Updatable Logo Link -->
-        <img id="header-logo" src="https://via.placeholder.com/80/f39c12/ffffff?text=TNSF" alt="TNSF Logo" class="header-logo">
-        <div class="header-title">
-          TNSF
-          <span>KADAPA PARLIAMENT</span>
+      <div class="brand">
+        <div class="brand-logo" id="header-logo"></div>
+        <div>
+          <div class="brand-title">TNSF</div>
+          <div class="brand-subtitle">KADAPA PARLIAMENT</div>
         </div>
       </div>
-      <!-- Menu Button replaced with Home Icon + Text -->
-      <button class="home-btn" onclick="navigateTo('page-1')">
-        <i class="fa-solid fa-house"></i> Home
-      </button>
+      <a href="#" class="home-btn" onclick="resetToHome(event)">
+        <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        Home
+      </a>
     </header>
 
-    <!-- Content Area -->
-    <div class="content">
+    <!-- Full-Width Hero Banner (Always Visible) -->
+    <div class="hero-banner" id="hero-banner"></div>
 
-      <!-- PAGE 1: Combined Hero Banner & Donation Selection -->
-      <div id="page-1" class="page active">
-        <!-- Full Width Hero Banner (Updatable Link) -->
-        <div class="hero-banner-container" style="margin: -20px -16px 16px -16px;">
-          <img id="hero-banner-img" src="https://via.placeholder.com/480x200/f1c40f/ffffff?text=Small+Donations+Create+a+Big+Impact" alt="Hero Banner" class="hero-banner-img">
-        </div>
-
+    <main>
+      <!-- STEP 1: Select Donation Amount (Replaces former Choose Method Page) -->
+      <section id="step-1" class="page-step active">
         <h2>Select Donation Amount</h2>
         <p class="subtitle">Choose an amount to make a difference.</p>
 
         <div class="amount-grid">
-          <div class="amount-btn" onclick="selectAmount(5, this)">₹ 5</div>
-          <div class="amount-btn" onclick="selectAmount(10, this)">₹ 10</div>
-          <div class="amount-btn" onclick="selectAmount(50, this)">₹ 50</div>
-          <div class="amount-btn" onclick="selectAmount(100, this)">₹ 100</div>
-          <div class="amount-btn" onclick="selectAmount(200, this)">₹ 200</div>
-          <div class="amount-btn" onclick="selectAmount(500, this)">₹ 500</div>
-          <div class="amount-btn selected" onclick="selectAmount(1000, this)">₹ 1,000</div>
-          <div class="amount-btn" onclick="selectAmount(2000, this)">₹ 2,000</div>
-          <div class="amount-btn" onclick="selectAmount(5000, this)">₹ 5,000</div>
+          <div class="amount-card" onclick="selectPreset(5)">₹ 5</div>
+          <div class="amount-card" onclick="selectPreset(10)">₹ 10</div>
+          <div class="amount-card" onclick="selectPreset(50)">₹ 50</div>
+          <div class="amount-card" onclick="selectPreset(100)">₹ 100</div>
+          <div class="amount-card" onclick="selectPreset(200)">₹ 200</div>
+          <div class="amount-card" onclick="selectPreset(500)">₹ 500</div>
+          <div class="amount-card selected" onclick="selectPreset(1000)">₹ 1,000</div>
+          <div class="amount-card" onclick="selectPreset(2000)">₹ 2,000</div>
+          <div class="amount-card" onclick="selectPreset(5000)">₹ 5,000</div>
         </div>
 
-        <div class="form-group">
+        <div class="custom-amount-group">
           <label>Custom Amount</label>
-          <input type="number" id="custom-amount" class="input-field" placeholder="₹ Enter amount (₹)" oninput="clearSelectedGrid()">
+          <div class="input-wrapper">
+            <span>₹</span>
+            <input type="number" id="custom-amount-input" placeholder="Enter amount (₹)" oninput="handleCustomInput(this.value)">
+          </div>
         </div>
 
         <button class="btn-primary" onclick="handleAmountProceed()">
-          Proceed to Payment <i class="fa-solid fa-arrow-right"></i>
+          Proceed to Payment &rarr;
         </button>
 
-        <div style="text-align: center; margin-top: 12px; font-size: 11px; color: #777;">
-          <i class="fa-solid fa-lock"></i> Your donation is safe and secure
+        <div class="secure-notice">
+          <span>🔒</span> Your donation is safe and secure
         </div>
-      </div>
+      </section>
 
-      <!-- PAGE 2: Payment Options -->
-      <div id="page-2" class="page">
-        <a class="back-nav" onclick="navigateTo('page-1')"><i class="fa-solid fa-arrow-left"></i> Back</a>
+      <!-- STEP 2: Payment Options -->
+      <section id="step-2" class="page-step">
+        <button class="back-nav" onclick="navigateTo('step-1')">&larr; Back</button>
         <h2>Payment Options</h2>
         <p class="subtitle">Scan the QR code or pay via UPI ID.</p>
 
         <div class="qr-container">
-          <p style="font-weight: 700; font-size: 14px;">Scan & Pay</p>
-          <p style="font-size: 11px; color: #666;">Open any UPI app and scan the QR code.</p>
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=upi://pay?pa=tnsf@okaxis" alt="QR Code" class="qr-code">
-          
-          <!-- Direct External App Redirection -->
+          <!-- Dynamic QR Placeholder generated via API -->
+          <img id="qr-image" class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=tnsf@okaxis&pn=TNSF" alt="Scan QR">
+          <p style="font-size: 12px; font-weight: 700; margin-bottom: 4px;">Scan & Pay</p>
+          <p style="font-size: 10px; color: var(--text-muted); margin-bottom: 8px;">Open any UPI app and scan the QR code.</p>
+
           <div class="app-icons">
-            <a href="upi://pay?pa=tnsf@okaxis" class="app-chip"><i class="fa-brands fa-google-pay" style="color: #4285F4;"></i> GPay</a>
-            <a href="upi://pay?pa=tnsf@okaxis" class="app-chip"><i class="fa-solid fa-mobile-screen" style="color: #5f259f;"></i> PhonePe</a>
-            <a href="upi://pay?pa=tnsf@okaxis" class="app-chip"><i class="fa-solid fa-wallet" style="color: #00baf2;"></i> Paytm</a>
+            <div class="app-badge" onclick="redirectToUPIApp('gpay')">
+              <img src="https://via.placeholder.com/28/4285F4/FFFFFF?text=G" alt="GPay">
+              <span>GPay</span>
+            </div>
+            <div class="app-badge" onclick="redirectToUPIApp('phonepe')">
+              <img src="https://via.placeholder.com/28/5f259f/FFFFFF?text=P" alt="PhonePe">
+              <span>PhonePe</span>
+            </div>
+            <div class="app-badge" onclick="redirectToUPIApp('paytm')">
+              <img src="https://via.placeholder.com/28/00baf2/FFFFFF?text=Pay" alt="Paytm">
+              <span>Paytm</span>
+            </div>
           </div>
         </div>
 
-        <div class="divider"><span>OR</span></div>
+        <div class="divider">OR</div>
 
-        <div class="form-group">
-          <label>Pay directly to our UPI ID</label>
-          <div class="upi-box">
-            <span style="font-weight: 600; font-size: 13px;">tnsf@okaxis</span>
-            <button class="copy-btn" onclick="copyUPI()"><i class="fa-regular fa-copy"></i></button>
+        <div class="upi-box">
+          <div>
+            <div style="font-size: 10px; color: var(--text-muted);">UPI ID</div>
+            <div style="font-size: 12px; font-weight: 700;">tnsf@okaxis</div>
           </div>
+          <button style="border: none; background: none; cursor: pointer; color: #3B82F6;" onclick="copyUPI()">
+            📋
+          </button>
         </div>
 
-        <button class="btn-primary" onclick="navigateTo('page-3')">
-          Next: Upload Receipt <i class="fa-solid fa-arrow-right"></i>
+        <button class="btn-primary" style="margin-top: 20px;" onclick="navigateTo('step-3')">
+          Next: Upload Screenshot &rarr;
         </button>
-      </div>
+      </section>
 
-      <!-- PAGE 3: Upload Payment Screenshot -->
-      <div id="page-3" class="page">
-        <a class="back-nav" onclick="navigateTo('page-2')"><i class="fa-solid fa-arrow-left"></i> Back</a>
+      <!-- STEP 3: Upload Payment Screenshot -->
+      <section id="step-3" class="page-step">
+        <button class="back-nav" onclick="navigateTo('step-2')">&larr; Back</button>
         <h2>Upload Payment Screenshot</h2>
-        <p class="subtitle">After making the payment, please enter the Payment ID and upload a screenshot for verification.</p>
+        <p class="subtitle">After making payment, enter Payment ID and upload screenshot for verification.</p>
 
         <div class="form-group">
           <label>Payment ID / UTR Number *</label>
-          <input type="text" id="utr-number" class="input-field" placeholder="Enter your payment ID">
+          <input type="text" id="utr-input" placeholder="Enter your payment ID">
         </div>
 
         <div class="form-group">
           <label>Upload Screenshot *</label>
-          <div class="file-upload-box">
-            <i class="fa-solid fa-cloud-arrow-up"></i>
-            <p style="font-size: 12px; font-weight: 600;">Tap to upload</p>
-            <p style="font-size: 10px; color: #888;">(JPG, PNG, PDF - Max 5MB)</p>
-            <input type="file" id="screenshot-file" onchange="handleFileSelect(this)">
+          <div class="upload-box" onclick="document.getElementById('file-input').click()">
+            <svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>
+            <p><strong>Tap to upload</strong></p>
+            <p>(JPG, PNG, PDF - Max 5MB)</p>
+            <div id="file-name" class="file-name">No file selected</div>
           </div>
-          <p id="file-name-display" style="font-size: 11px; color: #666; margin-top: 4px;"></p>
+          <input type="file" id="file-input" style="display: none;" accept="image/*,.pdf" onchange="handleFileSelect(this)">
         </div>
 
-        <button class="btn-primary" onclick="submitDonation()">Submit Donation</button>
-      </div>
+        <button class="btn-primary" onclick="submitDonation()">
+          Submit Donation
+        </button>
+      </section>
 
-      <!-- PAGE 4: High Value Donation Alert / Connect Form Prompt -->
-      <div id="page-4" class="page">
-        <a class="back-nav" onclick="navigateTo('page-1')"><i class="fa-solid fa-arrow-left"></i> Back</a>
+      <!-- STEP 4: Form for Donations Above ₹5,000 -->
+      <section id="step-4" class="page-step">
+        <button class="back-nav" onclick="navigateTo('step-1')">&larr; Back</button>
         
-        <div style="text-align: center; margin: 20px 0;">
-          <i class="fa-solid fa-graduation-cap" style="font-size: 60px; color: #34495e;"></i>
+        <div style="text-align: center; margin-bottom: 16px;">
+          <div style="font-size: 40px;">🎓</div>
+          <h2>For Donations Above ₹5,000</h2>
+          <p class="subtitle">For donations greater than ₹5,000, please fill the Connect TNSF Form to get a receipt and further details.</p>
         </div>
 
-        <h2 style="text-align: center;">For Donations Above ₹5,000</h2>
-        <p class="subtitle" style="text-align: center; margin-top: 6px;">For donations greater than ₹5,000, please fill the Connect TNSF Form to get a receipt and further details.</p>
-
-        <button class="btn-primary" onclick="navigateTo('page-5')">
-          Open Connect TNSF Form <i class="fa-solid fa-arrow-right"></i>
+        <button class="btn-primary" onclick="navigateTo('step-5')">
+          Open Connect TNSF Form &rarr;
         </button>
 
         <div class="info-card">
-          <i class="fa-solid fa-circle-check"></i>
-          <div>
-            <strong style="font-size: 13px; display: block; margin-bottom: 2px;">Why It Matters?</strong>
-            <p>Your generous support helps us provide better education, facilities and opportunities for deserving students.</p>
-          </div>
+          <h4><span style="color: #EAB308;">✔</span> Why It Matters?</h4>
+          <p>Your generous support helps us provide better education, facilities and opportunities for deserving students.</p>
         </div>
-      </div>
+      </section>
 
-      <!-- PAGE 5: Connect TNSF Form -->
-      <div id="page-5" class="page">
-        <a class="back-nav" onclick="navigateTo('page-4')"><i class="fa-solid fa-arrow-left"></i> Back</a>
+      <!-- STEP 5: Connect TNSF Form Page -->
+      <section id="step-5" class="page-step">
+        <button class="back-nav" onclick="navigateTo('step-4')">&larr; Back</button>
         <h2>Connect TNSF Form</h2>
-
-        <div class="form-group">
-          <label>Full Name *</label>
-          <input type="text" class="input-field" placeholder="Enter your full name">
-        </div>
-
-        <div class="form-group">
-          <label>Email Address *</label>
-          <input type="email" class="input-field" placeholder="Enter your email address">
-        </div>
-
-        <div class="form-group">
-          <label>Mobile Number *</label>
-          <input type="tel" class="input-field" placeholder="Enter your mobile number">
-        </div>
-
-        <div class="form-group">
-          <label>Address *</label>
-          <input type="text" class="input-field" placeholder="Enter your address">
-        </div>
-
-        <div class="form-group">
-          <label>Donation Amount (₹) *</label>
-          <input type="number" id="connect-form-amount" class="input-field" placeholder="Enter amount">
-        </div>
-
-        <div class="form-group">
-          <label>Payment ID / UTR Number *</label>
-          <input type="text" class="input-field" placeholder="Enter payment ID">
-        </div>
-
-        <div class="checkbox-container">
-          <input type="checkbox" id="citizen-check">
-          <label for="citizen-check">I declare that I am a citizen of India and above 18 years of age. I am donating from my own sources of funds.</label>
-        </div>
-
-        <button class="btn-primary" onclick="submitConnectForm()">Submit & Connect</button>
-      </div>
-
-      <!-- PAGE 6: Success Page -->
-      <div id="page-6" class="page">
-        <div style="text-align: center; padding: 30px 10px;">
-          <div style="width: 60px; height: 60px; background: #e8f5e9; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px auto;">
-            <i class="fa-solid fa-check" style="font-size: 30px; color: #2e7d32;"></i>
+        
+        <form id="connect-form" onsubmit="handleHighValueSubmit(event)">
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" required placeholder="Enter your full name">
           </div>
-          <h2 style="font-size: 24px;">Thank You!</h2>
-          <p style="font-size: 14px; color: #555; margin: 8px 0 24px 0;">
-            For your generous support! Your donation makes a real difference in the lives of our students.
-          </p>
-
-          <div style="background: #fffde7; border-radius: 12px; padding: 20px; margin-bottom: 24px;">
-            <i class="fa-solid fa-hands-holding-child" style="font-size: 40px; color: #f57f17; margin-bottom: 8px;"></i>
-            <h3 style="font-size: 16px;">Together</h3>
-            <p style="font-size: 12px; color: #666;">We Build Brighter Futures</p>
+          <div class="form-group">
+            <label>Email Address *</label>
+            <input type="email" required placeholder="Enter your email address">
+          </div>
+          <div class="form-group">
+            <label>Mobile Number *</label>
+            <input type="tel" required placeholder="Enter your mobile number">
+          </div>
+          <div class="form-group">
+            <label>Address *</label>
+            <input type="text" required placeholder="Enter your address">
+          </div>
+          <div class="form-group">
+            <label>Donation Amount (₹) *</label>
+            <input type="number" id="form-amount" required placeholder="Enter amount">
+          </div>
+          <div class="form-group">
+            <label>Payment ID / UTR Number *</label>
+            <input type="text" required placeholder="Enter payment ID">
+          </div>
+          
+          <div class="checkbox-group">
+            <input type="checkbox" id="declaration" required>
+            <label for="declaration">I declare that I am a citizen of India and above 18 years of age. I am donating from my own sources of funds.</label>
           </div>
 
-          <button class="btn-primary" onclick="navigateTo('page-1')">Back to Home</button>
-        </div>
-      </div>
+          <button type="submit" class="btn-primary">
+            Submit & Connect
+          </button>
+        </form>
+      </section>
 
-    </div>
+      <!-- STEP 6: Thank You / Success Page -->
+      <section id="step-6" class="page-step">
+        <div class="success-wrapper">
+          <div class="success-icon">
+            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          </div>
+          <h2>Thank You!</h2>
+          <p class="subtitle">For your generous support! Your donation makes a real difference in the lives of our students.</p>
+
+          <div style="margin: 24px 0;">
+            <div style="font-size: 32px;">🤝</div>
+            <div style="font-weight: 800; font-size: 16px;">Together</div>
+            <div style="font-size: 12px; color: var(--text-muted);">We Build Brighter Futures</div>
+          </div>
+
+          <button class="btn-primary" onclick="resetToHome(event)">
+            Back to Home
+          </button>
+        </div>
+      </section>
+
+    </main>
 
     <!-- Footer -->
     <footer>
@@ -634,99 +689,115 @@
   </div>
 
   <script>
-    // Configuration URLs (Easy to update links)
+    // State Management
+    let selectedAmount = 1000;
+
+    // Updatable Dynamic Links
     const CONFIG = {
-      logoUrl: "https://via.placeholder.com/80/f39c12/ffffff?text=TNSF",
-      heroBannerUrl: "https://via.placeholder.com/480x200/f1c40f/ffffff?text=Small+Donations+Create+a+Big+Impact"
+      logoUrl: 'https://via.placeholder.com/50/DC2626/FFFFFF?text=TNSF',
+      heroBannerUrl: 'https://via.placeholder.com/1200x400/FFF8DC/D97706?text=Small+Donations+Create+a+Big+Impact',
+      upiID: 'tnsf@okaxis'
     };
 
-    let selectedAmountValue = 1000;
+    // Initialize Images
+    document.getElementById('header-logo').style.backgroundImage = `url('${CONFIG.logoUrl}')`;
+    document.getElementById('hero-banner').style.backgroundImage = `url('${CONFIG.heroBannerUrl}')`;
 
-    // Apply Updatable Dynamic Links
-    document.getElementById('header-logo').src = CONFIG.logoUrl;
-    document.getElementById('hero-banner-img').src = CONFIG.heroBannerUrl;
-
-    // Page Navigation Router
-    function navigateTo(pageId) {
-      document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-      document.getElementById(pageId).classList.add('active');
+    // Navigation Helper
+    function navigateTo(stepId) {
+      document.querySelectorAll('.page-step').forEach(step => {
+        step.classList.remove('active');
+      });
+      document.getElementById(stepId).classList.add('active');
       window.scrollTo(0, 0);
     }
 
-    // Select Amount Logic
-    function selectAmount(amount, element) {
-      selectedAmountValue = amount;
-      document.querySelectorAll('.amount-btn').forEach(btn => btn.classList.remove('selected'));
-      element.classList.add('selected');
-      document.getElementById('custom-amount').value = '';
+    // Reset to initial Home step
+    function resetToHome(e) {
+      if(e) e.preventDefault();
+      navigateTo('step-1');
     }
 
-    function clearSelectedGrid() {
-      document.querySelectorAll('.amount-btn').forEach(btn => btn.classList.remove('selected'));
-      selectedAmountValue = null;
+    // Preset Amount Selection
+    function selectPreset(amount) {
+      selectedAmount = amount;
+      document.getElementById('custom-amount-input').value = '';
+      
+      const cards = document.querySelectorAll('.amount-card');
+      cards.forEach(card => {
+        card.classList.remove('selected');
+        if(card.textContent.includes(amount.toLocaleString('en-IN'))) {
+          card.classList.add('selected');
+        }
+      });
     }
 
-    // Proceed Logic from Page 1
+    // Handle Custom Amount Input
+    function handleCustomInput(val) {
+      document.querySelectorAll('.amount-card').forEach(card => card.classList.remove('selected'));
+      selectedAmount = val ? parseInt(val, 10) : 0;
+    }
+
+    // Proceed logic based on amount (> 5000 leads to Step 4)
     function handleAmountProceed() {
-      const customVal = document.getElementById('custom-amount').value;
-      const finalAmount = customVal ? parseFloat(customVal) : selectedAmountValue;
-
-      if (!finalAmount || finalAmount <= 0) {
-        alert("Please select or enter a valid donation amount.");
+      if(!selectedAmount || selectedAmount <= 0) {
+        alert('Please select or enter a valid donation amount.');
         return;
       }
 
-      // Check if donation is > 5000
-      if (finalAmount > 5000) {).value = finalAmount;
-        navigateTo('page-4');
+      // Update QR Code with selected amount
+      const qrApi = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=${CONFIG.upiID}&pn=TNSF&am=${selectedAmount}`;
+      document.getElementById('qr-image').src = qrApi;
+
+      if(selectedAmount > 5000) {
+        document.getElementById('form-amount').value = selectedAmount;
+        navigateTo('step-4');
       } else {
-        navigateTo('page-2');
+        navigateTo('step-2');
       }
     }
 
-    // Copy UPI ID
+    // Deep Linking to External UPI Apps
+    function redirectToUPIApp(appName) {
+      const upiUrl = `upi://pay?pa=${CONFIG.upiID}&pn=TNSF&am=${selectedAmount}&cu=INR`;
+      window.location.href = upiUrl;
+    }
+
+    // Copy UPI ID to Clipboard
     function copyUPI() {
-      navigator.clipboard.writeText("tnsf@okaxis");
-      alert("UPI ID copied to clipboard!");
+      navigator.clipboard.writeText(CONFIG.upiID);
+      alert('UPI ID copied to clipboard!');
     }
 
     // File Upload Handler
     function handleFileSelect(input) {
       if (input.files && input.files[0]) {
-        document.getElementById('file-name-display').innerText = "Selected: " + input.files[0].name;
+        document.getElementById('file-name').textContent = input.files[0].name;
       }
     }
 
-    // Submit Donation Logic
+    // Submit Standard Donation
     function submitDonation() {
-      const utr = document.getElementById('utr-number').value;
-      const file = document.getElementById('screenshot-file').files[0];
+      const utr = document.getElementById('utr-input').value;
+      const file = document.getElementById('file-input').files[0];
 
-      if (!utr) {
-        alert("Please enter the Payment ID / UTR Number.");
+      if(!utr) {
+        alert('Please enter your Payment ID / UTR Number.');
         return;
       }
-      if (!file) {
-        alert("Please upload a payment screenshot.");
+      if(!file) {
+        alert('Please upload a screenshot of your payment.');
         return;
       }
 
-      // Show Success Page
-      navigateTo('page-6');
+      navigateTo('step-6');
     }
 
-    // Submit Connect Form Logic
-    function submitConnectForm() {
-      const check = document.getElementById('citizen-check').checked;
-      if (!check) {
-        alert("Please confirm the declaration checkbox.");
-        return;
-      }
-
-      // Show Success Page
-      navigateTo('page-6');
+    // Submit High Value Donation Form
+    function handleHighValueSubmit(e) {
+      e.preventDefault();
+      navigateTo('step-6');
     }
   </script>
 </body>
 </html>
-        document.getElementById('connect-form-amount'
