@@ -5,11 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TNSF Kadapa Parliament</title>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
+        :root {
+            --bg-yellow: #fffdf0;
+            --accent-yellow: #ffdc00;
+            --light-yellow: #fff8c5;
+            --dark-yellow: #e6c200;
+            --black: #000000;
+            --off-black: #1a1a1a;
+            --white: #ffffff;
+            --gray: #666666;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -17,42 +28,47 @@
             font-family: 'Poppins', sans-serif;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            background-color: #fffdf0;
-            color: #333;
+            background-color: var(--bg-yellow);
+            color: var(--off-black);
             overflow-x: hidden;
         }
 
-        /* --- LOADING SCREEN --- */
+        /* --- LOADING SCREEN ANIMATION --- */
         #loader-wrapper {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #fff9d6;
+            background-color: var(--bg-yellow);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transition: opacity 0.8s ease, transform 0.8s ease, visibility 0.8s;
         }
 
         .loader-logo {
             width: 130px;
             height: 130px;
             border-radius: 50%;
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.8);
-            animation: pulseLogo 1.2s infinite alternate;
+            border: 3px solid var(--black);
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+            animation: pulseLogo 1.5s ease-in-out infinite alternate;
             margin-bottom: 30px;
         }
 
         .spinner {
-            width: 45px;
-            height: 45px;
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid #ffcc00;
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--light-yellow);
+            border-top: 4px solid var(--black);
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
             margin-bottom: 40px;
@@ -62,7 +78,8 @@
             position: absolute;
             bottom: 30px;
             font-size: 12px;
-            color: #555;
+            color: var(--black);
+            font-weight: 600;
             letter-spacing: 0.5px;
         }
 
@@ -72,8 +89,8 @@
         }
 
         @keyframes pulseLogo {
-            0% { transform: scale(1); box-shadow: 0 0 15px rgba(255, 204, 0, 0.5); }
-            100% { transform: scale(1.08); box-shadow: 0 0 30px rgba(255, 204, 0, 1); }
+            0% { transform: scale(1); box-shadow: 0 0 0px rgba(0, 0, 0, 0.2); }
+            100% { transform: scale(1.08); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); }
         }
 
         .loaded #loader-wrapper {
@@ -85,8 +102,8 @@
         /* --- PAGE ENTRANCE --- */
         #main-content {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 1s ease 0.3s, transform 1s ease 0.3s;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
         }
 
         .loaded #main-content {
@@ -94,17 +111,24 @@
             transform: translateY(0);
         }
 
-        /* Header */
+        /* --- HEADER & NAVIGATION --- */
         header {
-            background-color: #ffcc00;
-            padding: 12px 20px;
+            background-color: var(--accent-yellow);
+            padding: 14px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
             position: sticky;
             top: 0;
             z-index: 100;
+            border-bottom: 2px solid var(--black);
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
         }
 
         .brand {
@@ -117,70 +141,99 @@
             width: 45px;
             height: 45px;
             border-radius: 50%;
+            border: 2px solid var(--black);
+            transition: transform 0.3s ease;
+        }
+
+        .brand:hover img {
+            transform: rotate(360deg);
         }
 
         .brand-text h1 {
-            font-size: 16px;
-            font-weight: 700;
-            color: #000;
-            line-height: 1.2;
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--black);
+            line-height: 1.1;
+            letter-spacing: 0.5px;
         }
 
         .brand-text span {
-            font-size: 12px;
-            font-weight: 600;
-            color: #333;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--black);
+            letter-spacing: 0.5px;
         }
 
         /* Desktop Nav Links */
         .nav-links {
             display: none;
             list-style: none;
-            gap: 18px;
+            gap: 20px;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: #000;
+            color: var(--black);
             font-size: 13px;
-            font-weight: 500;
-            transition: color 0.3s, transform 0.3s;
+            font-weight: 600;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s;
         }
 
-        .nav-links a:hover {
-            color: #fff;
-            transform: scale(1.05);
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--black);
+            transition: width 0.3s ease;
         }
 
-        /* Hamburger Menu Toggle Button */
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hamburger Menu Toggle */
         .menu-toggle {
-            font-size: 24px;
+            font-size: 22px;
             cursor: pointer;
-            color: #000;
+            color: var(--black);
             z-index: 101;
-            transition: transform 0.3s;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--black);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .menu-toggle:hover {
             transform: scale(1.1);
+            background: var(--black);
+            color: var(--accent-yellow);
         }
 
-        /* --- MOBILE ANIMATED FULL-SCREEN MENU (TOP ALIGNED) --- */
+        /* --- MOBILE MENU OVERLAY --- */
         .mobile-menu-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 252, 235, 0.98);
+            background: rgba(255, 253, 240, 0.98);
             backdrop-filter: blur(10px);
             z-index: 999;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; /* Aligns content to top */
-            align-items: flex-start;    /* Left aligns content wrapper */
-            padding: 80px 30px 40px 30px; /* Top padding for header space */
-            overflow-y: auto;             /* Allows scrolling if items overflow */
+            justify-content: flex-start;
+            padding: 90px 30px 40px 30px;
+            overflow-y: auto;
             opacity: 0;
             visibility: hidden;
             transform: translateY(-20px);
@@ -196,35 +249,41 @@
         .close-menu {
             position: absolute;
             top: 20px;
-            right: 20px;
-            font-size: 28px;
+            right: 25px;
+            font-size: 24px;
             cursor: pointer;
-            color: #333;
+            color: var(--black);
+            width: 40px;
+            height: 40px;
+            background: var(--accent-yellow);
+            border: 2px solid var(--black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: transform 0.3s;
         }
 
         .close-menu:hover {
             transform: rotate(90deg);
-            color: #ff9900;
         }
 
         .mobile-nav-links {
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 15px;
             width: 100%;
         }
 
         .mobile-nav-links li {
             opacity: 0;
-            transform: translateX(-20px);
+            transform: translateX(-30px);
             transition: opacity 0.4s ease, transform 0.4s ease;
-            border-bottom: 1px solid rgba(255, 204, 0, 0.3);
-            padding-bottom: 12px;
+            border-bottom: 2px solid var(--light-yellow);
+            padding-bottom: 10px;
         }
 
-        /* Staggered animation effect from top */
         .mobile-menu-overlay.active .mobile-nav-links li {
             opacity: 1;
             transform: translateX(0);
@@ -243,49 +302,55 @@
 
         .mobile-nav-links a {
             text-decoration: none;
-            font-size: 17px;
-            font-weight: 600;
-            color: #222;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--black);
             display: flex;
             align-items: center;
             gap: 15px;
-            transition: color 0.3s, transform 0.3s;
+            transition: transform 0.3s;
         }
 
         .mobile-nav-links a i {
-            color: #ff9900;
-            font-size: 18px;
-            width: 25px;
-            text-align: center;
+            color: var(--black);
+            background: var(--accent-yellow);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            border: 1px solid var(--black);
         }
 
         .mobile-nav-links a:hover {
-            color: #d4a000;
-            transform: translateX(5px);
+            transform: translateX(8px);
         }
 
         .container {
             max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 15px;
+            margin: 25px auto;
+            padding: 0 20px;
         }
 
-        /* --- HERO SLIDER --- */
+        /* --- HERO BANNER SLIDER --- */
         .hero-slider-container {
             position: relative;
-            border-radius: 15px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-            margin-bottom: 25px;
-            height: 240px;
-            background-color: #2c3e50;
+            border: 3px solid var(--black);
+            box-shadow: 6px 6px 0px var(--black);
+            margin-bottom: 35px;
+            height: 280px;
+            background-color: var(--black);
         }
 
         .slider-wrapper {
             display: flex;
             width: 100%;
             height: 100%;
-            transition: transform 0.6s ease-in-out;
+            transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
         }
 
         .slide {
@@ -293,7 +358,8 @@
             height: 100%;
             position: relative;
             display: flex;
-            align-items: center;
+            align-items: flex-end;
+            overflow: hidden;
         }
 
         .slide img {
@@ -303,90 +369,127 @@
             position: absolute;
             top: 0;
             left: 0;
+            filter: brightness(0.65);
+            transition: transform 6s ease;
+        }
+
+        .slide.active img {
+            transform: scale(1.1);
         }
 
         .slide-content {
             position: relative;
             z-index: 2;
-            padding: 20px 30px;
-            color: #fff;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+            padding: 25px 30px;
+            color: var(--white);
+            width: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
         }
 
         .slide-content h2 {
-            font-size: clamp(20px, 4vw, 32px);
-            font-weight: 700;
-            color: #ffcc00;
+            font-size: clamp(22px, 4vw, 34px);
+            font-weight: 800;
+            color: var(--accent-yellow);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.5s ease 0.2s;
         }
 
         .slide-content p {
-            font-size: clamp(12px, 2vw, 16px);
+            font-size: clamp(13px, 2vw, 16px);
             font-weight: 500;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.5s ease 0.4s;
+        }
+
+        .slide.active .slide-content h2,
+        .slide.active .slide-content p {
+            transform: translateY(0);
+            opacity: 1;
         }
 
         .slider-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.8);
-            border: none;
-            width: 35px;
-            height: 35px;
+            background: var(--white);
+            border: 2px solid var(--black);
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
-            color: #333;
+            font-size: 15px;
+            color: var(--black);
             z-index: 10;
+            transition: all 0.3s;
+            box-shadow: 2px 2px 0px var(--black);
         }
 
-        .prev-btn { left: 12px; }
-        .next-btn { right: 12px; }
+        .slider-btn:hover {
+            background: var(--accent-yellow);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .prev-btn { left: 15px; }
+        .next-btn { right: 15px; }
 
         .slider-dots {
             position: absolute;
-            bottom: 12px;
-            left: 50%;
-            transform: translateX(-50%);
+            bottom: 15px;
+            right: 25px;
             display: flex;
             gap: 8px;
             z-index: 10;
         }
 
         .dot {
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid var(--black);
             cursor: pointer;
-            transition: background 0.3s, width 0.3s;
+            transition: all 0.3s ease;
         }
 
         .dot.active {
-            background: #ffcc00;
-            width: 20px;
-            border-radius: 4px;
+            background: var(--accent-yellow);
+            width: 26px;
+            border-radius: 10px;
         }
 
         /* --- PASSPORT CARD --- */
         .passport-card {
-            background: linear-gradient(135deg, #fffcf0 0%, #fff4b8 100%);
-            border: 2px solid #ffe680;
-            border-radius: 15px;
-            padding: 20px;
+            background: var(--white);
+            border: 3px solid var(--black);
+            border-radius: 20px;
+            padding: 24px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            margin-bottom: 25px;
+            gap: 18px;
+            box-shadow: 6px 6px 0px var(--black);
+            margin-bottom: 35px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .passport-card:hover {
+            transform: translateY(-4px);
         }
 
         .passport-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .passport-title-area {
@@ -396,33 +499,38 @@
         }
 
         .passport-title-area img {
-            width: 55px;
-            height: 55px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
-            border: 2px solid #ffd700;
+            border: 2px solid var(--black);
+            box-shadow: 3px 3px 0px var(--accent-yellow);
         }
 
         .passport-title-area h2 {
-            font-size: 20px;
-            font-weight: 700;
-            color: #111;
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--black);
         }
 
         .points-badge {
-            background-color: #fff;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 13px;
+            background-color: var(--accent-yellow);
+            color: var(--black);
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 14px;
             display: flex;
             align-items: center;
-            gap: 6px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-            color: #222;
+            gap: 8px;
+            border: 2px solid var(--black);
+            box-shadow: 3px 3px 0px var(--black);
+            animation: shimmer 2s infinite linear;
         }
 
-        .points-badge i {
-            color: #ffaa00;
+        @keyframes shimmer {
+            0% { box-shadow: 3px 3px 0px var(--black); }
+            50% { box-shadow: 5px 5px 10px rgba(0,0,0,0.2); }
+            100% { box-shadow: 3px 3px 0px var(--black); }
         }
 
         .passport-footer {
@@ -430,57 +538,75 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 15px;
+            padding-top: 15px;
+            border-top: 2px dashed var(--light-yellow);
         }
 
         .passport-tags {
-            font-size: 12px;
-            color: #666;
-            font-weight: 500;
+            font-size: 13px;
+            color: var(--black);
+            font-weight: 600;
         }
 
         .view-passport-btn {
-            background-color: #ffcc00;
-            color: #000;
-            padding: 8px 18px;
-            border-radius: 20px;
+            background-color: var(--black);
+            color: var(--white);
+            padding: 10px 22px;
+            border-radius: 30px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 13px;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            transition: all 0.3s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            gap: 10px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--black);
         }
 
         .view-passport-btn:hover {
-            background-color: #e6b800;
-            transform: translateX(3px);
+            background-color: var(--accent-yellow);
+            color: var(--black);
+            transform: translateX(5px);
+            box-shadow: 3px 3px 0px var(--black);
         }
 
         /* --- TNSF HUB SECTION --- */
         .hub-section {
-            background: #fff;
-            border-radius: 15px;
-            padding: 25px 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            margin-bottom: 30px;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px 20px;
+            border: 3px solid var(--black);
+            box-shadow: 6px 6px 0px var(--black);
+            margin-bottom: 35px;
         }
 
         .hub-title {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 20px;
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--black);
+            margin-bottom: 25px;
             position: relative;
-            padding-left: 10px;
-            border-left: 4px solid #ffcc00;
+            padding-left: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .hub-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background-color: var(--accent-yellow);
+            border-radius: 4px;
+            border: 1px solid var(--black);
         }
 
         .hub-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px 10px;
+            gap: 25px 15px;
             justify-items: center;
         }
 
@@ -489,48 +615,63 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             text-align: center;
+            width: 100%;
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .hub-item:hover {
-            transform: translateY(-5px) scale(1.05);
+            transform: translateY(-8px);
         }
 
         .hub-icon-circle {
-            width: 60px;
-            height: 60px;
-            background-color: #fffdf0;
-            border: 2px solid #ffcc00;
+            width: 65px;
+            height: 65px;
+            background-color: var(--bg-yellow);
+            border: 2px solid var(--black);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
-            color: #333;
-            box-shadow: 0 3px 8px rgba(255, 204, 0, 0.2);
+            font-size: 22px;
+            color: var(--black);
+            box-shadow: 4px 4px 0px var(--black);
             transition: all 0.3s ease;
         }
 
         .hub-item:hover .hub-icon-circle {
-            background-color: #ffcc00;
-            box-shadow: 0 6px 15px rgba(255, 204, 0, 0.5);
+            background-color: var(--accent-yellow);
+            box-shadow: 6px 6px 0px var(--black);
+            transform: rotate(-8deg);
         }
 
         .hub-item span {
-            font-size: 12px;
-            font-weight: 600;
-            color: #222;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--black);
+        }
+
+        /* --- SCROLL ANIMATION CLASSES --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         footer {
             text-align: center;
-            padding: 20px;
-            font-size: 11px;
-            color: #666;
-            background: #fffae6;
-            border-top: 1px solid #f0e6b2;
+            padding: 25px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--black);
+            background: var(--accent-yellow);
+            border-top: 3px solid var(--black);
         }
 
         /* --- RESPONSIVE MEDIA QUERIES --- */
@@ -545,14 +686,14 @@
                 display: none !important;
             }
             .hub-grid {
-                grid-template-columns: repeat(6, 1fr);
-                gap: 25px;
+                grid-template-columns: repeat(5, 1fr);
+                gap: 30px 20px;
             }
             .hero-slider-container {
-                height: 360px;
+                height: 380px;
             }
             .brand-text h1 {
-                font-size: 18px;
+                font-size: 20px;
             }
         }
     </style>
@@ -561,9 +702,9 @@
 
     <!-- LOADING SCREEN -->
     <div id="loader-wrapper">
-        <img src="image/images (3).jpeg" alt="TNSF Logo" class="loader-logo" onerror="this.src='https://via.placeholder.com/130?text=TNSF'">
+        <img src="image/images (3).jpeg" alt="TNSF Logo" class="loader-logo" onerror="this.src='https://via.placeholder.com/130/ffdc00/000000?text=TNSF'">
         <div class="spinner"></div>
-        <div class="loader-footer">©2026 TNSF KADAPA PARLIAMENT. All Rights Reserved.</div>
+        <div class="loader-footer">©2026 TNSF KADAPA PARLIAMENT. ALL RIGHTS RESERVED.</div>
     </div>
 
     <!-- MAIN CONTENT -->
@@ -571,7 +712,7 @@
         <!-- Header -->
         <header>
             <div class="brand">
-                <img src="https://i.ibb.co/3yk71Q9/logo.png" alt="Logo" onerror="this.src='https://via.placeholder.com/45?text=L'">
+                <img src="https://i.ibb.co/3yk71Q9/logo.png" alt="Logo" onerror="this.src='https://via.placeholder.com/45/ffdc00/000000?text=TNSF'">
                 <div class="brand-text">
                     <h1>TNSF</h1>
                     <span>KADAPA PARLIAMENT</span>
@@ -592,13 +733,13 @@
                 <li><a href="donate.html">Donate</a></li>
             </ul>
 
-            <!-- Mobile Hamburger Button -->
+            <!-- Mobile Hamburger Toggle Button -->
             <div class="menu-toggle" id="menuToggleBtn">
                 <i class="fa-solid fa-bars"></i>
             </div>
         </header>
 
-        <!-- MOBILE ANIMATED OVERLAY MENU (TOP ALIGNED) -->
+        <!-- MOBILE ANIMATED OVERLAY MENU -->
         <div class="mobile-menu-overlay" id="mobileMenuOverlay">
             <div class="close-menu" id="closeMenuBtn">
                 <i class="fa-solid fa-xmark"></i>
@@ -618,10 +759,10 @@
         </div>
 
         <div class="container">
-            <!-- HERO AUTO-SCROLLING BANNER SLIDER -->
-            <div class="hero-slider-container">
+            <!-- HERO BANNER SLIDER -->
+            <div class="hero-slider-container reveal">
                 <div class="slider-wrapper" id="sliderWrapper">
-                    <div class="slide">
+                    <div class="slide active">
                         <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80" alt="Banner 1">
                         <div class="slide-content">
                             <h2>Empowering Students</h2>
@@ -648,17 +789,17 @@
                 <button class="slider-btn next-btn" id="nextBtn"><i class="fa-solid fa-chevron-right"></i></button>
 
                 <div class="slider-dots" id="sliderDots">
-                  <span class="dot active" data-index="0"></span>
+                    <span class="dot active" data-index="0"></span>
                     <span class="dot" data-index="1"></span>
                     <span class="dot" data-index="2"></span>
                 </div>
             </div>
 
             <!-- My TNSF Passport Card -->
-            <div class="passport-card">
+            <div class="passport-card reveal">
                 <div class="passport-top">
                     <div class="passport-title-area">
-                        <img src="image/images (3).jpeg" alt="Passport" onerror="this.src='https://via.placeholder.com/55?text=P'">
+                        <img src="image/images (3).jpeg" alt="Passport" onerror="this.src='https://via.placeholder.com/60/ffdc00/000000?text=Passport'">
                         <h2>My TNSF Passport</h2>
                     </div>
                     <div class="points-badge">
@@ -672,7 +813,7 @@
             </div>
 
             <!-- TNSF Hub Section -->
-            <div class="hub-section">
+            <div class="hub-section reveal">
                 <div class="hub-title">TNSF Hub</div>
                 
                 <div class="hub-grid">
@@ -721,17 +862,18 @@
         </div>
 
         <footer>
-            <p>Copy 2026 TNSF KADAPA PARLIAMENT all rights reserved</p>
+            <p>© 2026 TNSF KADAPA PARLIAMENT. ALL RIGHTS RESERVED.</p>
         </footer>
     </div>
 
     <!-- JavaScript -->
     <script>
-        // 1. Loading Screen
-        window.addEventListener('DOMContentLoaded', () => {
+        // 1. Loading Screen Animation
+        window.addEventListener('load', () => {
             setTimeout(() => {
                 document.body.classList.add('loaded');
-            }, 2000);
+                revealOnScroll();
+            }, 1200);
         });
 
         // 2. Mobile Menu Toggle Logic
@@ -767,6 +909,9 @@
 
         function updateSlider() {
             sliderWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentIndex);
+            });
             dots.forEach((dot, index) => {
                 dot.classList.toggle('active', index === currentIndex);
             });
@@ -801,7 +946,7 @@
         });
 
         function startTimer() {
-            autoSlideInterval = setInterval(nextSlide, 3500);
+            autoSlideInterval = setInterval(nextSlide, 4000);
         }
 
         function resetTimer() {
@@ -810,6 +955,21 @@
         }
 
         startTimer();
+        // 4. Scroll Reveal Animations
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 100;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
     </script>
 </body>
 </html>
