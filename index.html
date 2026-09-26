@@ -3,973 +3,493 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TNSF Kadapa Parliament</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <title>TNSF KADAPA</title>
+    <!-- Tailwind CSS for modern styling and layout -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pineapple: '#FFD700', // Pineapple Yellow
+                        purewhite: '#FFFFFF',
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --bg-yellow: #fffdf0;
-            --accent-yellow: #ffdc00;
-            --light-yellow: #fff8c5;
-            --dark-yellow: #e6c200;
-            --black: #000000;
-            --off-black: #1a1a1a;
-            --white: #ffffff;
-            --gray: #666666;
+        /* Custom animations for smoke, letter reveal, and smooth transitions */
+        @keyframes smokeDissolve {
+            0% { opacity: 1; transform: scale(1) blur(0px); filter: drop-shadow(0 0 0px #FFD700); }
+            50% { opacity: 0.8; transform: scale(1.1) blur(4px); letter-spacing: 5px; }
+            100% { opacity: 0; transform: scale(2) blur(12px); filter: drop-shadow(0 0 20px #FFD700); }
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+        @keyframes bounceDot {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
         }
 
-        html {
-            scroll-behavior: smooth;
+        .animate-smoke {
+            animation: smokeDissolve 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
 
-        body {
-            background-color: var(--bg-yellow);
-            color: var(--off-black);
-            overflow-x: hidden;
-        }
-
-        /* --- LOADING SCREEN ANIMATION --- */
-        #loader-wrapper {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--bg-yellow);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.8s ease, transform 0.8s ease, visibility 0.8s;
-        }
-
-        .loader-logo {
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            border: 3px solid var(--black);
-            box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
-            animation: pulseLogo 1.5s ease-in-out infinite alternate;
-            margin-bottom: 30px;
-        }
-
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid var(--light-yellow);
-            border-top: 4px solid var(--black);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin-bottom: 40px;
-        }
-
-        .loader-footer {
-            position: absolute;
-            bottom: 30px;
-            font-size: 12px;
-            color: var(--black);
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @keyframes pulseLogo {
-            0% { transform: scale(1); box-shadow: 0 0 0px rgba(0, 0, 0, 0.2); }
-            100% { transform: scale(1.08); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); }
-        }
-
-        .loaded #loader-wrapper {
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-100%);
-        }
-
-        /* --- PAGE ENTRANCE --- */
-        #main-content {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
-        }
-
-        .loaded #main-content {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* --- HEADER & NAVIGATION --- */
-        header {
-            background-color: var(--accent-yellow);
-            padding: 14px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 2px solid var(--black);
-            animation: slideDown 0.6s ease-out;
-        }
-
-        @keyframes slideDown {
-            from { transform: translateY(-100%); }
-            to { transform: translateY(0); }
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .brand img {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            border: 2px solid var(--black);
-            transition: transform 0.3s ease;
-        }
-
-        .brand:hover img {
-            transform: rotate(360deg);
-        }
-
-        .brand-text h1 {
-            font-size: 18px;
-            font-weight: 800;
-            color: var(--black);
-            line-height: 1.1;
-            letter-spacing: 0.5px;
-        }
-
-        .brand-text span {
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--black);
-            letter-spacing: 0.5px;
-        }
-
-        /* Desktop Nav Links */
-        .nav-links {
-            display: none;
-            list-style: none;
-            gap: 20px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--black);
-            font-size: 13px;
-            font-weight: 600;
-            position: relative;
-            padding: 5px 0;
-            transition: color 0.3s;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--black);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Hamburger Menu Toggle */
-        .menu-toggle {
-            font-size: 22px;
-            cursor: pointer;
-            color: var(--black);
-            z-index: 101;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid var(--black);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .menu-toggle:hover {
-            transform: scale(1.1);
-            background: var(--black);
-            color: var(--accent-yellow);
-        }
-
-        /* --- MOBILE MENU OVERLAY --- */
-        .mobile-menu-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 253, 240, 0.98);
-            backdrop-filter: blur(10px);
-            z-index: 999;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            padding: 90px 30px 40px 30px;
-            overflow-y: auto;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-20px);
-            transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
-        }
-
-        .mobile-menu-overlay.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .close-menu {
-            position: absolute;
-            top: 20px;
-            right: 25px;
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--black);
-            width: 40px;
-            height: 40px;
-            background: var(--accent-yellow);
-            border: 2px solid var(--black);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s;
-        }
-
-        .close-menu:hover {
-            transform: rotate(90deg);
-        }
-
-        .mobile-nav-links {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            width: 100%;
-        }
-
-        .mobile-nav-links li {
-            opacity: 0;
-            transform: translateX(-30px);
-            transition: opacity 0.4s ease, transform 0.4s ease;
-            border-bottom: 2px solid var(--light-yellow);
-            padding-bottom: 10px;
-        }
-
-        .mobile-menu-overlay.active .mobile-nav-links li {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(1) { transition-delay: 0.05s; }
-        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(2) { transition-delay: 0.1s; }
-        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(3) { transition-delay: 0.15s; }
-        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(4) { transition-delay: 0.2s; }
-        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(5) { transition-delay: 0.25s; }
-        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(6) { transition-delay: 0.3s; }
-        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(7) { transition-delay: 0.35s; }
-        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(8) { transition-delay: 0.4s; }
-        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(9) { transition-delay: 0.45s; }
-        .mobile-menu-overlay.active .mobile-nav-links li:nth-child(10) { transition-delay: 0.5s; }
-
-        .mobile-nav-links a {
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--black);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            transition: transform 0.3s;
-        }
-
-        .mobile-nav-links a i {
-            color: var(--black);
-            background: var(--accent-yellow);
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 15px;
-            border: 1px solid var(--black);
-        }
-
-        .mobile-nav-links a:hover {
-            transform: translateX(8px);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 25px auto;
-            padding: 0 20px;
-        }
-
-        /* --- HERO BANNER SLIDER --- */
-        .hero-slider-container {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 3px solid var(--black);
-            box-shadow: 6px 6px 0px var(--black);
-            margin-bottom: 35px;
-            height: 280px;
-            background-color: var(--black);
-        }
-
-        .slider-wrapper {
-            display: flex;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
-        }
-
-        .slide {
-            min-width: 100%;
-            height: 100%;
-            position: relative;
-            display: flex;
-            align-items: flex-end;
-            overflow: hidden;
-        }
-
-        .slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            filter: brightness(0.65);
-            transition: transform 6s ease;
-        }
-
-        .slide.active img {
-            transform: scale(1.1);
-        }
-
-        .slide-content {
-            position: relative;
-            z-index: 2;
-            padding: 25px 30px;
-            color: var(--white);
-            width: 100%;
-            background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
-        }
-
-        .slide-content h2 {
-            font-size: clamp(22px, 4vw, 34px);
-            font-weight: 800;
-            color: var(--accent-yellow);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transform: translateY(20px);
-            opacity: 0;
-            transition: all 0.5s ease 0.2s;
-        }
-
-        .slide-content p {
-            font-size: clamp(13px, 2vw, 16px);
-            font-weight: 500;
-            transform: translateY(20px);
-            opacity: 0;
-            transition: all 0.5s ease 0.4s;
-        }
-
-        .slide.active .slide-content h2,
-        .slide.active .slide-content p {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .slider-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: var(--white);
-            border: 2px solid var(--black);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 15px;
-            color: var(--black);
-            z-index: 10;
-            transition: all 0.3s;
-            box-shadow: 2px 2px 0px var(--black);
-        }
-
-        .slider-btn:hover {
-            background: var(--accent-yellow);
-            transform: translateY(-50%) scale(1.1);
-        }
-
-        .prev-btn { left: 15px; }
-        .next-btn { right: 15px; }
-
-        .slider-dots {
-            position: absolute;
-            bottom: 15px;
-            right: 25px;
-            display: flex;
-            gap: 8px;
-            z-index: 10;
-        }
-
-        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.6);
-            border: 1px solid var(--black);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .dot.active {
-            background: var(--accent-yellow);
-            width: 26px;
-            border-radius: 10px;
-        }
-
-        /* --- PASSPORT CARD --- */
-        .passport-card {
-            background: var(--white);
-            border: 3px solid var(--black);
-            border-radius: 20px;
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-            box-shadow: 6px 6px 0px var(--black);
-            margin-bottom: 35px;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-
-        .passport-card:hover {
-            transform: translateY(-4px);
-        }
-
-        .passport-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .passport-title-area {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .passport-title-area img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            border: 2px solid var(--black);
-            box-shadow: 3px 3px 0px var(--accent-yellow);
-        }
-
-        .passport-title-area h2 {
-            font-size: 22px;
-            font-weight: 800;
-            color: var(--black);
-        }
-
-        .points-badge {
-            background-color: var(--accent-yellow);
-            color: var(--black);
-            padding: 8px 18px;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            border: 2px solid var(--black);
-            box-shadow: 3px 3px 0px var(--black);
-            animation: shimmer 2s infinite linear;
-        }
-
-        @keyframes shimmer {
-            0% { box-shadow: 3px 3px 0px var(--black); }
-            50% { box-shadow: 5px 5px 10px rgba(0,0,0,0.2); }
-            100% { box-shadow: 3px 3px 0px var(--black); }
-        }
-
-        .passport-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            padding-top: 15px;
-            border-top: 2px dashed var(--light-yellow);
-        }
-
-        .passport-tags {
-            font-size: 13px;
-            color: var(--black);
-            font-weight: 600;
-        }
-
-        .view-passport-btn {
-            background-color: var(--black);
-            color: var(--white);
-            padding: 10px 22px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 13px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-            border: 2px solid var(--black);
-        }
-
-        .view-passport-btn:hover {
-            background-color: var(--accent-yellow);
-            color: var(--black);
-            transform: translateX(5px);
-            box-shadow: 3px 3px 0px var(--black);
-        }
-
-        /* --- TNSF HUB SECTION --- */
-        .hub-section {
-            background: var(--white);
-            border-radius: 20px;
-            padding: 30px 20px;
-            border: 3px solid var(--black);
-            box-shadow: 6px 6px 0px var(--black);
-            margin-bottom: 35px;
-        }
-
-        .hub-title {
-            font-size: 20px;
-            font-weight: 800;
-            color: var(--black);
-            margin-bottom: 25px;
-            position: relative;
-            padding-left: 15px;
-            display: flex;
-            align-items: center;
-        }
-
-        .hub-title::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            width: 6px;
-            height: 100%;
-            background-color: var(--accent-yellow);
-            border-radius: 4px;
-            border: 1px solid var(--black);
-        }
-
-        .hub-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px 15px;
-            justify-items: center;
-        }
-
-        .hub-item {
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            text-align: center;
-            width: 100%;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .hub-item:hover {
-            transform: translateY(-8px);
-        }
-
-        .hub-icon-circle {
-            width: 65px;
-            height: 65px;
-            background-color: var(--bg-yellow);
-            border: 2px solid var(--black);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            color: var(--black);
-            box-shadow: 4px 4px 0px var(--black);
-            transition: all 0.3s ease;
-        }
-
-        .hub-item:hover .hub-icon-circle {
-            background-color: var(--accent-yellow);
-            box-shadow: 6px 6px 0px var(--black);
-            transform: rotate(-8deg);
-        }
-
-        .hub-item span {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--black);
-        }
-
-        /* --- SCROLL ANIMATION CLASSES --- */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        footer {
-            text-align: center;
-            padding: 25px;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--black);
-            background: var(--accent-yellow);
-            border-top: 3px solid var(--black);
-        }
+        .dot-1 { animation: bounceDot 0.6s infinite ease-in-out; }
+        .dot-2 { animation: bounceDot 0.6s infinite ease-in-out 0.2s; }
+        .dot-3 { animation: bounceDot 0.6s infinite ease-in-out 0.4s; }
 
-        /* --- RESPONSIVE MEDIA QUERIES --- */
-        @media (min-width: 768px) {
-            .nav-links {
-                display: flex;
-            }
-            .menu-toggle {
-                display: none;
-            }
-            .mobile-menu-overlay {
-                display: none !important;
-            }
-            .hub-grid {
-                grid-template-columns: repeat(5, 1fr);
-                gap: 30px 20px;
-            }
-            .hero-slider-container {
-                height: 380px;
-            }
-            .brand-text h1 {
-                font-size: 20px;
-            }
+        /* Accent top borders for cards/popups */
+        .accent-top {
+            border-top: 3px solid #FFD700;
         }
     </style>
 </head>
-<body class="">
+<body class="bg-purewhite text-black font-sans min-h-screen selection:bg-pineapple selection:text-black">
 
-    <!-- LOADING SCREEN -->
-    <div id="loader-wrapper">
-        <img src="image/images (3).jpeg" alt="TNSF Logo" class="loader-logo" onerror="this.src='https://via.placeholder.com/130/ffdc00/000000?text=TNSF'">
-        <div class="spinner"></div>
-        <div class="loader-footer">©2026 TNSF KADAPA PARLIAMENT. ALL RIGHTS RESERVED.</div>
+    <!-- ================= 1. SPLASH SCREEN & ANIMATIONS ================= -->
+    <div id="splashScreen" class="fixed inset-0 bg-purewhite z-50 flex flex-col items-center justify-center transition-opacity duration-700">
+        <div id="textAnimContainer" class="flex space-x-1 sm:space-x-3 text-2xl sm:text-5xl font-black tracking-wider text-black">
+            <!-- Letters injected dynamically via JS -->
+        </div>
+        
+        <!-- 3 Dotted Loading Indicator -->
+        <div id="loadingDots" class="mt-8 flex space-x-2 opacity-0 transition-opacity duration-300">
+            <div class="w-3 h-3 bg-pineapple rounded-full dot-1"></div>
+            <div class="w-3 h-3 bg-pineapple rounded-full dot-2"></div>
+            <div class="w-3 h-3 bg-pineapple rounded-full dot-3"></div>
+        </div>
     </div>
 
-    <!-- MAIN CONTENT -->
-    <div id="main-content">
-        <!-- Header -->
-        <header>
-            <div class="brand">
-                <img src="https://i.ibb.co/3yk71Q9/logo.png" alt="Logo" onerror="this.src='https://via.placeholder.com/45/ffdc00/000000?text=TNSF'">
-                <div class="brand-text">
-                    <h1>TNSF</h1>
-                    <span>KADAPA PARLIAMENT</span>
-                </div>
+    <!-- ================= 2. LOGIN VIEW ================= -->
+    <div id="loginView" class="hidden min-h-screen flex flex-col items-center justify-center p-4 bg-purewhite">
+        <div class="max-w-md w-full bg-purewhite p-8 rounded-2xl shadow-xl border border-pineapple/30 accent-top relative transition-all duration-300 hover:shadow-2xl">
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-pineapple mx-auto rounded-full flex items-center justify-center text-2xl font-black mb-3 shadow-md">TK</div>
+                <h1 class="text-2xl font-black tracking-tight">TNSF KADAPA</h1>
+                <p class="text-sm text-gray-600 mt-1">Please login to your account</p>
             </div>
-            
-            <!-- Desktop Navbar Menu -->
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="resolution.html">Resolution Desk</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="inbox.html">Inbox</a></li>
-                <li><a href="constituencies.html">Constituencies</a></li>
-                <li><a href="lidership.html">Leadership</a></li>
-                <li><a href="events.html">Events</a></li>
-                <li><a href="feedback.html">Feedback</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
-                <li><a href="donate.html">Donate</a></li>
-            </ul>
 
-            <!-- Mobile Hamburger Toggle Button -->
-            <div class="menu-toggle" id="menuToggleBtn">
-                <i class="fa-solid fa-bars"></i>
+            <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">User ID</label>
+                    <input type="text" id="loginUser" required value="User123" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-pineapple bg-purewhite transition-all">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Password</label>
+                    <input type="password" id="loginPass" required value="User123" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-pineapple bg-purewhite transition-all">
+                </div>
+                <button type="submit" class="w-full py-3 bg-pineapple font-black rounded-lg shadow-md hover:opacity-95 transition-all text-black">
+                    LOGIN
+                </button>
+            </form>
+
+            <div class="mt-6 text-center">
+                <p class="text-sm text-gray-600">If you are new member? <button onclick="showRegister()" class="font-bold underline text-black hover:text-pineapple transition-colors">Register here</button></p>
+            </div>
+            <div class="mt-4 p-2 bg-pineapple/10 rounded text-center text-xs text-gray-600">
+                Default: User123 / User123
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= 3. REGISTRATION VIEW (JOIN TNSF) ================= -->
+    <div id="registerView" class="hidden min-h-screen flex flex-col items-center justify-center p-4 bg-purewhite py-12">
+        <div class="max-w-2xl w-full bg-purewhite p-8 rounded-2xl shadow-xl border border-pineapple/30 accent-top relative">
+            <div class="text-center mb-6">
+                <h1 class="text-2xl sm:text-3xl font-black tracking-tight">Join TNSF KADAPA</h1>
+                <p class="text-sm text-gray-600 mt-1">Fill out the form below to become an official member of our community.</p>
+            </div>
+
+            <form id="registerForm" onsubmit="handleRegister(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Full Name</label>
+                    <input type="text" required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:border-pineapple bg-purewhite">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Mobile Number</label>
+                    <input type="tel" required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:border-pineapple bg-purewhite">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Email Address</label>
+                    <input type="email" required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:border-pineapple bg-purewhite">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Date Of Birth</label>
+                    <input type="date" required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:border-pineapple bg-purewhite">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Gender</label>
+                    <select required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:border-pineapple bg-purewhite">
+                        <option value="">Select Gender</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Constituency</label>
+                    <select required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:border-pineapple bg-purewhite">
+                        <option value="">Select Constituency</option>
+                        <option>Kadapa</option>
+                        <option>Rayachoty</option>
+                        <option>Proddatur</option>
+                        <option>Jammalamadugu</option>
+                        <option>Badvel</option>
+                        <option>Mydukur</option>
+                        <option>Pulivendula</option>
+                    </select>
+                </div>
+                <div class="sm:col-span-2">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">College / Institution</label>
+                    <input type="text" required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:border-pineapple bg-purewhite">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Course / Qualification</label>
+                    <select required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:border-pineapple bg-purewhite">
+                        <option value="">Select Qualification</option>
+                        <option>Undergraduate (UG)</option>
+                        <option>Postgraduate (PG)</option>
+                        <option>Diploma</option>
+                        <option>Doctorate (PhD)</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Occupation</label>
+                    <select required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:border-pineapple bg-purewhite">
+                        <option value="">Select Occupation</option>
+                        <option>Student</option>
+                        <option>Researcher</option>
+                        <option>Professional</option>
+                        <option>Educator</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="sm:col-span-2">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Address</label>
+                    <textarea rows="2" required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:border-pineapple bg-purewhite"></textarea>
+                </div>
+                <div class="sm:col-span-2 flex space-x-3 mt-4">
+                    <button type="submit" class="flex-1 py-3 bg-pineapple font-black rounded-lg shadow-md hover:opacity-95 transition-all text-black">
+                        SUBMIT REGISTRATION
+                    </button>
+                    <button type="button" onclick="showLogin()" class="px-6 py-3 border border-gray-300 font-bold rounded-lg hover:bg-gray-50 transition-all">
+                        BACK TO LOGIN
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- SUCCESS POPUP MODAL -->
+    <div id="successPopup" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-purewhite max-w-sm w-full p-6 rounded-2xl shadow-2xl text-center accent-top border border-pineapple/30">
+            <div class="w-12 h-12 bg-pineapple rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-black">✓</div>
+            <h3 class="text-xl font-black mb-2">Success!</h3>
+            <p class="text-sm text-gray-600 mb-6">Your registration has been successfully submitted. Welcome to TNSF Kadapa!</p>
+            <button onclick="closeSuccessPopup()" class="w-full py-2.5 bg-pineapple font-black rounded-lg shadow hover:opacity-95 text-black">OK</button>
+        </div>
+    </div>
+
+    <!-- ================= 4. DASHBOARD VIEW (MAIN APP) ================= -->
+    <div id="dashboardView" class="hidden min-h-screen flex flex-col bg-purewhite">
+        <!-- Header -->
+        <header class="sticky top-0 z-40 bg-purewhite border-b border-pineapple/40 shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+                <!-- Logo & Text -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchHubSection('Home')">
+                    <div class="w-10 h-10 bg-pineapple rounded-full flex items-center justify-center font-black shadow-inner">TK</div>
+                    <span class="font-black tracking-tight text-lg sm:text-xl">TNSF KADAPA</span>
+                </div>
+                <!-- Menu Button -->
+                <button id="menuBtn" onclick="toggleSlideMenu()" class="p-2 rounded-lg bg-pineapple/20 hover:bg-pineapple/40 transition-all font-black flex items-center space-x-2">
+                    <span id="menuIconText" class="text-sm">MENU</span>
+                    <div class="w-6 flex flex-col space-y-1">
+                        <span class="h-0.5 bg-black w-full rounded"></span>
+                        <span class="h-0.5 bg-black w-full rounded"></span>
+                        <span class="h-0.5 bg-black w-full rounded"></span>
+                    </div>
+                </button>
             </div>
         </header>
 
-        <!-- MOBILE ANIMATED OVERLAY MENU -->
-        <div class="mobile-menu-overlay" id="mobileMenuOverlay">
-            <div class="close-menu" id="closeMenuBtn">
-                <i class="fa-solid fa-xmark"></i>
-            </div>
-            <ul class="mobile-nav-links">
-                <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
-                <li><a href="resolution.html"><i class="fa-solid fa-graduation-cap"></i> Resolution Desk</a></li>
-                <li><a href="gallery.html"><i class="fa-solid fa-images"></i> Gallery</a></li>
-                <li><a href="inbox.html"><i class="fa-solid fa-envelope"></i> Inbox</a></li>
-                <li><a href="constituencies.html"><i class="fa-solid fa-map-location-dot"></i> Constituencies</a></li>
-                <li><a href="lidership.html"><i class="fa-solid fa-user-tie"></i> Leadership</a></li>
-                <li><a href="events.html"><i class="fa-solid fa-calendar-days"></i> Events</a></li>
-                <li><a href="feedback.html"><i class="fa-solid fa-comments"></i> Feedback</a></li>
-                <li><a href="contact.html"><i class="fa-solid fa-headset"></i> Contact Us</a></li>
-                <li><a href="donate.html"><i class="fa-solid fa-hand-holding-heart"></i> Donate Us</a></li>
-            </ul>
-        </div>
-
-        <div class="container">
-            <!-- HERO BANNER SLIDER -->
-            <div class="hero-slider-container reveal">
-                <div class="slider-wrapper" id="sliderWrapper">
-                    <div class="slide active">
-                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80" alt="Banner 1">
-                        <div class="slide-content">
-                            <h2>Empowering Students</h2>
-                            <p>Building a Better Tomorrow</p>
-                        </div>
+        <!-- Main Dynamic Content Container -->
+        <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 space-y-8">
+            
+            <!-- Hero Banner Auto-Scroll Section -->
+            <section class="relative rounded-2xl overflow-hidden bg-pineapple/10 border border-pineapple/30 accent-top shadow-md">
+                <div id="heroCarousel" class="relative h-64 sm:h-96 flex transition-transform duration-700 ease-in-out">
+                    <!-- Carousel Slide 1 -->
+                    <div class="min-w-full h-full flex flex-col items-center justify-center text-center p-6 sm:p-12">
+                        <h2 class="text-2xl sm:text-4xl font-black mb-3">Empowering Youth Through Science</h2>
+                        <p class="text-sm sm:text-base text-gray-700 max-w-xl">Building a rational, progressive society with scientific temper across every corner of Kadapa.</p>
                     </div>
-                    <div class="slide">
-                        <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1200&q=80" alt="Banner 2">
-                        <div class="slide-content">
-                            <h2>United for Rights</h2>
-                            <p>Striving for Student Welfare & Education</p>
-                        </div>
+                    <!-- Carousel Slide 2 -->
+                    <div class="min-w-full h-full flex flex-col items-center justify-center text-center p-6 sm:p-12">
+                        <h2 class="text-2xl sm:text-4xl font-black mb-3">Join the Rational Movement</h2>
+                        <p class="text-sm sm:text-base text-gray-700 max-w-xl">Engage in discussions, attend live events, and contribute to progressive community development.</p>
                     </div>
-                    <div class="slide">
-                        <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=1200&q=80" alt="Banner 3">
-                        <div class="slide-content">
-                            <h2>Join the Movement</h2>
-                            <p>Be a Part of TNSF Kadapa Parliament</p>
-                        </div>
+                    <!-- Carousel Slide 3 -->
+                    <div class="min-w-full h-full flex flex-col items-center justify-center text-center p-6 sm:p-12">
+                        <h2 class="text-2xl sm:text-4xl font-black mb-3">Science & Society Conclave</h2>
+                        <p class="text-sm sm:text-base text-gray-700 max-w-xl">Connecting students and leaders to foster innovation, critical thought, and scientific inquiry.</p>
                     </div>
                 </div>
-
-                <button class="slider-btn prev-btn" id="prevBtn"><i class="fa-solid fa-chevron-left"></i></button>
-                <button class="slider-btn next-btn" id="nextBtn"><i class="fa-solid fa-chevron-right"></i></button>
-
-                <div class="slider-dots" id="sliderDots">
-                    <span class="dot active" data-index="0"></span>
-                    <span class="dot" data-index="1"></span>
-                    <span class="dot" data-index="2"></span>
+                <!-- Carousel Dots Indicator -->
+                <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
+                    <button onclick="setHeroSlide(0)" class="w-2.5 h-2.5 rounded-full bg-black/40 hero-dot transition-all"></button>
+                    <button onclick="setHeroSlide(1)" class="w-2.5 h-2.5 rounded-full bg-black/40 hero-dot transition-all"></button>
+                    <button onclick="setHeroSlide(2)" class="w-2.5 h-2.5 rounded-full bg-black/40 hero-dot transition-all"></button>
                 </div>
-            </div>
+            </section>
 
-            <!-- My TNSF Passport Card -->
-            <div class="passport-card reveal">
-                <div class="passport-top">
-                    <div class="passport-title-area">
-                        <img src="image/images (3).jpeg" alt="Passport" onerror="this.src='https://via.placeholder.com/60/ffdc00/000000?text=Passport'">
-                        <h2>My TNSF Passport</h2>
-                    </div>
-                    <div class="points-badge">
-                        <i class="fa-solid fa-star"></i> 450.6 Points
-                    </div>
+            <!-- TNSF Hub Grid Section -->
+            <section>
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xl font-black">TNSF Hub</h3>
+                    <span class="text-xs font-bold uppercase tracking-wider text-gray-500 bg-pineapple/20 px-2.5 py-1 rounded">Quick Navigation</span>
                 </div>
-                <div class="passport-footer">
-                    <div class="passport-tags">Your Journey &nbsp;•&nbsp; Your Points &nbsp;•&nbsp; Your Growth</div>
-                    <a href="#" class="view-passport-btn">View My Passport <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-            </div>
-
-            <!-- TNSF Hub Section -->
-            <div class="hub-section reveal">
-                <div class="hub-title">TNSF Hub</div>
                 
-                <div class="hub-grid">
-                    <a href="#" class="hub-item">
-                        <div class="hub-icon-circle"><i class="fa-solid fa-user-plus"></i></div>
-                        <span>Refer</span>
-                    </a>
-                    <a href="resolution.html" class="hub-item">
-                        <div class="hub-icon-circle"><i class="fa-solid fa-graduation-cap"></i></div>
-                        <span>Resolution Desk</span>
-                    </a>
-                    <a href="gallery.html" class="hub-item">
-                        <div class="hub-icon-circle"><i class="fa-solid fa-images"></i></div>
-                        <span>Gallery</span>
-                    </a>
-                    <a href="inbox.html" class="hub-item">
-                        <div class="hub-icon-circle"><i class="fa-solid fa-envelope"></i></div>
-                        <span>Inbox</span>
-                    </a>
-                    <a href="constituencies.html" class="hub-item">
-                        <div class="hub-icon-circle"><i class="fa-solid fa-map-location-dot"></i></div>
-                        <span>Constituencies</span>
-                    </a>
-                    <a href="lidership.html" class="hub-item">
-                        <div class="hub-icon-circle"><i class="fa-solid fa-user-tie"></i></div>
-                        <span>Leadership</span>
-                    </a>
-                    <a href="events.html" class="hub-item">
-                        <div class="hub-icon-circle"><i class="fa-solid fa-calendar-days"></i></div>
-                        <span>Events</span>
-                    </a>
-                    <a href="feedback.html" class="hub-item">
-                        <div class="hub-icon-circle"><i class="fa-solid fa-comments"></i></div>
-                        <span>Feedback</span>
-                    </a>
-                    <a href="contact.html" class="hub-item">
-                        <div class="hub-icon-circle"><i class="fa-solid fa-headset"></i></div>
-                        <span>Contact Us</span>
-                    </a>
-                    <a href="donate.html" class="hub-item">
-                        <div class="hub-icon-circle"><i class="fa-solid fa-hand-holding-heart"></i></div>
-                        <span>Donate Us</span>
-                    </a>
+                <div id="hubGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                    <!-- Hub buttons dynamically injected -->
                 </div>
-            </div>
-        </div>
+            </section>
 
-        <footer>
-            <p>© 2026 TNSF KADAPA PARLIAMENT. ALL RIGHTS RESERVED.</p>
+            <!-- Dynamic Section Detail Display Card -->
+            <section id="activeSectionCard" class="bg-purewhite border border-pineapple/30 rounded-2xl p-6 shadow-md accent-top transition-all duration-300">
+                <div id="sectionContent">
+                    <h4 class="text-lg font-black mb-2">Welcome to TNSF Hub Dashboard</h4>
+                    <p class="text-sm text-gray-600">Select any item from the TNSF Hub above or open the side menu to navigate across platform modules.</p>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-purewhite border-t border-pineapple/40 py-6 text-center text-xs text-gray-600">
+            <p>&copy; 2026 TNSF KADAPA. All rights reserved. Built with Pineapple Yellow & White standards.</p>
         </footer>
     </div>
 
-    <!-- JavaScript -->
+    <!-- ================= 5. SLIDING SIDE MENU (DRAWER) ================= -->
+    <div id="slideMenuOverlay" class="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 hidden transition-opacity duration-300" onclick="toggleSlideMenu()"></div>
+    <div id="slideMenu" class="fixed top-0 right-0 h-full w-80 bg-purewhite z-50 transform translate-x-full transition-transform duration-300 ease-in-out shadow-2xl border-l border-pineapple/30 flex flex-col">
+        <div class="p-4 border-b border-pineapple/30 flex items-center justify-between bg-pineapple/10">
+            <h3 class="font-black">Navigation Menu</h3>
+            <button onclick="toggleSlideMenu()" class="p-1 rounded-md hover:bg-pineapple/30 font-black text-lg">✕</button>
+        </div>
+        <div class="flex-1 overflow-y-auto p-4 space-y-2">
+            <button onclick="switchHubSection('About Us'); toggleSlideMenu();" class="w-full text-left px-4 py-3 rounded-lg hover:bg-pineapple/20 font-bold transition-all flex items-center justify-between">
+                <span>About Us</span>
+                <span class="text-xs bg-pineapple/40 px-2 py-0.5 rounded">Info</span>
+            </button>
+            <div class="pt-2 pb-1 text-xs font-bold uppercase tracking-wider text-gray-400 px-2">TNSF Hub Modules</div>
+            <div id="slideMenuHubItems" class="space-y-1">
+                <!-- Injected Hub links for slide menu -->
+            </div>
+        </div>
+        <div class="p-4 border-t border-pineapple/30 text-center">
+            <button onclick="handleLogout()" class="w-full py-2.5 bg-pineapple font-black rounded-lg text-black hover:opacity-95 transition-all shadow-sm">LOGOUT</button>
+        </div>
+    </div>
+
+    <!-- ================= JAVASCRIPT LOGIC ================= -->
     <script>
-        // 1. Loading Screen Animation
-        window.addEventListener('load', () => {
+        // TNSF Hub Items Configuration
+        const hubItems = [
+            { name: 'Profile', desc: 'Manage your member profile details, credentials, and membership status.' },
+            { name: 'Resolution', desc: 'View organizational resolutions, policy objectives, and mission statements.' },
+            { name: 'Gallery', desc: 'Explore photographs and highlights from past scientific conclaves and events.' },
+            { name: 'Inbox', desc: 'Check official notifications, circulars, and announcements from district leadership.' },
+            { name: 'Constituencies', desc: 'Browse regional committee structures across Kadapa constituencies.' },
+            { name: 'Leadership', desc: 'Meet the executive body and district committee coordinators.' },
+            { name: 'Events', desc: 'Register and stay updated on upcoming seminars, camps, and meetings.' },
+            { name: 'Feedback', desc: 'Share your suggestions, queries, or complaints with the administrative team.' },
+            { name: 'Contact Us', desc: 'Get in touch with TNSF Kadapa office, email addresses, and helplines.' },
+            { name: 'Donate Us', desc: 'Support our rationalist campaigns and educational outreach programs.' },
+            { name: 'Refer', desc: 'Invite friends and fellow students to join the TNSF Kadapa movement.' }
+        ];
+
+        // 1. Splash Screen & Letter Animation on Open
+        window.addEventListener('DOMContentLoaded', () => {
+            const text = "TNSF KADAPA";
+            const container = document.getElementById('textAnimContainer');
+            
+            // Build letter spans
+            text.split('').forEach((char) => {
+                const span = document.createElement('span');
+                span.textContent = char === ' ' ? '\u00A0' : char;
+                span.className = "inline-block transform transition-transform duration-500";
+                container.appendChild(span);
+            });
+
+            // Sequence: Show letters one by one, then trigger smoke minimization
             setTimeout(() => {
-                document.body.classList.add('loaded');
-                revealOnScroll();
-            }, 1200);
+                document.getElementById('loadingDots').classList.remove('opacity-0');
+            }, 600);
+
+            // After letters form fully, minimize with smoke and transition to login
+            setTimeout(() => {
+                container.classList.add('animate-smoke');
+                document.getElementById('loadingDots').classList.add('opacity-0');
+            }, 2000);
+
+            setTimeout(() => {
+                document.getElementById('splashScreen').classList.add('opacity-0');
+                setTimeout(() => {
+                    document.getElementById('splashScreen').style.display = 'none';
+                    document.getElementById('loginView').classList.remove('hidden');
+                }, 700);
+            }, 3000);
+
+            // Initialize Hub Grid & Slide Menu items
+            renderHubGrid();
+            renderSlideMenuHubItems();
+            initHeroCarousel();
         });
 
-        // 2. Mobile Menu Toggle Logic
-        const menuToggleBtn = document.getElementById('menuToggleBtn');
-        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-        const closeMenuBtn = document.getElementById('closeMenuBtn');
-        const mobileLinks = document.querySelectorAll('.mobile-nav-links a');
+        // Navigation Actions
+        function showRegister() {
+            document.getElementById('loginView').classList.add('hidden');
+            document.getElementById('registerView').classList.remove('hidden');
+        }
 
-        menuToggleBtn.addEventListener('click', () => {
-            mobileMenuOverlay.classList.add('active');
-        });
+        function showLogin() {
+            document.getElementById('registerView').classList.add('hidden');
+            document.getElementById('loginView').classList.remove('hidden');
+        }
 
-        closeMenuBtn.addEventListener('click', () => {
-            mobileMenuOverlay.classList.remove('active');
-        });
+        function handleLogin(e) {
+            e.preventDefault();
+            const user = document.getElementById('loginUser').value;
+            const pass = document.getElementById('loginPass').value;
 
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenuOverlay.classList.remove('active');
+            if(user === 'User123' && pass === 'User123') {
+                document.getElementById('loginView').classList.add('hidden');
+                document.getElementById('dashboardView').classList.remove('hidden');
+            } else {
+                alert('Invalid Credentials! Please use User123 / User123');
+            }
+        }
+
+        function handleLogout() {
+            document.getElementById('dashboardView').classList.add('hidden');
+            document.getElementById('loginView').classList.remove('hidden');
+            toggleSlideMenu();
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            document.getElementById('successPopup').classList.remove('hidden');
+        }
+
+        function closeSuccessPopup() {
+            document.getElementById('successPopup').classList.add('hidden');
+            showLogin();
+        }
+
+        // Slide Menu Toggle
+        function toggleSlideMenu() {
+            const menu = document.getElementById('slideMenu');
+            const overlay = document.getElementById('slideMenuOverlay');
+            const isOpen = !menu.classList.contains('translate-x-full');
+
+            if (isOpen) {
+                menu.classList.add('translate-x-full');
+                overlay.classList.add('hidden');
+            } else {
+                menu.classList.remove('translate-x-full');
+                overlay.classList.remove('hidden');
+            }
+        }
+
+        // Render TNSF Hub items into Grid
+        function renderHubGrid() {
+            const grid = document.getElementById('hubGrid');
+            hubItems.forEach(item => {
+                const btn = document.createElement('button');
+                btn.className = "p-4 bg-purewhite border border-pineapple/30 rounded-xl hover:bg-pineapple/10 hover:border-pineapple transition-all text-center flex flex-col items-center justify-center space-y-2 shadow-sm accent-top group";
+                btn.onclick = () => switchHubSection(item.name);
+                btn.innerHTML = `
+                    <div class="w-10 h-10 rounded-full bg-pineapple/20 group-hover:bg-pineapple flex items-center justify-center font-black transition-colors text-sm">${item.name.charAt(0)}</div>
+                    <span class="text-xs sm:text-sm font-black tracking-tight">${item.name}</span>
+                `;
+                grid.appendChild(btn);
             });
-        });
+        }
 
-        // 3. Hero Auto Slider Logic
-        const sliderWrapper = document.getElementById('sliderWrapper');
-        const slides = document.querySelectorAll('.slide');
-        const dots = document.querySelectorAll('.dot');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
+        // Render Hub items inside slide menu
+        function renderSlideMenuHubItems() {
+            const container = document.getElementById('slideMenuHubItems');
+            hubItems.forEach(item => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left px-4 py-2.5 rounded-lg hover:bg-pineapple/20 text-sm font-bold transition-all text-gray-700 hover:text-black";
+                btn.onclick = () => {
+                    switchHubSection(item.name);
+                    toggleSlideMenu();
+                };
+                btn.textContent = item.name;
+                container.appendChild(btn);
+            });
+        }
+
+        // Switch active section in main view when hub item is clicked
+        function switchHubSection(sectionName) {
+            const contentContainer = document.getElementById('sectionContent');
+            const found = hubItems.find(i => i.name === sectionName);
+
+            if (sectionName === 'About Us') {
+                contentContainer.innerHTML = `
+                    <h4 class="text-xl font-black mb-2 text-black">About Us - TNSF KADAPA</h4>
+                    <p class="text-sm text-gray-700 leading-relaxed">The Tamil Nadu Science Forum / People's Science Network branch in Kadapa is dedicated to popularizing science, fostering scientific temper, eradicating superstitions, and encouraging empirical inquiry among students and the general public.</p>
+                `;
+            } else if (sectionName === 'Home') {
+                contentContainer.innerHTML = `
+                    <h4 class="text-lg font-black mb-2">Welcome to TNSF Hub Dashboard</h4>
+                    <p class="text-sm text-gray-600">Select any item from the TNSF Hub above or open the side menu to navigate across platform modules.</p>
+                `;
+            } else if (found) {
+                contentContainer.innerHTML = `
+                    <h4 class="text-xl font-black mb-2 text-black">${found.name}</h4>
+                    <p class="text-sm text-gray-700 leading-relaxed mb-4">${found.desc}</p>
+                    <div class="p-4 bg-pineapple/10 rounded-lg border border-pineapple/20 text-xs text-gray-600">
+                        Live module data for <strong>${found.name}</strong> is synchronized with TNSF Kadapa servers.
+                    </div>
+                `;
+            }
+            window.scrollTo({ top: 400, behavior: 'smooth' });
+        }
+
+        // Hero Banner Auto-Scroll Carousel
+        let currentSlide = 0;
+        const totalSlides = 3;
         
-        let currentIndex = 0;
-        const totalSlides = slides.length;
-        let autoSlideInterval;
-
-        function updateSlider() {
-            sliderWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
-            slides.forEach((slide, index) => {
-                slide.classList.toggle('active', index === currentIndex);
-            });
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentIndex);
-            });
+        function setHeroSlide(index) {
+            currentSlide = index;
+            const carousel = document.getElementById('heroCarousel');
+            carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+            updateDots();
         }
 
-        function nextSlide() {
-            currentIndex = (currentIndex + 1) % totalSlides;
-            updateSlider();
-        }
-
-        function prevSlide() {
-            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-            updateSlider();
-        }
-
-        nextBtn.addEventListener('click', () => {
-            nextSlide();
-            resetTimer();
-        });
-
-        prevBtn.addEventListener('click', () => {
-            prevSlide();
-            resetTimer();
-        });
-
-        dots.forEach(dot => {
-            dot.addEventListener('click', (e) => {
-                currentIndex = parseInt(e.target.getAttribute('data-index'));
-                updateSlider();
-                resetTimer();
-            });
-        });
-
-        function startTimer() {
-            autoSlideInterval = setInterval(nextSlide, 4000);
-        }
-
-        function resetTimer() {
-            clearInterval(autoSlideInterval);
-            startTimer();
-        }
-
-        startTimer();
-        // 4. Scroll Reveal Animations
-        function revealOnScroll() {
-            const reveals = document.querySelectorAll('.reveal');
-            reveals.forEach(element => {
-                const windowHeight = window.innerHeight;
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 100;
-                
-                if (elementTop < windowHeight - elementVisible) {
-                    element.classList.add('active');
+        function updateDots() {
+            const dots = document.querySelectorAll('.hero-dot');
+            dots.forEach((dot, idx) => {
+                if(idx === currentSlide) {
+                    dot.classList.add('bg-black', 'w-6');
+                    dot.classList.remove('bg-black/40');
+                } else {
+                    dot.classList.remove('bg-black', 'w-6');
+                    dot.classList.add('bg-black/40');
                 }
             });
         }
 
-        window.addEventListener('scroll', revealOnScroll);
+        // Auto advance banner every 4 seconds
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            setHeroSlide(currentSlide);
+        }, 4000);
     </script>
 </body>
 </html>
