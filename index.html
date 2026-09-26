@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TNSF KADAPA</title>
-    <!-- Tailwind CSS for modern styling and layout -->
+    <title>TNSF KADAPA PARLIAMENT</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        pineapple: '#FFD700', // Pineapple Yellow
+                        pineapple: '#FFD700',
                         purewhite: '#FFFFFF',
                     }
                 }
@@ -19,11 +19,18 @@
         }
     </script>
     <style>
-        /* Custom animations for smoke, letter reveal, and smooth transitions */
-        @keyframes smokeDissolve {
-            0% { opacity: 1; transform: scale(1) blur(0px); filter: drop-shadow(0 0 0px #FFD700); }
-            50% { opacity: 0.8; transform: scale(1.1) blur(4px); letter-spacing: 5px; }
-            100% { opacity: 0; transform: scale(2) blur(12px); filter: drop-shadow(0 0 20px #FFD700); }
+        /* Letters sliding in from left */
+        @keyframes slideInLeft {
+            0% { opacity: 0; transform: translateX(-50px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Full Yellow Smoke Dissolve Animation */
+        @keyframes fullYellowSmoke {
+            0% { opacity: 1; transform: scale(1); filter: blur(0px); background-color: #FFFFFF; }
+            40% { opacity: 1; transform: scale(1.05); filter: blur(2px); background-color: #FFD700; }
+            70% { opacity: 0.9; transform: scale(1.3); filter: blur(10px); background-color: #FFD700; box-shadow: 0 0 80px 40px #FFD700; }
+            100% { opacity: 0; transform: scale(2.5); filter: blur(25px); background-color: #FFD700; }
         }
 
         @keyframes bounceDot {
@@ -31,17 +38,21 @@
             50% { transform: translateY(-8px); }
         }
 
-        .animate-smoke {
-            animation: smokeDissolve 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        .letter-anim {
+            opacity: 0;
+            animation: slideInLeft 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .animate-smoke-screen {
+            animation: fullYellowSmoke 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
 
         .dot-1 { animation: bounceDot 0.6s infinite ease-in-out; }
         .dot-2 { animation: bounceDot 0.6s infinite ease-in-out 0.2s; }
         .dot-3 { animation: bounceDot 0.6s infinite ease-in-out 0.4s; }
 
-        /* Accent top borders for cards/popups */
-        .accent-top {
-            border-top: 3px solid #FFD700;
+        .accent-bar {
+            border-left: 4px solid #FFD700;
         }
     </style>
 </head>
@@ -49,24 +60,34 @@
 
     <!-- ================= 1. SPLASH SCREEN & ANIMATIONS ================= -->
     <div id="splashScreen" class="fixed inset-0 bg-purewhite z-50 flex flex-col items-center justify-center transition-opacity duration-700">
-        <div id="textAnimContainer" class="flex space-x-1 sm:space-x-3 text-2xl sm:text-5xl font-black tracking-wider text-black">
-            <!-- Letters injected dynamically via JS -->
+        <div id="splashContent" class="flex flex-col items-center justify-center">
+            <!-- Logo reveal container (hidden initially during text slide) -->
+            <div id="splashLogo" class="opacity-0 transition-opacity duration-500 mb-4 flex flex-col items-center">
+                <div class="w-20 h-20 bg-pineapple rounded-full flex items-center justify-center shadow-lg border-2 border-black/10">
+                    <span class="text-3xl font-black">TK</span>
+                </div>
+            </div>
+            
+            <!-- Sliding letters container -->
+            <div id="textAnimContainer" class="flex space-x-1 sm:space-x-2 text-2xl sm:text-4xl font-black tracking-wider text-black">
+                <!-- Injected via JS -->
+            </div>
         </div>
         
         <!-- 3 Dotted Loading Indicator -->
-        <div id="loadingDots" class="mt-8 flex space-x-2 opacity-0 transition-opacity duration-300">
-            <div class="w-3 h-3 bg-pineapple rounded-full dot-1"></div>
-            <div class="w-3 h-3 bg-pineapple rounded-full dot-2"></div>
-            <div class="w-3 h-3 bg-pineapple rounded-full dot-3"></div>
+        <div id="loadingDots" class="absolute bottom-20 flex space-x-2 opacity-0 transition-opacity duration-300">
+            <div class="w-3.5 h-3.5 bg-pineapple rounded-full dot-1 border border-black/20"></div>
+            <div class="w-3.5 h-3.5 bg-pineapple rounded-full dot-2 border border-black/20"></div>
+            <div class="w-3.5 h-3.5 bg-pineapple rounded-full dot-3 border border-black/20"></div>
         </div>
     </div>
 
     <!-- ================= 2. LOGIN VIEW ================= -->
     <div id="loginView" class="hidden min-h-screen flex flex-col items-center justify-center p-4 bg-purewhite">
-        <div class="max-w-md w-full bg-purewhite p-8 rounded-2xl shadow-xl border border-pineapple/30 accent-top relative transition-all duration-300 hover:shadow-2xl">
+        <div class="max-w-md w-full bg-purewhite p-8 rounded-2xl shadow-xl border border-pineapple/30 relative transition-all duration-300">
             <div class="text-center mb-6">
                 <div class="w-16 h-16 bg-pineapple mx-auto rounded-full flex items-center justify-center text-2xl font-black mb-3 shadow-md">TK</div>
-                <h1 class="text-2xl font-black tracking-tight">TNSF KADAPA</h1>
+                <h1 class="text-2xl font-black tracking-tight">TNSF KADAPA PARLIAMENT</h1>
                 <p class="text-sm text-gray-600 mt-1">Please login to your account</p>
             </div>
 
@@ -85,9 +106,9 @@
             </form>
 
             <div class="mt-6 text-center">
-                <p class="text-sm text-gray-600">If you are new member? <button onclick="showRegister()" class="font-bold underline text-black hover:text-pineapple transition-colors">Register here</button></p>
+                <p class="text-sm text-gray-600">If you are new member? <button onclick="showRegister()" class="font-bold underline text-black hover:text-gray-700 transition-colors">Register here</button></p>
             </div>
-            <div class="mt-4 p-2 bg-pineapple/10 rounded text-center text-xs text-gray-600">
+            <div class="mt-4 p-2 bg-pineapple/20 rounded text-center text-xs text-gray-700 font-bold">
                 Default: User123 / User123
             </div>
         </div>
@@ -95,10 +116,10 @@
 
     <!-- ================= 3. REGISTRATION VIEW (JOIN TNSF) ================= -->
     <div id="registerView" class="hidden min-h-screen flex flex-col items-center justify-center p-4 bg-purewhite py-12">
-        <div class="max-w-2xl w-full bg-purewhite p-8 rounded-2xl shadow-xl border border-pineapple/30 accent-top relative">
+        <div class="max-w-2xl w-full bg-purewhite p-8 rounded-2xl shadow-xl border border-pineapple/30 relative">
             <div class="text-center mb-6">
-                <h1 class="text-2xl sm:text-3xl font-black tracking-tight">Join TNSF KADAPA</h1>
-                <p class="text-sm text-gray-600 mt-1">Fill out the form below to become an official member of our community.</p>
+                <h1 class="text-2xl sm:text-3xl font-black tracking-tight">Join TNSF KADAPA PARLIAMENT</h1>
+                <p class="text-sm text-gray-600 mt-1">Fill out the form below to register your membership.</p>
             </div>
 
             <form id="registerForm" onsubmit="handleRegister(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -184,10 +205,10 @@
 
     <!-- SUCCESS POPUP MODAL -->
     <div id="successPopup" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-purewhite max-w-sm w-full p-6 rounded-2xl shadow-2xl text-center accent-top border border-pineapple/30">
+        <div class="bg-purewhite max-w-sm w-full p-6 rounded-2xl shadow-2xl text-center border border-pineapple/50">
             <div class="w-12 h-12 bg-pineapple rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-black">✓</div>
             <h3 class="text-xl font-black mb-2">Success!</h3>
-            <p class="text-sm text-gray-600 mb-6">Your registration has been successfully submitted. Welcome to TNSF Kadapa!</p>
+            <p class="text-sm text-gray-600 mb-6">Your registration has been successfully submitted.</p>
             <button onclick="closeSuccessPopup()" class="w-full py-2.5 bg-pineapple font-black rounded-lg shadow hover:opacity-95 text-black">OK</button>
         </div>
     </div>
@@ -195,158 +216,136 @@
     <!-- ================= 4. DASHBOARD VIEW (MAIN APP) ================= -->
     <div id="dashboardView" class="hidden min-h-screen flex flex-col bg-purewhite">
         <!-- Header -->
-        <header class="sticky top-0 z-40 bg-purewhite border-b border-pineapple/40 shadow-sm">
-            <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        <header class="sticky top-0 z-40 bg-pineapple shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
                 <!-- Logo & Text -->
                 <div class="flex items-center space-x-3 cursor-pointer" onclick="switchHubSection('Home')">
-                    <div class="w-10 h-10 bg-pineapple rounded-full flex items-center justify-center font-black shadow-inner">TK</div>
-                    <span class="font-black tracking-tight text-lg sm:text-xl">TNSF KADAPA</span>
+                    <div class="w-12 h-12 bg-purewhite rounded-full flex items-center justify-center font-black shadow-md text-sm border border-black/10">TK</div>
+                    <div>
+                        <h2 class="font-black tracking-tight text-lg leading-tight">TNSF</h2>
+                        <p class="text-xs font-bold tracking-wide text-black/80">KADAPA PARLIAMENT</p>
+                    </div>
                 </div>
                 <!-- Menu Button -->
-                <button id="menuBtn" onclick="toggleSlideMenu()" class="p-2 rounded-lg bg-pineapple/20 hover:bg-pineapple/40 transition-all font-black flex items-center space-x-2">
-                    <span id="menuIconText" class="text-sm">MENU</span>
-                    <div class="w-6 flex flex-col space-y-1">
-                        <span class="h-0.5 bg-black w-full rounded"></span>
-                        <span class="h-0.5 bg-black w-full rounded"></span>
-                        <span class="h-0.5 bg-black w-full rounded"></span>
+                <button id="menuBtn" onclick="toggleSlideMenu()" class="p-2 rounded-lg hover:bg-black/10 transition-all font-black flex items-center">
+                    <div class="w-7 flex flex-col space-y-1.5">
+                        <span class="h-1 bg-black w-full rounded"></span>
+                        <span class="h-1 bg-black w-full rounded"></span>
+                        <span class="h-1 bg-black w-full rounded"></span>
                     </div>
                 </button>
             </div>
         </header>
 
         <!-- Main Dynamic Content Container -->
-        <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 space-y-8">
+        <main class="flex-1 max-w-4xl w-full mx-auto p-4 sm:p-6 space-y-6">
             
-            <!-- Hero Banner Auto-Scroll Section -->
-            <section class="relative rounded-2xl overflow-hidden bg-pineapple/10 border border-pineapple/30 accent-top shadow-md">
-                <div id="heroCarousel" class="relative h-64 sm:h-96 flex transition-transform duration-700 ease-in-out">
-                    <!-- Carousel Slide 1 -->
-                    <div class="min-w-full h-full flex flex-col items-center justify-center text-center p-6 sm:p-12">
-                        <h2 class="text-2xl sm:text-4xl font-black mb-3">Empowering Youth Through Science</h2>
-                        <p class="text-sm sm:text-base text-gray-700 max-w-xl">Building a rational, progressive society with scientific temper across every corner of Kadapa.</p>
-                    </div>
-                    <!-- Carousel Slide 2 -->
-                    <div class="min-w-full h-full flex flex-col items-center justify-center text-center p-6 sm:p-12">
-                        <h2 class="text-2xl sm:text-4xl font-black mb-3">Join the Rational Movement</h2>
-                        <p class="text-sm sm:text-base text-gray-700 max-w-xl">Engage in discussions, attend live events, and contribute to progressive community development.</p>
-                    </div>
-                    <!-- Carousel Slide 3 -->
-                    <div class="min-w-full h-full flex flex-col items-center justify-center text-center p-6 sm:p-12">
-                        <h2 class="text-2xl sm:text-4xl font-black mb-3">Science & Society Conclave</h2>
-                        <p class="text-sm sm:text-base text-gray-700 max-w-xl">Connecting students and leaders to foster innovation, critical thought, and scientific inquiry.</p>
-                    </div>
-                </div>
-                <!-- Carousel Dots Indicator -->
-                <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
-                    <button onclick="setHeroSlide(0)" class="w-2.5 h-2.5 rounded-full bg-black/40 hero-dot transition-all"></button>
-                    <button onclick="setHeroSlide(1)" class="w-2.5 h-2.5 rounded-full bg-black/40 hero-dot transition-all"></button>
-                    <button onclick="setHeroSlide(2)" class="w-2.5 h-2.5 rounded-full bg-black/40 hero-dot transition-all"></button>
-                </div>
-            </section>
-
-            <!-- TNSF Hub Grid Section -->
-            <section>
-                <div class="flex items-center justify-between mb-4">
+            <!-- White Card Container Matching Reference Layout -->
+            <div class="bg-purewhite border border-gray-200 rounded-2xl p-6 shadow-md space-y-6">
+                <!-- TNSF Hub Header -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-1.5 h-6 bg-pineapple rounded-full"></div>
                     <h3 class="text-xl font-black">TNSF Hub</h3>
-                    <span class="text-xs font-bold uppercase tracking-wider text-gray-500 bg-pineapple/20 px-2.5 py-1 rounded">Quick Navigation</span>
                 </div>
-                
-                <div id="hubGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+
+                <!-- TNSF Hub Grid Layout matching reference image style -->
+                <div id="hubGrid" class="grid grid-cols-3 gap-6 pt-2">
                     <!-- Hub buttons dynamically injected -->
                 </div>
-            </section>
+            </div>
 
-            <!-- Dynamic Section Detail Display Card -->
-            <section id="activeSectionCard" class="bg-purewhite border border-pineapple/30 rounded-2xl p-6 shadow-md accent-top transition-all duration-300">
+            <!-- Dynamic Content Display Panel -->
+            <section id="activeSectionCard" class="bg-purewhite border border-gray-200 rounded-2xl p-6 shadow-md accent-bar transition-all duration-300">
                 <div id="sectionContent">
-                    <h4 class="text-lg font-black mb-2">Welcome to TNSF Hub Dashboard</h4>
-                    <p class="text-sm text-gray-600">Select any item from the TNSF Hub above or open the side menu to navigate across platform modules.</p>
+                    <h4 class="text-lg font-black mb-2">Welcome to TNSF Hub</h4>
+                    <p class="text-sm text-gray-600">Tap any icon above to view details or select options from the menu.</p>
                 </div>
             </section>
 
         </main>
 
         <!-- Footer -->
-        <footer class="bg-purewhite border-t border-pineapple/40 py-6 text-center text-xs text-gray-600">
-            <p>&copy; 2026 TNSF KADAPA. All rights reserved. Built with Pineapple Yellow & White standards.</p>
+        <footer class="bg-purewhite border-t border-gray-200 py-6 text-center text-xs text-gray-600">
+            <p>Copy 2026 TNSF KADAPA PARLIAMENT all rights reserved</p>
         </footer>
     </div>
 
     <!-- ================= 5. SLIDING SIDE MENU (DRAWER) ================= -->
     <div id="slideMenuOverlay" class="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 hidden transition-opacity duration-300" onclick="toggleSlideMenu()"></div>
-    <div id="slideMenu" class="fixed top-0 right-0 h-full w-80 bg-purewhite z-50 transform translate-x-full transition-transform duration-300 ease-in-out shadow-2xl border-l border-pineapple/30 flex flex-col">
-        <div class="p-4 border-b border-pineapple/30 flex items-center justify-between bg-pineapple/10">
+    <div id="slideMenu" class="fixed top-0 right-0 h-full w-80 bg-purewhite z-50 transform translate-x-full transition-transform duration-300 ease-in-out shadow-2xl border-l border-gray-200 flex flex-col">
+        <div class="p-4 border-b border-gray-200 flex items-center justify-between bg-pineapple/20">
             <h3 class="font-black">Navigation Menu</h3>
-            <button onclick="toggleSlideMenu()" class="p-1 rounded-md hover:bg-pineapple/30 font-black text-lg">✕</button>
+            <button onclick="toggleSlideMenu()" class="p-1 rounded-md hover:bg-black/10 font-black text-lg">✕</button>
         </div>
         <div class="flex-1 overflow-y-auto p-4 space-y-2">
-            <button onclick="switchHubSection('About Us'); toggleSlideMenu();" class="w-full text-left px-4 py-3 rounded-lg hover:bg-pineapple/20 font-bold transition-all flex items-center justify-between">
+            <button onclick="switchHubSection('About Us'); toggleSlideMenu();" class="w-full text-left px-4 py-3 rounded-lg hover:bg-pineapple/25 font-bold transition-all flex items-center justify-between">
                 <span>About Us</span>
-                <span class="text-xs bg-pineapple/40 px-2 py-0.5 rounded">Info</span>
+                <span class="text-xs bg-pineapple/40 px-2 py-0.5 rounded font-bold">Info</span>
             </button>
-            <div class="pt-2 pb-1 text-xs font-bold uppercase tracking-wider text-gray-400 px-2">TNSF Hub Modules</div>
+            <div class="pt-2 pb-1 text-xs font-bold uppercase tracking-wider text-gray-400 px-2">Hub Options</div>
             <div id="slideMenuHubItems" class="space-y-1">
                 <!-- Injected Hub links for slide menu -->
             </div>
         </div>
-        <div class="p-4 border-t border-pineapple/30 text-center">
+        <div class="p-4 border-t border-gray-200 text-center">
             <button onclick="handleLogout()" class="w-full py-2.5 bg-pineapple font-black rounded-lg text-black hover:opacity-95 transition-all shadow-sm">LOGOUT</button>
         </div>
     </div>
 
     <!-- ================= JAVASCRIPT LOGIC ================= -->
     <script>
-        // TNSF Hub Items Configuration
+        // TNSF Hub Items mapped with exact titles and vector representations matching the style image
         const hubItems = [
-            { name: 'Profile', desc: 'Manage your member profile details, credentials, and membership status.' },
-            { name: 'Resolution', desc: 'View organizational resolutions, policy objectives, and mission statements.' },
-            { name: 'Gallery', desc: 'Explore photographs and highlights from past scientific conclaves and events.' },
-            { name: 'Inbox', desc: 'Check official notifications, circulars, and announcements from district leadership.' },
-            { name: 'Constituencies', desc: 'Browse regional committee structures across Kadapa constituencies.' },
-            { name: 'Leadership', desc: 'Meet the executive body and district committee coordinators.' },
-            { name: 'Events', desc: 'Register and stay updated on upcoming seminars, camps, and meetings.' },
-            { name: 'Feedback', desc: 'Share your suggestions, queries, or complaints with the administrative team.' },
-            { name: 'Contact Us', desc: 'Get in touch with TNSF Kadapa office, email addresses, and helplines.' },
-            { name: 'Donate Us', desc: 'Support our rationalist campaigns and educational outreach programs.' },
-            { name: 'Refer', desc: 'Invite friends and fellow students to join the TNSF Kadapa movement.' }
+            { name: 'Refer', desc: 'Invite friends and fellow students to join TNSF Kadapa Parliament.', icon: '👤+' },
+            { name: 'Resolution Desk', desc: 'View organizational resolutions, policy objectives, and mission statements.', icon: '🎓' },
+            { name: 'Gallery', desc: 'Explore photographs and highlights from past scientific conclaves and events.', icon: '🖼️' },
+            { name: 'Inbox', desc: 'Check official notifications, circulars, and announcements.', icon: '✉️' },
+            { name: 'Constituencies', desc: 'Browse regional committee structures across Kadapa Parliament constituencies.', icon: '🗺️' },
+            { name: 'Leadership', desc: 'Meet the executive body and district committee coordinators.', icon: '👔' },
+            { name: 'Events', desc: 'Register and stay updated on upcoming seminars, camps, and meetings.', icon: '📅' },
+            { name: 'Feedback', desc: 'Share your suggestions, queries, or complaints with the administrative team.', icon: '💬' },
+            { name: 'Contact Us', desc: 'Get in touch with TNSF Kadapa Parliament office and helplines.', icon: '🎧' },
+            { name: 'Donate Us', desc: 'Support our rationalist campaigns and educational outreach programs.', icon: '❤️' }
         ];
 
-        // 1. Splash Screen & Letter Animation on Open
+        // 1. Splash Screen & Sequential Slide-in + Smoke Animation Sequence
         window.addEventListener('DOMContentLoaded', () => {
-            const text = "TNSF KADAPA";
+            const text = "TNSF KADAPA PARLIAMENT";
             const container = document.getElementById('textAnimContainer');
             
-            // Build letter spans
-            text.split('').forEach((char) => {
+            // Build letter elements with staggered delays for left-to-right slide-in
+            text.split('').forEach((char, index) => {
                 const span = document.createElement('span');
                 span.textContent = char === ' ' ? '\u00A0' : char;
-                span.className = "inline-block transform transition-transform duration-500";
+                span.className = "inline-block letter-anim";
+                span.style.animationDelay = `${index * 0.05}s`;
                 container.appendChild(span);
             });
 
-            // Sequence: Show letters one by one, then trigger smoke minimization
+            // Total time for letters to slide in: ~1.4s. Then show logo & start dotted loading
             setTimeout(() => {
+                document.getElementById('splashLogo').classList.remove('opacity-0');
                 document.getElementById('loadingDots').classList.remove('opacity-0');
-            }, 600);
+            }, 1400);
 
-            // After letters form fully, minimize with smoke and transition to login
+            // After 2.6s, trigger full yellow smoke dissolve minimization
             setTimeout(() => {
-                container.classList.add('animate-smoke');
+                document.getElementById('splashContent').classList.add('animate-smoke-screen');
                 document.getElementById('loadingDots').classList.add('opacity-0');
-            }, 2000);
+            }, 2600);
 
+            // Hide splash screen completely and reveal login screen
             setTimeout(() => {
                 document.getElementById('splashScreen').classList.add('opacity-0');
                 setTimeout(() => {
                     document.getElementById('splashScreen').style.display = 'none';
                     document.getElementById('loginView').classList.remove('hidden');
-                }, 700);
-            }, 3000);
+                }, 500);
+            }, 3600);
 
             // Initialize Hub Grid & Slide Menu items
             renderHubGrid();
             renderSlideMenuHubItems();
-            initHeroCarousel();
         });
 
         // Navigation Actions
@@ -404,18 +403,21 @@
             }
         }
 
-        // Render TNSF Hub items into Grid
+        // Render TNSF Hub Grid matching reference style (Round yellow circle buttons with label underneath)
         function renderHubGrid() {
             const grid = document.getElementById('hubGrid');
             hubItems.forEach(item => {
-                const btn = document.createElement('button');
-                btn.className = "p-4 bg-purewhite border border-pineapple/30 rounded-xl hover:bg-pineapple/10 hover:border-pineapple transition-all text-center flex flex-col items-center justify-center space-y-2 shadow-sm accent-top group";
-                btn.onclick = () => switchHubSection(item.name);
-                btn.innerHTML = `
-                    <div class="w-10 h-10 rounded-full bg-pineapple/20 group-hover:bg-pineapple flex items-center justify-center font-black transition-colors text-sm">${item.name.charAt(0)}</div>
-                    <span class="text-xs sm:text-sm font-black tracking-tight">${item.name}</span>
+                const wrapper = document.createElement('div');
+                wrapper.className = "flex flex-col items-center text-center group cursor-pointer";
+                wrapper.onclick = () => switchHubSection(item.name);
+                
+                wrapper.innerHTML = `
+                    <div class="w-20 h-20 rounded-full border-2 border-pineapple flex items-center justify-center bg-purewhite group-hover:bg-pineapple/10 transition-all shadow-sm mb-2">
+                        <span class="text-2xl">${item.icon}</span>
+                    </div>
+                    <span class="text-xs sm:text-sm font-bold tracking-tight text-gray-800">${item.name}</span>
                 `;
-                grid.appendChild(btn);
+                grid.appendChild(wrapper);
             });
         }
 
@@ -424,7 +426,7 @@
             const container = document.getElementById('slideMenuHubItems');
             hubItems.forEach(item => {
                 const btn = document.createElement('button');
-                btn.className = "w-full text-left px-4 py-2.5 rounded-lg hover:bg-pineapple/20 text-sm font-bold transition-all text-gray-700 hover:text-black";
+                btn.className = "w-full text-left px-4 py-2 rounded-lg hover:bg-pineapple/20 text-sm font-bold transition-all text-gray-700 hover:text-black";
                 btn.onclick = () => {
                     switchHubSection(item.name);
                     toggleSlideMenu();
@@ -434,62 +436,32 @@
             });
         }
 
-        // Switch active section in main view when hub item is clicked
+        // Switch active section in main view
         function switchHubSection(sectionName) {
             const contentContainer = document.getElementById('sectionContent');
             const found = hubItems.find(i => i.name === sectionName);
 
             if (sectionName === 'About Us') {
                 contentContainer.innerHTML = `
-                    <h4 class="text-xl font-black mb-2 text-black">About Us - TNSF KADAPA</h4>
-                    <p class="text-sm text-gray-700 leading-relaxed">The Tamil Nadu Science Forum / People's Science Network branch in Kadapa is dedicated to popularizing science, fostering scientific temper, eradicating superstitions, and encouraging empirical inquiry among students and the general public.</p>
+                    <h4 class="text-xl font-black mb-2 text-black">About Us - TNSF KADAPA PARLIAMENT</h4>
+                    <p class="text-sm text-gray-700 leading-relaxed">The Tamil Nadu Science Forum / People's Science Network branch in Kadapa Parliament is dedicated to popularizing science, fostering scientific temper, eradicating superstitions, and encouraging empirical inquiry.</p>
                 `;
             } else if (sectionName === 'Home') {
                 contentContainer.innerHTML = `
-                    <h4 class="text-lg font-black mb-2">Welcome to TNSF Hub Dashboard</h4>
-                    <p class="text-sm text-gray-600">Select any item from the TNSF Hub above or open the side menu to navigate across platform modules.</p>
+                    <h4 class="text-lg font-black mb-2">Welcome to TNSF Hub</h4>
+                    <p class="text-sm text-gray-600">Tap any icon above to view details or select options from the menu.</p>
                 `;
             } else if (found) {
                 contentContainer.innerHTML = `
                     <h4 class="text-xl font-black mb-2 text-black">${found.name}</h4>
                     <p class="text-sm text-gray-700 leading-relaxed mb-4">${found.desc}</p>
-                    <div class="p-4 bg-pineapple/10 rounded-lg border border-pineapple/20 text-xs text-gray-600">
-                        Live module data for <strong>${found.name}</strong> is synchronized with TNSF Kadapa servers.
+                    <div class="p-3 bg-pineapple/15 rounded-lg border border-pineapple/30 text-xs text-gray-700 font-medium">
+                        Live module data for <strong>${found.name}</strong> is synchronized.
                     </div>
                 `;
             }
-            window.scrollTo({ top: 400, behavior: 'smooth' });
+            window.scrollTo({ top: 300, behavior: 'smooth' });
         }
-
-        // Hero Banner Auto-Scroll Carousel
-        let currentSlide = 0;
-        const totalSlides = 3;
-        
-        function setHeroSlide(index) {
-            currentSlide = index;
-            const carousel = document.getElementById('heroCarousel');
-            carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
-            updateDots();
-        }
-
-        function updateDots() {
-            const dots = document.querySelectorAll('.hero-dot');
-            dots.forEach((dot, idx) => {
-                if(idx === currentSlide) {
-                    dot.classList.add('bg-black', 'w-6');
-                    dot.classList.remove('bg-black/40');
-                } else {
-                    dot.classList.remove('bg-black', 'w-6');
-                    dot.classList.add('bg-black/40');
-                }
-            });
-        }
-
-        // Auto advance banner every 4 seconds
-        setInterval(() => {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            setHeroSlide(currentSlide);
-        }, 4000);
     </script>
 </body>
 </html>
