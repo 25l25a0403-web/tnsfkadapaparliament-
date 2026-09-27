@@ -139,16 +139,6 @@
       margin-top: 6px;
     }
 
-    .hero-pills {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 12px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: #333;
-    }
-
     /* ==================== SECTIONS ==================== */
     .section-header {
       padding: 20px 20px 5px;
@@ -177,391 +167,180 @@
 
     .section-subtext {
       padding: 0 20px 15px;
-      color: #777;
-      font-size: 0.82rem;
+      color: #555;
+      font-size: 0.9rem;
       font-weight: 500;
+      line-height: 1.5;
     }
 
-    /* ==================== INTERACTIVE MAP STYLES ==================== */
-    .map-container {
+    /* ==================== INTERACTIVE MAP SECTION ==================== */
+    .map-container-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      margin: 20px auto;
       padding: 20px;
+      background: #fff;
       display: flex;
       justify-content: center;
-      background: #fafafa;
-      border-bottom: 1px solid #eee;
+      align-items: center;
     }
 
-    .map-svg {
+    .map-svg-container {
       width: 100%;
-      max-width: 700px;
       height: auto;
-      filter: drop-shadow(0px 4px 10px rgba(0,0,0,0.08));
+      filter: drop-shadow(0px 8px 12px rgba(0,0,0,0.15));
     }
 
     .constituency-path {
       fill: #ffffff;
-      stroke: #f39c12;
-      stroke-width: 3.5;
+      stroke: #ffd200;
+      stroke-width: 4;
       stroke-linejoin: round;
+      stroke-linecap: round;
       cursor: pointer;
-      transition: fill 0.3s ease, stroke 0.3s ease, transform 0.2s;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
 
     .constituency-path:hover {
-      fill: #fff7be;
-      stroke: #d4a000;
+      fill: #fff9d6;
+      stroke-width: 5;
     }
 
-    .constituency-path.selected {
+    .constituency-path.active {
       fill: #ffd200 !important;
-      stroke: #000000 !important;
-      stroke-width: 4;
+      stroke: #d4a000 !important;
+      stroke-width: 5;
+      filter: drop-shadow(5px 12px 10px rgba(0, 0, 0, 0.4));
+      transform: translateY(-8px) scale(1.02);
+      transform-origin: center;
     }
 
     .map-label {
       font-size: 14px;
-      font-weight: 800;
-      fill: #111;
+      font-weight: 900;
+      fill: #000000;
       text-anchor: middle;
-      dominant-baseline: middle;
       pointer-events: none;
       opacity: 0;
       transition: opacity 0.3s ease;
       text-shadow: 0px 0px 4px rgba(255, 255, 255, 0.9);
     }
 
-    .map-label.active {
+    .map-label.visible {
       opacity: 1;
     }
 
-    /* ==================== CONSTITUENCY GRID ==================== */
-    .constituency-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      padding: 10px 20px 30px;
+    /* ==================== CONSTITUENCY DETAIL CARD ==================== */
+    .constituency-detail-section {
+      padding: 20px;
     }
 
-    .card {
-      background: #fff;
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-      cursor: pointer;
-      transition: transform 0.2s, border-color 0.2s;
-      border: 2px solid #f0f0f0;
+    .constituency-display-card {
+      background: #ffffff;
+      border: 2px solid #ffd200;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      margin-bottom: 25px;
     }
 
-    .card:hover, .card.active-card {
-      transform: translateY(-4px);
-      border-color: #ffd200;
-    }
-
-    .card-img-container {
-      height: 150px;
-      width: 100%;
-      overflow: hidden;
-    }
-
-    .card-img-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .card-details {
-      padding: 14px;
-      position: relative;
-    }
-
-    .card-title-line {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .card-title {
-      font-weight: 800;
-      font-size: 1.05rem;
-      color: #111;
-    }
-
-    .card-subtitle {
-      font-size: 0.78rem;
-      color: #777;
-      margin-top: 4px;
-      margin-left: 32px;
-    }
-
-    .card-arrow {
-      position: absolute;
-      right: 14px;
-      bottom: 14px;
-      background: #ffd200;
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      color: #000;
-    }
-
-    /* ==================== DETAIL VIEW ==================== */
-    #detailView {
-      display: none;
-    }
-
-    .stats-container {
-      background: #fffdf0;
-      border-top: 1px solid #ffe885;
-      border-bottom: 1px solid #ffe885;
-      padding: 15px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .stats-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .stats-grid {
-      display: flex;
-      gap: 25px;
-    }
-
-    .stat-box {
-      text-align: center;
-    }
-
-    .stat-box i {
-      font-size: 1.1rem;
-      color: #333;
-      margin-bottom: 3px;
-    }
-
-    .stat-number {
-      font-size: 1.25rem;
+    .constituency-display-title {
+      font-size: 1.8rem;
       font-weight: 900;
       color: #111;
+      margin-bottom: 10px;
     }
 
-    .stat-label {
-      font-size: 0.72rem;
-      color: #666;
-      font-weight: 600;
-    }
-
-    .about-layout {
-      display: flex;
-      gap: 20px;
-      padding: 0 20px 20px;
-    }
-
-    .about-text {
-      flex: 1;
-      font-size: 0.88rem;
-      color: #555;
+    .constituency-display-desc {
+      font-size: 0.95rem;
+      color: #444;
       line-height: 1.6;
     }
 
-    .about-img-card {
-      width: 280px;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-      flex-shrink: 0;
-      border: 1px solid #eee;
-    }
-
-    .about-img-card img {
-      width: 100%;
-      height: 120px;
-      object-fit: cover;
-    }
-
-    .about-img-caption {
-      padding: 8px 12px;
-      background: #fff;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .about-img-caption h5 {
-      font-size: 0.85rem;
-      font-weight: 800;
-    }
-
-    .about-img-caption p {
-      font-size: 0.72rem;
-      color: #777;
-    }
-
-    /* Leadership Grid & Social Media Icons */
+    /* Leadership Cards */
     .leadership-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 20px;
-      padding: 0 20px 20px;
+      margin-top: 15px;
     }
 
-    .leader-card {
+    .leader-card-extended {
       background: #fff;
-      border: 1px solid #eee;
+      border: 1px solid #e0e0e0;
       border-radius: 12px;
-      padding: 16px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
       display: flex;
-      gap: 16px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      position: relative;
+      flex-direction: column;
+      gap: 15px;
     }
 
-    .leader-img {
-      width: 80px;
-      height: 80px;
-      border-radius: 10px;
+    .leader-header-flex {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .leader-img-lg {
+      width: 75px;
+      height: 75px;
+      border-radius: 50%;
       object-fit: cover;
-      border: 2px solid #ffd200;
+      border: 3px solid #ffd200;
     }
 
-    .leader-info {
-      flex: 1;
-    }
-
-    .leader-info h5 {
-      font-size: 0.75rem;
-      color: #e67e22;
-      font-weight: 700;
+    .leader-main-info h5 {
+      font-size: 0.8rem;
       text-transform: uppercase;
+      color: #e67e22;
+      font-weight: 800;
       letter-spacing: 0.5px;
     }
 
-    .leader-info h4 {
-      font-size: 1.05rem;
+    .leader-main-info h4 {
+      font-size: 1.15rem;
       font-weight: 800;
       color: #111;
-      margin: 2px 0;
     }
 
-    .leader-info p.designation {
+    .leader-main-info p {
       font-size: 0.8rem;
-      font-weight: 600;
-      color: #555;
+      color: #666;
     }
 
-    .leader-info p.bio {
-      font-size: 0.76rem;
-      color: #777;
-      margin-top: 6px;
-      line-height: 1.4;
-    }
-
-    .leader-socials {
+    .social-links-inline {
       display: flex;
-      gap: 8px;
-      margin-top: 10px;
+      gap: 10px;
+      margin-top: 6px;
     }
 
-    .leader-socials a {
-      width: 26px;
-      height: 26px;
-      background: #f0f0f0;
+    .social-icon-btn {
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
+      background: #f0f0f0;
+      color: #333;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #333;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       text-decoration: none;
       transition: background 0.2s, color 0.2s;
     }
 
-    .leader-socials a:hover {
+    .social-icon-btn:hover {
       background: #ffd200;
       color: #000;
     }
 
-    /* Team Grid */
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-      padding: 0 20px 20px;
-    }
-
-    .team-card {
-      background: #fff;
-      border: 1px solid #eee;
-      border-radius: 12px;
-      overflow: hidden;
-      text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-    }
-
-    .team-card img {
-      width: 100%;
-      height: 110px;
-      object-fit: cover;
-    }
-
-    .team-card-info {
-      padding: 8px;
-    }
-
-    .team-card-info h4 {
+    .leader-bio-text {
       font-size: 0.85rem;
-      font-weight: 800;
-    }
-
-    .team-card-info p {
-      font-size: 0.72rem;
-      color: #777;
-    }
-
-    /* Activities Grid */
-    .activities-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-      padding: 0 20px 20px;
-    }
-
-    .activity-card {
-      background: #fff;
-      border: 1px solid #eee;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-    }
-
-    .activity-card img {
-      width: 100%;
-      height: 100px;
-      object-fit: cover;
-    }
-
-    .activity-info {
-      padding: 8px 10px;
-    }
-
-    .activity-info h4 {
-      font-size: 0.8rem;
-      font-weight: 800;
-      line-height: 1.2;
-    }
-
-    .activity-date {
-      font-size: 0.7rem;
-      color: #888;
-      margin-top: 4px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
+      color: #555;
+      line-height: 1.5;
+      border-top: 1px solid #eee;
+      padding-top: 12px;
     }
 
     /* ==================== FOOTER ==================== */
@@ -640,27 +419,9 @@
       font-weight: 600;
     }
 
-    /* ==================== RESPONSIVE DESIGN ==================== */
     @media (max-width: 768px) {
-      .constituency-grid {
-        grid-template-columns: 1fr;
-      }
-      .about-layout {
-        flex-direction: column;
-      }
-      .about-img-card {
-        width: 100%;
-      }
       .leadership-grid {
         grid-template-columns: 1fr;
-      }
-      .team-grid, .activities-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .stats-container {
-        flex-direction: column;
-        gap: 15px;
-        align-items: flex-start;
       }
       footer {
         flex-direction: column;
@@ -687,203 +448,105 @@
         </div>
       </div>
       
-      <button class="nav-btn" id="navBtn" onclick="handleNavClick()">
-        <i class="fa-solid fa-house" id="navBtnIcon"></i>
-        <span id="navBtnText">Home</span>
+      <button class="nav-btn" onclick="window.scrollTo(0,0)">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
       </button>
     </header>
 
-    <!-- OVERVIEW SCREEN -->
-    <div id="overviewView">
-      
-      <!-- Banner -->
-      <div class="hero-banner" id="overviewHeroBanner">
-        <div class="hero-content">
-          <h2 class="hero-title-main">Stronger <span>Together</span></h2>
-          <p class="hero-subtitle">Across All Constituencies</p>
-          <div class="hero-pills">
-            <span>7 Constituencies</span> | <span>1 Vision</span> | <span>A Better Future</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Title & Text Header -->
-      <div class="section-header">
-        <div class="section-icon-badge"><i class="fa-solid fa-map-location-dot"></i></div>
-        <h2 class="section-title">Select Constituency</h2>
-      </div>
-      <p class="section-subtext">Click on any region in the map below or choose from the list to view detailed leadership and constituency info.</p>
-
-      <!-- MAP SECTION -->
-      <div class="map-container">
-        <svg class="map-svg" viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg">
-          <!-- SVG Map Shapes Matching Image -->
-          <g id="mapSegments">
-            <!-- Jammalamadugu (Top Left) -->
-            <path id="path-jammalamadugu" class="constituency-path" 
-                  d="M 280,118 Q 300,120 330,130 Q 360,190 350,225 Q 390,210 420,220 Q 400,270 480,220 Q 490,260 460,300 Q 480,310 490,380 Q 410,400 480,420 Q 410,480 350,470 Q 340,530 200,430 Q 230,370 140,310 Q 170,200 245,200 Q 250,120 280,118 Z" 
-                  onclick="selectConstituency('jammalamadugu')"/>
-
-            <!-- Badvel (Right Long Segment) -->
-            <path id="path-badvel" class="constituency-path" 
-                  d="M 570,42 Q 680,50 740,65 Q 750,200 780,260 Q 820,380 930,610 Q 830,630 800,530 Q 640,530 710,360 Q 710,250 570,170 Q 680,220 570,42 Z" 
-                  onclick="selectConstituency('badvel')"/>
-
-            <!-- Mydukur (Top Middle) -->
-            <path id="path-mydukur" class="constituency-path" 
-                  d="M 480,220 Q 570,170 710,250 Q 710,360 640,530 Q 640,440 600,440 Q 570,480 500,480 Q 490,380 460,300 Q 490,260 480,220 Z" 
-                  onclick="selectConstituency('mydukur')"/>
-
-            <!-- Proddatur (Center Small Region) -->
-            <path id="path-proddatur" class="constituency-path" 
-                  d="M 380,225 Q 420,220 480,220 Q 460,300 490,260 Q 480,310 490,380 Q 410,400 480,420 Q 410,480 350,470 Z" 
-                  onclick="selectConstituency('proddatur')"/>
-
-            <!-- Pulivendla (Bottom Left) -->
-            <path id="path-pulivendla" class="constituency-path" 
-                  d="M 80,450 Q 180,430 350,470 Q 340,530 380,560 Q 350,690 380,730 Q 360,760 470,720 Q 510,690 510,660 Q 450,650 350,650 Q 180,660 80,450 Z" 
-                  onclick="selectConstituency('pulivendla')"/>
-
-            <!-- Kamalapuram (Bottom Middle) -->
-            <path id="path-kamalapuram" class="constituency-path" 
-                  d="M 350,470 Q 410,480 480,420 Q 490,380 500,480 Q 570,480 600,440 Q 640,440 640,530 Q 650,620 580,650 Q 500,650 510,660 Q 450,650 380,560 Q 340,530 350,470 Z" 
-                  onclick="selectConstituency('kamalapuram')"/>
-
-            <!-- Kadapa (Bottom Center-Right) -->
-            <path id="path-kadapa" class="constituency-path" 
-                  d="M 640,530 Q 800,530 830,630 Q 700,600 650,620 Q 640,530 640,530 Z" 
-                  onclick="selectConstituency('kadapa')"/>
-          </g>
-
-          <!-- Text Labels on Map -->
-          <g id="mapLabels">
-            <text id="label-jammalamadugu" class="map-label" x="270" y="300">Jammalamadugu</text>
-            <text id="label-badvel" class="map-label" x="730" y="300">Badvel</text>
-            <text id="label-mydukur" class="map-label" x="570" y="330">Mydukur</text>
-            <text id="label-proddatur" class="map-label" x="430" y="340">Proddatur</text>
-            <text id="label-pulivendla" class="map-label" x="250" y="580">Pulivendla</text>
-            <text id="label-kamalapuram" class="map-label" x="480" y="550">Kamalapuram</text>
-            <text id="label-kadapa" class="map-label" x="710" y="570">Kadapa</text>
-          </g>
-        </svg>
-      </div>
-
-      <!-- Constituencies List Below Map -->
-      <div class="section-header">
-        <div class="section-icon-badge"><i class="fa-solid fa-list-check"></i></div>
-        <h2 class="section-title">Constituencies List</h2>
-      </div>
-
-      <div class="constituency-grid" id="constituencyGrid">
-        <!-- JS Grid -->
+    <!-- HERO BANNER -->
+    <div class="hero-banner" id="overviewHeroBanner" style="background-image: url('https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80');">
+      <div class="hero-content">
+        <h2 class="hero-title-main">Stronger <span>Together</span></h2>
+        <p class="hero-subtitle">Across All Constituencies</p>
       </div>
     </div>
 
-    <!-- DETAIL VIEW SCREEN -->
-    <div id="detailView">
-      
-      <!-- Detail Hero Banner -->
-      <div class="hero-banner" id="detailHeroBanner">
-        <div class="hero-content">
-          <h2 class="hero-title-main" id="detailHeroTitle">Badvel <span>Constituency</span></h2>
-          <p class="hero-subtitle" id="detailHeroSubtitle">Unity | Education | Progress</p>
-        </div>
+    <!-- MAIN HEADING & DETAILED TEXT -->
+    <div class="section-header">
+      <div class="section-icon-badge"><i class="fa-solid fa-flag"></i></div>
+      <h2 class="section-title">Kadapa Parliamentary Movement</h2>
+    </div>
+    <p class="section-subtext">
+      The TDP Telugu Nadu Students Federation (TNSF) in Kadapa Parliamentary constituency stands as a dedicated force empowering youth and student communities across all seven assembly segments. Through focused leadership, institutional advocacy, career guidance programs, and active student support desks, TNSF drives progressive transformation across the region.
+    </p>
+
+    <!-- SELECT CONSTITUENCY HEADING -->
+    <div class="section-header">
+      <div class="section-icon-badge"><i class="fa-solid fa-map-location-dot"></i></div>
+      <h2 class="section-title">Select Constituency</h2>
+    </div>
+    <p class="section-subtext">Click on any constituency on the interactive map below to view details and leadership information.</p>
+
+    <!-- MAP CONTAINER WITH EXACT TRACED SVG -->
+    <div class="map-container-wrapper">
+      <svg class="map-svg-container" viewBox="0 0 1000 900" xmlns="http://www.w3.org/2000/svg">
+        <g id="mapGroup">
+          <!-- Jammalamadugu (Top Left Segment) -->
+          <path id="path-jammalamadugu" class="constituency-path" data-name="Jammalamadugu"
+                d="M 280,145 C 310,145 330,155 345,140 C 360,125 380,170 390,165 C 400,160 410,145 425,170 C 435,160 425,140 430,135 C 450,160 470,165 485,185 C 500,200 520,180 535,210 C 510,215 480,245 490,265 C 470,270 455,250 440,260 C 420,240 405,280 380,410 C 330,370 295,310 260,250 C 235,240 215,245 200,280 C 180,270 160,320 135,405 C 150,425 170,435 180,470 C 205,480 200,500 230,510 C 270,520 320,560 350,590 C 280,520 220,490 180,450 C 150,400 130,360 165,340 C 155,320 180,240 240,240 C 245,200 270,150 280,145 Z" />
+          <text id="label-jammalamadugu" class="map-label" x="300" y="300">Jammalamadugu</text>
+
+          <!-- Proddatur (Top Right Center Segment) -->
+          <path id="path-proddatur" class="constituency-path" data-name="Proddatur"
+                d="M 485,185 C 520,200 550,230 570,255 C 590,280 610,260 620,285 C 625,310 600,325 615,355 C 635,370 655,355 675,410 C 710,405 700,380 680,360 C 690,305 640,290 600,235 C 570,165 565,55 670,50 C 660,35 680,15 690,20 C 700,35 705,75 745,70 C 740,150 760,210 770,280 C 790,340 810,400 835,450 C 850,500 880,520 930,690 C 880,660 840,680 820,630 C 770,610 740,625 720,590 C 640,590 630,520 635,500 C 670,490 710,455 710,420 C 680,410 635,370 615,355 C 600,325 625,310 620,285 C 610,260 590,280 570,255 C 550,230 520,200 485,185 Z" />
+          <text id="label-proddatur" class="map-label" x="700" y="300">Proddatur</text>
+
+          <!-- Mydukur (Center Top Segment) -->
+          <path id="path-mydukur" class="constituency-path" data-name="Mydukur"
+                d="M 380,410 C 405,280 420,240 440,260 C 455,250 470,270 490,265 C 480,245 510,215 535,210 C 570,255 590,280 620,285 C 600,325 625,310 615,355 C 635,370 680,410 710,420 C 670,490 635,500 630,520 C 615,520 600,560 580,520 C 520,480 480,550 435,485 C 420,490 405,420 380,410 Z" />
+          <text id="label-mydukur" class="map-label" x="510" y="380">Mydukur</text>
+
+          <!-- Kamalapuram (Center Segment) -->
+          <path id="path-kamalapuram" class="constituency-path" data-name="Kamalapuram"
+                d="M 350,590 C 380,560 420,490 435,485 C 480,550 520,480 580,520 C 600,560 615,520 630,520 C 640,590 720,590 740,625 C 700,640 680,680 630,650 C 580,740 570,720 500,710 C 430,700 410,630 350,590 Z" />
+          <text id="label-kamalapuram" class="map-label" x="510" y="600">Kamalapuram</text>
+
+          <!-- Kadapa (South Center Segment) -->
+          <path id="path-kadapa" class="constituency-path" data-name="Kadapa"
+                d="M 500,710 C 570,720 580,740 630,650 C 680,680 700,640 740,625 C 770,610 820,630 880,660 C 850,710 810,700 810,750 C 850,770 880,790 930,690 C 870,780 830,730 800,810 C 760,780 720,830 685,815 C 640,820 610,790 595,820 C 530,810 500,815 485,820 C 510,800 515,750 500,710 Z" />
+          <text id="label-kadapa" class="map-label" x="680" y="740">Kadapa</text>
+
+          <!-- Badvel (Far Right Segment) -->
+          <path id="path-badvel" class="constituency-path" data-name="Badvel"
+                d="M 740,70 C 705,75 700,35 690,20 C 720,25 745,20 740,70 Z M 770,280 C 760,210 740,150 745,70 C 850,100 880,250 930,690 C 880,790 870,780 880,660 C 820,630 770,610 740,625 C 640,590 630,520 635,500 C 670,490 710,455 710,420 C 680,410 635,370 615,355 C 625,310 600,325 620,285 C 610,260 590,280 570,255 C 600,235 640,290 690,305 C 680,360 700,380 710,405 C 770,280 770,280 770,280 Z" />
+          <text id="label-badvel" class="map-label" x="800" y="250">Badvel</text>
+
+          <!-- Pulivendla (South-West / Bottom Left Segment) -->
+          <path id="path-pulivendla" class="constituency-path" data-name="Pulivendla"
+                d="M 180,450 C 220,490 280,520 350,590 C 410,630 430,700 500,710 C 515,750 510,800 485,820 C 460,860 465,870 440,860 C 425,825 400,855 370,855 C 350,750 365,720 345,670 C 370,660 350,600 350,590 Z M 180,450 C 130,510 80,570 100,580 C 110,600 130,590 170,670 C 230,730 300,790 360,820 C 350,750 365,720 345,670 C 370,660 350,600 350,590 Z" />
+          <text id="label-pulivendla" class="map-label" x="250" y="680">Pulivendla</text>
+        </g>
+      </svg>
+    </div>
+
+    <!-- MAP BELOW CONSTITUENCY DETAILS -->
+    <div class="constituency-detail-section">
+      <div class="constituency-display-card">
+        <h3 class="constituency-display-title" id="displayTitle">Select a Constituency</h3>
+        <p class="constituency-display-desc" id="displayDesc">
+          Click on any constituency region in the map above to view the detailed leadership and overview of that specific region.
+        </p>
       </div>
 
-      <!-- Stats Bar -->
-      <div class="stats-container">
-        <div class="stats-left">
-          <div class="section-icon-badge"><i class="fa-solid fa-users"></i></div>
-          <div>
-            <h3 style="font-size:1.1rem; font-weight:800;">Our Members</h3>
-            <p style="font-size:0.75rem; color:#666;">Together We Are Stronger</p>
-          </div>
-        </div>
-        <div class="stats-grid">
-          <div class="stat-box">
-            <i class="fa-solid fa-users"></i>
-            <div class="stat-number" id="statTotal">1,250+</div>
-            <div class="stat-label">Total Members</div>
-          </div>
-          <div class="stat-box">
-            <i class="fa-solid fa-graduation-cap"></i>
-            <div class="stat-number" id="statStudents">860+</div>
-            <div class="stat-label">Students</div>
-          </div>
-          <div class="stat-box">
-            <i class="fa-solid fa-building-columns"></i>
-            <div class="stat-number" id="statColleges">32+</div>
-          </div>
-          <div class="stat-box">
-            <i class="fa-solid fa-user-group"></i>
-            <div class="stat-number" id="statTeams">12+</div>
-            <div class="stat-label">Active Teams</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Constituency Name Heading & Detail Text -->
-      <div class="section-header">
-        <div class="section-icon-badge"><i class="fa-solid fa-circle-info"></i></div>
-        <h2 class="section-title" id="aboutTitle">About Badvel Constituency</h2>
-      </div>
-      <p class="section-subtext" id="aboutSubtitle">A Region of Talent, Tradition and Progress</p>
-
-      <div class="about-layout">
-        <div class="about-text" id="aboutText"></div>
-        <div class="about-img-card">
-          <img id="aboutImg" src="" alt="Constituency View">
-          <div class="about-img-caption">
-            <div class="section-icon-badge" style="width:24px; height:24px; font-size:0.65rem;"><i class="fa-solid fa-location-dot"></i></div>
-            <div>
-              <h5 id="aboutImgName">Badvel</h5>
-              <p>Kadapa District</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Leadership (President, General Secretary Name, Designation, Social Media & Bio Text with Photo) -->
+      <!-- LEADERSHIP SECTION -->
       <div class="section-header">
         <div class="section-icon-badge"><i class="fa-solid fa-user-tie"></i></div>
         <h2 class="section-title">Leadership</h2>
       </div>
-      <p class="section-subtext">President, General Secretary and Key Office Bearers</p>
-      
+      <p class="section-subtext">President and General Secretary details for the selected constituency.</p>
+
       <div class="leadership-grid" id="leadershipGrid">
-        <!-- Rendered via JS -->
+        <!-- Dynamic Leadership Data Loaded via JS -->
       </div>
-
-      <!-- Team Section -->
-      <div class="section-header">
-        <div class="section-icon-badge"><i class="fa-solid fa-users"></i></div>
-        <h2 class="section-title">Our Team</h2>
-      </div>
-      <p class="section-subtext">Dedicated People | Stronger Together</p>
-
-      <div class="team-grid" id="teamGrid">
-        <!-- Rendered via JS -->
-      </div>
-
-      <!-- Activities Section -->
-      <div class="section-header">
-        <div class="section-icon-badge"><i class="fa-solid fa-calendar-days"></i></div>
-        <h2 class="section-title">Recent Activities</h2>
-      </div>
-      <p class="section-subtext">Creating Awareness | Empowering Students</p>
-
-      <div class="activities-grid" id="activitiesGrid">
-        <!-- Rendered via JS -->
-      </div>
-
     </div>
 
     <!-- FOOTER -->
     <footer>
       <div class="footer-left">
         <p><i class="fa-solid fa-phone"></i> Contact Us</p>
-        <p id="footerPhone" style="font-weight:normal; margin-top:2px;">9908180194 / 8125727668</p>
-        <p id="footerLocation" style="font-weight:normal; margin-top:2px;"><i class="fa-solid fa-location-dot"></i> Proddatur, Kadapa District</p>
+        <p style="font-weight:normal; margin-top:2px;">9908180194 / 8125727668</p>
+        <p style="font-weight:normal; margin-top:2px;"><i class="fa-solid fa-location-dot"></i> Proddatur, Kadapa District</p>
       </div>
 
       <div class="footer-center">
@@ -910,332 +573,210 @@
 
   </div>
 
+  <!-- ==================== JAVASCRIPT ==================== -->
   <script>
-    const GLOBAL_CONFIG = {
-      logoUrl: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=100&q=80",
-      overviewBannerUrl: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80"
+    /* Detailed Constituency & Leadership Data */
+    const constituencyData = {
+      "jammalamadugu": {
+        name: "Jammalamadugu Constituency",
+        desc: "Jammalamadugu is a major educational and industrial hub in Kadapa district. TNSF actively operates here to secure student welfare, enhance library and hostel infrastructure, and organize academic excellence seminars.",
+        leaders: [
+          {
+            designation: "Constituency President",
+            name: "B. Raju Naidu",
+            photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80",
+            social: { instagram: "#", facebook: "#", twitter: "#" },
+            detail: "Leading student advocacy initiatives and public educational rallies across Jammalamadugu colleges with dedication to student rights."
+          },
+          {
+            designation: "General Secretary",
+            name: "K. Venkatesh",
+            photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80",
+            social: { instagram: "#", whatsapp: "#" },
+            detail: "Coordinating grassroots organizational activities, scholarship guidance, and student membership drives in the constituency."
+          }
+        ]
+      },
+      "proddatur": {
+        name: "Proddatur Constituency",
+        desc: "Proddatur represents a high-density student demographic. TNSF focuses heavily on modern skill development programs, digital literacy, coding bootcamps, and career counseling sessions for young aspirants.",
+        leaders: [
+          {
+            designation: "Constituency President",
+            name: "C. Sekhar Reddy",
+            photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80",
+            social: { instagram: "#", facebook: "#", twitter: "#" },
+            detail: "Empowering youth through technical workshops, employment guidance drives, and dynamic student representation in Proddatur."
+          },
+          {
+            designation: "General Secretary",
+            name: "M. Vamsi Krishna",
+            photo: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80",
+            social: { instagram: "#", whatsapp: "#" },
+            detail: "Managing day-to-day coordination, student grievance cells, and active college campus committees."
+          }
+        ]
+      },
+      "mydukur": {
+        name: "Mydukur Constituency",
+        desc: "Mydukur TNSF unit is deeply committed to rural educational empowerment, ensuring merit scholarships, school-to-college transition assistance, and youth leadership training.",
+        leaders: [
+          {
+            designation: "Constituency President",
+            name: "T. Kumar Yadav",
+            photo: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80",
+            social: { instagram: "#", facebook: "#" },
+            detail: "Spearheading leadership seminars, student unity campaigns, and social service initiatives across Mydukur."
+          },
+          {
+            designation: "General Secretary",
+            name: "P. Ramanjaneyulu",
+            photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80",
+            social: { instagram: "#", twitter: "#" },
+            detail: "Organizing awareness rallies, merit award ceremonies, and interactive student forums across educational institutions."
+          }
+        ]
+      },
+      "kamalapuram": {
+        name: "Kamalapuram Constituency",
+        desc: "Kamalapuram emphasizes combining academic achievement with physical development through sports events, youth welfare programs, and vibrant student community engagement.",
+        leaders: [
+          {
+            designation: "Constituency President",
+            name: "S. Shiva Naidu",
+            photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80",
+            social: { instagram: "#", facebook: "#", twitter: "#" },
+            detail: "Promoting student welfare, sports tournaments, and active youth leadership throughout Kamalapuram."
+          },
+          {
+            designation: "General Secretary",
+            name: "A. Prakash Roy",
+            photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80",
+            social: { instagram: "#", whatsapp: "#" },
+            detail: "Driving student outreach, campus mentorship networks, and educational assistance drives."
+          }
+        ]
+      },
+      "kadapa": {
+        name: "Kadapa Constituency",
+        desc: "Serving as the central focal point of the district, Kadapa constituency TNSF hosts large-scale educational summits, job fairs, and district-wide student coordination activities.",
+        leaders: [
+          {
+            designation: "Constituency President",
+            name: "V. Mahesh Chowdary",
+            photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80",
+            social: { instagram: "#", facebook: "#", twitter: "#" },
+            detail: "Pioneering major student welfare movements, university-level advocacy, and career placement mentoring in Kadapa."
+          },
+          {
+            designation: "General Secretary",
+            name: "S. Suresh Reddy",
+            photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80",
+            social: { instagram: "#", whatsapp: "#" },
+            detail: "Managing organizational communications, event execution, and constituency-wide student support helplines."
+          }
+        ]
+      },
+      "badvel": {
+        name: "Badvel Constituency",
+        desc: "Badvel is known for its vibrant youth and academic dedication. TNSF supports students in Badvel through continuous educational advocacy, public awareness drives, and skill building.",
+        leaders: [
+          {
+            designation: "Constituency President",
+            name: "Rama Krishna Reddy",
+            photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80",
+            social: { instagram: "#", facebook: "#", twitter: "#" },
+            detail: "Dedicated leader championing student rights, educational facilities, and youth empowerment initiatives across Badvel."
+          },
+          {
+            designation: "General Secretary",
+            name: "Suresh Kumar",
+            photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80",
+            social: { instagram: "#", whatsapp: "#" },
+            detail: "Actively organizing student awareness programs, social service camps, and college engagement drives."
+          }
+        ]
+      },
+      "pulivendla": {
+        name: "Pulivendla Constituency",
+        desc: "Pulivendla constituency focuses on expanding educational access in rural regions, digital learning tools, and grassroots student empowerment.",
+        leaders: [
+          {
+            designation: "Constituency President",
+            name: "K. Mohan Reddy",
+            photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80",
+            social: { instagram: "#", facebook: "#", twitter: "#" },
+            detail: "Guiding rural youth development, competitive exam guidance, and educational assistance in Pulivendla."
+          },
+          {
+            designation: "General Secretary",
+            name: "G. Anitha Kumar",
+            photo: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80",
+            social: { instagram: "#", whatsapp: "#" },
+            detail: "Overseeing grassroots campaigns, student welfare programs, and organizational unity."
+          }
+        ]
+      }
     };
 
-    let currentPageState = 'overview';
-    let selectedConstituencyId = null;
+    /* Handle Map Interactions */
+    document.querySelectorAll('.constituency-path').forEach(path => {
+      path.addEventListener('click', function() {
+        const key = this.id.replace('path-', '');
+        
+        // Remove active class from all paths and labels
+        document.querySelectorAll('.constituency-path').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.map-label').forEach(l => l.classList.remove('visible'));
 
-    document.getElementById('headerLogo').src = GLOBAL_CONFIG.logoUrl;
-    document.getElementById('overviewHeroBanner').style.backgroundImage = `url('${GLOBAL_CONFIG.overviewBannerUrl}')`;
+        // Highlight selected constituency with 3D yellow effect
+        this.classList.add('active');
+        
+        // Bring active SVG path to top of stacking order
+        this.parentElement.appendChild(this);
 
-    /* Constituencies Data Structure */
-    const constituenciesData = [
-      {
-        id: "badvel",
-        name: "Badvel",
-        tagline: "Unity in Diversity",
-        image: "https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=600&q=80",
-        heroBanner: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80",
-        heroSubtitle: "Unity | Education | Progress",
-        stats: { total: "1,250+", students: "860+", colleges: "32+", teams: "12+" },
-        aboutSub: "A Region of Talent, Tradition and Progress",
-        aboutText: "Badvel is one of the important constituencies in Kadapa district, known for its rich cultural heritage, educational institutions and hardworking youth. TNSF works here to support students, create awareness, and build a stronger future through education, unity and social responsibility.",
-        aboutImage: "https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=600&q=80",
-        leaders: [
-          { role: "President", name: "Rama Krishna Reddy", designation: "Constituency President", bio: "Dedicated to building strong educational frameworks and serving student rights across Badvel.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80", socials: { instagram: "#", whatsapp: "#", twitter: "#" } },
-          { role: "General Secretary", name: "Suresh Kumar", designation: "General Secretary", bio: "Leading grassroots youth organizing and academic support drives in schools and colleges.", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80", socials: { instagram: "#", whatsapp: "#", twitter: "#" } }
-        ],
-        team: [
-          { name: "Lakshmi Prasanna", role: "Team Member", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" },
-          { name: "Ravi Teja", role: "Team Member", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=200&q=80" },
-          { name: "Pavani", role: "Team Member", img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80" },
-          { name: "Kiran", role: "Team Member", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=200&q=80" }
-        ],
-        activities: [
-          { title: "College Awareness Program", date: "15 Aug 2025", img: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=300&q=80" },
-          { title: "Career Guidance Session", date: "10 Aug 2025", img: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=300&q=80" },
-          { title: "Plantation Drive", date: "05 Aug 2025", img: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=300&q=80" },
-          { title: "Student Rally", date: "28 Jul 2025", img: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=300&q=80" }
-        ]
-      },
-      {
-        id: "kadapa",
-        name: "Kadapa",
-        tagline: "Education Drives Progress",
-        image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80",
-        heroBanner: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=80",
-        heroSubtitle: "Knowledge | Leadership | Growth",
-        stats: { total: "2,400+", students: "1,800+", colleges: "45+", teams: "20+" },
-        aboutSub: "The Central Hub of Student Movement",
-        aboutText: "Kadapa constituency serves as the central focal point for student welfare and career-building initiatives. TNSF actively organizes employment drives, academic mentoring, and scholarship guidance across institutions here.",
-        aboutImage: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80",
-        leaders: [
-          { role: "President", name: "V. Mahesh", designation: "Constituency President", bio: "Leading urban youth programs, campus mentoring, and student welfare campaigns.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80", socials: { instagram: "#", whatsapp: "#", twitter: "#" } },
-          { role: "General Secretary", name: "A. Rahman", designation: "General Secretary", bio: "Coordinating inter-college committees and youth skill empowerment initiatives.", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80", socials: { instagram: "#", whatsapp: "#", twitter: "#" } }
-        ],
-        team: [
-          { name: "Suresh", role: "Team Member", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80" }
-        ],
-        activities: [
-          { title: "Educational Seminar", date: "12 Aug 2025", img: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=300&q=80" }
-        ]
-      },
-      {
-        id: "pulivendla",
-        name: "Pulivendla",
-        tagline: "People Power Change",
-        image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80",
-        heroBanner: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80",
-        heroSubtitle: "Youth Power | Development",
-        stats: { total: "1,850+", students: "1,200+", colleges: "28+", teams: "15+" },
-        aboutSub: "Grassroots Organization and Youth Development",
-        aboutText: "Pulivendla constituency focuses on expanding educational access in rural regions, promoting digital literacy, and conducting regular student outreach drives.",
-        aboutImage: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80",
-        leaders: [
-          { role: "President", name: "K. Mohan", designation: "Constituency President", bio: "Empowering rural youth with modern educational opportunities and digital awareness.", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80", socials: { instagram: "#", whatsapp: "#", twitter: "#" } },
-          { role: "General Secretary", name: "P. Naidu", designation: "General Secretary", bio: "Strengthening local student networks and youth social responsibility programs.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80", socials: { instagram: "#", whatsapp: "#", twitter: "#" } }
-        ],
-        team: [
-          { name: "Anitha", role: "Team Member", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" }
-        ],
-        activities: [
-          { title: "Blood Donation Camp", date: "02 Aug 2025", img: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=300&q=80" }
-        ]
-      },
-      {
-        id: "kamalapuram",
-        name: "Kamalapuram",
-        tagline: "Rooted in Culture",
-        image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80",
-        heroBanner: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
-        heroSubtitle: "Heritage | Education",
-        stats: { total: "1,100+", students: "750+", colleges: "20+", teams: "10+" },
-        aboutSub: "Promoting Youth & Sports Development",
-        aboutText: "Kamalapuram emphasizes academic perfection along with youth engagement in sports, culture, and social welfare programs.",
-        aboutImage: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80",
-        leaders: [
-          { role: "President", name: "S. Naidu", designation: "Constituency President", bio: "Focused on combining educational excellence with community youth service.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80", socials: { instagram: "#", whatsapp: "#", twitter: "#" } },
-          { role: "General Secretary", name: "V. Chaitanya", designation: "General Secretary", bio: "Managing sports tournaments and student leadership workshops.", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80", socials: { instagram: "#", whatsapp: "#", twitter: "#" } }
-        ],
-        team: [
-          { name: "Prakash", role: "Team Member", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=200&q=80" }
-        ],
-        activities: [
-          { title: "Youth Sports Event", date: "20 Jul 2025", img: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=300&q=80" }
-        ]
-      },
-      {
-        id: "jammalamadugu",
-        name: "Jammalamadugu",
-        tagline: "Tradition to Tomorrow",
-        image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80",
-        heroBanner: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80",
-        heroSubtitle: "Tradition | Progress",
-        stats: { total: "1,400+", students: "920+", colleges: "25+", teams: "11+" },
-        aboutSub: "Building Brighter Academic Infrastructure",
-        aboutText: "Jammalamadugu TNSF unit works closely with government colleges to improve campus amenities, library resources, and student hostel facilities.",
-        aboutImage: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80",
-        leaders: [
-          { role: "President", name: "B. Raju", designation: "Constituency President", bio: "Advocating for improved college infrastructure and campus welfare.", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80", socials: { instagram: "#", whatsapp: "#", twitter: "#" } },
-          { role: "General Secretary", name: "D. Srinivas", designation: "General Secretary", bio: "Organizing student rights awareness drives and library development projects.", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80", socials: { instagram: "#", whatsapp: "#", twitter: "#" } }
-        ],
-        team: [
-          { name: "Gita", role: "Team Member", img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80" }
-        ],
-        activities: [
-          { title: "Hostel Facility Drive", date: "18 Jul 2025", img: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=300&q=80" }
-        ]
-      },
-      {
-        id: "proddatur",
-        name: "Proddatur",
-        tagline: "Progress Together",
-        image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80",
-        heroBanner: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=80",
-        heroSubtitle: "Innovation | Skill | Future",
-        stats: { total: "2,100+", students: "1,500+", colleges: "38+", teams: "18+" },
-        aboutSub: "Skill Development & Technical Learning",
-        aboutText: "Proddatur is a high-density student area where TNSF focuses on technical workshops, coding bootcamps, and career counseling sessions.",
-        aboutImage: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80",
-        leaders: [
-          { role: "President", name: "C. Sekhar", designation: "Constituency President", bio: "Driving youth innovation, skill development seminars, and technical training.", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80", socials: { instagram: "#", whatsapp: "#", twitter: "#" } },
-          { role: "General Secretary", name: "M. Dinesh", designation: "General Secretary", bio: "Leading career mentoring drives and student support networks.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80", socials: { instagram: "#", whatsapp: "#", twitter: "#" } }
-        ],
-        team: [
-          { name: "Vamsi", role: "Team Member", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=200&q=80" }
-        ],
-        activities: [
-          { title: "Technical Skill Workshop", date: "25 Jul 2025", img: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=300&q=80" }
-        ]
-      },
-      {
-        id: "mydukur",
-        name: "Mydukur",
-        tagline: "Learning Today Leading Tomorrow",
-        image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=600&q=80",
-        heroBanner: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1200&q=80",
-        heroSubtitle: "Learning | Leadership",
-        stats: { total: "950+", students: "680+", colleges: "18+", teams: "8+" },
-        aboutSub: "Leadership Training for Emerging Youth",
-        aboutText: "Mydukur TNSF empowers school and college youth through leadership seminars, merit scholarship drives, and student assistance desks.",
-        aboutImage: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=600&q=80",
-        leaders: [
-          { role: "President", name: "T. Kumar", designation: "Constituency President", bio: "Fostering youth leadership programs and educational aid campaigns.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80", socials: { instagram: "#", whatsapp: "#", twitter: "#" } },
-          { role: "General Secretary", name: "G. Mahesh", designation: "General Secretary", bio: "Coordinating merit scholarship drives and student assistance desks.", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80", socials: { instagram: "#", whatsapp: "#", twitter: "#" } }
-        ],
-        team: [
-          { name: "Sravani", role: "Team Member", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" }
-        ],
-        activities: [
-          { title: "Scholarship Distribution", date: "01 Aug 2025", img: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=300&q=80" }
-        ]
-      }
-    ];
+        // Show SVG Label Overlay
+        const label = document.getElementById(`label-${key}`);
+        if(label) {
+          label.classList.add('visible');
+          label.parentElement.appendChild(label);
+        }
 
-    /* Render List Cards */
-    const grid = document.getElementById('constituencyGrid');
-
-    function renderCards() {
-      grid.innerHTML = '';
-      constituenciesData.forEach((item) => {
-        const card = document.createElement('div');
-        card.className = `card ${selectedConstituencyId === item.id ? 'active-card' : ''}`;
-        card.id = `card-${item.id}`;
-        card.onclick = () => selectConstituency(item.id);
-
-        card.innerHTML = `
-          <div class="card-img-container">
-            <img src="${item.image}" alt="${item.name}">
-          </div>
-          <div class="card-details">
-            <div class="card-title-line">
-              <div class="section-icon-badge" style="width:24px; height:24px; font-size:0.7rem;"><i class="fa-solid fa-location-dot"></i></div>
-              <div class="card-title">${item.name}</div>
-            </div>
-            <div class="card-subtitle">${item.tagline}</div>
-            <div class="card-arrow" onclick="event.stopPropagation(); showDetail('${item.id}');"><i class="fa-solid fa-arrow-right"></i></div>
-          </div>
-        `;
-        grid.appendChild(card);
+        // Render Constituency Info and Leadership
+        renderConstituencyData(key);
       });
-    }
+    });
 
-    /* Map & Selection Handler */
-    function selectConstituency(id) {
-      selectedConstituencyId = id;
-
-      // Reset paths and labels on Map
-      document.querySelectorAll('.constituency-path').forEach(el => el.classList.remove('selected'));
-      document.querySelectorAll('.map-label').forEach(el => el.classList.remove('active'));
-
-      // Reset list active cards
-      document.querySelectorAll('.card').forEach(el => el.classList.remove('active-card'));
-
-      // Highlight selected map region & show label
-      const pathEl = document.getElementById(`path-${id}`);
-      const labelEl = document.getElementById(`label-${id}`);
-      const cardEl = document.getElementById(`card-${id}`);
-
-      if (pathEl) pathEl.classList.add('selected');
-      if (labelEl) labelEl.classList.add('active');
-      if (cardEl) cardEl.classList.add('active-card');
-
-      // Directly open detail view for the clicked constituency
-      showDetail(id);
-    }
-
-    /* Nav Button Click */
-    function handleNavClick() {
-      if (currentPageState === 'detail') {
-        showOverview();
-      } else {
-        window.scrollTo(0, 0);
-      }
-    }
-
-    /* View Handlers */
-    function showOverview() {
-      currentPageState = 'overview';
-      document.getElementById('overviewView').style.display = 'block';
-      document.getElementById('detailView').style.display = 'none';
-
-      document.getElementById('navBtnIcon').className = 'fa-solid fa-house';
-      document.getElementById('navBtnText').innerText = 'Home';
-
-      window.scrollTo(0, 0);
-    }
-
-    function showDetail(id) {
-      const data = constituenciesData.find(c => c.id === id);
+    function renderConstituencyData(key) {
+      const data = constituencyData[key];
       if (!data) return;
 
-      currentPageState = 'detail';
+      document.getElementById('displayTitle').innerText = data.name;
+      document.getElementById('displayDesc').innerText = data.desc;
 
-      document.getElementById('navBtnIcon').className = 'fa-solid fa-arrow-left';
-      document.getElementById('navBtnText').innerText = 'Back';
-
-      // Update Detail Hero
-      document.getElementById('detailHeroBanner').style.backgroundImage = `url('${data.heroBanner}')`;
-      document.getElementById('detailHeroTitle').innerHTML = `${data.name} <span>Constituency</span>`;
-      document.getElementById('detailHeroSubtitle').innerText = data.heroSubtitle;
-
-      // Update Stats
-      document.getElementById('statTotal').innerText = data.stats.total;
-      document.getElementById('statStudents').innerText = data.stats.students;
-      document.getElementById('statColleges').innerText = data.stats.colleges;
-      document.getElementById('statTeams').innerText = data.stats.teams;
-
-      // Update About Text
-      document.getElementById('aboutTitle').innerText = `About ${data.name} Constituency`;
-      document.getElementById('aboutSubtitle').innerText = data.aboutSub;
-      document.getElementById('aboutText').innerHTML = `<p>${data.aboutText}</p>`;
-      document.getElementById('aboutImg').src = data.aboutImage;
-      document.getElementById('aboutImgName').innerText = data.name;
-
-      // Render Leadership (President, General Secretary, etc.)
-      const lGrid = document.getElementById('leadershipGrid');
-      lGrid.innerHTML = data.leaders.map(l => `
-        <div class="leader-card">
-          <img src="${l.img}" alt="${l.name}" class="leader-img">
-          <div class="leader-info">
-            <h5>${l.role}</h5>
-            <h4>${l.name}</h4>
-            <p class="designation">${l.designation}</p>
-            <p class="bio">${l.bio}</p>
-            <div class="leader-socials">
-              <a href="${l.socials.instagram}"><i class="fa-brands fa-instagram"></i></a>
-              <a href="${l.socials.whatsapp}"><i class="fa-brands fa-whatsapp"></i></a>
-              <a href="${l.socials.twitter}"><i class="fa-brands fa-x-twitter"></i></a>
+      const grid = document.getElementById('leadershipGrid');
+      grid.innerHTML = data.leaders.map(leader => `
+        <div class="leader-card-extended">
+          <div class="leader-header-flex">
+            <img src="${leader.photo}" alt="${leader.name}" class="leader-img-lg">
+            <div class="leader-main-info">
+              <h5>${leader.designation}</h5>
+              <h4>${leader.name}</h4>
+              <p>TNSF ${data.name.split(' ')[0]}</p>
+              <div class="social-links-inline">
+                ${leader.social.instagram ? `<a href="${leader.social.instagram}" class="social-icon-btn"><i class="fa-brands fa-instagram"></i></a>` : ''}
+                ${leader.social.facebook ? `<a href="${leader.social.facebook}" class="social-icon-btn"><i class="fa-brands fa-facebook-f"></i></a>` : ''}
+                ${leader.social.twitter ? `<a href="${leader.social.twitter}" class="social-icon-btn"><i class="fa-brands fa-x-twitter"></i></a>` : ''}
+                ${leader.social.whatsapp ? `<a href="${leader.social.whatsapp}" class="social-icon-btn"><i class="fa-brands fa-whatsapp"></i></a>` : ''}
+              </div>
             </div>
           </div>
+          <p class="leader-bio-text">${leader.detail}</p>
         </div>
       `).join('');
-
-      // Render Team
-      const tGrid = document.getElementById('teamGrid');
-      tGrid.innerHTML = data.team.map(t => `
-        <div class="team-card">
-          <img src="${t.img}" alt="${t.name}">
-          <div class="team-card-info">
-            <h4>${t.name}</h4>
-            <p>${t.role}</p>
-          </div>
-        </div>
-      `).join('');
-
-      // Render Activities
-      const actGrid = document.getElementById('activitiesGrid');
-      actGrid.innerHTML = data.activities.map(a => `
-        <div class="activity-card">
-          <img src="${a.img}" alt="${a.title}">
-          <div class="activity-info">
-            <h4>${a.title}</h4>
-            <div class="activity-date"><i class="fa-solid fa-calendar"></i> ${a.date}</div>
-          </div>
-        </div>
-      `).join('');
-
-      document.getElementById('overviewView').style.display = 'none';
-      document.getElementById('detailView').style.display = 'block';
-      window.scrollTo(0, 0);
     }
 
-    renderCards();
-    showOverview();
+    // Default selection on initial load: Badvel
+    document.getElementById('path-badvel').click();
   </script>
 </body>
 </html>
