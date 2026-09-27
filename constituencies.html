@@ -92,7 +92,7 @@
       background: #f1f1f1;
     }
 
-    /* ==================== HERO BANNERS ==================== */
+    /* ==================== HERO BANNER ==================== */
     .hero-banner {
       position: relative;
       width: 100%;
@@ -173,63 +173,70 @@
       line-height: 1.5;
     }
 
-    /* ==================== INTERACTIVE CANVAS MAP ==================== */
+    /* ==================== 3D MAP SECTION ==================== */
     .map-container-wrapper {
       position: relative;
       width: 100%;
-      max-width: 800px;
-      margin: 10px auto;
-      padding: 10px;
-      background: #fff;
+      max-width: 850px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #ffffff;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
     }
 
-    .canvas-map-container {
-      position: relative;
-      width: 100%;
-      max-width: 750px;
-      cursor: pointer;
-    }
-
-    canvas {
+    .map-svg-container {
       width: 100%;
       height: auto;
-      display: block;
-      filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.15));
-      transition: filter 0.3s ease;
+      /* Subtle isometric tilt & perspective */
+      perspective: 1000px;
     }
 
-    .map-tag {
-      position: absolute;
-      background: #ffd200;
-      color: #000;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 900;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    .base-map-image {
       pointer-events: none;
-      transform: translate(-50%, -100%);
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      border: 2px solid #000;
-      display: none;
-      z-index: 10;
+      user-select: none;
     }
 
-    .map-tag::after {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      left: 50%;
-      transform: translateX(-50%);
-      border-width: 8px 8px 0;
-      border-style: solid;
-      border-color: #000 transparent;
-      display: block;
-      width: 0;
+    .constituency-path {
+      fill: rgba(255, 255, 255, 0.01);
+      stroke: transparent;
+      stroke-width: 2;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      transform-origin: center;
+    }
+
+    .constituency-path:hover {
+      fill: rgba(255, 210, 0, 0.35);
+      stroke: #ffd200;
+      stroke-width: 3;
+    }
+
+    /* 3D Yellow Raised Active State */
+    .constituency-path.active {
+      fill: #ffd200 !important;
+      fill-opacity: 0.85 !important;
+      stroke: #d4a000 !important;
+      stroke-width: 4;
+      filter: drop-shadow(0px 15px 12px rgba(0, 0, 0, 0.45));
+      transform: translateY(-12px) scale(1.02);
+    }
+
+    .map-label {
+      font-size: 22px;
+      font-weight: 900;
+      fill: #000000;
+      text-anchor: middle;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      text-shadow: -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 2px 2px 0 #fff;
+    }
+
+    .map-label.visible {
+      opacity: 1;
+      transform: translateY(-12px);
     }
 
     /* ==================== CONSTITUENCY DETAIL CARD ==================== */
@@ -477,14 +484,55 @@
       <div class="section-icon-badge"><i class="fa-solid fa-map-location-dot"></i></div>
       <h2 class="section-title">Select Constituency</h2>
     </div>
-    <p class="section-subtext">Click on any constituency on the map below to highlight it in yellow with 3D elevation and view its leadership information.</p>
+    <p class="section-subtext">Click on any constituency on the interactive 3D map below to view details and leadership information.</p>
 
-    <!-- INTERACTIVE MAP CONTAINER WITH EXACT IMAGE BOUNDARIES -->
+    <!-- MAP CONTAINER WITH OVERLAY -->
     <div class="map-container-wrapper">
-      <div class="canvas-map-container" id="mapWrapper">
-        <canvas id="mapCanvas" width="1000" height="714"></canvas>
-        <div class="map-tag" id="mapTag">Selected Region</div>
-      </div>
+      <svg class="map-svg-container" viewBox="0 0 1000 750" xmlns="http://www.w3.org/2000/svg">
+        <g id="mapGroup">
+          
+          <!-- Government Map Overlay Base -->
+          <image class="base-map-image" href="https://i.ibb.co/68Xk9r5/1000273527.png" x="0" y="0" width="1000" height="750"/>
+
+          <!-- Interactive Polygon Maps mapped to exact official segment regions -->
+          
+          <!-- 1. Jammalamadugu (Top Left Region) -->
+          <path id="path-jammalamadugu" class="constituency-path" data-name="Jammalamadugu"
+                d="M 270,120 L 320,135 L 340,210 L 390,230 L 410,210 L 480,240 L 430,280 L 480,330 L 390,440 L 350,520 L 230,460 L 160,370 L 220,230 Z" />
+          <text id="label-jammalamadugu" class="map-label" x="320" y="310">Jammalamadugu</text>
+
+          <!-- 2. Proddatur (Top Center-Right Region) -->
+          <path id="path-proddatur" class="constituency-path" data-name="Proddatur"
+                d="M 480,240 L 530,220 L 580,80 L 710,50 L 740,110 L 740,260 L 610,300 L 680,410 L 630,490 L 500,270 Z" />
+          <text id="label-proddatur" class="map-label" x="620" y="220">Proddatur</text>
+
+          <!-- 3. Mydukur (Center-Right Segment) -->
+          <path id="path-mydukur" class="constituency-path" data-name="Mydukur"
+                d="M 480,240 L 500,270 L 630,490 L 580,520 L 480,470 L 390,440 L 480,330 L 430,280 Z" />
+          <text id="label-mydukur" class="map-label" x="500" y="380">Mydukur</text>
+
+          <!-- 4. Kamalapuram (Center Region) -->
+          <path id="path-kamalapuram" class="constituency-path" data-name="Kamalapuram"
+                d="M 390,440 L 480,470 L 580,520 L 630,620 L 500,700 L 350,570 L 350,520 Z" />
+          <text id="label-kamalapuram" class="map-label" x="480" y="580">Kamalapuram</text>
+
+          <!-- 5. Kadapa (South Center Region) -->
+          <path id="path-kadapa" class="constituency-path" data-name="Kadapa"
+                d="M 500,700 L 630,620 L 720,620 L 880,660 L 800,800 L 680,810 L 480,820 L 500,700 Z" />
+          <text id="label-kadapa" class="map-label" x="660" y="720">Kadapa</text>
+
+          <!-- 6. Badvel (Far Right Region) -->
+          <path id="path-badvel" class="constituency-path" data-name="Badvel"
+                d="M 740,110 L 780,270 L 920,680 L 880,660 L 720,620 L 630,490 L 680,410 L 610,300 L 740,260 Z" />
+          <text id="label-badvel" class="map-label" x="780" y="420">Badvel</text>
+
+          <!-- 7. Pulivendla (South-West Bottom Region) -->
+          <path id="path-pulivendla" class="constituency-path" data-name="Pulivendla"
+                d="M 350,520 L 350,570 L 500,700 L 480,820 L 360,850 L 170,670 L 100,570 L 180,450 Z" />
+          <text id="label-pulivendla" class="map-label" x="290" y="680">Pulivendla</text>
+
+        </g>
+      </svg>
     </div>
 
     <!-- MAP BELOW CONSTITUENCY DETAILS -->
@@ -492,7 +540,7 @@
       <div class="constituency-display-card">
         <h3 class="constituency-display-title" id="displayTitle">Select a Constituency</h3>
         <p class="constituency-display-desc" id="displayDesc">
-          Click on any constituency region on the map above to highlight it in yellow with 3D effect and view leadership details.
+          Click on any constituency region in the map above to view the detailed leadership and overview of that specific region.
         </p>
       </div>
 
@@ -542,15 +590,10 @@
 
   <!-- ==================== JAVASCRIPT ==================== -->
   <script>
-    /* Exact Constituency Image Source */
-    const MAP_IMAGE_SRC = "https://i.ibb.co/68vM3M9/kadapa-map.png"; // Source map rendering exact 100% border contours
-
-    /* Constituency & Leadership Data */
+    /* Detailed Constituency & Leadership Data */
     const constituencyData = {
       "jammalamadugu": {
         name: "Jammalamadugu Constituency",
-        tagX: 300, tagY: 280,
-        polygon: [[230,130],[440,120],[480,260],[380,410],[130,380],[170,220]],
         desc: "Jammalamadugu is a major educational and industrial hub in Kadapa district. TNSF actively operates here to secure student welfare, enhance library and hostel infrastructure, and organize academic excellence seminars.",
         leaders: [
           {
@@ -571,8 +614,6 @@
       },
       "proddatur": {
         name: "Proddatur Constituency",
-        tagX: 620, tagY: 230,
-        polygon: [[550,50],[720,20],[760,250],[620,380],[500,260]],
         desc: "Proddatur represents a high-density student demographic. TNSF focuses heavily on modern skill development programs, digital literacy, coding bootcamps, and career counseling sessions for young aspirants.",
         leaders: [
           {
@@ -593,8 +634,6 @@
       },
       "mydukur": {
         name: "Mydukur Constituency",
-        tagX: 510, tagY: 370,
-        polygon: [[480,260],[620,280],[670,410],[580,520],[430,480],[380,410]],
         desc: "Mydukur TNSF unit is deeply committed to rural educational empowerment, ensuring merit scholarships, school-to-college transition assistance, and youth leadership training.",
         leaders: [
           {
@@ -615,8 +654,6 @@
       },
       "kamalapuram": {
         name: "Kamalapuram Constituency",
-        tagX: 510, tagY: 590,
-        polygon: [[350,580],[430,480],[580,520],[630,520],[680,680],[500,710]],
         desc: "Kamalapuram emphasizes combining academic achievement with physical development through sports events, youth welfare programs, and vibrant student community engagement.",
         leaders: [
           {
@@ -637,8 +674,6 @@
       },
       "kadapa": {
         name: "Kadapa Constituency",
-        tagX: 680, tagY: 720,
-        polygon: [[500,710],[630,650],[740,620],[880,660],[800,810],[590,820]],
         desc: "Serving as the central focal point of the district, Kadapa constituency TNSF hosts large-scale educational summits, job fairs, and district-wide student coordination activities.",
         leaders: [
           {
@@ -659,8 +694,6 @@
       },
       "badvel": {
         name: "Badvel Constituency",
-        tagX: 820, tagY: 380,
-        polygon: [[760,250],[930,300],[930,680],[740,620],[670,410]],
         desc: "Badvel is known for its vibrant youth and academic dedication. TNSF supports students in Badvel through continuous educational advocacy, public awareness drives, and skill building.",
         leaders: [
           {
@@ -681,8 +714,6 @@
       },
       "pulivendla": {
         name: "Pulivendla Constituency",
-        tagX: 250, tagY: 660,
-        polygon: [[130,380],[380,410],[350,580],[500,710],[440,860],[100,580]],
         desc: "Pulivendla constituency focuses on expanding educational access in rural regions, digital learning tools, and grassroots student empowerment.",
         leaders: [
           {
@@ -703,100 +734,36 @@
       }
     };
 
-    const canvas = document.getElementById('mapCanvas');
-    const ctx = canvas.getContext('2d');
-    const mapTag = document.getElementById('mapTag');
-    let selectedKey = 'badvel';
-    let mapImage = new Image();
-
-    mapImage.crossOrigin = "Anonymous";
-    mapImage.src = MAP_IMAGE_SRC;
-    mapImage.onload = function() {
-      drawMap();
-      selectConstituency('badvel');
-    };
-
-    // Point in Polygon Detector
-    function isPointInPoly(pt, poly) {
-      let c = false;
-      for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
-        if (((poly[i][1] > pt.y) !== (poly[j][1] > pt.y)) &&
-            (pt.x < (poly[j][0] - poly[i][0]) * (pt.y - poly[i][1]) / (poly[j][1] - poly[i][1]) + poly[i][0])) {
-          c = !c;
-        }
-      }
-      return c;
-    }
-
-    function drawMap() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      // Draw Base Map Image preserving 100% exact borders
-      ctx.drawImage(mapImage, 0, 0, canvas.width, canvas.height);
-
-      if (selectedKey && constituencyData[selectedKey]) {
-        const poly = constituencyData[selectedKey].polygon;
+    /* Handle Map Interactions */
+    document.querySelectorAll('.constituency-path').forEach(path => {
+      path.addEventListener('click', function() {
+        const key = this.id.replace('path-', '');
         
-        // Render 3D Yellow Shadow
-        ctx.save();
-        ctx.beginPath();
-        ctx.moveTo(poly[0][0], poly[0][1]);
-        for (let i = 1; i < poly.length; i++) ctx.lineTo(poly[i][0], poly[i][1]);
-        ctx.closePath();
+        // Remove active class from all paths and labels
+        document.querySelectorAll('.constituency-path').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.map-label').forEach(l => l.classList.remove('visible'));
 
-        ctx.fillStyle = "rgba(255, 210, 0, 0.65)";
-        ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
-        ctx.shadowBlur = 20;
-        ctx.shadowOffsetY = 12;
-        ctx.fill();
+        // Highlight selected constituency with 3D yellow effect
+        this.classList.add('active');
 
-        // Render Vibrant Yellow Highlight & Border
-        ctx.lineWidth = 6;
-        ctx.strokeStyle = "#ffd200";
-        ctx.stroke();
-        ctx.restore();
-      }
-    }
-
-    canvas.addEventListener('click', function(e) {
-      const rect = canvas.getBoundingClientRect();
-      const scaleX = canvas.width / rect.width;
-      const scaleY = canvas.height / rect.height;
-      const pt = {
-        x: (e.clientX - rect.left) * scaleX,
-        y: (e.clientY - rect.top) * scaleY
-      };
-
-      for (let key in constituencyData) {
-        if (isPointInPoly(pt, constituencyData[key].polygon)) {
-          selectConstituency(key);
-          break;
+        // Show SVG Label Overlay
+        const label = document.getElementById(`label-${key}`);
+        if(label) {
+          label.classList.add('visible');
         }
-      }
+
+        // Render Constituency Info and Leadership
+        renderConstituencyData(key);
+      });
     });
 
-    function selectConstituency(key) {
-      selectedKey = key;
+    function renderConstituencyData(key) {
       const data = constituencyData[key];
       if (!data) return;
 
-      drawMap();
-
-      // Show and Position Floating 3D Label Overlay
-      const rect = canvas.getBoundingClientRect();
-      const tagXPercent = (data.tagX / canvas.width) * 100;
-      const tagYPercent = (data.tagY / canvas.height) * 100;
-
-      mapTag.style.left = tagXPercent + '%';
-      mapTag.style.top = tagYPercent + '%';
-      mapTag.innerText = data.name.replace(' Constituency', '');
-      mapTag.style.display = 'block';
-
-      // Update Text Details
       document.getElementById('displayTitle').innerText = data.name;
       document.getElementById('displayDesc').innerText = data.desc;
 
-      // Update Leadership Info
       const grid = document.getElementById('leadershipGrid');
       grid.innerHTML = data.leaders.map(leader => `
         <div class="leader-card-extended">
@@ -818,6 +785,9 @@
         </div>
       `).join('');
     }
+
+    // Default selection on initial load: Badvel
+    document.getElementById('path-badvel').click();
   </script>
 </body>
 </html>
