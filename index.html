@@ -18,154 +18,142 @@
         }
 
         body {
-            background-color: #ffffff;
+            background-color: #fffdf0;
             color: #333;
             overflow-x: hidden;
         }
 
-        /* --- ADVANCED 3D INTRO / LOADING SCREEN --- */
+        /* --- INTRO LOADING SCREEN --- */
         #loader-wrapper {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
             background-color: #ffffff;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 99999;
+            z-index: 9999;
             overflow: hidden;
-            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
+            transition: opacity 1s ease-out, visibility 1s ease-out;
         }
 
-        /* Hand Rising Container */
+        /* Yellow Raised Hand */
         .hand-container {
             position: absolute;
-            bottom: -220px;
+            bottom: -200px;
             left: 50%;
             transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            animation: raiseHand 1.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.2s;
-            z-index: 10;
-        }
-
-        .yellow-hand {
-            width: 110px;
-            height: 140px;
-            background: linear-gradient(135deg, #ffe600, #ffaa00);
-            clip-path: polygon(30% 0%, 70% 0%, 85% 30%, 80% 100%, 20% 100%, 15% 30%);
-            border-radius: 20px 20px 10px 10px;
-            box-shadow: 0 10px 25px rgba(255, 204, 0, 0.5);
-            position: relative;
-        }
-
-        .hand-palm {
-            width: 70px;
-            height: 70px;
-            background: #ffcc00;
-            border-radius: 50%;
-            position: absolute;
-            top: -20px;
-            left: 20px;
-            box-shadow: 0 0 30px #ffea00;
+            font-size: 100px;
+            color: #ffcc00;
+            filter: drop-shadow(0px 10px 15px rgba(230, 180, 0, 0.4));
+            animation: raiseHand 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            z-index: 1;
         }
 
         @keyframes raiseHand {
-            0% { bottom: -220px; }
-            100% { bottom: 18vh; }
+            0% { bottom: -200px; opacity: 0; }
+            100% { bottom: 12%; opacity: 1; }
         }
 
-        /* 3D Letters Container */
-        .3d-text-container {
-            position: absolute;
-            top: 25vh;
+        /* Vertically Arranged 3D Text Container */
+        .intro-text-wrapper {
+            position: relative;
+            z-index: 2;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            perspective: 1000px;
-            z-index: 20;
+            gap: 2px;
+            margin-bottom: 80px;
         }
 
-        .letter-3d {
-            font-size: 55px;
+        .vertical-word {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+
+        /* 3D Letter Styling for MY TNSF */
+        .char-3d {
+            font-size: 32px;
             font-weight: 900;
             color: #ffcc00;
             text-shadow: 
                 0 1px 0 #e6b800,
-                0 2px 0 #cc00,
-                0 3px 0 #b38f00,
-                0 4px 0 #997a00,
-                0 6px 15px rgba(0,0,0,0.3);
+                0 2px 0 #d4a000,
+                0 3px 0 #c29500,
+                0 4px 0 #b08700,
+                0 6px 12px rgba(0,0,0,0.2);
             opacity: 0;
-            transform: translateY(-300px) rotateX(90deg) scale(0.3);
-            animation: drop3DLetter 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            transform: translateY(-250px) scale(1.5) rotateX(45deg);
+            animation: drop3DLetter 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            display: inline-block;
+            line-height: 1;
         }
 
-        .letter-3d:nth-child(1) { animation-delay: 1.0s; }
-        .letter-3d:nth-child(2) { animation-delay: 1.2s; }
-        .letter-3d:nth-child(3) { animation-delay: 1.4s; }
-        .letter-3d:nth-child(4) { animation-delay: 1.6s; }
-        .letter-3d:nth-child(5) { animation-delay: 1.8s; }
-        .letter-3d:nth-child(6) { animation-delay: 2.0s; }
-
-        .small-kadapa-badge {
-            background: #222;
-            color: #ffcc00;
-            font-size: 11px;
-            font-weight: 800;
-            padding: 3px 8px;
-            border-radius: 4px;
-            letter-spacing: 2px;
-            position: absolute;
-            top: -25px;
-            right: 0;
+        /* Small Size Letters for KADAPA */
+        .char-small {
+            font-size: 14px;
+            font-weight: 700;
+            color: #ff9900;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.15);
             opacity: 0;
-            transform: translateY(-20px);
-            animation: fadeInBadge 0.5s ease forwards 2.3s;
+            transform: translateY(-150px);
+            animation: dropSmallLetter 0.4s ease-out forwards;
+            display: inline-block;
+            line-height: 1.2;
+            letter-spacing: 2px;
+        }
+
+        .space-divider {
+            height: 10px;
         }
 
         @keyframes drop3DLetter {
             0% {
                 opacity: 0;
-                transform: translateY(-300px) rotateX(90deg) scale(0.3);
+                transform: translateY(-250px) scale(1.5) rotateX(45deg);
             }
             100% {
                 opacity: 1;
-                transform: translateY(0) rotateX(0deg) scale(1);
+                transform: translateY(0) scale(1) rotateX(0deg);
             }
         }
 
-        @keyframes fadeInBadge {
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes dropSmallLetter {
+            0% {
+                opacity: 0;
+                transform: translateY(-150px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        /* Yellow Smoke Canvas Effect */
-        #smoke-canvas {
+        /* Yellow Smoke Effect on Fade */
+        .smoke-particle {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            background: radial-gradient(circle, rgba(255, 204, 0, 0.8) 0%, rgba(255, 230, 100, 0) 70%);
+            border-radius: 50%;
             pointer-events: none;
-            z-index: 15;
-            opacity: 0;
-            transition: opacity 0.5s ease;
+            z-index: 3;
+            animation: smokeRise 1.2s ease-out forwards;
         }
 
-        .dissolving #smoke-canvas {
-            opacity: 1;
-        }
-
-        .dissolving .hand-container,
-        .dissolving .3d-text-container {
-            transform: scale(0.1);
-            opacity: 0;
-            transition: transform 0.8s ease-in, opacity 0.8s ease-in;
+        @keyframes smokeRise {
+            0% {
+                transform: translate(0, 0) scale(0.5);
+                opacity: 0.9;
+            }
+            100% {
+                transform: translate(var(--dx), var(--dy)) scale(3);
+                opacity: 0;
+            }
         }
 
         .loaded #loader-wrapper {
@@ -176,8 +164,8 @@
         /* --- PAGE ENTRANCE --- */
         #main-content {
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transform: translateY(30px);
+            transition: opacity 1s ease 0.3s, transform 1s ease 0.3s;
         }
 
         .loaded #main-content {
@@ -430,11 +418,6 @@
             font-size: 14px;
             color: #333;
             z-index: 10;
-            transition: background 0.3s;
-        }
-
-        .slider-btn:hover {
-            background: #ffcc00;
         }
 
         .prev-btn { left: 12px; }
@@ -628,6 +611,7 @@
             border-top: 1px solid #f0e6b2;
         }
 
+        /* --- RESPONSIVE MEDIA QUERIES --- */
         @media (min-width: 768px) {
             .nav-links {
                 display: flex;
@@ -648,31 +632,47 @@
             .brand-text h1 {
                 font-size: 18px;
             }
+            .char-3d {
+                font-size: 42px;
+            }
+            .char-small {
+                font-size: 18px;
+            }
         }
     </style>
 </head>
-<body>
+<body class="">
 
-    <!-- ANIMATED INTRO / LOADING SCREEN -->
+    <!-- INTRO LOADING SCREEN WITH ANIMATIONS -->
     <div id="loader-wrapper">
-        <canvas id="smoke-canvas"></canvas>
-        
-        <!-- Rising Yellow Hand -->
-        <div class="hand-container">
-            <div class="hand-palm"></div>
-            <div class="yellow-hand"></div>
+        <div class="intro-text-wrapper" id="introTextWrapper">
+            <!-- 3D MY TNSF Vertically -->
+            <div class="vertical-word">
+                <span class="char-3d">M</span>
+                <span class="char-3d">Y</span>
+            </div>
+            <div class="space-divider"></div>
+            <div class="vertical-word">
+                <span class="char-3d">T</span>
+                <span class="char-3d">N</span>
+                <span class="char-3d">S</span>
+                <span class="char-3d">F</span>
+            </div>
+            <div class="space-divider"></div>
+            <!-- Small Size KADAPA Vertically -->
+            <div class="vertical-word">
+                <span class="char-small">K</span>
+                <span class="char-small">A</span>
+                <span class="char-small">D</span>
+                <span class="char-small">A</span>
+                <span class="char-small">P</span>
+                <span class="char-small">A</span>
+            </div>
         </div>
 
-        <!-- 3D Letters "MY TNSF" -->
-        <div class="3d-text-container">
-            <div class="letter-3d">M</div>
-            <div class="letter-3d">Y</div>
-            <div class="letter-3d" style="margin-left: 12px;">T</div>
-            <div class="letter-3d">N</div>
-            <div class="letter-3d">S</div>
-            <div class="letter-3d">F
-                <span class="small-kadapa-badge">KADAPA</span>
-            </div>
+        <!-- Yellow Raised Hand -->
+        <div class="hand-container">
+            <i class="fa-solid fa-hand-back-fist"></i>
         </div>
     </div>
 
@@ -837,147 +837,157 @@
 
     <!-- JavaScript -->
     <script>
-        // --- 1. SOUND EFFECTS SYSTEM (Web Audio API) ---
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        // --- WEB AUDIO SYNTHESIZER SOUNDS ---
+        let audioCtx;
 
-        function playClickSound() {
-            if (audioCtx.state === 'suspended') audioCtx.resume();
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(600, audioCtx.currentTime);
-            osc.frequency.exponentialRampToValueAtTime(200, audioCtx.currentTime + 0.08);
-            gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
-            gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            osc.start();
-            osc.stop(audioCtx.currentTime + 0.08);
+        function getAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            return audioCtx;
         }
 
-        function playWhooshSound() {
-            if (audioCtx.state === 'suspended') audioCtx.resume();
-            const bufferSize = audioCtx.sampleRate * 0.4;
-            const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-            const data = buffer.getChannelData(0);
-            for (let i = 0; i < bufferSize; i++) {
-                data[i] = Math.random() * 2 - 1;
-            }
-            const noise = audioCtx.createBufferSource();
-            noise.buffer = buffer;
-
-            const filter = audioCtx.createBiquadFilter();
-            filter.type = 'bandpass';
-            filter.frequency.setValueAtTime(200, audioCtx.currentTime);
-            filter.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.2);
-            filter.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.4);
-
-            const gain = audioCtx.createGain();
-            gain.gain.setValueAtTime(0.01, audioCtx.currentTime);
-            gain.gain.linearRampToValueAtTime(0.2, audioCtx.currentTime + 0.2);
-            gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.4);
-
-            noise.connect(filter);
-            filter.connect(gain);
-            gain.connect(audioCtx.destination);
-            noise.start();
+        // Play Sound when Letter drops
+        function playLetterDropSound(freq) {
+            try {
+                const ctx = getAudioContext();
+                if (ctx.state === 'suspended') ctx.resume();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq || 440, ctx.currentTime);
+                gain.gain.setValueAtTime(0.08, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.15);
+            } catch (e) {}
         }
 
-        // --- 2. YELLOW SMOKE ANIMATION SYSTEM ---
-        const canvas = document.getElementById('smoke-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        class Particle {
-            constructor() {
-                this.x = window.innerWidth / 2 + (Math.random() - 0.5) * 200;
-                this.y = window.innerHeight / 2 + (Math.random() - 0.5) * 100;
-                this.radius = Math.random() * 40 + 20;
-                this.color = `rgba(255, ${Math.floor(200 + Math.random() * 55)}, 0, ${Math.random() * 0.6 + 0.2})`;
-                this.vx = (Math.random() - 0.5) * 6;
-                this.vy = (Math.random() - 0.5) * 6 - 2;
-                this.alpha = 0.8;
-            }
-
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                this.radius += 1.5;
-                this.alpha -= 0.012;
-            }
-
-            draw() {
-                ctx.save();
-                ctx.globalAlpha = Math.max(this.alpha, 0);
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
-                ctx.shadowBlur = 20;
-                ctx.shadowColor = "#ffcc00";
-                ctx.fill();
-                ctx.restore();
-            }
+        // Play Smoke Swoosh Sound on intro end
+        function playSmokeSound() {
+            try {
+                const ctx = getAudioContext();
+                if (ctx.state === 'suspended') ctx.resume();
+                const bufferSize = ctx.sampleRate * 0.5;
+                const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+                const data = buffer.getChannelData(0);
+                for (let i = 0; i < bufferSize; i++) {
+                    data[i] = Math.random() * 2 - 1;
+                }
+                const noise = ctx.createBufferSource();
+                noise.buffer = buffer;
+                const filter = ctx.createBiquadFilter();
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(800, ctx.currentTime);
+                filter.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.5);
+                const gain = ctx.createGain();
+                gain.gain.setValueAtTime(0.1, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
+                noise.connect(filter);
+                filter.connect(gain);
+                gain.connect(ctx.destination);
+                noise.start();
+            } catch (e) {}
         }
 
-        function triggerSmokeEffect() {
-            for (let i = 0; i < 70; i++) {
-                particles.push(new Particle());
-            }
-            animateSmoke();
+        // Play UI Click Sound for Buttons
+        function playBtnClickSound() {
+            try {
+                const ctx = getAudioContext();
+                if (ctx.state === 'suspended') ctx.resume();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(600, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.08);
+                gain.gain.setValueAtTime(0.12, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.08);
+            } catch (e) {}
         }
 
-        function animateSmoke() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach((p, index) => {
-                p.update();
-                p.draw();
-                if (p.alpha <= 0) particles.splice(index, 1);
+        // Attach click sound listener to all buttons & links
+        document.addEventListener('DOMContentLoaded', () => {
+            const clickableElements = document.querySelectorAll('a, button, .menu-toggle, .close-menu, .dot');
+            clickableElements.forEach(el => {
+                el.addEventListener('click', () => {
+                    playBtnClickSound();
+                });
             });
-            if (particles.length > 0) {
-                requestAnimationFrame(animateSmoke);
-            }
-        }
+        });
 
-        // --- 3. INTRO ANIMATION TIMELINE ---
+        // --- INTRO SEQUENCE & SMOKE ANIMATION ---
         window.addEventListener('DOMContentLoaded', () => {
-            // Sequence Dissolve Phase
+            const letters3d = document.querySelectorAll('.char-3d');
+            const lettersSmall = document.querySelectorAll('.char-small');
+            const loaderWrapper = document.getElementById('loader-wrapper');
+            const textWrapper = document.getElementById('introTextWrapper');
+
+            let delay = 300; // Base delay after hand rises
+            const baseFreq = 300;
+
+            // Staggered drop for 3D MY TNSF letters
+            letters3d.forEach((letter, index) => {
+                setTimeout(() => {
+                    letter.style.animationDelay = '0s';
+                    playLetterDropSound(baseFreq + (index * 60));
+                }, delay);
+                delay += 180;
+            });
+
+            // Staggered drop for Small KADAPA letters
+            lettersSmall.forEach((letter, index) => {
+                setTimeout(() => {
+                    letter.style.animationDelay = '0s';
+                    playLetterDropSound(baseFreq + 350 + (index * 40));
+                }, delay);
+                delay += 120;
+            });
+
+            // Trigger Smoke Effect & Fade Out
             setTimeout(() => {
-                const loader = document.getElementById('loader-wrapper');
-                loader.classList.add('dissolving');
-                triggerSmokeEffect();
-                playWhooshSound();
+                playSmokeSound();
+                createYellowSmoke(loaderWrapper, textWrapper);
 
                 setTimeout(() => {
                     document.body.classList.add('loaded');
-                }, 800);
-            }, 3000);
+                }, 400);
+            }, delay + 400);
         });
 
-        // --- 4. BUTTON CLICK & PAGE NAVIGATION SOUNDS ---
-        document.querySelectorAll('a, button, .menu-toggle, .hub-item').forEach(element => {
-            element.addEventListener('click', (e) => {
-                playClickSound();
-                
-                // If it's an external page link, briefly delay navigation for sound play
-                const href = element.getAttribute('href');
-                if (href && href !== '#' && !href.startsWith('javascript')) {
-                    e.preventDefault();
-                    playWhooshSound();
-                    setTimeout(() => {
-                        window.location.href = href;
-                    }, 180);
-                }
-            });
-        });
+        function createYellowSmoke(parent, target) {
+            const rect = target.getBoundingClientRect();
+            const particleCount = 40;
 
-        // --- 5. MOBILE MENU LOGIC ---
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('smoke-particle');
+
+                const size = Math.random() * 50 + 30;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+
+                const startX = rect.left + (rect.width / 2) + (Math.random() * 100 - 50);
+                const startY = rect.top + (rect.height / 2) + (Math.random() * 100 - 50);
+
+                particle.style.left = startX + 'px';
+                particle.style.top = startY + 'px';
+
+                const dx = (Math.random() - 0.5) * 250 + 'px';
+                const dy = - (Math.random() * 150 + 50) + 'px';
+                particle.style.setProperty('--dx', dx);
+                particle.style.setProperty('--dy', dy);
+
+                parent.appendChild(particle);
+            }
+        }
+
+        // --- MOBILE MENU TOGGLE LOGIC ---
         const menuToggleBtn = document.getElementById('menuToggleBtn');
         const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
         const closeMenuBtn = document.getElementById('closeMenuBtn');
@@ -997,7 +1007,7 @@
             });
         });
 
-        // --- 6. HERO AUTO SLIDER LOGIC ---
+        // --- HERO AUTO SLIDER LOGIC ---
         const sliderWrapper = document.getElementById('sliderWrapper');
         const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.dot');
