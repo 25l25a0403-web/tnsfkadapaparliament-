@@ -18,12 +18,12 @@
         }
 
         body {
-            background-color: #ffffff;
+            background-color: #fffdf0;
             color: #333;
             overflow-x: hidden;
         }
 
-        /* --- 3D INTRO LOADING SCREEN --- */
+        /* --- 3D INTRO LOADER ANIMATION --- */
         #loader-wrapper {
             position: fixed;
             top: 0;
@@ -36,96 +36,92 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            transition: opacity 0.8s ease, transform 0.8s ease, visibility 0.8s;
-            perspective: 1000px;
+            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
         }
 
-        .3d-intro-container {
+        .intro-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1), opacity 0.6s ease;
+            perspective: 1000px;
         }
 
-        /* Main 3D Text Container for MY TNSF */
-        .intro-title {
+        .vertical-text {
             display: flex;
-            gap: 12px;
-            font-size: clamp(32px, 8vw, 64px);
-            font-weight: 900;
-            letter-spacing: 2px;
+            flex-direction: flex-row;
+            gap: 15px;
+            align-items: center;
+            justify-content: center;
             margin-bottom: 10px;
         }
 
-        .intro-title .word {
-            display: flex;
-        }
-
-        .intro-title .char {
+        .letter {
             display: inline-block;
-            color: #111111;
-            /* 3D Black & White Shadow Effect */
+            font-size: clamp(40px, 8vw, 75px);
+            font-weight: 900;
+            color: #ffffff;
+            text-transform: uppercase;
+            /* 3D Black & White effect */
             text-shadow: 
-                0px 1px 0px #e0e0e0,
-                0px 2px 0px #cccccc,
-                0px 3px 0px #b3b3b3,
-                0px 4px 0px #999999,
-                0px 5px 10px rgba(0, 0, 0, 0.4),
-                0px 10px 20px rgba(0, 0, 0, 0.2);
+                0 1px 0 #000,
+                0 2px 0 #000,
+                0 3px 0 #000,
+                0 4px 0 #000,
+                0 5px 0 #000,
+                0 6px 1px rgba(0,0,0,.1),
+                0 0 5px rgba(0,0,0,.1),
+                0 1px 3px rgba(0,0,0,.3),
+                0 3px 5px rgba(0,0,0,.2),
+                0 5px 10px rgba(0,0,0,.25);
             opacity: 0;
-            transform: translateY(-200px) rotateX(90deg) rotateZ(-15deg);
-            animation: drop3D 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            transform: translateY(-80px) rotateX(90deg) scale(0.5);
+            animation: fallIn 0.5s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* Subtitle KADAPA (Small Letters) */
-        .intro-subtitle {
+        .sub-text-container {
             display: flex;
             gap: 6px;
-            font-size: clamp(14px, 3.5vw, 24px);
-            font-weight: 700;
-            letter-spacing: 6px;
-            color: #555;
-            margin-top: 5px;
         }
 
-        .intro-subtitle .char {
+        .sub-letter {
             display: inline-block;
-            color: #222222;
+            font-size: clamp(14px, 3vw, 22px);
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: #ffffff;
+            text-transform: uppercase;
+            /* 3D Black & White effect (Small) */
             text-shadow: 
-                0px 1px 0px #ddd,
-                0px 2px 0px #bbb,
-                0px 3px 6px rgba(0, 0, 0, 0.3);
+                0 1px 0 #000,
+                0 2px 0 #000,
+                0 3px 0 #000,
+                0 4px 1px rgba(0,0,0,.2);
             opacity: 0;
-            transform: translateY(-150px) scale(0.5);
-            animation: drop3D 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            transform: translateY(-40px) rotateX(90deg);
+            animation: fallIn 0.4s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        @keyframes drop3D {
-            0% {
-                opacity: 0;
-                transform: translateY(-200px) rotateX(90deg) scale(0.3);
-            }
-            80% {
-                transform: translateY(10px) rotateX(0deg) scale(1.05);
-            }
-            100% {
+        @keyframes fallIn {
+            to {
                 opacity: 1;
                 transform: translateY(0) rotateX(0deg) scale(1);
             }
         }
 
-        /* Minimize to open website animation */
-        .loaded #loader-wrapper {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
+        .loader-footer {
+            position: absolute;
+            bottom: 30px;
+            font-size: 12px;
+            color: #666;
+            letter-spacing: 0.5px;
         }
 
-        .loaded .3d-intro-container {
-            transform: scale(0.1) translateY(-100px);
+        /* Minimise loader animation when loaded */
+        .loaded #loader-wrapper {
             opacity: 0;
+            transform: scale(0.05) translateY(-500px);
+            pointer-events: none;
         }
 
         /* --- PAGE ENTRANCE --- */
@@ -211,14 +207,14 @@
             transform: scale(1.1);
         }
 
-        /* --- MOBILE ANIMATED FULL-SCREEN MENU (TOP ALIGNED) --- */
+        /* --- MOBILE ANIMATED FULL-SCREEN MENU --- */
         .mobile-menu-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.98);
+            background: rgba(255, 252, 235, 0.98);
             backdrop-filter: blur(10px);
             z-index: 999;
             display: flex;
@@ -417,7 +413,7 @@
 
         /* --- PASSPORT CARD --- */
         .passport-card {
-            background: linear-gradient(135deg, #ffffff 0%, #fff4b8 100%);
+            background: linear-gradient(135deg, #fffcf0 0%, #fff4b8 100%);
             border: 2px solid #ffe680;
             border-radius: 15px;
             padding: 20px;
@@ -511,7 +507,6 @@
             padding: 25px 15px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             margin-bottom: 30px;
-            border: 1px solid #f0f0f0;
         }
 
         .hub-title {
@@ -547,7 +542,7 @@
         .hub-icon-circle {
             width: 60px;
             height: 60px;
-            background-color: #ffffff;
+            background-color: #fffdf0;
             border: 2px solid #ffcc00;
             border-radius: 50%;
             display: flex;
@@ -575,8 +570,8 @@
             padding: 20px;
             font-size: 11px;
             color: #666;
-            background: #ffffff;
-            border-top: 1px solid #f0f0f0;
+            background: #fffae6;
+            border-top: 1px solid #f0e6b2;
         }
 
         /* --- RESPONSIVE MEDIA QUERIES --- */
@@ -605,18 +600,15 @@
 </head>
 <body>
 
-    <!-- WHITE BACKGROUND 3D ANIMATED LOADING SCREEN -->
+    <!-- 3D INTRO LOADING SCREEN -->
     <div id="loader-wrapper">
-        <div class="3d-intro-container" id="introContainer">
-            <!-- MY TNSF 3D Black & White Letters -->
-            <div class="intro-title" id="introTitle">
-                <!-- Javascript auto generates 3D animated character spans -->
-            </div>
-            <!-- KADAPA Small Size Letters -->
-            <div class="intro-subtitle" id="introSubtitle">
-                <!-- Javascript auto generates 3D animated character spans -->
-            </div>
+        <div class="intro-container">
+            <!-- MY TNSF Letter Animation -->
+            <div class="vertical-text" id="topText"></div>
+            <!-- KADAPA Letter Animation -->
+            <div class="sub-text-container" id="bottomText"></div>
         </div>
+        <div class="loader-footer">©2026 TNSF KADAPA PARLIAMENT. All Rights Reserved.</div>
     </div>
 
     <!-- MAIN CONTENT -->
@@ -651,7 +643,7 @@
             </div>
         </header>
 
-        <!-- MOBILE ANIMATED OVERLAY MENU (TOP ALIGNED) -->
+        <!-- MOBILE ANIMATED OVERLAY MENU -->
         <div class="mobile-menu-overlay" id="mobileMenuOverlay">
             <div class="close-menu" id="closeMenuBtn">
                 <i class="fa-solid fa-xmark"></i>
@@ -668,7 +660,7 @@
                 <li><a href="contact.html"><i class="fa-solid fa-headset"></i> Contact Us</a></li>
                 <li><a href="donate.html"><i class="fa-solid fa-hand-holding-heart"></i> Donate Us</a></li>
             </ul>
-            </div>
+        </div>
 
         <div class="container">
             <!-- HERO AUTO-SCROLLING BANNER SLIDER -->
@@ -774,15 +766,15 @@
         </div>
 
         <footer>
-            <p>©2026 TNSF KADAPA PARLIAMENT all rights reserved</p>
+            <p>Copy 2026 TNSF KADAPA PARLIAMENT all rights reserved</p>
         </footer>
     </div>
 
     <!-- JavaScript -->
     <script>
-        // --- 1. WEB AUDIO API: WATER BUBBLE SOUND SYNTHESIZER ---
-        let audioCtx;
-
+        // --- 1. WATER BUBBLE SOUND GENERATOR ---
+        let audioCtx = null;
+        
         function playWaterBubbleSound() {
             try {
                 if (!audioCtx) {
@@ -796,13 +788,12 @@
                 const gain = audioCtx.createGain();
 
                 osc.type = 'sine';
-
-                // Pitch rapid sweep up to create realistic water pop sound
+                
+                // Frequency sweep to simulate water bubble popping sound
                 const now = audioCtx.currentTime;
                 osc.frequency.setValueAtTime(300, now);
-                osc.frequency.exponentialRampToValueAtTime(1200, now + 0.08);
+                osc.frequency.exponentialRampToValueAtTime(800, now + 0.08);
 
-                // Quick decay envelope
                 gain.gain.setValueAtTime(0.3, now);
                 gain.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
 
@@ -812,65 +803,57 @@
                 osc.start(now);
                 osc.stop(now + 0.08);
             } catch (e) {
-                console.log("Audio Context Error: ", e);
+                // Fallback catch for unsupported environments
             }
         }
 
-        // Attach Water Bubble Sound Listener to Interactive Elements
-        function setupBubbleSoundOnButtons() {
-            const clickableSelectors = 'a, button, .menu-toggle, .close-menu, .dot, .hub-item, .view-passport-btn';
-            const clickables = document.querySelectorAll(clickableSelectors);
-
-            clickables.forEach(elem => {
-                elem.addEventListener('click', () => {
-                    playWaterBubbleSound();
-                });
-            });
-        }
-
-        // --- 2. 3D INTRO TEXT ANIMATION BUILDER ---
-        const titleWords = ["MY", "TNSF"];
-        const subTitleText = "KADAPA";
-
-        const introTitleContainer = document.getElementById('introTitle');
-        const introSubtitleContainer = document.getElementById('introSubtitle');
-
-        let globalDelay = 0.1; // Sequential drop delay
-
-        // Build 3D MY TNSF (words side-by-side with individual characters)
-        titleWords.forEach(word => {
-            const wordSpan = document.createElement('span');
-            wordSpan.className = 'word';
-            for (let char of word) {
-                const charSpan = document.createElement('span');
-                charSpan.className = 'char';
-                charSpan.textContent = char;
-                charSpan.style.animationDelay = `${globalDelay}s`;
-                wordSpan.appendChild(charSpan);
-                globalDelay += 0.12;
+        // Attach bubble sound to buttons, links, and icons
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('button, a, .menu-toggle, .close-menu, .dot, .hub-item')) {
+                playWaterBubbleSound();
             }
-            introTitleContainer.appendChild(wordSpan);
         });
 
-        // Build KADAPA Subtitle Characters
-        globalDelay += 0.1; // slight pause before sub-text drops
-        for (let char of subTitleText) {
-            const charSpan = document.createElement('span');
-            charSpan.className = 'char';
-            charSpan.textContent = char;
-            charSpan.style.animationDelay = `${globalDelay}s`;
-            introSubtitleContainer.appendChild(charSpan);
-            globalDelay += 0.08;
-        }
+        // --- 2. 3D INTRO TEXT ANIMATION ---
+        const mainTitle = "MY TNSF";
+        const subTitle = "KADAPA";
 
-        // Complete Intro & Minimize to open site after animation finishes
-        const totalIntroDuration = (globalDelay + 0.8) * 1000;
+        const topContainer = document.getElementById('topText');
+        const bottomContainer = document.getElementById('bottomText');
+
+        let delayCount = 0;
+
+        // Generate top text dynamically one by one
+        mainTitle.split('').forEach((char) => {
+            const span = document.createElement('span');
+            if (char === ' ') {
+                span.style.width = '15px';
+            } else {
+                span.classList.add('letter');
+                span.textContent = char;
+                span.style.animationDelay = `${delayCount * 0.12}s`;
+                delayCount++;
+            }
+            topContainer.appendChild(span);
+        });
+
+        // Generate bottom text dynamically one by one
+        subTitle.split('').forEach((char) => {
+            const span = document.createElement('span');
+            span.classList.add('sub-letter');
+            span.textContent = char;
+            span.style.animationDelay = `${(delayCount * 0.12) + 0.1}s`;
+            delayCount++;
+            bottomContainer.appendChild(span);
+        });
+
+        // Total delay calculations to minimize and load page
+        const totalAnimationDuration = (delayCount * 120) + 800;
+
         window.addEventListener('DOMContentLoaded', () => {
-            setupBubbleSoundOnButtons();
-            
             setTimeout(() => {
                 document.body.classList.add('loaded');
-            }, Math.max(totalIntroDuration, 2200));
+            }, totalAnimationDuration);
         });
 
         // --- 3. MOBILE MENU TOGGLE LOGIC ---
