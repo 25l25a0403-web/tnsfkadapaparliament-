@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TNSF Kadapa Parliament</title>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -18,75 +18,166 @@
         }
 
         body {
-            background-color: #fffdf0;
+            background-color: #ffffff;
             color: #333;
             overflow-x: hidden;
         }
 
-        /* --- LOADING SCREEN --- */
+        /* --- ADVANCED 3D INTRO / LOADING SCREEN --- */
         #loader-wrapper {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #fff9d6;
+            width: 100vw;
+            height: 100vh;
+            background-color: #ffffff;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            z-index: 99999;
+            overflow: hidden;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
         }
 
-        .loader-logo {
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.8);
-            animation: pulseLogo 1.2s infinite alternate;
-            margin-bottom: 30px;
-        }
-
-        .spinner {
-            width: 45px;
-            height: 45px;
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid #ffcc00;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin-bottom: 40px;
-        }
-
-        .loader-footer {
+        /* Hand Rising Container */
+        .hand-container {
             position: absolute;
-            bottom: 30px;
-            font-size: 12px;
-            color: #555;
-            letter-spacing: 0.5px;
+            bottom: -220px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: raiseHand 1.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.2s;
+            z-index: 10;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .yellow-hand {
+            width: 110px;
+            height: 140px;
+            background: linear-gradient(135deg, #ffe600, #ffaa00);
+            clip-path: polygon(30% 0%, 70% 0%, 85% 30%, 80% 100%, 20% 100%, 15% 30%);
+            border-radius: 20px 20px 10px 10px;
+            box-shadow: 0 10px 25px rgba(255, 204, 0, 0.5);
+            position: relative;
         }
 
-        @keyframes pulseLogo {
-            0% { transform: scale(1); box-shadow: 0 0 15px rgba(255, 204, 0, 0.5); }
-            100% { transform: scale(1.08); box-shadow: 0 0 30px rgba(255, 204, 0, 1); }
+        .hand-palm {
+            width: 70px;
+            height: 70px;
+            background: #ffcc00;
+            border-radius: 50%;
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            box-shadow: 0 0 30px #ffea00;
+        }
+
+        @keyframes raiseHand {
+            0% { bottom: -220px; }
+            100% { bottom: 18vh; }
+        }
+
+        /* 3D Letters Container */
+        .3d-text-container {
+            position: absolute;
+            top: 25vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            perspective: 1000px;
+            z-index: 20;
+        }
+
+        .letter-3d {
+            font-size: 55px;
+            font-weight: 900;
+            color: #ffcc00;
+            text-shadow: 
+                0 1px 0 #e6b800,
+                0 2px 0 #cc00,
+                0 3px 0 #b38f00,
+                0 4px 0 #997a00,
+                0 6px 15px rgba(0,0,0,0.3);
+            opacity: 0;
+            transform: translateY(-300px) rotateX(90deg) scale(0.3);
+            animation: drop3DLetter 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .letter-3d:nth-child(1) { animation-delay: 1.0s; }
+        .letter-3d:nth-child(2) { animation-delay: 1.2s; }
+        .letter-3d:nth-child(3) { animation-delay: 1.4s; }
+        .letter-3d:nth-child(4) { animation-delay: 1.6s; }
+        .letter-3d:nth-child(5) { animation-delay: 1.8s; }
+        .letter-3d:nth-child(6) { animation-delay: 2.0s; }
+
+        .small-kadapa-badge {
+            background: #222;
+            color: #ffcc00;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 4px;
+            letter-spacing: 2px;
+            position: absolute;
+            top: -25px;
+            right: 0;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeInBadge 0.5s ease forwards 2.3s;
+        }
+
+        @keyframes drop3DLetter {
+            0% {
+                opacity: 0;
+                transform: translateY(-300px) rotateX(90deg) scale(0.3);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) rotateX(0deg) scale(1);
+            }
+        }
+
+        @keyframes fadeInBadge {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Yellow Smoke Canvas Effect */
+        #smoke-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 15;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .dissolving #smoke-canvas {
+            opacity: 1;
+        }
+
+        .dissolving .hand-container,
+        .dissolving .3d-text-container {
+            transform: scale(0.1);
+            opacity: 0;
+            transition: transform 0.8s ease-in, opacity 0.8s ease-in;
         }
 
         .loaded #loader-wrapper {
             opacity: 0;
             visibility: hidden;
-            transform: translateY(-100%);
         }
 
         /* --- PAGE ENTRANCE --- */
         #main-content {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 1s ease 0.3s, transform 1s ease 0.3s;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
         .loaded #main-content {
@@ -165,7 +256,7 @@
             transform: scale(1.1);
         }
 
-        /* --- MOBILE ANIMATED FULL-SCREEN MENU (TOP ALIGNED) --- */
+        /* --- MOBILE ANIMATED FULL-SCREEN MENU --- */
         .mobile-menu-overlay {
             position: fixed;
             top: 0;
@@ -177,10 +268,10 @@
             z-index: 999;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; /* Aligns content to top */
-            align-items: flex-start;    /* Left aligns content wrapper */
-            padding: 80px 30px 40px 30px; /* Top padding for header space */
-            overflow-y: auto;             /* Allows scrolling if items overflow */
+            justify-content: flex-start;
+            align-items: flex-start;
+            padding: 80px 30px 40px 30px;
+            overflow-y: auto;
             opacity: 0;
             visibility: hidden;
             transform: translateY(-20px);
@@ -224,7 +315,6 @@
             padding-bottom: 12px;
         }
 
-        /* Staggered animation effect from top */
         .mobile-menu-overlay.active .mobile-nav-links li {
             opacity: 1;
             transform: translateX(0);
@@ -340,6 +430,11 @@
             font-size: 14px;
             color: #333;
             z-index: 10;
+            transition: background 0.3s;
+        }
+
+        .slider-btn:hover {
+            background: #ffcc00;
         }
 
         .prev-btn { left: 12px; }
@@ -533,7 +628,6 @@
             border-top: 1px solid #f0e6b2;
         }
 
-        /* --- RESPONSIVE MEDIA QUERIES --- */
         @media (min-width: 768px) {
             .nav-links {
                 display: flex;
@@ -557,13 +651,29 @@
         }
     </style>
 </head>
-<body class="">
+<body>
 
-    <!-- LOADING SCREEN -->
+    <!-- ANIMATED INTRO / LOADING SCREEN -->
     <div id="loader-wrapper">
-        <img src="image/images (3).jpeg" alt="TNSF Logo" class="loader-logo" onerror="this.src='https://via.placeholder.com/130?text=TNSF'">
-        <div class="spinner"></div>
-        <div class="loader-footer">©2026 TNSF KADAPA PARLIAMENT. All Rights Reserved.</div>
+        <canvas id="smoke-canvas"></canvas>
+        
+        <!-- Rising Yellow Hand -->
+        <div class="hand-container">
+            <div class="hand-palm"></div>
+            <div class="yellow-hand"></div>
+        </div>
+
+        <!-- 3D Letters "MY TNSF" -->
+        <div class="3d-text-container">
+            <div class="letter-3d">M</div>
+            <div class="letter-3d">Y</div>
+            <div class="letter-3d" style="margin-left: 12px;">T</div>
+            <div class="letter-3d">N</div>
+            <div class="letter-3d">S</div>
+            <div class="letter-3d">F
+                <span class="small-kadapa-badge">KADAPA</span>
+            </div>
+        </div>
     </div>
 
     <!-- MAIN CONTENT -->
@@ -598,7 +708,7 @@
             </div>
         </header>
 
-        <!-- MOBILE ANIMATED OVERLAY MENU (TOP ALIGNED) -->
+        <!-- MOBILE ANIMATED OVERLAY MENU -->
         <div class="mobile-menu-overlay" id="mobileMenuOverlay">
             <div class="close-menu" id="closeMenuBtn">
                 <i class="fa-solid fa-xmark"></i>
@@ -648,7 +758,7 @@
                 <button class="slider-btn next-btn" id="nextBtn"><i class="fa-solid fa-chevron-right"></i></button>
 
                 <div class="slider-dots" id="sliderDots">
-                  <span class="dot active" data-index="0"></span>
+                    <span class="dot active" data-index="0"></span>
                     <span class="dot" data-index="1"></span>
                     <span class="dot" data-index="2"></span>
                 </div>
@@ -677,14 +787,6 @@
                 
                 <div class="hub-grid">
                     <a href="#" class="hub-item">
-                        <div class="hub-icon-circle"><i class="fa-solid fa-user"></i></div>
-                        <span>Profile</span>
-                    </a>
-                    <a href="#" class="hub-item">
-                        <div class="hub-icon-circle"><i class="fa-solid fa-square-poll-vertical"></i></div>
-                        <span>Polls</span>
-                    </a>
-                    <a href="#" class="hub-item">
                         <div class="hub-icon-circle"><i class="fa-solid fa-user-plus"></i></div>
                         <span>Refer</span>
                     </a>
@@ -707,10 +809,6 @@
                     <a href="lidership.html" class="hub-item">
                         <div class="hub-icon-circle"><i class="fa-solid fa-user-tie"></i></div>
                         <span>Leadership</span>
-                    </a>
-                    <a href="#" class="hub-item">
-                        <div class="hub-icon-circle"><i class="fa-solid fa-list-check"></i></div>
-                        <span>Tasks</span>
                     </a>
                     <a href="events.html" class="hub-item">
                         <div class="hub-icon-circle"><i class="fa-solid fa-calendar-days"></i></div>
@@ -739,14 +837,147 @@
 
     <!-- JavaScript -->
     <script>
-        // 1. Loading Screen
+        // --- 1. SOUND EFFECTS SYSTEM (Web Audio API) ---
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playClickSound() {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(200, audioCtx.currentTime + 0.08);
+            gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+            gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.08);
+        }
+
+        function playWhooshSound() {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const bufferSize = audioCtx.sampleRate * 0.4;
+            const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+            const data = buffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) {
+                data[i] = Math.random() * 2 - 1;
+            }
+            const noise = audioCtx.createBufferSource();
+            noise.buffer = buffer;
+
+            const filter = audioCtx.createBiquadFilter();
+            filter.type = 'bandpass';
+            filter.frequency.setValueAtTime(200, audioCtx.currentTime);
+            filter.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.2);
+            filter.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.4);
+
+            const gain = audioCtx.createGain();
+            gain.gain.setValueAtTime(0.01, audioCtx.currentTime);
+            gain.gain.linearRampToValueAtTime(0.2, audioCtx.currentTime + 0.2);
+            gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.4);
+
+            noise.connect(filter);
+            filter.connect(gain);
+            gain.connect(audioCtx.destination);
+            noise.start();
+        }
+
+        // --- 2. YELLOW SMOKE ANIMATION SYSTEM ---
+        const canvas = document.getElementById('smoke-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = window.innerWidth / 2 + (Math.random() - 0.5) * 200;
+                this.y = window.innerHeight / 2 + (Math.random() - 0.5) * 100;
+                this.radius = Math.random() * 40 + 20;
+                this.color = `rgba(255, ${Math.floor(200 + Math.random() * 55)}, 0, ${Math.random() * 0.6 + 0.2})`;
+                this.vx = (Math.random() - 0.5) * 6;
+                this.vy = (Math.random() - 0.5) * 6 - 2;
+                this.alpha = 0.8;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.radius += 1.5;
+                this.alpha -= 0.012;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = Math.max(this.alpha, 0);
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 20;
+                ctx.shadowColor = "#ffcc00";
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function triggerSmokeEffect() {
+            for (let i = 0; i < 70; i++) {
+                particles.push(new Particle());
+            }
+            animateSmoke();
+        }
+
+        function animateSmoke() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p, index) => {
+                p.update();
+                p.draw();
+                if (p.alpha <= 0) particles.splice(index, 1);
+            });
+            if (particles.length > 0) {
+                requestAnimationFrame(animateSmoke);
+            }
+        }
+
+        // --- 3. INTRO ANIMATION TIMELINE ---
         window.addEventListener('DOMContentLoaded', () => {
+            // Sequence Dissolve Phase
             setTimeout(() => {
-                document.body.classList.add('loaded');
-            }, 2000);
+                const loader = document.getElementById('loader-wrapper');
+                loader.classList.add('dissolving');
+                triggerSmokeEffect();
+                playWhooshSound();
+
+                setTimeout(() => {
+                    document.body.classList.add('loaded');
+                }, 800);
+            }, 3000);
         });
 
-        // 2. Mobile Menu Toggle Logic
+        // --- 4. BUTTON CLICK & PAGE NAVIGATION SOUNDS ---
+        document.querySelectorAll('a, button, .menu-toggle, .hub-item').forEach(element => {
+            element.addEventListener('click', (e) => {
+                playClickSound();
+                
+                // If it's an external page link, briefly delay navigation for sound play
+                const href = element.getAttribute('href');
+                if (href && href !== '#' && !href.startsWith('javascript')) {
+                    e.preventDefault();
+                    playWhooshSound();
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 180);
+                }
+            });
+        });
+
+        // --- 5. MOBILE MENU LOGIC ---
         const menuToggleBtn = document.getElementById('menuToggleBtn');
         const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
         const closeMenuBtn = document.getElementById('closeMenuBtn');
@@ -766,7 +997,7 @@
             });
         });
 
-        // 3. Hero Auto Slider Logic
+        // --- 6. HERO AUTO SLIDER LOGIC ---
         const sliderWrapper = document.getElementById('sliderWrapper');
         const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.dot');
