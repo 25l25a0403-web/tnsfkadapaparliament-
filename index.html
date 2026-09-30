@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TNSF Kadapa Parliament - Constituency Admin Portal</title>
+    <title>TNSF Proddatur Constituency Admin Desk</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- FontAwesome for Icons -->
@@ -17,123 +17,29 @@
             font-family: 'Poppins', sans-serif;
         }
 
+        :root {
+            --primary-yellow: #ffcc00;
+            --dark-yellow: #e6b800;
+            --light-bg: #fffdf0;
+            --card-bg: #ffffff;
+            --text-dark: #222222;
+            --text-muted: #666666;
+            --border-color: #f0e6b2;
+            --status-pending: #f39c12;
+            --status-active: #27ae60;
+            --status-rejected: #e74c3c;
+            --status-info: #2980b9;
+        }
+
         body {
-            background-color: #fffdf0;
-            color: #333;
-            overflow-x: hidden;
-            padding-bottom: 30px;
-        }
-
-        /* --- 3D INTRO LOADER ANIMATION --- */
-        #loader-wrapper {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
-        }
-
-        .intro-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            perspective: 1000px;
-        }
-
-        .vertical-text {
-            display: flex;
-            flex-direction: row;
-            gap: 12px;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 10px;
-        }
-
-        .letter {
-            display: inline-block;
-            font-size: clamp(35px, 7vw, 65px);
-            font-weight: 900;
-            color: #fee12b;
-            text-transform: uppercase;
-            text-shadow: 
-                0 1px 0 #ffa500,
-                0 2px 0 #ffa500,
-                0 3px 0 #ffa500,
-                0 4px 0 #ffa500,
-                0 5px 0 #ffa500,
-                0 6px 1px rgba(0,0,0,.1),
-                0 0 5px rgba(0,0,0,.1),
-                0 1px 3px rgba(0,0,0,.3);
-            opacity: 0;
-            transform: translateY(-80px) rotateX(90deg) scale(0.5);
-            animation: fallIn 0.5s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .sub-text-container {
-            display: flex;
-            gap: 6px;
-        }
-
-        .sub-letter {
-            display: inline-block;
-            font-size: clamp(14px, 3vw, 22px);
-            font-weight: 700;
-            letter-spacing: 4px;
-            color: #fee12b;
-            text-transform: uppercase;
-            text-shadow: 
-                0 1px 0 #ffa500,
-                0 2px 0 #ffa500,
-                0 3px 0 #ffa500,
-                0 4px 1px rgba(0,0,0,.2);
-            opacity: 0;
-            transform: translateY(-40px) rotateX(90deg);
-            animation: fallIn 0.4s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        @keyframes fallIn {
-            to {
-                opacity: 1;
-                transform: translateY(0) rotateX(0deg) scale(1);
-            }
-        }
-
-        .loader-footer {
-            position: absolute;
-            bottom: 30px;
-            font-size: 12px;
-            color: #666;
-            letter-spacing: 0.5px;
-        }
-
-        .loaded #loader-wrapper {
-            opacity: 0;
-            transform: scale(0.05) translateY(-500px);
-            pointer-events: none;
-        }
-
-        #main-content {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
-        }
-
-        .loaded #main-content {
-            opacity: 1;
-            transform: translateY(0);
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            padding-bottom: 40px;
         }
 
         /* --- HEADER & NAVIGATION --- */
         header {
-            background-color: #ffcc00;
+            background-color: var(--primary-yellow);
             padding: 12px 20px;
             display: flex;
             justify-content: space-between;
@@ -148,7 +54,6 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            cursor: pointer;
         }
 
         .brand img {
@@ -156,8 +61,6 @@
             height: 45px;
             border-radius: 50%;
             background: #fff;
-            padding: 2px;
-            border: 2px solid #000;
         }
 
         .brand-text h1 {
@@ -170,216 +73,207 @@
         .brand-text span {
             font-size: 11px;
             font-weight: 700;
-            color: #222;
+            color: #333;
             letter-spacing: 0.5px;
         }
 
-        .nav-actions {
+        .header-actions {
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
         .mode-badge {
-            background: #000;
-            color: #ffcc00;
+            background: rgba(0,0,0,0.08);
+            padding: 5px 10px;
+            border-radius: 20px;
             font-size: 11px;
             font-weight: 700;
-            padding: 4px 10px;
-            border-radius: 20px;
-            text-transform: uppercase;
+            color: #000;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
 
         .menu-toggle {
-            font-size: 24px;
+            font-size: 22px;
             cursor: pointer;
             color: #000;
-            transition: transform 0.3s;
+            padding: 5px;
         }
 
-        .menu-toggle:hover {
-            transform: scale(1.1);
+        /* --- CONSTITUENCY BANNER --- */
+        .constituency-banner {
+            background: linear-gradient(135deg, #111 0%, #333 100%);
+            color: #fff;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
 
-        /* CONSTITUENCY BANNER STRIP */
-        .admin-banner-strip {
-            background: #111;
-            color: #ffcc00;
-            padding: 8px 15px;
-            text-align: center;
-            font-size: 13px;
+        .constituency-banner h2 {
+            font-size: 16px;
             font-weight: 700;
-            letter-spacing: 0.5px;
-            box-shadow: inset 0 -2px 5px rgba(0,0,0,0.2);
+            color: var(--primary-yellow);
+        }
+
+        .constituency-banner p {
+            font-size: 11px;
+            color: #ccc;
+        }
+
+        .switch-personal-btn {
+            background: var(--primary-yellow);
+            color: #000;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 8px;
+            gap: 6px;
+            transition: all 0.2s ease;
         }
 
-        /* --- MOBILE OVERLAY MENU --- */
-        .mobile-menu-overlay {
+        .switch-personal-btn:hover {
+            background: #fff;
+        }
+
+        /* --- DRAWER SIDE MENU --- */
+        .drawer-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 253, 240, 0.98);
-            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(3px);
             z-index: 999;
-            display: flex;
-            flex-direction: column;
-            padding: 25px 20px 40px 20px;
-            overflow-y: auto;
             opacity: 0;
             visibility: hidden;
-            transform: translateY(-20px);
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
         }
 
-        .mobile-menu-overlay.active {
+        .drawer-overlay.active {
             opacity: 1;
             visibility: visible;
-            transform: translateY(0);
         }
 
-        .menu-header-box {
-            border-bottom: 2px solid #ffcc00;
-            padding-bottom: 15px;
-            margin-bottom: 15px;
+        .drawer-menu {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 290px;
+            height: 100%;
+            background: #ffffff;
+            z-index: 1000;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.15);
+            overflow-y: auto;
+            transition: left 0.3s ease;
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
+            flex-direction: column;
         }
 
-        .menu-header-title h3 {
-            font-size: 20px;
-            font-weight: 900;
+        .drawer-overlay.active .drawer-menu {
+            left: 0;
+        }
+
+        .drawer-header {
+            background: var(--primary-yellow);
+            padding: 20px 15px;
+            position: relative;
+        }
+
+        .drawer-header h3 {
+            font-size: 16px;
+            font-weight: 800;
             color: #000;
         }
 
-        .menu-header-title p {
-            font-size: 13px;
-            font-weight: 700;
-            color: #ff9900;
-            text-transform: uppercase;
-        }
-
-        .close-menu {
-            font-size: 26px;
-            cursor: pointer;
+        .drawer-header p {
+            font-size: 12px;
+            font-weight: 600;
             color: #333;
         }
 
-        .nested-menu {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+        .close-drawer {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 20px;
+            cursor: pointer;
+            color: #000;
         }
 
-        .menu-group-title {
+        .drawer-content {
+            padding: 15px 0;
+            flex-grow: 1;
+        }
+
+        .nav-section-title {
+            padding: 10px 20px 5px;
             font-size: 11px;
             font-weight: 800;
             color: #888;
             letter-spacing: 1px;
             text-transform: uppercase;
-            margin-top: 10px;
-            margin-bottom: 5px;
         }
 
-        .menu-list {
+        .drawer-nav {
             list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            padding-left: 10px;
+            margin-bottom: 15px;
         }
 
-        .menu-list li a {
-            text-decoration: none;
-            color: #222;
-            font-size: 14px;
-            font-weight: 600;
+        .drawer-nav li a {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 8px 12px;
-            border-radius: 8px;
-            transition: all 0.2s;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #333;
+            font-size: 13px;
+            font-weight: 600;
+            transition: background 0.2s;
         }
 
-        .menu-list li a:hover, .menu-list li a.active {
-            background: #ffcc00;
+        .drawer-nav li a:hover, .drawer-nav li a.active {
+            background: #fff8d6;
             color: #000;
-            transform: translateX(4px);
+            border-left: 4px solid var(--primary-yellow);
         }
 
-        .menu-list li a i {
-            width: 20px;
-            color: #e6a100;
-            text-align: center;
+        .drawer-nav li a i {
+            width: 18px;
+            color: #555;
+            font-size: 14px;
         }
 
-        .menu-list li a:hover i, .menu-list li a.active i {
-            color: #000;
+        .drawer-footer {
+            padding: 15px 20px;
+            border-top: 1px solid #eee;
+            background: #fdfdfd;
         }
 
-        .menu-divider {
-            height: 1px;
-            background: rgba(0,0,0,0.08);
-            margin: 10px 0;
-        }
-
-        .action-link {
-            font-weight: 700 !important;
-        }
-
-        .switch-mode-btn {
-            background: #000 !important;
-            color: #ffcc00 !important;
-            border-radius: 10px !important;
-            margin-top: 10px;
-        }
-
-        .switch-mode-btn i {
-            color: #ffcc00 !important;
-        }
-
-        .logout-btn {
-            background: #ffe6e6 !important;
-            color: #d9534f !important;
-            border-radius: 10px !important;
-        }
-
-        .logout-btn i {
-            color: #d9534f !important;
-        }
-
-        /* --- CONTAINER & LAYOUT --- */
+        /* --- MAIN CONTAINER --- */
         .container {
             max-width: 1100px;
             margin: 20px auto;
             padding: 0 15px;
         }
 
-        .page-view {
+        .view-panel {
             display: none;
         }
 
-        .page-view.active-view {
+        .view-panel.active {
             display: block;
-            animation: fadeIn 0.3s ease-in-out;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- STATS SECTION --- */
+        /* --- STATS GRID --- */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -390,70 +284,61 @@
         @media (min-width: 768px) {
             .stats-grid {
                 grid-template-columns: repeat(4, 1fr);
-                gap: 20px;
             }
         }
 
         .stat-card {
-            background: #ffffff;
-            border-radius: 14px;
-            padding: 16px;
-            border: 1px solid #f0e6b2;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-color);
             display: flex;
-            flex-direction: column;
-            gap: 6px;
-            position: relative;
-            overflow: hidden;
+            align-items: center;
+            gap: 12px;
         }
 
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 5px;
-            height: 100%;
-            background: #ffcc00;
-        }
-
-        .stat-card .stat-icon {
-            font-size: 18px;
+        .stat-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: #fff8d6;
             color: #d4a000;
-            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
         }
 
-        .stat-card .stat-value {
-            font-size: 24px;
+        .stat-info h4 {
+            font-size: 18px;
             font-weight: 800;
-            color: #111;
-            line-height: 1;
+            line-height: 1.2;
         }
 
-        .stat-card .stat-label {
+        .stat-info p {
             font-size: 11px;
-            font-weight: 600;
-            color: #666;
-            text-transform: uppercase;
+            color: var(--text-muted);
+            font-weight: 500;
         }
 
         /* --- ADMIN HUB GRID --- */
-        .hub-section {
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 22px 18px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-            border: 1px solid #f0e6b2;
+        .admin-hub-section {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 20px 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
             margin-bottom: 25px;
+            border: 1px solid var(--border-color);
         }
 
         .hub-title {
-            font-size: 17px;
-            font-weight: 800;
-            margin-bottom: 20px;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 18px;
             padding-left: 10px;
-            border-left: 4px solid #ffcc00;
-            color: #111;
+            border-left: 4px solid var(--primary-yellow);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -462,21 +347,13 @@
         .hub-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 18px 10px;
+            gap: 15px 10px;
             justify-items: center;
         }
 
-        @media (min-width: 600px) {
-            .hub-grid {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 20px;
-            }
-        }
-
-        @media (min-width: 900px) {
+        @media (min-width: 768px) {
             .hub-grid {
                 grid-template-columns: repeat(7, 1fr);
-                gap: 22px 15px;
             }
         }
 
@@ -489,408 +366,191 @@
             text-align: center;
             cursor: pointer;
             width: 100%;
-            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .hub-item:hover {
-            transform: translateY(-5px);
         }
 
         .hub-icon-circle {
-            width: 58px;
-            height: 58px;
-            background-color: #fffdf0;
-            border: 2px solid #ffcc00;
+            width: 55px;
+            height: 55px;
+            background-color: var(--light-bg);
+            border: 2px solid var(--primary-yellow);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
-            color: #222;
-            box-shadow: 0 3px 8px rgba(255, 204, 0, 0.25);
-            transition: all 0.3s ease;
-            position: relative;
+            font-size: 18px;
+            color: #333;
+            box-shadow: 0 3px 8px rgba(255, 204, 0, 0.15);
+            transition: all 0.2s ease;
         }
 
         .hub-item:hover .hub-icon-circle {
-            background-color: #ffcc00;
-            box-shadow: 0 6px 15px rgba(255, 204, 0, 0.5);
-            color: #000;
-        }
-
-        .hub-badge {
-            position: absolute;
-            top: -2px;
-            right: -2px;
-            background: #e63946;
-            color: #fff;
-            font-size: 10px;
-            font-weight: 700;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid #fff;
+            background-color: var(--primary-yellow);
+            transform: translateY(-3px);
         }
 
         .hub-item span {
             font-size: 11px;
             font-weight: 600;
-            color: #333;
-            line-height: 1.2;
+            color: #222;
         }
 
-        /* --- MEMBERSHIP APPLICATIONS LIST VIEW --- */
-        .view-header {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+        /* --- UI CARD LISTS & TABLES --- */
+        .panel-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             margin-bottom: 20px;
         }
 
-        .view-title-row {
+        .panel-header {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-        }
-
-        .view-title {
-            font-size: 19px;
-            font-weight: 800;
-            color: #111;
-        }
-
-        .back-btn {
-            background: #fff;
-            border: 1px solid #ccc;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            display: inline-flex;
             align-items: center;
-            gap: 6px;
-            transition: all 0.2s;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
-        .back-btn:hover {
-            background: #ffcc00;
-            border-color: #ffcc00;
-            color: #000;
+        .panel-title {
+            font-size: 16px;
+            font-weight: 700;
         }
 
-        .filter-tabs {
+        /* TABS */
+        .tab-group {
             display: flex;
-            gap: 8px;
+            gap: 6px;
+            background: #f4f4f4;
+            padding: 4px;
+            border-radius: 8px;
             overflow-x: auto;
-            padding-bottom: 5px;
         }
 
         .tab-btn {
-            background: #fff;
-            border: 1px solid #e0e0e0;
-            padding: 6px 16px;
-            border-radius: 20px;
+            border: none;
+            background: transparent;
+            padding: 6px 14px;
+            border-radius: 6px;
             font-size: 12px;
             font-weight: 600;
-            color: #555;
             cursor: pointer;
+            color: #666;
             white-space: nowrap;
-            transition: all 0.2s;
         }
 
         .tab-btn.active {
-            background: #ffcc00;
-            border-color: #ffcc00;
+            background: #fff;
             color: #000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
         }
 
+        /* SEARCH & FILTERS */
         .search-box {
             position: relative;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .search-box input {
             width: 100%;
-            padding: 12px 15px 12px 42px;
-            border: 1.5px solid #e0d080;
-            border-radius: 12px;
+            padding: 10px 15px 10px 38px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
             font-size: 13px;
-            background: #fff;
             outline: none;
-            transition: border-color 0.2s;
-        }
-
-        .search-box input:focus {
-            border-color: #d4a000;
         }
 
         .search-box i {
             position: absolute;
-            left: 15px;
+            left: 12px;
             top: 50%;
             transform: translateY(-50%);
-            color: #999;
+            color: #888;
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        @media (min-width: 768px) {
+            .filter-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
+        }
+
+        .filter-grid select {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 12px;
+            background: #fff;
+        }
+
+        /* APPLICANT / MEMBER ITEM CARD */
+        .item-card {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: border 0.2s;
+        }
+
+        .item-card:hover {
+            border-color: var(--primary-yellow);
+        }
+
+        .item-info {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .item-name {
+            font-weight: 700;
             font-size: 14px;
         }
 
-        .app-cards-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .app-card {
-            background: #fff;
-            border: 1px solid #f0e6b2;
-            border-radius: 14px;
-            padding: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-            transition: transform 0.2s;
-        }
-
-        .app-card:hover {
-            transform: translateY(-2px);
-            border-color: #ffcc00;
-        }
-
-        .app-info h4 {
-            font-size: 15px;
-            font-weight: 700;
-            color: #111;
-        }
-
-        .app-info .app-id {
+        .item-sub {
             font-size: 12px;
-            font-weight: 600;
-            color: #e6a100;
-            margin-bottom: 4px;
-        }
-
-        .app-meta {
-            font-size: 11px;
             color: #666;
-            display: flex;
-            gap: 10px;
-            margin-top: 4px;
         }
 
         .status-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
             font-size: 11px;
-            font-weight: 700;
-            padding: 3px 10px;
-            border-radius: 12px;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .status-pending {
-            background: #fff8e1;
-            color: #b78103;
-        }
-
-        .status-approved {
-            background: #e8f5e9;
-            color: #2e7d32;
-        }
-
-        .status-rejected {
-            background: #ffebee;
-            color: #c62828;
-        }
-
-        .view-btn {
-            background: #ffcc00;
-            border: none;
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-            color: #000;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .view-btn:hover {
-            background: #e6b800;
-        }
-
-        /* --- DETAILED APPLICATION VIEW --- */
-        .detail-card {
-            background: #fff;
-            border-radius: 16px;
-            padding: 20px;
-            border: 1px solid #f0e6b2;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-            margin-bottom: 25px;
-        }
-
-        .app-header-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 12px;
-            margin-bottom: 16px;
-        }
-
-        .app-header-bar h3 {
-            font-size: 18px;
-            font-weight: 800;
-            color: #111;
-        }
-
-        .app-header-bar span {
-            font-size: 13px;
-            font-weight: 700;
-            color: #e6a100;
-        }
-
-        .detail-section-title {
-            font-size: 12px;
-            font-weight: 800;
-            color: #888;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            margin: 16px 0 10px 0;
-            border-bottom: 1px dashed #e0d080;
-            padding-bottom: 4px;
-        }
-
-        .detail-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px 15px;
-        }
-
-        @media (min-width: 600px) {
-            .detail-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        .detail-item {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .detail-item label {
-            font-siize: 11px;
-            color: #777;
-            font-weight: 500;
-        }
-
-        .detail-item span {
-            font-size: 13px;
             font-weight: 600;
-            color: #222;
         }
 
-        .docs-list {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-active { background: #d4edda; color: #155724; }
+        .status-rejected { background: #f8d7da; color: #721c24; }
+        .status-info { background: #d1ecf1; color: #0c5460; }
 
-        .doc-chip {
-            background: #fffdf0;
-            border: 1px solid #ffe680;
-            padding: 8px 14px;
-            border-radius: 10px;
-            font-size: 12px;
+        .btn-view {
+            background: #f4f4f4;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 6px;
             font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #333;
-            cursor: pointer;
-        }
-
-        .doc-chip i {
-            color: #ffaa00;
-        }
-
-        .declaration-box {
-            background: #f9f9f9;
-            padding: 12px;
-            border-radius: 10px;
             font-size: 12px;
-            color: #444;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .declaration-box i {
-            color: #2e7d32;
-            font-size: 16px;
-        }
-
-        .action-button-group {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 25px;
-        }
-
-        @media (min-width: 600px) {
-            .action-button-group {
-                flex-direction: row;
-            }
-        }
-
-        .verify-send-btn {
-            flex: 2;
-            background: #2e7d32;
-            color: #fff;
-            border: none;
-            padding: 14px;
-            border-radius: 12px;
-            font-size: 13px;
-            font-weight: 700;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            box-shadow: 0 4px 10px rgba(46, 125, 50, 0.25);
-            transition: background 0.2s;
         }
 
-        .verify-send-btn:hover {
-            background: #256628;
+        .btn-view:hover {
+            background: var(--primary-yellow);
         }
 
-        .reject-btn {
-            flex: 1;
-            background: #d32f2f;
-            color: #fff;
-            border: none;
-            padding: 14px;
-            border-radius: 12px;
-            font-size: 13px;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: background 0.2s;
-        }
-
-        .reject-btn:hover {
-            background: #b71c1c;
-        }
-
-        /* --- REJECTION MODAL --- */
+        /* --- MODALS & DRAWER SCREENS --- */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -898,15 +558,14 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(4px);
-            z-index: 2000;
             display: flex;
-            align-items: center;
             justify-content: center;
-            padding: 20px;
+            align-items: center;
+            z-index: 2000;
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
+            padding: 15px;
         }
 
         .modal-overlay.active {
@@ -916,112 +575,213 @@
 
         .modal-card {
             background: #fff;
-            border-radius: 16px;
-            max-width: 450px;
             width: 100%;
-            padding: 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transform: translateY(20px);
-            transition: transform 0.3s ease;
+            max-width: 550px;
+            max-height: 90vh;
+            border-radius: 15px;
+            overflow-y: auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            position: relative;
         }
 
-        .modal-overlay.active .modal-card {
-            transform: translateY(0);
-        }
-
-        .modal-title {
-            font-size: 18px;
-            font-weight: 800;
-            color: #d32f2f;
-            margin-bottom: 6px;
+        .modal-header {
+            padding: 15px 20px;
+            background: #fcfcfc;
+            border-bottom: 1px solid #eee;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 8px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
 
-        .modal-subtitle {
-            font-size: 13px;
-            color: #555;
-            margin-bottom: 16px;
+        .modal-header h3 {
+            font-size: 15px;
+            font-weight: 700;
         }
 
-        .form-group {
+        .modal-close {
+            font-size: 20px;
+            cursor: pointer;
+            color: #888;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .detail-section-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 15px 0 8px;
+            border-bottom: 1px dashed #ddd;
+            padding-bottom: 4px;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px 15px;
+            margin-bottom: 10px;
+        }
+
+        .detail-item {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+        }
+
+        .detail-item label {
+            font-size: 11px;
+            color: #777;
+        }
+
+        .detail-item span {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .doc-thumbs {
+            display: flex;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .doc-thumb {
+            width: 60px;
+            height: 60px;
+            background: #eee;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #666;
+            cursor: pointer;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+
+        /* FORMS */
+        .form-group {
             margin-bottom: 14px;
         }
 
         .form-group label {
+            display: block;
             font-size: 12px;
-            font-weight: 700;
-            color: #333;
+            font-weight: 600;
+            margin-bottom: 5px;
         }
 
-        .form-group select, .form-group textarea {
-            padding: 10px 12px;
-            border: 1.5px solid #ccc;
-            border-radius: 10px;
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 9px 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
             font-size: 13px;
             outline: none;
-            background: #fff;
         }
 
-        .form-group select:focus, .form-group textarea:focus {
-            border-color: #d32f2f;
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
         }
 
-        .modal-actions {
+        .form-inline-checkbox {
             display: flex;
-            gap: 10px;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+        }
+
+        /* BUTTONS */
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
             margin-top: 20px;
         }
 
-        .modal-actions button {
-            flex: 1;
-            padding: 12px;
-            border-radius: 10px;
-            font-size: 13px;
-            font-weight: 700;
-            cursor: pointer;
+        .btn-primary {
+            background: var(--primary-yellow);
+            color: #000;
             border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            text-align: center;
+            width: 100%;
         }
 
-        .btn-confirm-reject {
-            background: #d32f2f;
-            color: #fff;
+        .btn-primary:hover {
+            background: var(--dark-yellow);
         }
 
-        .btn-cancel {
+        .btn-danger {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            text-align: center;
+            width: 100%;
+        }
+
+        .btn-secondary {
             background: #eee;
             color: #333;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
         }
 
-        /* SUCCESS TOAST NOTIFICATION */
-        .toast {
-            position: fixed;
-            bottom: 25px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: #111;
-            color: #ffcc00;
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-size: 13px;
-            font-weight: 700;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-            z-index: 3000;
-            opacity: 0;
-            transition: all 0.4s ease;
+        /* RESOLUTION PIPELINE */
+        .pipeline-bar {
             display: flex;
-            align-items: center;
-            gap: 10px;
+            justify-content: space-between;
+            background: #eee;
+            border-radius: 20px;
+            padding: 4px;
+            margin: 15px 0;
+            font-size: 9px;
+            font-weight: 700;
+            overflow-x: auto;
+        }
+
+        .pipeline-step {
+            padding: 4px 8px;
+            border-radius: 15px;
+            color: #666;
             white-space: nowrap;
         }
 
-        .toast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
+        .pipeline-step.active {
+            background: var(--primary-yellow);
+            color: #000;
         }
 
         footer {
@@ -1029,419 +789,736 @@
             padding: 20px;
             font-size: 11px;
             color: #666;
-            background: #fffae6;
-            border-top: 1px solid #f0e6b2;
-            margin-top: 40px;
+            margin-top: 30px;
+            border-top: 1px solid #eee;
         }
     </style>
 </head>
 <body>
 
-    <!-- 3D INTRO LOADING SCREEN -->
-    <div id="loader-wrapper">
-        <div class="intro-container">
-            <div class="vertical-text" id="topText"></div>
-            <div class="sub-text-container" id="bottomText"></div>
+    <!-- HEADER -->
+    <header>
+        <div class="brand">
+            <img src="https://via.placeholder.com/45?text=TNSF" alt="TNSF Logo">
+            <div class="brand-text">
+                <h1>TNSF KADAPA</h1>
+        <span>PARLIAMENT DESK</span>
+            </div>
         </div>
-        <div class="loader-footer">©2026 TNSF KADAPA PARLIAMENT. All Rights Reserved.</div>
+        <div class="header-actions">
+            <div class="mode-badge"><i class="fa-solid fa-shield-halved"></i> Admin Mode</div>
+            <div class="menu-toggle" id="openDrawerBtn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONSTITUENCY BANNER -->
+    <div class="constituency-banner">
+        <div>
+            <h2>PRODDATUR CONSTITUENCY</h2>
+            <p>Administration Panel</p>
+        </div>
+        <button class="switch-personal-btn" onclick="alert('Switching to Personal General User Mode...')">
+            <i class="fa-solid fa-right-from-bracket"></i> Switch to Personal
+        </button>
     </div>
 
-    <!-- MAIN APP CONTAINER -->
-    <div id="main-content">
-        
-        <!-- HEADER -->
-        <header>
-            <div class="brand" onclick="switchView('dashboardView')">
-                <img src="https://i.ibb.co/3yk71Q9/logo.png" alt="TNSF Logo" onerror="this.src='https://via.placeholder.com/45?text=TNSF'">
-                <div class="brand-text">
-                    <h1>TNSF KADAPA</h1>
-                    <span id="headerRoleTag">CONSTITUENCY ADMIN</span>
-                </div>
+    <!-- DRAWER MENU -->
+    <div class="drawer-overlay" id="drawerOverlay">
+        <div class="drawer-menu">
+            <div class="drawer-header">
+                <div class="close-drawer" id="closeDrawerBtn"><i class="fa-solid fa-xmark"></i></div>
+                <h3>TNSF KADAPA</h3>
+                <p>PRODDATUR ADMIN</p>
             </div>
-            
-            <div class="nav-actions">
-                <span class="mode-badge" id="modeBadge"><i class="fa-solid fa-shield-halved"></i> Admin Mode</span>
-                <div class="menu-toggle" id="menuToggleBtn">
-                    <i class="fa-solid fa-bars"></i>
-                </div>
+            <div class="drawer-content">
+                <div class="nav-section-title">Members</div>
+                <ul class="drawer-nav">
+                    <li><a href="#" onclick="switchView('applications'); return false;"><i class="fa-solid fa-file-signature"></i> Applications</a></li>
+                    <li><a href="#" onclick="switchView('members'); return false;"><i class="fa-solid fa-users"></i> All Members</a></li>
+                    <li><a href="#" onclick="switchView('members'); return false;"><i class="fa-solid fa-user-check"></i> Active Members</a></li>
+                    <li><a href="#" onclick="switchView('applications'); return false;"><i class="fa-solid fa-clock"></i> Pending</a></li>
+                    <li><a href="#" onclick="switchView('members'); return false;"><i class="fa-solid fa-user-slash"></i> Suspended</a></li>
+                </ul>
+
+                <div class="nav-section-title">Activities</div>
+                <ul class="drawer-nav">
+                    <li><a href="#" onclick="switchView('events'); return false;"><i class="fa-solid fa-calendar-days"></i> Events</a></li>
+                    <li><a href="#" onclick="switchView('dashboard'); return false;"><i class="fa-solid fa-list-check"></i> Tasks</a></li>
+                    <li><a href="#" onclick="switchView('dashboard'); return false;"><i class="fa-solid fa-square-poll-vertical"></i> Polls</a></li>
+                    <li><a href="#" onclick="switchView('gallery'); return false;"><i class="fa-solid fa-images"></i> Gallery</a></li>
+                </ul>
+
+                <div class="nav-section-title">Communication</div>
+                <ul class="drawer-nav">
+                    <li><a href="#" onclick="switchView('dashboard'); return false;"><i class="fa-solid fa-bullhorn"></i> Announcements</a></li>
+                    <li><a href="#" onclick="switchView('dashboard'); return false;"><i class="fa-solid fa-inbox"></i> Inbox</a></li>
+                    <li><a href="#" onclick="switchView('dashboard'); return false;"><i class="fa-solid fa-bell"></i> Notifications</a></li>
+                </ul>
+
+                <div class="nav-section-title">Services</div>
+                <ul class="drawer-nav">
+                    <li><a href="#" onclick="switchView('resolution'); return false;"><i class="fa-solid fa-handshake-angle"></i> Resolution Desk</a></li>
+                    <li><a href="#" onclick="switchView('dashboard'); return false;"><i class="fa-solid fa-comments"></i> Feedback</a></li>
+                </ul>
+
+                <div class="nav-section-title">System</div>
+                <ul class="drawer-nav">
+                    <li><a href="#" onclick="switchView('dashboard'); return false;"><i class="fa-solid fa-chart-pie"></i> Reports</a></li>
+                    <li><a href="#" onclick="switchView('dashboard'); return false;"><i class="fa-solid fa-user-gear"></i> Admin Profile</a></li>
+                </ul>
             </div>
-        </header>
-
-        <!-- SUB HEADER / CONSTITUENCY STRIP -->
-        <div class="admin-banner-strip" id="adminBannerStrip">
-            <i class="fa-solid fa-location-dot"></i> PRODDATUR CONSTITUENCY ADMINISTRATION
-        </div>
-
-        <!-- MOBILE SLIDE-IN NESTED MENU -->
-        <div class="mobile-menu-overlay" id="mobileMenuOverlay">
-            <div class="menu-header-box">
-                <div class="menu-header-title">
-                    <h3>TNSF KADAPA</h3>
-                    <p id="menuSubHeader">PRODDATUR ADMIN</p>
-                </div>
-                <div class="close-menu" id="closeMenuBtn">
-                    <i class="fa-solid fa-xmark"></i>
-                </div>
-            </div>
-
-            <div class="nested-menu">
-                <!-- MEMBERS SECTION -->
-                <div class="menu-group-title">Members</div>
-                <ul class="menu-list">
-                    <li><a href="#" onclick="switchView('applicationsView'); closeMenu();"><i class="fa-solid fa-file-signature"></i> Applications</a></li>
-                    <li><a href="#" onclick="showToast('Loading All Members list...'); closeMenu();"><i class="fa-solid fa-users"></i> All Members</a></li>
-                    <li><a href="#" onclick="showToast('Loading Active Members...'); closeMenu();"><i class="fa-solid fa-user-check"></i> Active Members</a></li>
-                    <li><a href="#" onclick="switchView('applicationsView'); closeMenu();"><i class="fa-solid fa-clock"></i> Pending</a></li>
-                    <li><a href="#" onclick="showToast('Loading Suspended List...'); closeMenu();"><i class="fa-solid fa-user-slash"></i> Suspended</a></li>
-                </ul>
-
-                <div class="menu-divider"></div>
-
-                <!-- ACTIVITIES SECTION -->
-                <div class="menu-group-title">Activities</div>
-                <ul class="menu-list">
-                    <li><a href="#" onclick="showToast('Opening Events Manager...'); closeMenu();"><i class="fa-solid fa-calendar-days"></i> Events</a></li>
-                    <li><a href="#" onclick="showToast('Opening Task Desk...'); closeMenu();"><i class="fa-solid fa-list-check"></i> Tasks</a></li>
-                    <li><a href="#" onclick="showToast('Opening Polls Manager...'); closeMenu();"><i class="fa-solid fa-square-poll-vertical"></i> Polls</a></li>
-                    <li><a href="#" onclick="showToast('Opening Gallery Manager...'); closeMenu();"><i class="fa-solid fa-images"></i> Gallery</a></li>
-                </ul>
-
-                <div class="menu-divider"></div>
-                <!-- COMMUNICATION SECTION -->
-                <div class="menu-group-title">Communication</div>
-                <ul class="menu-list">
-                    <li><a href="#" onclick="showToast('Opening Announcements...'); closeMenu();"><i class="fa-solid fa-bullhorn"></i> Announcements</a></li>
-                    <li><a href="#" onclick="showToast('Opening Admin Inbox...'); closeMenu();"><i class="fa-solid fa-envelope"></i> Inbox</a></li>
-                    <li><a href="#" onclick="showToast('Opening Notifications...'); closeMenu();"><i class="fa-solid fa-bell"></i> Notifications</a></li>
-                </ul>
-
-                <div class="menu-divider"></div>
-
-                <!-- SERVICES SECTION -->
-                <div class="menu-group-title">Services</div>
-                <ul class="menu-list">
-                    <li><a href="#" onclick="showToast('Opening Resolution Desk...'); closeMenu();"><i class="fa-solid fa-graduation-cap"></i> Resolution Desk</a></li>
-                    <li><a href="#" onclick="showToast('Opening Feedback Center...'); closeMenu();"><i class="fa-solid fa-comments"></i> Feedback</a></li>
-                </ul>
-
-                <div class="menu-divider"></div>
-
-                <!-- GENERAL & ACCOUNT -->
-                <ul class="menu-list">
-                    <li><a href="#" onclick="showToast('Opening Reports...'); closeMenu();"><i class="fa-solid fa-chart-line"></i> Reports</a></li>
-                    <li><a href="#" onclick="showToast('Opening Admin Profile...'); closeMenu();"><i class="fa-solid fa-user-gear"></i> Admin Profile</a></li>
-                    <li>
-                        <a href="#" class="action-link switch-mode-btn" id="toggleUserModeBtn" onclick="toggleUserRole(); closeMenu();">
-                            <i class="fa-solid fa-arrows-rotate"></i> Switch to Personal Mode
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="action-link logout-btn" onclick="showToast('Logging out...'); closeMenu();">
-                            <i class="fa-solid fa-right-from-bracket"></i> Logout
-                        </a>
-                    </li>
-                </ul>
+            <div class="drawer-footer">
+                <button class="switch-personal-btn" style="width: 100%; justify-content: center;" onclick="alert('Switching to Personal Mode...')">
+                    <i class="fa-solid fa-user"></i> Switch to Personal Mode
+                </button>
             </div>
         </div>
+    </div>
 
-        <div class="container">
+    <!-- MAIN CONTAINER -->
+    <div class="container">
 
-            <!-- ================= VIEW 1: CONSTITUENCY ADMIN DASHBOARD ================= -->
-            <div id="dashboardView" class="page-view active-view">
-                
-                <!-- STATS CARDS -->
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <i class="fa-solid fa-users stat-icon"></i>
-                        <div class="stat-value">1,482</div>
-                        <div class="stat-label">Total Members</div>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fa-solid fa-hourglass-half stat-icon"></i>
-                        <div class="stat-value" id="statPendingCount">12</div>
-                        <div class="stat-label">Pending Registrations</div>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fa-solid fa-clipboard-question stat-icon"></i>
-                        <div class="stat-value">28</div>
-                        <div class="stat-label">Active Requests</div>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fa-solid fa-calendar-check stat-icon"></i>
-                        <div class="stat-value">05</div>
-                        <div class="stat-label">Upcoming Events</div>
+        <!-- DASHBOARD VIEW -->
+        <div id="view-dashboard" class="view-panel active">
+            <!-- STATS CARDS -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+                    <div class="stat-info">
+                        <h4>1,248</h4>
+                        <p>Total Members</p>
                     </div>
                 </div>
-
-                <!-- ADMIN HUB ICON GRID -->
-                <div class="hub-section">
-                    <div class="hub-title">
-                        <span>Admin Hub</span>
-                        <small style="font-weight: 500; font-size: 11px; color: #777;">Proddatur Desk</small>
-                    </div>
-                    
-                    <div class="hub-grid">
-                        <div class="hub-item" onclick="showToast('Members Management')">
-                            <div class="hub-icon-circle"><i class="fa-solid fa-users"></i></div>
-                            <span>Members</span>
-                        </div>
-                        <div class="hub-item" onclick="showToast('Membership Details')">
-                            <div class="hub-icon-circle"><i class="fa-solid fa-id-card"></i></div>
-                            <span>Membership</span>
-                        </div>
-                        <div class="hub-item" onclick="switchView('applicationsView')">
-                            <div class="hub-icon-circle">
-                                <i class="fa-solid fa-file-signature"></i>
-                                <span class="hub-badge" id="appBadge">12</span>
-                            </div>
-                            <span>Applications</span>
-                        </div>
-                        <div class="hub-item" onclick="showToast('Approvals Desk')">
-                            <div class="hub-icon-circle"><i class="fa-solid fa-user-check"></i></div>
-                            <span>Approvals</span>
-                        </div>
-                        <div class="hub-item" onclick="showToast('Resolution Desk')">
-                            <div class="hub-icon-circle"><i class="fa-solid fa-graduation-cap"></i></div>
-                            <span>Resolution Desk</span>
-                        </div>
-                        <div class="hub-item" onclick="showToast('Events Desk')">
-                            <div class="hub-icon-circle"><i class="fa-solid fa-calendar-days"></i></div>
-                            <span>Events</span>
-                        </div>
-                        <div class="hub-item" onclick="showToast('Gallery Manager')">
-                            <div class="hub-icon-circle"><i class="fa-solid fa-images"></i></div>
-                            <span>Gallery</span>
-                        </div>
-                        <div class="hub-item" onclick="showToast('Announcements Desk')">
-                            <div class="hub-icon-circle"><i class="fa-solid fa-bullhorn"></i></div>
-                            <span>Announcements</span>
-                        </div>
-                        <div class="hub-item" onclick="showToast('Feedback Desk')">
-                            <div class="hub-icon-circle"><i class="fa-solid fa-comments"></i></div>
-                            <span>Feedback</span>
-                        </div>
-                        <div class="hub-item" onclick="showToast('Tasks Desk')">
-                            <div class="hub-icon-circle"><i class="fa-solid fa-list-check"></i></div>
-                            <span>Tasks</span>
-                        </div>
-                        <div class="hub-item" onclick="showToast('Polls Desk')">
-                            <div class="hub-icon-circle"><i class="fa-solid fa-square-poll-vertical"></i></div>
-                            <span>Polls</span>
-                        </div>
-                        <div class="hub-item" onclick="showToast('Reports Desk')">
-                            <div class="hub-icon-circle"><i class="fa-solid fa-chart-pie"></i></div>
-                            <span>Reports</span>
-                        </div>
-                        <div class="hub-item" onclick="showToast('Notifications Desk')">
-                            <div class="hub-icon-circle"><i class="fa-solid fa-bell"></i></div>
-                            <span>Notifications</span>
-                        </div>
-                        <div class="hub-item" onclick="showToast('Admin Profile')">
-                            <div class="hub-icon-circle"><i class="fa-solid fa-user-tie"></i></div>
-                            <span>Admin Profile</span>
-                        </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-clock"></i></div>
+                    <div class="stat-info">
+                        <h4>14</h4>
+                        <p>Pending Registrations</p>
                     </div>
                 </div>
-
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-headset"></i></div>
+                    <div class="stat-info">
+                        <h4>8</h4>
+                        <p>Active Requests</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-calendar-star"></i></div>
+                    <div class="stat-info">
+                        <h4>3</h4>
+                        <p>Upcoming Events</p>
+                    </div>
+                </div>
             </div>
 
-            <!-- ================= VIEW 2: MEMBERSHIP APPLICATIONS LIST ================= -->
-            <div id="applicationsView" class="page-view">
-                <div class="view-header">
-                    <div class="view-title-row">
-                        <div class="view-title">MEMBERSHIP APPLICATIONS</div>
-                        <button class="back-btn" onclick="switchView('dashboardView')"><i class="fa-solid fa-arrow-left"></i> Dashboard</button>
+            <!-- ADMIN HUB GRID -->
+            <div class="admin-hub-section">
+                <div class="hub-title">
+                    <span>Admin Hub</span>
+                    <small style="font-size: 11px; font-weight: 500; color: #666;">Proddatur Desktop</small>
+                </div>
+                <div class="hub-grid">
+                    <div class="hub-item" onclick="switchView('members')">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-users"></i></div>
+                        <span>Members</span>
                     </div>
+                    <div class="hub-item" onclick="switchView('applications')">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-address-card"></i></div>
+                        <span>Membership</span>
+                    </div>
+                    <div class="hub-item" onclick="switchView('applications')">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-file-signature"></i></div>
+                        <span>Applications</span>
+                    </div>
+                    <div class="hub-item" onclick="switchView('applications')">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-circle-check"></i></div>
+                        <span>Approvals</span>
+                    </div>
+                    <div class="hub-item" onclick="switchView('resolution')">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-handshake-angle"></i></div>
+                        <span>Resolution Desk</span>
+                    </div>
+                    <div class="hub-item" onclick="switchView('events')">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-calendar-days"></i></div>
+                        <span>Events</span>
+                    </div>
+                    <div class="hub-item" onclick="switchView('gallery')">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-images"></i></div>
+                        <span>Gallery</span>
+                    </div>
+                    <div class="hub-item" onclick="alert('Announcements Panel')">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-bullhorn"></i></div>
+                        <span>Announcements</span>
+                    </div>
+                    <div class="hub-item" onclick="alert('Feedback Desk')">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-comments"></i></div>
+                        <span>Feedback</span>
+                    </div>
+                    <div class="hub-item" onclick="alert('Tasks Desk')">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-list-check"></i></div>
+                        <span>Tasks</span>
+                    </div>
+                    <div class="hub-item" onclick="alert('Polls Desk')">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-square-poll-vertical"></i></div>
+                        <span>Polls</span>
+                    </div>
+                    <div class="hub-item" onclick="alert('Reports Desk')">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-chart-pie"></i></div>
+                        <span>Reports</span>
+                    </div>
+                    <div class="hub-item" onclick="alert('Notifications Center')">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-bell"></i></div>
+                        <span>Notifications</span>
+                    </div>
+                    <div class="hub-item" onclick="alert('Admin Profile')">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-user-gear"></i></div>
+                        <span>Admin Profile</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                    <!-- FILTER TABS -->
-                    <div class="filter-tabs">
-                        <button class="tab-btn active" onclick="filterApps('all', this)">All</button>
-                        <button class="tab-btn" onclick="filterApps('pending', this)">Pending</button>
-                        <button class="tab-btn" onclick="filterApps('approved', this)">Approved</button>
-                        <button class="tab-btn" onclick="filterApps('rejected', this)">Rejected</button>
+        <!-- 1. MEMBERSHIP APPLICATIONS VIEW -->
+        <div id="view-applications" class="view-panel">
+            <div class="panel-card">
+                <div class="panel-header">
+                    <div class="panel-title">MEMBERSHIP APPLICATIONS</div>
+                    <div class="tab-group">
+                        <button class="tab-btn active">All</button>
+                        <button class="tab-btn">Pending</button>
+                        <button class="tab-btn">Approved</button>
+                        <button class="tab-btn">Rejected</button>
                     </div>
                 </div>
 
-                <!-- SEARCH BAR -->
                 <div class="search-box">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" id="searchInput" placeholder="Search by Name / Application ID / Mobile..." onkeyup="handleSearch()">
+                    <input type="text" placeholder="Search: Name / Application ID / Mobile">
                 </div>
 
-                <!-- APPLICATIONS LIST CARDS -->
-                <div class="app-cards-list" id="applicationsContainer">
-                    <!-- Cards dynamically rendered via JS -->
-                </div>
-            </div>
-
-            <!-- ================= VIEW 3: SINGLE MEMBERSHIP APPLICATION DETAIL ================= -->
-            <div id="applicationDetailView" class="page-view">
-                <div class="view-header">
-                    <div class="view-title-row">
-                        <div class="view-title">MEMBERSHIP APPLICATION</div>
-                        <button class="back-btn" onclick="switchView('applicationsView')"><i class="fa-solid fa-arrow-left"></i> Back to List</button>
+                <!-- APPLICATION ITEM -->
+                <div class="item-card">
+                    <div class="item-info">
+                        <div class="item-name">Ravi Kumar</div>
+                        <div class="item-sub">ID: TNSF-APP-00125 &bull; Proddatur</div>
+                        <div class="item-sub">Submitted: 30 Sep 2026</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <span class="status-badge status-pending" style="margin-bottom: 8px;">🟡 Pending</span><br>
+                        <button class="btn-view" onclick="openModal('modal-app-detail')">View</button>
                     </div>
                 </div>
 
-                <div class="detail-card">
-                    <div class="app-header-bar">
-                        <div>
-                            <label style="font-size: 11px; color: #777;">Application ID</label>
-                            <h3 id="detAppId">TNSF-APP-00125</h3>
-                        </div>
-                        <span class="status-badge status-pending" id="detStatusBadge">🟡 Pending Verification</span>
+                <div class="item-card">
+                    <div class="item-info">
+                        <div class="item-name">Sita Verma</div>
+                        <div class="item-sub">ID: TNSF-APP-00126 &bull; Proddatur</div>
+                        <div class="item-sub">Submitted: 29 Sep 2026</div>
                     </div>
-
-                    <!-- Personal Information -->
-                    <div class="detail-section-title">Personal Information</div>
-                    <div class="detail-grid">
-                        <div class="detail-item">
-                            <label>Full Name</label>
-                            <span id="detName">Ravi Kumar</span>
-                        </div>
-                        <div class="detail-item">
-                            <label>Mobile Number</label>
-                            <span id="detMobile">+91 98765 43210</span>
-                        </div>
-                        <div class="detail-item">
-                            <label>Email Address</label>
-                            <span id="detEmail">ravikumar@gmail.com</span>
-                        </div>
-                        <div class="detail-item">
-                            <label>Date of Birth</label>
-                            <span id="detDob">14 Aug 2003</span>
-                        </div>
-                        <div class="detail-item">
-                            <label>Gender</label>
-                            <span id="detGender">Male</span>
-                        </div>
-                    </div>
-
-                    <!-- Address -->
-                    <div class="detail-section-title">Address</div>
-                    <div class="detail-grid">
-                        <div class="detail-item">
-                            <label>District</label>
-                            <span>Kadapa</span>
-                        </div>
-                        <div class="detail-item">
-                            <label>Constituency</label>
-                            <span id="detConstituency">Proddatur</span>
-                        </div>
-                        <div class="detail-item">
-                            <label>Mandal</label>
-                            <span>Proddatur Urban</span>
-                        </div>
-                        <div class="detail-item">
-                            <label>Village / Locality</label>
-                            <span>Rameshwaram</span>
-                        </div>
-                    </div>
-
-                    <!-- Education -->
-                    <div class="detail-section-title">Education</div>
-                    <div class="detail-grid">
-                        <div class="detail-item">
-                            <label>College Name</label>
-                            <span>Govt Degree College, Proddatur</span>
-                        </div>
-                        <div class="detail-item">
-                            <label>Course</label>
-                            <span>B.Sc Computer Science</span>
-                        </div>
-                        <div class="detail-item">
-                            <label>Qualification</label>
-                            <span>Undergraduate</span>
-                        </div>
-                        <div class="detail-item">
-                            <label>Passing Year</label>
-                            <span>2025</span>
-                        </div>
-                    </div>
-
-                    <!-- Documents -->
-                    <div class="detail-section-title">Submitted Documents</div>
-                    <div class="docs-list">
-                        <div class="doc-chip" onclick="showToast('Opening Profile Photo...')">
-                            <i class="fa-solid fa-image"></i> Profile Photo.png
-                        </div>
-                        <div class="doc-chip" onclick="showToast('Opening ID Document...')">
-                            <i class="fa-solid fa-id-card"></i> Aadhaar_Card.pdf
-                        </div>
-                        <div class="doc-chip" onclick="showToast('Opening Student Document...')">
-                            <i class="fa-solid fa-file-pdf"></i> College_ID.pdf
-                        </div>
-                    </div>
-
-                    <!-- Applicant Declaration -->
-                    <div class="declaration-box">
-                        <i class="fa-solid fa-circle-check"></i>
-                        <div>
-                            <strong>Applicant Declaration Verified</strong><br>
-                            I hereby declare that all provided details are authentic and I pledge commitment to TNSF rules and ethics.
-                        </div>
-                    </div>
-
-                    <!-- Action Buttons -->
-                    <div class="action-button-group" id="actionButtonsContainer">
-                        <button class="verify-send-btn" onclick="verifyAndSendToSuperAdmin()">
-                            <i class="fa-solid fa-paper-plane"></i> VERIFY & SEND TO SUPER ADMIN
-                        </button>
-                        <button class="reject-btn" onclick="openRejectModal()">
-                            <i class="fa-solid fa-circle-xmark"></i> REJECT APPLICATION
-                        </button>
+                    <div style="text-align: right;">
+                        <span class="status-badge status-pending" style="margin-bottom: 8px;">🟡 Pending</span><br>
+                        <button class="btn-view" onclick="openModal('modal-app-detail')">View</button>
                     </div>
                 </div>
             </div>
-
         </div>
 
-        <footer>
-            <p>© 2026 TNSF KADAPA PARLIAMENT • All Rights Reserved</p>
-        </footer>
+        <!-- 2. ALL MEMBERS VIEW -->
+        <div id="view-members" class="view-panel">
+            <div class="panel-card">
+                <div class="panel-header">
+                    <div>
+                        <div class="panel-title">ALL MEMBERS</div>
+                        <div style="font-size: 12px; color: #666;">Proddatur Constituency &bull; Total: 1,248</div>
+                    </div>
+                </div>
+
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search Members...">
+                </div>
+
+                <div class="filter-grid">
+                    <select><option>Status: All</option><option>Active</option><option>Pending</option></select>
+                    <select><option>Gender: All</option><option>Male</option><option>Female</option></select>
+                    <select><option>College</option></select>
+                    <select><option>Course</option></select>
+                    <select><option>Year</option></select>
+                    <select><option>Member Since</option></select>
+                </div>
+
+                <!-- MEMBER ITEM -->
+                <div class="item-card">
+                    <div class="item-info">
+                        <div class="item-name">Ravi Kumar</div>
+                        <div class="item-sub">TNSF-KDP-001245 &bull; General User</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <span class="status-badge status-active" style="margin-bottom: 8px;">🟢 Active</span><br>
+                        <button class="btn-view" onclick="openModal('modal-member-profile')">View Profile</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. RESOLUTION DESK VIEW -->
+        <div id="view-resolution" class="view-panel">
+            <div class="panel-card">
+                <div class="panel-header">
+                    <div class="panel-title">RESOLUTION DESK</div>
+                </div>
+
+                <div class="stats-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 15px;">
+                    <div style="background: #f8f9fa; padding: 10px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 11px; color: #666;">New</div>
+                        <div style="font-weight: 800; font-size: 16px;">8</div>
+                    </div>
+                    <div style="background: #f8f9fa; padding: 10px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 11px; color: #666;">Assigned</div>
+                        <div style="font-weight: 800; font-size: 16px;">5</div>
+                    </div>
+                    <div style="background: #f8f9fa; padding: 10px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 11px; color: #666;">Under Review</div>
+                        <div style="font-weight: 800; font-size: 16px;">7</div>
+                    </div>
+                    <div style="background: #f8f9fa; padding: 10px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 11px; color: #666;">Resolved</div>
+                        <div style="font-weight: 800; font-size: 16px;">32</div>
+                    </div>
+                </div>
+                <!-- REQUEST ITEM -->
+                <div class="item-card">
+                    <div class="item-info">
+                        <div style="font-size: 11px; font-weight: 700; color: #888;">#RD1025</div>
+                        <div class="item-name">Scholarship Issue</div>
+                        <div class="item-sub">Ravi Kumar &bull; Proddatur</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <span class="status-badge status-pending" style="margin-bottom: 8px;">🟡 New</span><br>
+                        <button class="btn-view" onclick="openModal('modal-resolution-detail')">View Request</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. EVENTS VIEW -->
+        <div id="view-events" class="view-panel">
+            <div class="panel-card">
+                <div class="panel-header">
+                    <div class="panel-title">EVENTS</div>
+                    <button class="btn-primary" style="width: auto; padding: 6px 14px; font-size: 12px;" onclick="openModal('modal-create-event')">+ CREATE EVENT</button>
+                </div>
+
+                <div class="detail-section-title">Upcoming Events</div>
+
+                <div class="item-card" style="flex-direction: column; align-items: flex-start; gap: 10px;">
+                    <div style="display: flex; justify-content: space-between; width: 100%;">
+                        <div>
+                            <div class="item-name" style="font-size: 15px;">Student Awareness Meeting</div>
+                            <div class="item-sub"><i class="fa-solid fa-calendar"></i> 10 Oct 2026 &bull; Proddatur</div>
+                        </div>
+                        <span class="status-badge status-info">125 Registered</span>
+                    </div>
+                    <div style="display: flex; gap: 8px; width: 100%; margin-top: 5px;">
+                        <button class="btn-view" style="flex: 1;" onclick="openModal('modal-manage-event')">Manage Event</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. GALLERY VIEW -->
+        <div id="view-gallery" class="view-panel">
+            <div class="panel-card">
+                <div class="panel-header">
+                    <div class="panel-title">GALLERY</div>
+                    <button class="btn-primary" style="width: auto; padding: 6px 14px; font-size: 12px;" onclick="openModal('modal-create-album')">+ Upload Photos</button>
+                </div>
+
+                <div class="detail-section-title">Albums</div>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                    <div style="background: #f9f9f9; padding: 12px; border-radius: 8px; border: 1px solid #eee;">
+                        <div style="font-weight: 700; font-size: 13px;">Student Awareness Meet</div>
+                        <div style="font-size: 11px; color: #666;">12 Photos</div>
+                    </div>
+                    <div style="background: #f9f9f9; padding: 12px; border-radius: 8px; border: 1px solid #eee;">
+                        <div style="font-weight: 700; font-size: 13px;">Republic Day Event</div>
+                        <div style="font-size: 11px; color: #666;">24 Photos</div>
+                    </div>
+                    <div style="background: #f9f9f9; padding: 12px; border-radius: 8px; border: 1px solid #eee;">
+                        <div style="font-weight: 700; font-size: 13px;">Leadership Program</div>
+                        <div style="font-size: 11px; color: #666;">18 Photos</div>
+                    </div>
+                    <div style="background: #f9f9f9; padding: 12px; border-radius: 8px; border: 1px solid #eee;">
+                        <div style="font-weight: 700; font-size: 13px;">College Visit</div>
+                        <div style="font-size: 11px; color: #666;">8 Photos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-    <!-- REJECTION MODAL -->
-    <div class="modal-overlay" id="rejectModal">
+
+    <!-- MODAL 1: APPLICATION DETAIL -->
+    <div class="modal-overlay" id="modal-app-detail">
         <div class="modal-card">
-            <div class="modal-title">
-                <i class="fa-solid fa-triangle-exclamation"></i> REJECT APPLICATION
+            <div class="modal-header">
+                <h3>MEMBERSHIP APPLICATION</h3>
+                <div class="modal-close" onclick="closeModal('modal-app-detail')"><i class="fa-solid fa-xmark"></i></div>
             </div>
-            <div class="modal-subtitle">
-                Applicant: <strong id="rejectApplicantName">Ravi Kumar</strong>
-            </div>
+            <div class="modal-body">
+                <div class="detail-item" style="margin-bottom: 10px;">
+                    <label>Application ID</label>
+                    <span style="font-size: 15px; color: #000;">TNSF-APP-00125</span>
+                </div>
 
-            <div class="form-group">
-                <label>Reason *</label>
-                <select id="rejectReasonSelect">
-                    <option value="" disabled selected>-- Select reason --</option>
-                    <option value="Incorrect information">Incorrect information</option>
-                    <option value="Duplicate application">Duplicate application</option>
-                    <option value="Invalid constituency">Invalid constituency</option>
-                    <option value="Insufficient details">Insufficient details</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
+                <div class="detail-section-title">Personal Information</div>
+                <div class="detail-grid">
+                    <div class="detail-item"><label>Name</label><span>Ravi Kumar</span></div>
+                    <div class="detail-item"><label>Mobile</label><span>+91 98765 43210</span></div>
+                    <div class="detail-item"><label>Email</label><span>ravi@example.com</span></div>
+                    <div class="detail-item"><label>DOB</label><span>15/08/2003</span></div>
+                    <div class="detail-item"><label>Gender</label><span>Male</span></div>
+                </div>
 
-            <div class="form-group">
-                <label>Additional Comment</label>
-                <textarea id="rejectComment" rows="3" placeholder="Provide additional details for the applicant..."></textarea>
-            </div>
+                <div class="detail-section-title">Address</div>
+                <div class="detail-grid">
+                    <div class="detail-item"><label>District</label><span>Kadapa</span></div>
+                    <div class="detail-item"><label>Constituency</label><span>Proddatur</span></div>
+                    <div class="detail-item"><label>Mandal</label><span>Proddatur Urban</span></div>
+                    <div class="detail-item"><label>Village</label><span>Holmes Pet</span></div>
+                </div>
 
-            <div class="modal-actions">
-                <button class="btn-cancel" onclick="closeRejectModal()">Cancel</button>
-                <button class="btn-confirm-reject" onclick="confirmRejection()">CONFIRM REJECTION</button>
+                <div class="detail-section-title">Education</div>
+                <div class="detail-grid">
+                    <div class="detail-item"><label>College</label><span>Govt Degree College</span></div>
+                    <div class="detail-item"><label>Course</label><span>B.Sc Computer Science</span></div>
+                    <div class="detail-item"><label>Qualification</label><span>Undergraduate</span></div>
+                    <div class="detail-item"><label>Year</label><span>3rd Year</span></div>
+                </div>
+
+                <div class="detail-section-title">Documents</div>
+                <div class="doc-thumbs">
+                    <div class="doc-thumb"><i class="fa-solid fa-user"></i><br>Profile Photo</div>
+                    <div class="doc-thumb"><i class="fa-solid fa-id-card"></i><br>ID Doc</div>
+                    <div class="doc-thumb"><i class="fa-solid fa-graduation-cap"></i><br>Student Doc</div>
+                </div>
+
+                <div class="detail-section-title">Applicant Declaration</div>
+                <div style="font-size: 12px; color: #27ae60; font-weight: 600;">
+                    ✓ Verified & Signed Digitally by Applicant
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn-primary" onclick="alert('Verified and recommended! Sent to Super Admin for final approval.'); closeModal('modal-app-detail');">VERIFY & SEND TO SUPER ADMIN</button>
+                    <button class="btn-danger" onclick="closeModal('modal-app-detail'); openModal('modal-reject-app');">REJECT APPLICATION</button>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- TOAST NOTIFICATION -->
-    <div class="toast" id="toastMessage">
-        <i class="fa-solid fa-circle-info"></i> <span id="toastText">Notification message</span>
+    <!-- MODAL 2: REJECT APPLICATION -->
+    <div class="modal-overlay" id="modal-reject-app">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>REJECT APPLICATION</h3>
+                <div class="modal-close" onclick="closeModal('modal-reject-app')"><i class="fa-solid fa-xmark"></i></div>
+            </div>
+            <div class="modal-body">
+                <div style="margin-bottom: 12px; font-size: 13px;">
+                    Applicant: <strong>Ravi Kumar</strong>
+                </div>
+
+                <div class="form-group">
+                    <label>Reason *</label>
+                    <select>
+                        <option value="">[ Select reason ]</option>
+                        <option>Incorrect information</option>
+                        <option>Duplicate application</option>
+                        <option>Invalid constituency</option>
+                        <option>Insufficient details</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Additional comment</label>
+                    <textarea placeholder="Provide detailed feedback..."></textarea>
+                </div>
+
+                <button class="btn-danger" onclick="alert('Application rejected.'); closeModal('modal-reject-app');">CONFIRM REJECTION</button>
+            </div>
+        </div>
     </div>
 
-    <!-- JAVASCRIPT LOGIC -->
+    <!-- MODAL 3: MEMBER PROFILE -->
+    <div class="modal-overlay" id="modal-member-profile">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>MEMBER PROFILE</h3>
+                <div class="modal-close" onclick="closeModal('modal-member-profile')"><i class="fa-solid fa-xmark"></i></div>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <div style="width: 70px; height: 70px; background: #eee; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 28px; color: #888; border: 2px solid var(--primary-yellow);">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <h3 style="font-size: 16px;">Ravi Kumar</h3>
+                <div style="font-size: 12px; color: #666;">TNSF-KDP-001245 &bull; Proddatur</div>
+                <span class="status-badge status-active" style="margin-top: 6px;">🟢 Active Member</span>
+
+                <div class="detail-section-title" style="text-align: left;">Personal Information</div>
+                <div class="detail-grid" style="text-align: left;">
+                    <div class="detail-item"><label>Mobile</label><span>+91 98765 43210</span></div>
+                    <div class="detail-item"><label>Email</label><span>ravi@example.com</span></div>
+                    <div class="detail-item"><label>DOB</label><span>15/08/2003</span></div>
+                    <div class="detail-item"><label>Gender</label><span>Male</span></div>
+                </div>
+
+                <div class="detail-section-title" style="text-align: left;">Education</div>
+                <div class="detail-grid" style="text-align: left;">
+                    <div class="detail-item"><label>College</label><span>Govt Degree College</span></div>
+                    <div class="detail-item"><label>Course</label><span>B.Sc Computer Science</span></div>
+                    <div class="detail-item"><label>Qualification</label><span>Undergraduate</span></div>
+                </div>
+
+                <div class="detail-section-title" style="text-align: left;">Membership</div>
+                <div class="detail-grid" style="text-align: left;">
+                    <div class="detail-item"><label>Joined Date</label><span>10 Jan 2026</span></div>
+                    <div class="detail-item"><label>Verified Date</label><span>12 Jan 2026</span></div>
+                    <div class="detail-item"><label>Verified By</label><span>Super Admin</span></div>
+                </div>
+
+                <div class="detail-section-title" style="text-align: left;">Activity</div>
+                <div class="stats-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 10px;">
+                    <div style="background: #f9f9f9; padding: 6px; border-radius: 6px;"><div style="font-size: 10px;">Events</div><strong>8</strong></div>
+                    <div style="background: #f9f9f9; padding: 6px; border-radius: 6px;"><div style="font-size: 10px;">Tasks</div><strong>12</strong></div>
+                    <div style="background: #f9f9f9; padding: 6px; border-radius: 6px;"><div style="font-size: 10px;">Polls</div><strong>7</strong></div>
+                    <div style="background: #f9f9f9; padding: 6px; border-radius: 6px;"><div style="font-size: 10px;">Points</div><strong>450.6</strong></div>
+                </div>
+
+                <div class="detail-section-title" style="text-align: left;">Roles</div>
+                <div class="detail-grid" style="text-align: left;">
+                    <div class="detail-item"><label>General User</label><span>Yes</span></div>
+                    <div class="detail-item"><label>VIP</label><span>No</span></div>
+                    <div class="detail-item"><label>Admin</label><span>No</span></div>
+                </div>
+
+                <div class="btn-group" style="margin-top: 15px;">
+                    <button class="btn-secondary" onclick="alert('Viewing Activity Log...')">View Activity</button>
+                    <button class="btn-secondary" onclick="alert('Opening Messenger...')">Send Message</button>
+                    <button class="btn-danger" onclick="alert('Suspend request sent to Super Admin.')">Suspend Request</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 4: RESOLUTION DETAIL -->
+    <div class="modal-overlay" id="modal-resolution-detail">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>RESOLUTION #RD1025</h3>
+                <div class="modal-close" onclick="closeModal('modal-resolution-detail')"><i class="fa-solid fa-xmark"></i></div>
+            </div>
+            <div class="modal-body">
+                <div class="pipeline-bar">
+                    <span class="pipeline-step active">NEW</span> &rarr;
+                    <span class="pipeline-step">RECEIVED</span> &rarr;
+                    <span class="pipeline-step">ASSIGNED</span> &rarr;
+                    <span class="pipeline-step">UNDER REVIEW</span> &rarr;
+                    <span class="pipeline-step">RESPONSE SENT</span> &rarr;
+                    <span class="pipeline-step">RESOLVED</span>
+                </div>
+
+                <div class="detail-grid">
+                    <div class="detail-item"><label>Member</label><span>Ravi Kumar</span></div>
+                    <div class="detail-item"><label>Category</label><span>Scholarship</span></div>
+                </div>
+
+                <div class="detail-item" style="margin-top: 10px;">
+                    <label>Subject</label>
+                    <span>Scholarship application issue</span>
+                </div>
+
+                <div class="detail-section-title">Description</div>
+                <p style="font-size: 12px; color: #444; background: #f9f9f9; padding: 10px; border-radius: 6px;">
+                    Student has reported an issue with scholarship application.
+                </p>
+
+                <div class="detail-section-title">Attachments</div>
+                <button class="btn-secondary" style="font-size: 11px;" onclick="alert('Opening Attachment...')"><i class="fa-solid fa-paperclip"></i> View Attachment</button>
+
+                <div class="form-group" style="margin-top: 15px;">
+                    <label>Assign To</label>
+                    <select>
+                        <option>[ Admin / Responsible Person ]</option>
+                        <option>Proddatur Admin Desk</option>
+                        <option>Scholarship Incharge</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Response</label>
+                    <textarea placeholder="Enter resolution reply or notes..."></textarea>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn-primary" onclick="alert('Status Updated!')">UPDATE STATUS</button>
+                    <button class="btn-secondary" onclick="alert('Response Sent to Member!')">SEND RESPONSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 5: CREATE EVENT -->
+    <div class="modal-overlay" id="modal-create-event">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>CREATE EVENT</h3>
+                <div class="modal-close" onclick="closeModal('modal-create-event')"><i class="fa-solid fa-xmark"></i></div>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Event Title *</label>
+                    <input type="text" placeholder="e.g. Student Awareness Meeting">
+                </div>
+
+                <div class="form-group">
+                    <label>Description *</label>
+                    <textarea placeholder="Event details..."></textarea>
+                </div>
+
+                <div class="detail-grid">
+                    <div class="form-group">
+                        <label>Date *</label>
+                        <input type="date">
+                    </div>
+                    <div class="form-group">
+                        <label>Time *</label>
+                        <input type="time">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Venue *</label>
+                    <input type="text" placeholder="Venue location">
+                </div>
+
+                <div class="detail-grid">
+                    <div class="form-group">
+                        <label>Maximum Participants</label>
+                        <input type="number" placeholder="100">
+                    </div>
+                    <div class="form-group">
+                        <label>Points</label>
+                        <input type="number" value="20">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Event Image</label>
+                    <input type="file">
+                </div>
+
+                <div class="form-group form-inline-checkbox">
+                    <input type="checkbox" id="regReq" checked>
+                    <label for="regReq">Registration Required</label>
+                </div>
+
+                <div class="form-group">
+                    <label>Visibility</label>
+                    <div class="radio-group">
+                        <label class="radio-option"><input type="radio" name="vis" checked> Constituency</label>
+                        <label class="radio-option"><input type="radio" name="vis"> Members</label>
+                        <label class="radio-option"><input type="radio" name="vis"> Public</label>
+                    </div>
+                </div>
+
+                <button class="btn-primary" onclick="alert('Event Created Successfully!'); closeModal('modal-create-event');">CREATE EVENT</button>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL 6: EVENT MANAGEMENT -->
+    <div class="modal-overlay" id="modal-manage-event">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>EVENT MANAGEMENT</h3>
+                <div class="modal-close" onclick="closeModal('modal-manage-event')"><i class="fa-solid fa-xmark"></i></div>
+            </div>
+            <div class="modal-body">
+                <h3>Student Awareness Meeting</h3>
+                <div style="font-size: 12px; color: #666; margin-bottom: 15px;">Proddatur Venue</div>
+
+                <div class="stats-grid" style="margin-bottom: 15px;">
+                    <div style="background: #f9f9f9; padding: 10px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 11px; color: #666;">Registered</div>
+                        <div style="font-weight: 800; font-size: 16px;">125</div>
+                    </div>
+                    <div style="background: #f9f9f9; padding: 10px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 11px; color: #666;">Attended</div>
+                        <div style="font-weight: 800; font-size: 16px;">108</div>
+                    </div>
+                </div>
+
+                <div class="detail-section-title">Actions</div>
+                <div class="btn-group">
+                    <button class="btn-secondary" onclick="alert('Opening Registrations List...')">Registrations</button>
+                    <button class="btn-secondary" onclick="alert('Opening Attendance Sheet...')">Attendance</button>
+                    <button class="btn-secondary" onclick="alert('Edit Event Details...')">Edit</button>
+                    <button class="btn-secondary" onclick="alert('Opening Gallery Uploads...')">Gallery</button>
+                    <button class="btn-primary" onclick="alert('Announcement Sent to Participants!')">Announce</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 7: CREATE ALBUM -->
+    <div class="modal-overlay" id="modal-create-album">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>CREATE ALBUM</h3>
+                <div class="modal-close" onclick="closeModal('modal-create-album')"><i class="fa-solid fa-xmark"></i></div>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Album Name</label>
+                    <input type="text" placeholder="e.g. Republic Day Event">
+                </div>
+
+                <div class="detail-grid">
+                    <div class="form-group">
+                        <label>Event</label>
+                        <select><option>Select Event</option></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Photos Upload</label>
+                    <input type="file" multiple>
+                </div>
+
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea placeholder="Album notes..."></textarea>
+                </div>
+
+                <button class="btn-primary" onclick="alert('Album Published!'); closeModal('modal-create-album');">PUBLISH</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 TNSF KADAPA PARLIAMENT &bull; Proddatur Constituency Administration Desk</p>
+    </footer>
+
+    <!-- JAVASCRIPT -->
     <script>
-        // --- 1. WATER BUBBLE AUDIO SOUND ---
+        // --- 1. AUDIO BUBBLE SOUND EFFECT ---
         let audioCtx = null;
         function playWaterBubbleSound() {
             try {
@@ -1453,320 +1530,71 @@
                 }
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
-
                 osc.type = 'sine';
                 const now = audioCtx.currentTime;
                 osc.frequency.setValueAtTime(300, now);
                 osc.frequency.exponentialRampToValueAtTime(800, now + 0.08);
-
-                gain.gain.setValueAtTime(0.25, now);
+                gain.gain.setValueAtTime(0.3, now);
                 gain.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
-
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
-
                 osc.start(now);
                 osc.stop(now + 0.08);
             } catch (e) {}
         }
 
         document.addEventListener('click', (e) => {
-            if (e.target.closest('button, a, .hub-item, .doc-chip, .menu-toggle, .close-menu')) {
+            if (e.target.closest('button, a, .hub-item, .menu-toggle, .close-drawer, .modal-close')) {
                 playWaterBubbleSound();
             }
         });
 
-        // --- 2. 3D INTRO TEXT ANIMATION ---
-        const mainTitle = "MY TNSF";
-        const subTitle = "KADAPA";
-        const topContainer = document.getElementById('topText');
-        const bottomContainer = document.getElementById('bottomText');
-        let delayCount = 0;
+        // --- 2. DRAWER CONTROL ---
+        const openDrawerBtn = document.getElementById('openDrawerBtn');
+        const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+        const drawerOverlay = document.getElementById('drawerOverlay');
 
-        mainTitle.split('').forEach((char) => {
-            const span = document.createElement('span');
-            if (char === ' ') {
-                span.style.width = '12px';
-            } else {
-                span.classList.add('letter');
-                span.textContent = char;
-                span.style.animationDelay = `${delayCount * 0.12}s`;
-                delayCount++;
+        openDrawerBtn.addEventListener('click', () => {
+            drawerOverlay.classList.add('active');
+        });
+
+        closeDrawerBtn.addEventListener('click', () => {
+            drawerOverlay.classList.remove('active');
+        });
+
+        drawerOverlay.addEventListener('click', (e) => {
+            if (e.target === drawerOverlay) {
+                drawerOverlay.classList.remove('active');
             }
-            topContainer.appendChild(span);
         });
 
-        subTitle.split('').forEach((char) => {
-            const span = document.createElement('span');
-            span.classList.add('sub-letter');
-            span.textContent = char;
-            span.style.animationDelay = `${(delayCount * 0.12) + 0.1}s`;
-            delayCount++;
-            bottomContainer.appendChild(span);
-        });
-
-        const totalAnimationDuration = (delayCount * 120) + 700;
-        window.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                document.body.classList.add('loaded');
-            }, totalAnimationDuration);
-        });
-
-        // --- 3. DATA & STATE MANAGEMENT ---
-        let currentRole = 'admin'; // 'admin' or 'personal'
-        let currentFilter = 'all';
-        let currentSelectedApp = null;
-
-        const applicationsList = [
-            {
-                id: "TNSF-APP-00125",
-                name: "Ravi Kumar",
-                constituency: "Proddatur",
-                mobile: "+91 98765 43210",
-                email: "ravikumar@gmail.com",
-                dob: "14 Aug 2003",
-                gender: "Male",
-                date: "30 Sep 2026",
-                status: "pending"
-            },
-            {
-                id: "TNSF-APP-00126",
-                name: "Anitha Reddy",
-                constituency: "Proddatur",
-                mobile: "+91 91234 56789",
-                email: "anitha.reddy@gmail.com",
-                dob: "22 Nov 2004",
-                gender: "Female",
-                date: "29 Sep 2026",
-                status: "pending"
-            },
-            {
-                id: "TNSF-APP-00120",
-                name: "Suresh Naidu",
-                constituency: "Proddatur",
-                mobile: "+91 99887 76655",
-                email: "suresh.n@gmail.com",
-                dob: "05 Mar 2002",
-                gender: "Male",
-                date: "25 Sep 2026",
-                status: "approved"
-            },
-            {
-                id: "TNSF-APP-00118",
-                name: "Mahesh Babu",
-                constituency: "Proddatur",
-                mobile: "+91 97001 12233",
-                email: "mahesh.b@gmail.com",
-                dob: "11 Jul 2003",
-                gender: "Male",
-                date: "22 Sep 2026",
-                status: "rejected"
-            }
-        ];
-
-        // Render Applications Cards
-        function renderApplications() {
-            const container = document.getElementById('applicationsContainer');
-            const searchVal = document.getElementById('searchInput').value.toLowerCase().trim();
-            container.innerHTML = '';
-
-            const filtered = applicationsList.filter(app => {
-                const matchesFilter = (currentFilter === 'all') || (app.status === currentFilter);
-                const matchesSearch = app.name.toLowerCase().includes(searchVal) || 
-                                      app.id.toLowerCase().includes(searchVal) || 
-                                      app.mobile.includes(searchVal);
-                return matchesFilter && matchesSearch;
+        // --- 3. VIEW SWITCHER ---
+        function switchView(viewName) {
+            document.querySelectorAll('.view-panel').forEach(panel => {
+                panel.classList.remove('active');
             });
 
-            if (filtered.length === 0) {
-                container.innerHTML = `<div style="text-align:center; padding: 40px; color: #888; font-size:13px;">No applications found matching the criteria.</div>`;
-                return;
-            }
-
-            filtered.forEach(app => {
-                let statusTag = '';
-                if (app.status === 'pending') {
-                    statusTag = `<span class="status-badge status-pending">🟡 Pending</span>`;
-                } else if (app.status === 'approved') {
-                    statusTag = `<span class="status-badge status-approved">🟢 Verified & Sent</span>`;
-                } else {
-                    statusTag = `<span class="status-badge status-rejected">🔴 Rejected</span>`;
-                }
-
-                const card = document.createElement('div');
-                card.className = 'app-card';
-                card.innerHTML = `
-                    <div class="app-info">
-                        <h4>${app.name}</h4>
-                        <div class="app-id">${app.id}</div>
-                        <div style="font-size:12px; color:#444; font-weight:500;">Constituency: ${app.constituency}</div>
-                        <div class="app-meta">
-                            <span>Submitted: ${app.date}</span>
-                            <span>•</span>
-                            ${statusTag}
-                        </div>
-                    </div>
-                    <div>
-                        <button class="view-btn" onclick="openApplicationDetails('${app.id}')">View</button>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-
-            updatePendingCount();
-        }
-
-        function updatePendingCount() {
-            const count = applicationsList.filter(a => a.status === 'pending').length;
-            document.getElementById('statPendingCount').textContent = count;
-            document.getElementById('appBadge').textContent = count;
-        }
-
-        // --- 4. NAVIGATION & VIEW SWITCHING ---
-        function switchView(viewId) {
-            document.querySelectorAll('.page-view').forEach(v => v.classList.remove('active-view'));
-            const target = document.getElementById(viewId);
-            if (target) {
-                target.classList.add('active-view');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        }
-
-        function filterApps(status, btnElem) {
-            currentFilter = status;
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            btnElem.classList.add('active');
-            renderApplications();
-        }
-
-        function handleSearch() {
-            renderApplications();
-        }
-
-        function openApplicationDetails(appId) {
-            const app = applicationsList.find(a => a.id === appId);
-            if (!app) return;
-
-            currentSelectedApp = app;
-
-            document.getElementById('detAppId').textContent = app.id;
-            document.getElementById('detName').textContent = app.name;
-            document.getElementById('detMobile').textContent = app.mobile;
-            document.getElementById('detEmail').textContent = app.email;
-            document.getElementById('detDob').textContent = app.dob;
-            document.getElementById('detGender').textContent = app.gender;
-            document.getElementById('detConstituency').textContent = app.constituency;
-
-            const badge = document.getElementById('detStatusBadge');
-            const actionGroup = document.getElementById('actionButtonsContainer');
-
-            if (app.status === 'pending') {
-                badge.className = 'status-badge status-pending';
-                badge.textContent = '🟡 Pending Verification';
-                actionGroup.style.display = 'flex';
-            } else if (app.status === 'approved') {
-                badge.className = 'status-badge status-approved';
-                badge.textContent = '🟢 Verified & Recommended to Super Admin';
-                actionGroup.style.display = 'none';
+            const targetView = document.getElementById('view-' + viewName);
+            if (targetView) {
+                targetView.classList.add('active');
             } else {
-                badge.className = 'status-badge status-rejected';
-                badge.textContent = '🔴 Application Rejected';
-                actionGroup.style.display = 'none';
+                document.getElementById('view-dashboard').classList.add('active');
             }
 
-            switchView('applicationDetailView');
+            drawerOverlay.classList.remove('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // --- 5. WORKFLOW: VERIFY & SEND TO SUPER ADMIN ---
-        function verifyAndSendToSuperAdmin() {
-            if (!currentSelectedApp) return;
-
-            currentSelectedApp.status = 'approved';
-            renderApplications();
-            
-            showToast(`Verified & Sent ${currentSelectedApp.name}'s application to Super Admin!`);
-            
-            // Refresh view
-            openApplicationDetails(currentSelectedApp.id);
+        // --- 4. MODAL CONTROLS ---
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) modal.classList.add('active');
         }
 
-        // --- 6. WORKFLOW: REJECT APPLICATION MODAL ---
-        function openRejectModal() {
-            if (!currentSelectedApp) return;
-            document.getElementById('rejectApplicantName').textContent = currentSelectedApp.name;
-            document.getElementById('rejectReasonSelect').value = '';
-            document.getElementById('rejectComment').value = '';
-            document.getElementById('rejectModal').classList.add('active');
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) modal.classList.remove('active');
         }
-
-        function closeRejectModal() {
-            document.getElementById('rejectModal').classList.remove('active');
-        }
-
-        function confirmRejection() {
-            const reason = document.getElementById('rejectReasonSelect').value;
-            if (!reason) {
-                alert('Please select a reason for rejection.');
-                return;
-            }
-
-            if (currentSelectedApp) {
-                currentSelectedApp.status = 'rejected';
-                renderApplications();
-                closeRejectModal();
-                showToast(`Application ${currentSelectedApp.id} rejected.`);
-                openApplicationDetails(currentSelectedApp.id);
-            }
-        }
-
-        // --- 7. TOGGLE ROLE: ADMIN MODE <-> PERSONAL MODE ---
-        function toggleUserRole() {
-            if (currentRole === 'admin') {
-                currentRole = 'personal';
-                document.getElementById('headerRoleTag').textContent = 'PERSONAL ACCOUNT';
-                document.getElementById('modeBadge').innerHTML = '<i class="fa-solid fa-user"></i> Personal';
-                document.getElementById('adminBannerStrip').style.display = 'none';
-                document.getElementById('menuSubHeader').textContent = 'PERSONAL DASHBOARD';
-                document.getElementById('toggleUserModeBtn').innerHTML = '<i class="fa-solid fa-shield-halved"></i> Switch to Admin Mode';
-                showToast('Switched to Personal Mode');
-            } else {
-                currentRole = 'admin';
-                document.getElementById('headerRoleTag').textContent = 'CONSTITUENCY ADMIN';
-                document.getElementById('modeBadge').innerHTML = '<i class="fa-solid fa-shield-halved"></i> Admin Mode';
-                document.getElementById('adminBannerStrip').style.display = 'flex';
-                document.getElementById('menuSubHeader').textContent = 'PRODDATUR ADMIN';
-                document.getElementById('toggleUserModeBtn').innerHTML = '<i class="fa-solid fa-arrows-rotate"></i> Switch to Personal Mode';
-                showToast('Switched to Constituency Admin Mode');
-            }
-        }
-
-        // --- 8. MOBILE MENU CONTROLS ---
-        const menuToggleBtn = document.getElementById('menuToggleBtn');
-        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-        const closeMenuBtn = document.getElementById('closeMenuBtn');
-
-        menuToggleBtn.addEventListener('click', () => {
-            mobileMenuOverlay.classList.add('active');
-        });
-
-        function closeMenu() {
-            mobileMenuOverlay.classList.remove('active');
-        }
-
-        closeMenuBtn.addEventListener('click', closeMenu);
-
-        // --- 9. TOAST NOTIFICATION ---
-        function showToast(msg) {
-            const toast = document.getElementById('toastMessage');
-            document.getElementById('toastText').textContent = msg;
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
-
-        // Initialize Render
-        renderApplications();
     </script>
 </body>
 </html>
