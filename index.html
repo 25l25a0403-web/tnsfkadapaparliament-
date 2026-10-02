@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TNSF Kadapa Parliament</title>
+    <title>TNSF Kadapa Parliament Administration Desk</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- FontAwesome for Icons -->
@@ -21,6 +21,160 @@
             background-color: #fffdf0;
             color: #333;
             overflow-x: hidden;
+        }
+
+        /* --- ZOOM-IN LOGIN POPUP MODAL --- */
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            animation: fadeInOverlay 0.4s ease forwards;
+        }
+
+        .login-modal {
+            background: #ffffff;
+            width: 100%;
+            max-width: 420px;
+            border-radius: 20px;
+            padding: 35px 30px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            position: relative;
+            transform: scale(0.3);
+            opacity: 0;
+            animation: zoomInPopup 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s forwards;
+            border: 3px solid #ffcc00;
+        }
+
+        @keyframes fadeInOverlay {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes zoomInPopup {
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .login-logo {
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            border: 3px solid #ffcc00;
+            padding: 2px;
+            object-fit: cover;
+        }
+
+        .login-modal h2 {
+            font-size: 24px;
+            font-weight: 800;
+            color: #111;
+            margin-bottom: 5px;
+        }
+
+        .login-modal p {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 6px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e1e1;
+            border-radius: 10px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #ffcc00;
+        }
+
+        .login-btn {
+            width: 100%;
+            background: #ffcc00;
+            color: #000;
+            font-weight: 700;
+            font-size: 15px;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 4px 12px rgba(255, 204, 0, 0.4);
+        }
+
+        .login-btn:hover {
+            background: #e6b800;
+            transform: translateY(-2px);
+        }
+
+        .login-footer {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .login-footer a {
+            color: #d4a000;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .demo-creds {
+            margin-top: 20px;
+            background: #fffdf0;
+            border: 1px dashed #ffd700;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 11px;
+            color: #444;
+            text-align: left;
+        }
+
+        .demo-creds b {
+            color: #222;
+        }
+
+        /* Hidden helper for views */
+        .app-view {
+            display: none;
+        }
+
+        .app-view.active-view {
+            display: block;
         }
 
         /* --- 3D INTRO LOADER ANIMATION --- */
@@ -63,16 +217,8 @@
             color: #fee12b;
             text-transform: uppercase;
             text-shadow: 
-                0 1px 0 #ffa500,
-                0 2px 0 #ffa500,
-                0 3px 0 #ffa500,
-                0 4px 0 #ffa500,
-                0 5px 0 #ffa500,
-                0 6px 1px rgba(0,0,0,.1),
-                0 0 5px rgba(0,0,0,.1),
-                0 1px 3px rgba(0,0,0,.3),
-                0 3px 5px rgba(0,0,0,.2),
-                0 5px 10px rgba(0,0,0,.25);
+                0 1px 0 #ffa500, 0 2px 0 #ffa500, 0 3px 0 #ffa500, 0 4px 0 #ffa500, 0 5px 0 #ffa500,
+                0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3);
             opacity: 0;
             transform: translateY(-80px) rotateX(90deg) scale(0.5);
             animation: fallIn 0.5s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -90,21 +236,14 @@
             letter-spacing: 4px;
             color: #fee12b;
             text-transform: uppercase;
-            text-shadow: 
-                0 1px 0 #ffa500,
-                0 2px 0 #ffa500,
-                0 3px 0 #ffa500,
-                0 4px 1px rgba(0,0,0,.2);
+            text-shadow: 0 1px 0 #ffa500, 0 2px 0 #ffa500, 0 3px 0 #ffa500, 0 4px 1px rgba(0,0,0,.2);
             opacity: 0;
             transform: translateY(-40px) rotateX(90deg);
             animation: fallIn 0.4s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         @keyframes fallIn {
-            to {
-                opacity: 1;
-                transform: translateY(0) rotateX(0deg) scale(1);
-            }
+            to { opacity: 1; transform: translateY(0) rotateX(0deg) scale(1); }
         }
 
         .loader-footer {
@@ -119,146 +258,6 @@
             opacity: 0;
             transform: scale(0.05) translateY(-500px);
             pointer-events: none;
-        }
-
-        #main-content {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 1s ease 0.3s, transform 1s ease 0.3s;
-        }
-
-        .loaded #main-content {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* --- ZOOM-IN LOGIN MODAL --- */
-        .login-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-            transition: opacity 0.4s ease;
-        }
-
-        .login-card {
-            background: #fff;
-            width: 90%;
-            max-width: 420px;
-            padding: 35px 30px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            transform: scale(0);
-            opacity: 0;
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
-            text-align: center;
-            border-top: 6px solid #ffcc00;
-        }
-
-        .login-overlay.active .login-card {
-            transform: scale(1);
-            opacity: 1;
-        }
-
-        .login-card img {
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            margin-bottom: 15px;
-            border: 2px solid #ffcc00;
-        }
-
-        .login-card h2 {
-            font-size: 24px;
-            font-weight: 700;
-            color: #111;
-            margin-bottom: 5px;
-        }
-
-        .login-card p {
-            font-size: 13px;
-            color: #666;
-            margin-bottom: 25px;
-        }
-
-        .form-group {
-            text-align: left;
-            margin-bottom: 18px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 12px;
-            font-weight: 600;
-            color: #444;
-            margin-bottom: 6px;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #eee;
-            border-radius: 10px;
-            font-size: 14px;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus {
-            border-color: #ffcc00;
-        }
-
-        .login-btn {
-            width: 100%;
-            padding: 13px;
-            background: #ffcc00;
-            color: #000;
-            border: none;
-            border-radius: 10px;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.2s;
-            box-shadow: 0 4px 12px rgba(255, 204, 0, 0.3);
-            margin-top: 10px;
-        }
-
-        .login-btn:hover {
-            background: #e6b800;
-            transform: translateY(-2px);
-        }
-
-        .register-link {
-            display: inline-block;
-            margin-top: 20px;
-            font-size: 13px;
-            color: #555;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s;
-        }
-
-        .register-link:hover {
-            color: #ff9900;
-            text-decoration: underline;
-        }
-
-        .demo-credentials {
-            margin-top: 15px;
-            background: #fffdf0;
-            padding: 10px;
-            border-radius: 8px;
-            font-size: 11px;
-            color: #555;
-            border: 1px dashed #ffd700;
-            text-align: left;
         }
 
         /* Header */
@@ -396,206 +395,128 @@
             gap: 15px;
         }
 
+        .mobile-nav-links a i {
+            color: #ff9900;
+            font-size: 18px;
+            width: 25px;
+            text-align: center;
+        }
+
         .container {
             max-width: 1200px;
             margin: 20px auto;
             padding: 0 15px;
         }
 
-        /* --- HERO SLIDER --- */
-        .hero-slider-container {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-            margin-bottom: 25px;
-            height: 240px;
-            background-color: #2c3e50;
-        }
-
-        .slider-wrapper {
-            display: flex;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.6s ease-in-out;
-        }
-
-        .slide {
-            min-width: 100%;
-            height: 100%;
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
-        .slide-content {
-            position: relative;
-            z-index: 2;
-            padding: 20px 30px;
+        /* --- ADMIN STATS CARDS --- */
+        .welcome-admin-banner {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
             color: #fff;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
-        }
-
-        .slide-content h2 {
-            font-size: clamp(20px, 4vw, 32px);
-            font-weight: 700;
-            color: #ffcc00;
-        }
-
-        .slide-content p {
-            font-size: clamp(12px, 2vw, 16px);
-            font-weight: 500;
-        }
-
-        .slider-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.8);
-            border: none;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            color: #333;
-            z-index: 10;
-        }
-
-        .prev-btn { left: 12px; }
-        .next-btn { right: 12px; }
-
-        .slider-dots {
-            position: absolute;
-            bottom: 12px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 8px;
-            z-index: 10;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
-            cursor: pointer;
-            transition: background 0.3s, width 0.3s;
-        }
-
-        .dot.active {
-            background: #ffcc00;
-            width: 20px;
-            border-radius: 4px;
-        }
-
-        /* --- PASSPORT CARD --- */
-        .passport-card {
-            background: linear-gradient(135deg, #fffcf0 0%, #fff4b8 100%);
-            border: 2px solid #ffe680;
+            padding: 25px;
             border-radius: 15px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             margin-bottom: 25px;
-        }
-
-        .passport-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .passport-title-area {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .passport-title-area img {
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            border: 2px solid #ffd700;
-        }
-
-        .passport-title-area h2 {
-            font-size: 20px;
-            font-weight: 700;
-            color: #111;
-        }
-
-        .points-badge {
-            background-color: #fff;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 13px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-            color: #222;
-        }
-
-        .points-badge i {
-            color: #ffaa00;
-        }
-
-        .passport-footer {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 15px;
         }
 
-        .passport-tags {
-            font-size: 12px;
-            color: #666;
-            font-weight: 500;
+        .welcome-admin-banner h2 {
+            font-size: clamp(18px, 3vw, 24px);
+            font-weight: 700;
+            color: #ffcc00;
         }
 
-        .view-passport-btn {
-            background-color: #ffcc00;
-            color: #000;
-            padding: 8px 18px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-weight: 600;
+        .welcome-admin-banner p {
             font-size: 13px;
-            display: inline-flex;
+            color: #ddd;
+        }
+
+        .logout-pill {
+            background: #e74c3c;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 13px;
+            transition: background 0.3s;
+        }
+
+        .logout-pill:hover {
+            background: #c0392b;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: flex;
             align-items: center;
-            gap: 8px;
-            transition: all 0.3s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            gap: 15px;
+            cursor: pointer;
+            border-left: 5px solid #ffcc00;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
         }
 
-        .view-passport-btn:hover {
-            background-color: #e6b800;
-            transform: translateX(3px);
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         }
 
-        /* --- TNSF HUB SECTION --- */
+        .stat-icon {
+            width: 55px;
+            height: 55px;
+            background: #fffdf0;
+            border: 2px solid #ffcc00;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: #d4a000;
+        }
+
+        .stat-info h3 {
+            font-size: 24px;
+            font-weight: 800;
+            color: #111;
+        }
+
+        .stat-info p {
+            font-size: 13px;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .stat-card::after {
+            content: 'View Breakdown \f105';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            bottom: 8px;
+            right: 15px;
+            font-size: 10px;
+            color: #999;
+        }
+
+        /* --- ADMINISTRATIVE HUB SECTION --- */
         .hub-section {
             background: #fff;
             border-radius: 15px;
-            padding: 25px 15px;
+            padding: 25px 20px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             margin-bottom: 30px;
         }
@@ -612,7 +533,7 @@
         .hub-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px 10px;
+            gap: 20px 15px;
             justify-items: center;
         }
 
@@ -624,7 +545,7 @@
             gap: 8px;
             text-align: center;
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
+            width: 100%;
         }
 
         .hub-item:hover {
@@ -652,186 +573,101 @@
         }
 
         .hub-item span {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             color: #222;
+            line-height: 1.2;
         }
 
-        /* --- SUPER ADMIN DASHBOARD STYLES --- */
-        #admin-dashboard {
-            display: none;
-        }
-
-        .admin-welcome {
-            background: linear-gradient(135deg, #2c3e50, #1a252f);
-            color: #fff;
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 25px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .admin-welcome h2 {
-            font-size: clamp(20px, 3vw, 26px);
-            font-weight: 700;
-            color: #ffcc00;
-            margin-bottom: 5px;
-        }
-
-        .admin-welcome p {
-            font-size: 13px;
-            color: #ddd;
-        }
-
-        .logout-btn {
-            background: #e74c3c;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 13px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .logout-btn:hover {
-            background: #c0392b;
-        }
-
-        /* Stats Cards */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .stat-card {
-            background: #fff;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-left: 5px solid #ffcc00;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-        }
-
-        .stat-icon {
-            width: 55px;
-            height: 55px;
-            background: #fffdf0;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            color: #ff9900;
-            border: 2px solid #ffcc00;
-        }
-
-        .stat-info h3 {
-            font-size: 13px;
-            color: #666;
-            font-weight: 600;
-        }
-
-        .stat-info .stat-val {
-            font-size: 24px;
-            font-weight: 800;
-            color: #111;
-        }
-
-        /* Zoom-in Stat Modal */
-        .stat-modal-overlay {
+        /* --- STAT POPUP MODAL --- */
+        .stat-popup-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(5px);
-            display: flex;
+            z-index: 10001;
+            display: none;
             justify-content: center;
             align-items: center;
-            z-index: 10001;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s;
+            padding: 20px;
         }
 
-        .stat-modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
+        .stat-popup-overlay.active {
+            display: flex;
         }
 
-        .stat-modal-card {
+        .stat-popup-box {
             background: #fff;
-            width: 90%;
-            max-width: 550px;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
-            transform: scale(0.3);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 100%;
+            max-width: 600px;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             position: relative;
+            transform: scale(0.4);
+            opacity: 0;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s;
+            max-height: 85vh;
+            overflow-y: auto;
         }
 
-        .stat-modal-overlay.active .stat-modal-card {
+        .stat-popup-overlay.active .stat-popup-box {
             transform: scale(1);
+            opacity: 1;
         }
 
-        .stat-modal-close {
+        .stat-popup-close {
             position: absolute;
-            top: 20px;
+            top: 15px;
             right: 20px;
-            font-size: 22px;
+            font-size: 24px;
             cursor: pointer;
             color: #666;
+            transition: color 0.3s;
         }
 
-        .stat-modal-close:hover { color: #000; }
+        .stat-popup-close:hover {
+            color: #ff3333;
+        }
 
-        .stat-modal-card h3 {
-            font-size: 20px;
+        .stat-popup-title {
+            font-size: 18px;
             font-weight: 700;
             color: #111;
             margin-bottom: 15px;
+            padding-right: 30px;
             border-bottom: 2px solid #ffcc00;
-            padding-bottom: 8px;
+            padding-bottom: 10px;
         }
 
-        .constituency-breakdown-list {
-            list-style: none;
-            max-height: 280px;
-            overflow-y: auto;
+        .constituency-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
             margin-top: 15px;
         }
 
-        .constituency-breakdown-list li {
+        .constituency-row {
             display: flex;
             justify-content: space-between;
-            padding: 10px 12px;
-            border-bottom: 1px solid #eee;
+            align-items: center;
+            padding: 10px 15px;
+            background: #fffdf0;
+            border-radius: 8px;
+            border: 1px solid #ffe680;
             font-size: 13px;
             font-weight: 500;
         }
 
-        .constituency-breakdown-list li:nth-child(even) {
-            background: #fffdf8;
+        .constituency-row span:last-child {
+            background: #ffcc00;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 12px;
         }
 
         footer {
@@ -841,7 +677,6 @@
             color: #666;
             background: #fffae6;
             border-top: 1px solid #f0e6b2;
-            margin-top: 40px;
         }
 
         @media (min-width: 768px) {
@@ -849,40 +684,11 @@
             .menu-toggle { display: none; }
             .mobile-menu-overlay { display: none !important; }
             .hub-grid { grid-template-columns: repeat(6, 1fr); gap: 25px; }
-            .hero-slider-container { height: 360px; }
+            .hub-item span { font-size: 12px; }
         }
     </style>
 </head>
 <body>
-
-    <!-- ZOOM-IN LOGIN POPUP OVERLAY -->
-    <div class="login-overlay active" id="loginOverlay">
-        <div class="login-card">
-            <img src="https://i.ibb.co/3yk71Q9/logo.png" alt="Logo" onerror="this.src='https://via.placeholder.com/65?text=L'">
-            <h2>TNSF Login</h2>
-            <p>Kadapa Parliament Portal</p>
-            
-            <form id="loginForm">
-                <div class="form-group">
-                    <label>Member ID</label>
-                    <input type="text" id="memberIdInput" placeholder="e.g. TNSF-PDTR-0001 or TNSF-KP-ADMIN" required>
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" id="passwordInput" placeholder="Enter password" required>
-                </div>
-                <button type="submit" class="login-btn">Login to Portal</button>
-            </form>
-
-            <a href="#" class="register-link" id="registerLink">Become a member? Register here</a>
-
-            <div class="demo-credentials">
-                <b>Quick Test Credentials:</b><br>
-                • User: <code>TNSF-PDTR-0001</code> / <code>Tnsf@123</code><br>
-                • Super Admin: <code>TNSF-KP-ADMIN</code> / <code>Admin@kp</code>
-            </div>
-        </div>
-    </div>
 
     <!-- 3D INTRO LOADING SCREEN -->
     <div id="loader-wrapper">
@@ -893,30 +699,76 @@
         <div class="loader-footer">©2026 TNSF KADAPA PARLIAMENT. All Rights Reserved.</div>
     </div>
 
-    <!-- MAIN APP CONTENT -->
-    <div id="main-content">
+    <!-- ZOOM-IN LOGIN POPUP (Opens on Load) -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-modal">
+            <img src="https://i.ibb.co/3yk71Q9/logo.png" alt="TNSF Logo" class="login-logo" onerror="this.src='https://via.placeholder.com/75?text=TNSF'">
+            <h2>TNSF Login</h2>
+            <p>Enter your credentials to access your account</p>
+            
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Member ID</label>
+                    <input type="text" id="memberId" placeholder="e.g., TNSF-KP-ADMIN" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="login-btn">Login to Dashboard</button>
+            </form>
+
+            <div class="login-footer">
+                Become a member? <a href="#" onclick="alert('Redirecting to Member Registration portal...');">Register here</a>
+            </div>
+
+            <div class="demo-creds">
+                <b>Demo Credentials:</b><br>
+                • Super Admin: <code>TNSF-KP-ADMIN</code> / <code>Admin@kp</code><br>
+                • Member: <code>TNSF-PDTR-0001</code> / <code>Tnsf@123</code>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= NORMAL MEMBER VIEW ================= -->
+    <div id="memberView" class="app-view">
+        <header>
+            <div class="brand">
+                <img src="https://i.ibb.co/3yk71Q9/logo.png" alt="Logo" onerror="this.src='https://via.placeholder.com/45?text=L'">
+                <div class="brand-text">
+                    <h1>TNSF</h1>
+                    <span>KADAPA PARLIAMENT</span>
+                </div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" onclick="logoutToLogin()">Logout</a></li>
+            </ul>
+            <div class="menu-toggle" onclick="logoutToLogin()"><i class="fa-solid fa-right-from-bracket" title="Logout"></i></div>
+        </header>
+
+        <div class="container">
+            <div style="background:#fff; padding:30px; border-radius:15px; text-align:center; box-shadow:0 4px 15px rgba(0,0,0,0.05); margin-bottom:25px;">
+                <h2 style="color:#d4a000; margin-bottom:10px;">Welcome, Member!</h2>
+                <p style="color:#666; font-size:14px; margin-bottom:20px;">You are successfully logged in as General Member (ID: TNSF-PDTR-0001).</p>
+                <button onclick="logoutToLogin()" class="logout-pill">Logout Session</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= SUPER ADMIN VIEW ================= -->
+    <div id="superAdminView" class="app-view">
         <!-- Header -->
         <header>
             <div class="brand">
                 <img src="https://i.ibb.co/3yk71Q9/logo.png" alt="Logo" onerror="this.src='https://via.placeholder.com/45?text=L'">
                 <div class="brand-text">
-                    <h1 id="headerTitle">TNSF</h1>
-                    <span id="headerSub">KADAPA PARLIAMENT</span>
+                    <h1>TNSF KADAPA PARLIAMENT</h1>
+                    <span>ADMINISTRATION DESK</span>
                 </div>
             </div>
             
-            <!-- Desktop Navbar Menu -->
-            <ul class="nav-links" id="desktopNav">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Resolution Desk</a></li>
-                <li><a href="#">Gallery</a></li>
-                <li><a href="#">Inbox</a></li>
-                <li><a href="#">Constituencies</a></li>
-                <li><a href="#">Leadership</a></li>
-                <li><a href="#">Events</a></li>
-                <li><a href="#">Feedback</a></li>
-                <li><a href="#">Contact Us</a></li>
-                <li><a href="#">Donate</a></li>
+            <ul class="nav-links">
+                <li><a href="#" onclick="logoutToLogin()"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
             </ul>
 
             <div class="menu-toggle" id="menuToggleBtn">
@@ -924,294 +776,192 @@
             </div>
         </header>
 
-        <!-- MOBILE MENU OVERLAY -->
+        <!-- MOBILE OVERLAY MENU -->
         <div class="mobile-menu-overlay" id="mobileMenuOverlay">
-            <div class="close-menu" id="closeMenuBtn">
-                <i class="fa-solid fa-xmark"></i>
-            </div>
-            <ul class="mobile-nav-links" id="mobileNavList">
-                <li><a href="#"><i class="fa-solid fa-house"></i> Home</a></li>
-                <li><a href="#"><i class="fa-solid fa-graduation-cap"></i> Resolution Desk</a></li>
-                <li><a href="#"><i class="fa-solid fa-images"></i> Gallery</a></li>
-                <li><a href="#"><i class="fa-solid fa-envelope"></i> Inbox</a></li>
-                <li><a href="#"><i class="fa-solid fa-map-location-dot"></i> Constituencies</a></li>
+            <div class="close-menu" id="closeMenuBtn"><i class="fa-solid fa-xmark"></i></div>
+            <ul class="mobile-nav-links">
+                <li><a href="#" onclick="logoutToLogin()"><i class="fa-solid fa-right-from-bracket"></i> Logout Admin</a></li>
             </ul>
         </div>
 
         <div class="container">
+            <!-- Welcome Banner -->
+            <div class="welcome-admin-banner">
+                <div>
+                    <h2>Welcome To TNSF Kadapa Parliament Administration Desk</h2>
+                    <p>Super Admin Control Center • Manage members, constituencies, permissions & analytics.</p>
+                </div>
+                <button onclick="logoutToLogin()" class="logout-pill"><i class="fa-solid fa-power-off"></i> Logout</button>
+            </div>
 
-            <!-- ================= REGULAR USER DASHBOARD ================= -->
-            <div id="user-dashboard">
-                <!-- HERO SLIDER -->
-                <div class="hero-slider-container">
-                    <div class="slider-wrapper" id="sliderWrapper">
-                        <div class="slide">
-                            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80" alt="Banner 1">
-                            <div class="slide-content">
-                                <h2>Empowering Students</h2>
-                                <p>Building a Better Tomorrow</p>
-                            </div>
-                        </div>
-                        <div class="slide">
-                            <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1200&q=80" alt="Banner 2">
-                            <div class="slide-content">
-                                <h2>United for Rights</h2>
-                                <p>Striving for Student Welfare & Education</p>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="slider-btn prev-btn" id="prevBtn"><i class="fa-solid fa-chevron-left"></i></button>
-                    <button class="slider-btn next-btn" id="nextBtn"><i class="fa-solid fa-chevron-right"></i></button>
-                    <div class="slider-dots" id="sliderDots">
-                        <span class="dot active" data-index="0"></span>
-                        <span class="dot" data-index="1"></span>
+            <!-- Stats Cards (Clickable for zoom-in popups) -->
+            <div class="stats-grid">
+                <div class="stat-card" onclick="openStatPopup('general')">
+                    <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+                    <div class="stat-info">
+                        <h3>14,850</h3>
+                        <p>General Members</p>
                     </div>
                 </div>
 
-                <!-- Passport Card -->
-                <div class="passport-card">
-                    <div class="passport-top">
-                        <div class="passport-title-area">
-                            <img src="https://i.ibb.co/3yk71Q9/logo.png" alt="Passport">
-                            <h2>My TNSF Passport</h2>
-                        </div>
-                        <div class="points-badge">
-                            <i class="fa-solid fa-star"></i> 450.6 Points
-                        </div>
-                    </div>
-                    <div class="passport-footer">
-                        <div class="passport-tags">Your Journey &nbsp;•&nbsp; Your Points &nbsp;•&nbsp; Your Growth</div>
-                        <a href="#" class="view-passport-btn">View My Passport <i class="fa-solid fa-arrow-right"></i></a>
+                <div class="stat-card" onclick="openStatPopup('vip')">
+                    <div class="stat-icon"><i class="fa-solid fa-crown"></i></div>
+                    <div class="stat-info">
+                        <h3>320</h3>
+                        <p>VIP's</p>
                     </div>
                 </div>
 
-                <!-- TNSF Hub Section -->
-                <div class="hub-section">
-                    <div class="hub-title">TNSF Hub</div>
-                    <div class="hub-grid">
-                        <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-user"></i></div><span>Profile</span></a>
-                        <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-square-poll-vertical"></i></div><span>Polls</span></a>
-                        <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-list-check"></i></div><span>Tasks</span></a>
-                        <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-user-plus"></i></div><span>Refer</span></a>
-                        <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-graduation-cap"></i></div><span>Resolution Desk</span></a>
-                        <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-images"></i></div><span>Gallery</span></a>
+                <div class="stat-card" onclick="openStatPopup('admins')">
+                    <div class="stat-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div class="stat-info">
+                        <h3>45</h3>
+                        <p>Admins</p>
+                    </div>
+                </div>
+
+                <div class="stat-card" onclick="openStatPopup('pending')">
+                    <div class="stat-icon"><i class="fa-solid fa-user-clock"></i></div>
+                    <div class="stat-info">
+                        <h3>185</h3>
+                        <p>Pending Approvals</p>
                     </div>
                 </div>
             </div>
 
-            <!-- ================= SUPER ADMIN DASHBOARD ================= -->
-            <div id="admin-dashboard">
-                <div class="admin-welcome">
-                    <div>
-                        <h2>Welcome To TNSF Kadapa Parliament Administration Desk</h2>
-                        <p>Super Admin Control Center & Constituency Management</p>
-                    </div>
-                    <button class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
-                </div>
-
-                <!-- Stats Cards -->
-                <div class="stats-grid">
-                    <div class="stat-card" onclick="openStatModal('General Members', 12450)">
-                        <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
-                        <div class="stat-info">
-                            <h3>General Members</h3>
-                            <div class="stat-val">12,450</div>
-                        </div>
-                    </div>
-                    <div class="stat-card" onclick="openStatModal('VIP Members', 340)">
-                        <div class="stat-icon"><i class="fa-solid fa-crown"></i></div>
-                        <div class="stat-info">
-                            <h3>VIP's</h3>
-                            <div class="stat-val">340</div>
-                        </div>
-                    </div>
-                    <div class="stat-card" onclick="openStatModal('Admins & Leaders', 85)">
-                        <div class="stat-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                        <div class="stat-info">
-                            <h3>Admins</h3>
-                            <div class="stat-val">85</div>
-                        </div>
-                    </div>
-                    <div class="stat-card" onclick="openStatModal('Pending Approvals', 120)">
-                        <div class="stat-icon"><i class="fa-solid fa-clock"></i></div>
-                        <div class="stat-info">
-                            <h3>Pending</h3>
-                            <div class="stat-val">120</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Administrative Hub Section -->
-                <div class="hub-section">
-                    <div class="hub-title">Administrative Hub</div>
-                    <div class="hub-grid">
-                        <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-users-gear"></i></div><span>Member Management</span></a>
-                        <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-id-card"></i></div><span>Membership's</span></a>
-                        <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-crown"></i></div><span>VIP Management</span></a>
-                        <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-user-shield"></i></div><span>Admin Management</span></a>
-                        <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-map-location-dot"></i></div><span>Constituencies</span></a>
-                        <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-sliders"></i></div><span>Features & Permissions</span></a>
-                        <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-graduation-cap"></i></div><span>Resolution Desk</span></a>
-                        <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-calendar-days"></i></div><span>Events</span></a>
-                        <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-images"></i></div><span>Gallery</span></a>
-                        <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-list-check"></i></div><span>Tasks</span></a>
-                        <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-square-poll-vertical"></i></div><span>Polls</span></a>
-                        <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-comments"></i></div><span>Feedback</span></a>
-                        <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-hand-holding-heart"></i></div><span>Donations</span></a>
-                        <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-gears"></i></div><span>System Settings</span></a>
-                    </div>
+            <!-- ADMINISTRATIVE HUB SECTION -->
+            <div class="hub-section">
+                <div class="hub-title">ADMINISTRATIVE HUB</div>
+                
+                <div class="hub-grid">
+                    <a href="#" class="hub-item" onclick="alertHubClick('Member Management (All Users, General, VIP, Pending, Suspended)')">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-user-gear"></i></div>
+                        <span>Member Management</span>
+                    </a>
+                    <a href="#" class="hub-item" onclick="alertHubClick('Membership Hub (Pending Approvals, Approved, Rejected)')">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-id-card"></i></div>
+                        <span>Membership's</span>
+                    </a>
+                    <a href="#" class="hub-item" onclick="alertHubClick('VIP Management Suite')">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-crown"></i></div>
+                        <span>VIP Management</span>
+                    </a>
+                    <a href="#" class="hub-item" onclick="alertHubClick('Administration (Constituency Admins, Permissions, Logs)')">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-user-shield"></i></div>
+                        <span>Admin Management</span>
+                    </a>
+                    <a href="#" class="hub-item" onclick="alertHubClick('Constituencies Wide Hub')">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-map-location-dot"></i></div>
+                        <span>Constituencies</span>
+                    </a>
+                    <a href="#" class="hub-item" onclick="alertHubClick('Features & Permissions')">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-toggle-on"></i></div>
+                        <span>Features & Permissions</span>
+                    </a>
+                    <a href="#" class="hub-item" onclick="alertHubClick('Resolution Desk')">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-graduation-cap"></i></div>
+                        <span>Resolution Desk</span>
+                    </a>
+                    <a href="#" class="hub-item" onclick="alertHubClick('Events Management')">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-calendar-days"></i></div>
+                        <span>Events</span>
+                    </a>
+                    <a href="#" class="hub-item" onclick="alertHubClick('Gallery Management')">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-images"></i></div>
+                        <span>Gallery</span>
+                    </a>
+                    <a href="#" class="hub-item" onclick="alertHubClick('Tasks Hub')">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-list-check"></i></div>
+                        <span>Tasks</span>
+                    </a>
+                    <a href="#" class="hub-item" onclick="alertHubClick('Polls & Voting')">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-square-poll-vertical"></i></div>
+                        <span>Polls</span>
+                    </a>
+                    <a href="#" class="hub-item" onclick="alertHubClick('Feedback & Messages')">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-comments"></i></div>
+                        <span>Feedback</span>
+                    </a>
+                    <a href="#" class="hub-item" onclick="alertHubClick('Donations & Financial Records')">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                        <span>Donations</span>
+                    </a>
+                    <a href="#" class="hub-item" onclick="alertHubClick('System Settings & Configuration')">
+                        <div class="hub-icon-circle"><i class="fa-solid fa-gear"></i></div>
+                        <span>System Settings</span>
+                    </a>
                 </div>
             </div>
-
         </div>
 
         <footer>
-            <p>©2026 TNSF KADAPA PARLIAMENT all rights reserved</p>
+            <p>Copy 2026 TNSF KADAPA PARLIAMENT all rights reserved</p>
         </footer>
     </div>
 
-    <!-- ZOOM-IN STAT MODAL -->
-    <div class="stat-modal-overlay" id="statModalOverlay">
-        <div class="stat-modal-card">
-            <div class="stat-modal-close" id="closeStatModal"><i class="fa-solid fa-xmark"></i></div>
-            <h3 id="statModalTitle">Constituency Breakdown</h3>
-            <p style="font-size: 12px; color: #666;">Detailed constituency-wide statistics for Kadapa Parliament.</p>
-            <ul class="constituency-breakdown-list" id="statModalList">
-                <!-- Dynamically populated -->
-            </ul>
+    <!-- STAT POPUP MODAL (Zoom-in from stat cards) -->
+    <div class="stat-popup-overlay" id="statPopupOverlay">
+        <div class="stat-popup-box">
+            <div class="stat-popup-close" onclick="closeStatPopup()"><i class="fa-solid fa-xmark"></i></div>
+            <div class="stat-popup-title" id="statPopupTitle">Constituency Breakdown</div>
+            <div id="statPopupContent" class="constituency-list">
+                <!-- Dynamically populated constituency stats -->
+            </div>
         </div>
     </div>
 
     <!-- JavaScript -->
     <script>
-        // --- AUTHENTICATION & LOGIN LOGIC ---
-        const loginOverlay = document.getElementById('loginOverlay');
-        const loginForm = document.getElementById('loginForm');
-        const memberIdInput = document.getElementById('memberIdInput');
-        const passwordInput = document.getElementById('passwordInput');
-        const userDashboard = document.getElementById('user-dashboard');
-        const adminDashboard = document.getElementById('admin-dashboard');
-        const logoutBtn = document.getElementById('logoutBtn');
-        const headerTitle = document.getElementById('headerTitle');
-        const headerSub = document.getElementById('headerSub');
-
-        loginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const mId = memberIdInput.value.trim();
-            const pass = passwordInput.value.trim();
-
-            if (mId === 'TNSF-PDTR-0001' && pass === 'Tnsf@123') {
-                // Regular Member Login
-                loginOverlay.classList.remove('active');
-                userDashboard.style.display = 'block';
-                adminDashboard.style.display = 'none';
-                headerTitle.textContent = 'TNSF';
-                headerSub.textContent = 'KADAPA PARLIAMENT';
-            } else if (mId === 'TNSF-KP-ADMIN' && pass === 'Admin@kp') {
-                // Super Admin Login
-                loginOverlay.classList.remove('active');
-                userDashboard.style.display = 'none';
-                adminDashboard.style.display = 'block';
-                headerTitle.textContent = 'TNSF';
-                headerSub.textContent = 'KADAPA PARLIAMENT ADMINISTRATION';
-            } else {
-                alert('Invalid Member ID or Password! Please check demo credentials below.');
-            }
-        });
-
-        logoutBtn.addEventListener('click', () => {
-            memberIdInput.value = '';
-            passwordInput.value = '';
-            adminDashboard.style.display = 'none';
-            loginOverlay.classList.add('active');
-        });
-
-        // --- ZOOM-IN STAT MODAL LOGIC ---
-        const statModalOverlay = document.getElementById('statModalOverlay');
-        const closeStatModal = document.getElementById('closeStatModal');
-        const statModalTitle = document.getElementById('statModalTitle');
-        const statModalList = document.getElementById('statModalList');
-
-        const constituencies = [
-            "Kadapa", "Proddatur", "Rayachoty", "Jammalamadugu", 
-            "Badvel", "Mydukur", "Pulivendula"
-        ];
-
-        function openStatModal(category, total) {
-            statModalTitle.textContent = `${category} (Total: ${total.toLocaleString()})`;
-            statModalList.innerHTML = '';
-            
-            const baseCount = Math.floor(total / constituencies.length);
-            const remainder = total % constituencies.length;
-
-            const fragment = document.createDocumentFragment();
-            const currentYear = new Date().getFullYear();
-            // Just referencing a dynamic computation or dummy stats array for demonstration
-            const activeCount = Math.floor(total * 0.9);
-
-            const liTotal = document.createElement('li');
-            liTotal.innerHTML = `<strong>Total Parliament Wide</strong> <strong>${total.toLocaleString()}</strong>`;
-            fragment.appendChild(liTotal);
-
-            constituencies.forEach((c, idx) => {
-                const count = baseCount + (idx === 0 ? remainder : 0);
-                const li = document.createElement('li');
-                li.innerHTML = `<span><i class="fa-solid fa-location-dot" style="color:#ff9900; margin-right:8px;"></i> ${c} Constituency</span> <strong>${count.toLocaleString()}</strong>`;
-                fragment.appendChild(li);
-            });
-
-            statModalList.appendChild(fragment);
-            statModalOverlay.classList.add('active');
-        }
-
-        closeStatModal.addEventListener('click', () => {
-            statModalOverlay.classList.remove('active');
-        });
-
-        statModalOverlay.addEventListener('click', (e) => {
-            if (e.target === statModalOverlay) {
-                statModalOverlay.classList.remove('active');
-            }
-        });
-
-        // --- WATER BUBBLE SOUND & 3D LOADER ---
+        // --- 1. WATER BUBBLE SOUND GENERATOR ---
         let audioCtx = null;
+        
         function playWaterBubbleSound() {
             try {
-                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                if (audioCtx.state === 'suspended') audioCtx.resume();
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
+
                 osc.type = 'sine';
                 const now = audioCtx.currentTime;
                 osc.frequency.setValueAtTime(300, now);
                 osc.frequency.exponentialRampToValueAtTime(800, now + 0.08);
+
                 gain.gain.setValueAtTime(0.3, now);
                 gain.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
+
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
+
                 osc.start(now);
                 osc.stop(now + 0.08);
             } catch (e) {}
         }
 
         document.addEventListener('click', (e) => {
-            if (e.target.closest('button, a, .menu-toggle, .close-menu, .dot, .hub-item, .stat-card')) {
+            if (e.target.closest('button, a, .menu-toggle, .close-menu, .stat-card, .hub-item')) {
                 playWaterBubbleSound();
             }
         });
 
-        // 3D Intro Text Animation
+        // --- 2. 3D INTRO TEXT ANIMATION ---
         const mainTitle = "MY TNSF";
         const subTitle = "KADAPA";
+
         const topContainer = document.getElementById('topText');
         const bottomContainer = document.getElementById('bottomText');
         let delayCount = 0;
 
         mainTitle.split('').forEach((char) => {
             const span = document.createElement('span');
-            if (char === ' ') span.style.width = '15px';
-            else {
+            if (char === ' ') {
+                span.style.width = '15px';
+            } else {
                 span.classList.add('letter');
                 span.textContent = char;
                 span.style.animationDelay = `${delayCount * 0.12}s`;
@@ -1230,48 +980,97 @@
         });
 
         const totalAnimationDuration = (delayCount * 120) + 800;
+
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 document.body.classList.add('loaded');
             }, totalAnimationDuration);
         });
 
-        // Mobile menu toggle
+        // --- 3. LOGIN & ROUTING LOGIC ---
+        function handleLogin(event) {
+            event.preventDefault();
+            const id = document.getElementById('memberId').value.trim();
+            const pass = document.getElementById('password').value.trim();
+
+            const loginOverlay = document.getElementById('loginOverlay');
+            const memberView = document.getElementById('memberView');
+            const superAdminView = document.getElementById('superAdminView');
+
+            if (id === 'TNSF-KP-ADMIN' && pass === 'Admin@kp') {
+                loginOverlay.style.display = 'none';
+                superAdminView.classList.add('active-view');
+            } else if (id === 'TNSF-PDTR-0001' && pass === 'Tnsf@123') {
+                loginOverlay.style.display = 'none';
+                memberView.classList.add('active-view');
+            } else {
+                alert('Invalid Credentials! Please use the demo credentials provided on the login box.');
+            }
+        }
+
+        function logoutToLogin() {
+            document.getElementById('memberView').classList.remove('active-view');
+            document.getElementById('superAdminView').classList.remove('active-view');
+            document.getElementById('loginOverlay').style.display = 'flex';
+            document.getElementById('loginForm').reset();
+        }
+
+        // --- 4. STAT POPUP CONSTITUENCY BREAKDOWN LOGIC ---
+        const constituenciesData = [
+            { name: "Kadapa", general: 2400, vip: 65, admins: 8, pending: 30 },
+            { name: "Rayachoti", general: 1950, vip: 45, admins: 6, pending: 25 },
+            { name: "Proddatur", general: 2800, vip: 70, admins: 9, pending: 40 },
+            { name: "Jammalamadugu", general: 1500, vip: 30, admins: 5, pending: 18 },
+            { name: "Badvel", general: 1700, vip: 35, admins: 5, pending: 22 },
+            { name: "Pulivendula", general: 2600, vip: 55, admins: 8, pending: 35 },
+            { name: "Mydukur", general: 1900, vip: 20, admins: 4, pending: 15 }
+        ];
+
+        function openStatPopup(type) {
+            const overlay = document.getElementById('statPopupOverlay');
+            const titleEl = document.getElementById('statPopupTitle');
+            const contentEl = document.getElementById('statPopupContent');
+            contentEl.innerHTML = '';
+
+            let titlePrefix = '';
+            let key = '';
+
+            if (type === 'general') { titlePrefix = 'General Members Breakdown (Total & Constituency Wide)'; key = 'general'; }
+            else if (type === 'vip') { titlePrefix = "VIP's Breakdown (Total & Constituency Wide)"; key = 'vip'; }
+            else if (type === 'admins') { titlePrefix = 'Admins Breakdown (Constituency Wide)'; key = 'admins'; }
+            else if (type === 'pending') { titlePrefix = 'Pending Members Breakdown (Constituency Wide)'; key = 'pending'; }
+
+            titleEl.textContent = titlePrefix;
+
+            let totalCount = 0;
+            constrowsHtml = constituenciesData.map(c => {
+                totalCount += c[key];
+                return `<div class="constituency-row"><span>${c.name} Constituency</span><span>${c[key]} Members</span></div>`;
+            }).join('');
+
+            contentEl.innerHTML = `
+                <div style="font-weight:700; margin-bottom:12px; font-size:14px; color:#d4a000;">Total Count across all Constituencies: ${totalCount}</div>
+                ${constrowsHtml}
+            `;
+
+            overlay.classList.add('active');
+        }
+
+        function closeStatPopup() {
+            document.getElementById('statPopupOverlay').classList.remove('active');
+        }
+
+        function alertHubClick(featureName) {
+            alert(`Opening Hub Module: ${featureName}\n(Redirecting to respective admin panel section)`);
+        }
+        // Mobile menu toggle for admin
         const menuToggleBtn = document.getElementById('menuToggleBtn');
         const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
         const closeMenuBtn = document.getElementById('closeMenuBtn');
-        
-        menuToggleBtn.addEventListener('click', () => mobileMenuOverlay.classList.add('active'));
-        closeMenuBtn.addEventListener('click', () => mobileMenuOverlay.classList.remove('active'));
 
-        // Slider logic
-        const sliderWrapper = document.getElementById('sliderWrapper');
-        const slides = document.querySelectorAll('.slide');
-        const dots = document.querySelectorAll('.dot');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        let currentIndex = 0;
-
-        function updateSlider() {
-            sliderWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
-            dots.forEach((dot, index) => dot.classList.toggle('active', index === currentIndex));
-        }
-
-        function nextSlide() {
-            currentIndex = (currentIndex + 1) % slides.length;
-            updateSlider();
-        }
-
-        function prevSlide() {
-            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-            updateSlider();
-        }
-
-        if (nextBtn && prevBtn) {
-            nextBtn.addEventListener('click', nextSlide);
-            prevBtn.addEventListener('click', prevSlide);
-            dots.forEach((dot, i) => dot.addEventListener('click', () => { currentIndex = i; updateSlider(); }));
-            setInterval(nextSlide, 4000);
+        if (menuToggleBtn) {
+            menuToggleBtn.addEventListener('click', () => mobileMenuOverlay.classList.add('active'));
+            closeMenuBtn.addEventListener('click', () => mobileMenuOverlay.classList.remove('active'));
         }
     </script>
 </body>
