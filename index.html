@@ -95,7 +95,7 @@
             margin-bottom: 6px;
         }
 
-        .form-group input {
+        .form-group input, .form-group select, .form-group textarea {
             width: 100%;
             padding: 12px 15px;
             border: 1px solid #ddd;
@@ -105,7 +105,7 @@
             transition: border-color 0.3s;
         }
 
-        .form-group input:focus {
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
             outline: none;
             border-color: #ffcc00;
             box-shadow: 0 0 5px rgba(255, 204, 0, 0.3);
@@ -299,7 +299,6 @@
             color: #333;
         }
 
-        /* Desktop Nav Links */
         .nav-links {
             display: none;
             list-style: none;
@@ -319,7 +318,6 @@
             transform: scale(1.05);
         }
 
-        /* Hamburger Menu Toggle Button */
         .menu-toggle {
             font-size: 24px;
             cursor: pointer;
@@ -767,7 +765,7 @@
             gap: 5px;
         }
 
-        /* Stat Details Zoom-in Popup */
+        /* Modal Overlays & Views */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -793,7 +791,7 @@
         .zoom-modal {
             background: #fff;
             width: 90%;
-            max-width: 600px;
+            max-width: 650px;
             border-radius: 20px;
             padding: 30px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
@@ -851,6 +849,235 @@
             border: 1px solid #ffe680;
         }
 
+        /* --- MEMBER MANAGEMENT SECTION STYLES --- */
+        #memberManagementSection {
+            display: none;
+            background: #fff;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        .member-mgmt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .member-mgmt-header h3 {
+            font-size: 22px;
+            font-weight: 800;
+            color: #111;
+        }
+
+        .total-badge {
+            background: #ffcc00;
+            color: #000;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .filter-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+            background: #fffdf0;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #ffe680;
+        }
+
+        .search-box {
+            grid-column: 1 / -1;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            background: #fff;
+        }
+
+        .filter-group label {
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 4px;
+        }
+
+        .filter-group select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 12px;
+            background: #fff;
+        }
+
+        .members-table-wrapper {
+            overflow-x: auto;
+        }
+
+        .members-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            text-align: left;
+        }
+
+        .members-table th {
+            background: #ffcc00;
+            color: #000;
+            padding: 12px 15px;
+            font-weight: 700;
+        }
+
+        .members-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .members-table tr {
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .members-table tr:hover {
+            background: #fffdf0;
+        }
+
+        /* User Details Modal Styles */
+        .user-profile-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .user-profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid #ffcc00;
+            object-fit: cover;
+            margin-bottom: 12px;
+        }
+
+        .user-profile-name {
+            font-size: 20px;
+            font-weight: 800;
+            color: #111;
+        }
+
+        .user-profile-id {
+            font-size: 13px;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .profile-section-title {
+            font-size: 14px;
+            font-weight: 800;
+            color: #ff9900;
+            margin: 15px 0 8px 0;
+            border-bottom: 1px dashed #ffe680;
+            padding-bottom: 4px;
+        }
+
+        .profile-info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            font-size: 13px;
+            background: #fffdf0;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #ffe680;
+        }
+
+        .profile-info-item span {
+            display: block;
+        }
+
+        .profile-info-label {
+            font-size: 11px;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .profile-info-val {
+            font-weight: 700;
+            color: #222;
+        }
+
+        .activity-stats-row {
+            display: flex;
+            justify-content: space-around;
+            background: #ffcc0022;
+            padding: 12px;
+            border-radius: 10px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .act-stat-box span {
+            display: block;
+        }
+
+        .act-stat-num {
+            font-size: 16px;
+            font-weight: 800;
+            color: #111;
+        }
+
+        .act-stat-lbl {
+            font-size: 10px;
+            color: #555;
+            font-weight: 600;
+        }
+
+        .profile-action-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .btn-action {
+            flex: 1;
+            min-width: 110px;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 12px;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .btn-action:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-edit { background: #ffcc00; color: #000; }
+        .btn-suspend { background: #e74c3c; color: #fff; }
+        .btn-role { background: #3498db; color: #fff; }
+        .btn-activity { background: #2ecc71; color: #fff; }
+
         footer {
             text-align: center;
             padding: 20px;
@@ -860,27 +1087,13 @@
             border-top: 1px solid #f0e6b2;
         }
 
-        /* --- RESPONSIVE MEDIA QUERIES --- */
         @media (min-width: 768px) {
-            .nav-links {
-                display: flex;
-            }
-            .menu-toggle {
-                display: none;
-            }
-            .mobile-menu-overlay {
-                display: none !important;
-            }
-            .hub-grid {
-                grid-template-columns: repeat(6, 1fr);
-                gap: 25px;
-            }
-            .hero-slider-container {
-                height: 360px;
-            }
-            .brand-text h1 {
-                font-size: 18px;
-            }
+            .nav-links { display: flex; }
+            .menu-toggle { display: none; }
+            .mobile-menu-overlay { display: none !important; }
+            .hub-grid { grid-template-columns: repeat(6, 1fr); gap: 25px; }
+            .hero-slider-container { height: 360px; }
+            .brand-text h1 { font-size: 18px; }
         }
     </style>
 </head>
@@ -934,16 +1147,16 @@
                 </div>
                 
                 <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#resolution">Resolution Desk</a></li>
-                    <li><a href="#gallery">Gallery</a></li>
-                    <li><a href="#inbox">Inbox</a></li>
-                    <li><a href="#constituencies">Constituencies</a></li>
-                    <li><a href="#leadership">Leadership</a></li>
-                    <li><a href="#events">Events</a></li>
-                    <li><a href="#feedback">Feedback</a></li>
-                    <li><a href="#contact">Contact Us</a></li>
-                    <li><a href="#donate">Donate</a></li>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Resolution Desk</a></li>
+                    <li><a href="#">Gallery</a></li>
+                    <li><a href="#">Inbox</a></li>
+                    <li><a href="#">Constituencies</a></li>
+                    <li><a href="#">Leadership</a></li>
+                    <li><a href="#">Events</a></li>
+                    <li><a href="#">Feedback</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Donate</a></li>
                 </ul>
 
                 <div class="menu-toggle" id="menuToggleBtn">
@@ -972,7 +1185,6 @@
             </div>
 
             <div class="container">
-                <!-- HERO AUTO-SCROLLING BANNER SLIDER -->
                 <div class="hero-slider-container">
                     <div class="slider-wrapper" id="sliderWrapper">
                         <div class="slide">
@@ -1016,13 +1228,19 @@
                             <h2>My TNSF Passport</h2>
                         </div>
                         <div class="points-badge">
-                            <i class="fa-solid fa-star"></i> 450.6 Points
+                            <i class="fa-solid fa-star"></i> <span id="userPointsDisplay">450.6</span> Points
                         </div>
                     </div>
                     <div class="passport-footer">
                         <div class="passport-tags">Your Journey &nbsp;•&nbsp; Your Points &nbsp;•&nbsp; Your Growth</div>
                         <a href="#" class="view-passport-btn">View My Passport <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
+                </div>
+
+                <!-- VIP Features Section (Appears dynamically if upgraded to VIP) -->
+                <div id="vipFeatureSection" style="display:none; background: linear-gradient(135deg, #2c3e50 100%, #1a252f 0%); color: #fff; padding: 20px; border-radius: 15px; margin-bottom: 25px; border: 2px solid #ffcc00;">
+                    <h3 style="color: #ffcc00; margin-bottom: 8px;"><i class="fa-solid fa-crown"></i> VIP Exclusive Desk</h3>
+                    <p style="font-size: 13px; opacity: 0.9;">You have active VIP privileges. Access special events, priority resolutions, and VIP activities below.</p>
                 </div>
 
                 <!-- TNSF Hub Section -->
@@ -1085,7 +1303,6 @@
                     </div>
                 </div>
             </div>
-
             <footer>
                 <p>Copy 2026 TNSF KADAPA PARLIAMENT all rights reserved | <a href="#" onclick="logoutUser()" style="color:#d4a000; font-weight:600;">Switch / Logout</a></p>
             </footer>
@@ -1113,16 +1330,16 @@
                     <i class="fa-solid fa-xmark"></i>
                 </div>
                 <ul class="mobile-nav-links">
-                    <li><a href="#"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+                    <li><a href="#" onclick="showAdminDashboard()"><i class="fa-solid fa-house"></i> Dashboard</a></li>
                     <li>
                         <a href="#"><i class="fa-solid fa-users"></i> USER MANAGEMENT</a>
                         <div style="padding-left: 25px; display: flex; flex-direction: column; gap: 8px; margin-top: 8px; font-size: 13px;">
-                            <a href="#">├── All Users</a>
-                            <a href="#">├── General Users</a>
-                            <a href="#">├── VIP Users</a>
-                            <a href="#">├── Pending Users</a>
-                            <a href="#">├── Suspended Users</a>
-                            <a href="#">└── Deleted/Deactivated</a>
+                            <a href="#" onclick="openMemberManagement()">├── All Users</a>
+                            <a href="#" onclick="openMemberManagement()">├── General Users</a>
+                            <a href="#" onclick="openMemberManagement()">├── VIP Users</a>
+                            <a href="#" onclick="openMemberManagement()">├── Pending Users</a>
+                            <a href="#" onclick="openMemberManagement()">├── Suspended Users</a>
+                            <a href="#" onclick="openMemberManagement()">└── Deleted/Deactivated</a>
                         </div>
                     </li>
                     <li>
@@ -1172,93 +1389,178 @@
                     <button class="logout-pill" onclick="logoutUser()">Logout <i class="fa-solid fa-right-from-bracket"></i></button>
                 </div>
 
-                <!-- STATS CARDS -->
-                <div class="stats-grid">
-                    <div class="stat-card" onclick="openStatModal('general')">
-                        <div class="stat-title">General Members</div>
-                        <div class="stat-value">12,450</div>
-                        <div class="stat-footer"><i class="fa-solid fa-chart-pie"></i> Click for Constituency Breakdown</div>
+                <!-- MAIN DASHBOARD CONTENT (STATS + HUB) -->
+                <div id="adminDashboardHome">
+                    <!-- STATS CARDS -->
+                    <div class="stats-grid">
+                        <div class="stat-card" onclick="openStatModal('general')">
+                            <div class="stat-title">General Members</div>
+                            <div class="stat-value">12,450</div>
+                            <div class="stat-footer"><i class="fa-solid fa-chart-pie"></i> Click for Constituency Breakdown</div>
+                        </div>
+                        <div class="stat-card" onclick="openStatModal('vip')">
+                            <div class="stat-title">VIP's</div>
+                            <div class="stat-value">340</div>
+                            <div class="stat-footer"><i class="fa-solid fa-chart-pie"></i> Click for Constituency Breakdown</div>
+                        </div>
+                        <div class="stat-card" onclick="openStatModal('admins')">
+                            <div class="stat-title">Admins</div>
+                            <div class="stat-value">48</div>
+                            <div class="stat-footer"><i class="fa-solid fa-chart-pie"></i> Click for All Constituencies</div>
+                        </div>
+                        <div class="stat-card" onclick="openStatModal('pending')">
+                            <div class="stat-title">Pending</div>
+                            <div class="stat-value">185</div>
+                            <div class="stat-footer"><i class="fa-solid fa-chart-pie"></i> Click for Constituency Breakdown</div>
+                        </div>
                     </div>
-                    <div class="stat-card" onclick="openStatModal('vip')">
-                        <div class="stat-title">VIP's</div>
-                        <div class="stat-value">340</div>
-                        <div class="stat-footer"><i class="fa-solid fa-chart-pie"></i> Click for Constituency Breakdown</div>
-                    </div>
-                    <div class="stat-card" onclick="openStatModal('admins')">
-                        <div class="stat-title">Admins</div>
-                        <div class="stat-value">48</div>
-                        <div class="stat-footer"><i class="fa-solid fa-chart-pie"></i> Click for All Constituencies</div>
-                    </div>
-                    <div class="stat-card" onclick="openStatModal('pending')">
-                        <div class="stat-title">Pending</div>
-                        <div class="stat-value">185</div>
-                        <div class="stat-footer"><i class="fa-solid fa-chart-pie"></i> Click for Constituency Breakdown</div>
+
+                    <!-- ADMINISTRATIVE HUB -->
+                    <div class="hub-section">
+                        <div class="hub-title">Administrative Hub</div>
+                        
+                        <div class="hub-grid">
+                            <a href="#" class="hub-item" onclick="openMemberManagement()">
+                                <div class="hub-icon-circle"><i class="fa-solid fa-users-gear"></i></div>
+                                <span>Member Management</span>
+                            </a>
+                            <a href="#" class="hub-item">
+                                <div class="hub-icon-circle"><i class="fa-solid fa-id-card"></i></div>
+                                <span>Membership's</span>
+                            </a>
+                            <a href="#" class="hub-item">
+                                <div class="hub-icon-circle"><i class="fa-solid fa-crown"></i></div>
+                                <span>VIP Management</span>
+                            </a>
+                            <a href="#" class="hub-item">
+                                <div class="hub-icon-circle"><i class="fa-solid fa-user-shield"></i></div>
+                                <span>Admin Management</span>
+                            </a>
+                            <a href="#" class="hub-item">
+                                <div class="hub-icon-circle"><i class="fa-solid fa-map-location-dot"></i></div>
+                                <span>Constituencies</span>
+                            </a>
+                            <a href="#" class="hub-item">
+                                <div class="hub-icon-circle"><i class="fa-solid fa-sliders"></i></div>
+                                <span>Features & Permissions</span>
+                            </a>
+                            <a href="#" class="hub-item">
+                                <div class="hub-icon-circle"><i class="fa-solid fa-graduation-cap"></i></div>
+                                <span>Resolution Desk</span>
+                            </a>
+                            <a href="#" class="hub-item">
+                                <div class="hub-icon-circle"><i class="fa-solid fa-calendar-days"></i></div>
+                                <span>Events</span>
+                            </a>
+                            <a href="#" class="hub-item">
+                                <div class="hub-icon-circle"><i class="fa-solid fa-images"></i></div>
+                                <span>Gallery</span>
+                            </a>
+                            <a href="#" class="hub-item">
+                                <div class="hub-icon-circle"><i class="fa-solid fa-list-check"></i></div>
+                                <span>Tasks</span>
+                            </a>
+                            <a href="#" class="hub-item">
+                                <div class="hub-icon-circle"><i class="fa-solid fa-square-poll-vertical"></i></div>
+                                <span>Polls</span>
+                            </a>
+                            <a href="#" class="hub-item">
+                                <div class="hub-icon-circle"><i class="fa-solid fa-comments"></i></div>
+                                <span>Feedback</span>
+                            </a>
+                            <a href="#" class="hub-item">
+                                <div class="hub-icon-circle"><i class="fa-solid fa-hand-holding-heart"></i></div>
+                                <span>Donations</span>
+                            </a>
+                            <a href="#" class="hub-item">
+                                <div class="hub-icon-circle"><i class="fa-solid fa-gear"></i></div>
+                                <span>System Settings</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- ADMINISTRATIVE HUB -->
-                <div class="hub-section">
-                    <div class="hub-title">Administrative Hub</div>
-                    
-                    <div class="hub-grid">
-                        <a href="#" class="hub-item">
-                            <div class="hub-icon-circle"><i class="fa-solid fa-users-gear"></i></div>
-                            <span>Member Management</span>
-                        </a>
-                        <a href="#" class="hub-item">
-                            <div class="hub-icon-circle"><i class="fa-solid fa-id-card"></i></div>
-                            <span>Membership's</span>
-                        </a>
-                        <a href="#" class="hub-item">
-                            <div class="hub-icon-circle"><i class="fa-solid fa-crown"></i></div>
-                            <span>VIP Management</span>
-                        </a>
-                        <a href="#" class="hub-item">
-                            <div class="hub-icon-circle"><i class="fa-solid fa-user-shield"></i></div>
-                            <span>Admin Management</span>
-                        </a>
-                        <a href="#" class="hub-item">
-                            <div class="hub-icon-circle"><i class="fa-solid fa-map-location-dot"></i></div>
-                            <span>Constituencies</span>
-                        </a>
-                        <a href="#" class="hub-item">
-                            <div class="hub-icon-circle"><i class="fa-solid fa-sliders"></i></div>
-                            <span>Features & Permissions</span>
-                        </a>
-                        <a href="#" class="hub-item">
-                            <div class="hub-icon-circle"><i class="fa-solid fa-graduation-cap"></i></div>
-                            <span>Resolution Desk</span>
-                        </a>
-                        <a href="#" class="hub-item">
-                            <div class="hub-icon-circle"><i class="fa-solid fa-calendar-days"></i></div>
-                            <span>Events</span>
-                        </a>
-                        <a href="#" class="hub-item">
-                            <div class="hub-icon-circle"><i class="fa-solid fa-images"></i></div>
-                            <span>Gallery</span>
-                        </a>
-                        <a href="#" class="hub-item">
-                            <div class="hub-icon-circle"><i class="fa-solid fa-list-check"></i></div>
-                            <span>Tasks</span>
-                        </a>
-                        <a href="#" class="hub-item">
-                            <div class="hub-icon-circle"><i class="fa-solid fa-square-poll-vertical"></i></div>
-                            <span>Polls</span>
-                        </a>
-                        <a href="#" class="hub-item">
-                            <div class="hub-icon-circle"><i class="fa-solid fa-comments"></i></div>
-                            <span>Feedback</span>
-                        </a>
-                        <a href="#" class="hub-item">
-                            <div class="hub-icon-circle"><i class="fa-solid fa-hand-holding-heart"></i></div>
-                            <span>Donations</span>
-                        </a>
-                        <a href="#" class="hub-item">
-                            <div class="hub-icon-circle"><i class="fa-solid fa-gear"></i></div>
-                            <span>System Settings</span>
-                        </a>
+                <!-- MEMBER MANAGEMENT SECTION (Dynamic Page) -->
+                <div id="memberManagementSection">
+                    <div class="member-mgmt-header">
+                        <h3>MEMBER MANAGEMENT</h3>
+                        <div class="total-badge">Total Users: 12,450</div>
+                    </div>
+
+                    <div class="filter-container">
+                        <div class="search-box">
+                            <input type="text" id="memberSearchInput" placeholder="Search Name / Mobile / ID..." onkeyup="filterMembers()">
+                        </div>
+                        <div class="filter-group">
+                            <label>Filter:</label>
+                            <select id="filterAll" onchange="filterMembers()">
+                                <option value="all">All Users</option>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Role:</label>
+                            <select id="filterRole" onchange="filterMembers()">
+                                <option value="">All</option>
+                                <option value="General">General</option>
+                                <option value="VIP">VIP</option>
+                                <option value="Admin">Admin</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Status:</label>
+                            <select id="filterStatus" onchange="filterMembers()">
+                                <option value="">All</option>
+                                <option value="Active">Active</option>
+                                <option value="Pending">Pending</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Constituency:</label>
+                            <select id="filterConstituency" onchange="filterMembers()">
+                                <option value="">All</option>
+                                <option value="Proddatur">Proddatur</option>
+                                <option value="Kadapa">Kadapa</option>
+                                <option value="Rayachoti">Rayachoti</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="members-table-wrapper">
+                        <table class="members-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>ID</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="memberTableBody">
+                                <tr onclick="openUserDetails('Ravi Kumar', 'TNSF-KDP-001245', 'General User', 'Proddatur', 'Active')">
+                                    <td>Ravi Kumar</td>
+                                    <td>KDP001245</td>
+                                    <td>General</td>
+                                    <td>Active</td>
+                                </tr>
+                                <tr onclick="openUserDetails('Suresh', 'TNSF-KDP-001246', 'VIP User', 'Kadapa', 'Active')">
+                                    <td>Suresh</td>
+                                    <td>KDP001246</td>
+                                    <td>VIP</td>
+                                    <td>Active</td>
+                                </tr>
+                                <tr onclick="openUserDetails('Kiran', 'TNSF-KDP-001247', 'Constituency Admin', 'Rayachoti', 'Active')">
+                                    <td>Kiran</td>
+                                    <td>KDP001247</td>
+                                    <td>Admin</td>
+                                    <td>Active</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+
             </div>
 
             <footer>
@@ -1271,11 +1573,166 @@
     <!-- STAT DETAILS ZOOM-IN MODAL POPUP -->
     <div class="modal-overlay" id="statModalOverlay">
         <div class="zoom-modal">
-            <div class="modal-close" id="modalCloseBtn"><i class="fa-solid fa-xmark"></i></div>
+            <div class="modal-close" onclick="closeStatModal()"><i class="fa-solid fa-xmark"></i></div>
             <div class="modal-title" id="modalTitle">Constituency Breakdown</div>
-            <div class="constituency-breakdown" id="constituencyList">
-                <!-- Dynamically populated -->
+            <div class="constituency-breakdown" id="constituencyList"></div>
+        </div>
+    </div>
+
+    <!-- USER DETAILS ZOOM-IN MODAL POPUP -->
+    <div class="modal-overlay" id="userDetailsModal">
+        <div class="zoom-modal">
+            <div class="modal-close" onclick="closeUserDetailsModal()"><i class="fa-solid fa-xmark"></i></div>
+            
+            <div class="user-profile-header">
+                <img src="https://via.placeholder.com/80?text=U" alt="Profile" class="user-profile-avatar" id="detAvatar">
+                <div class="user-profile-name" id="detName">Ravi Kumar</div>
+                <div class="user-profile-id" id="detId">TNSF-KDP-001245</div>
             </div>
+
+            <div class="profile-info-grid">
+                <div class="profile-info-item">
+                    <span class="profile-info-label">Role</span>
+                    <span class="profile-info-val" id="detRole">General User</span>
+                </div>
+                <div class="profile-info-item">
+                    <span class="profile-info-label">Status</span>
+                    <span class="profile-info-val" id="detStatus">🟢 Active</span>
+                </div>
+                <div class="profile-info-item">
+                    <span class="profile-info-label">Constituency</span>
+                    <span class="profile-info-val" id="detConstituency">Proddatur</span>
+                </div>
+            </div>
+
+            <div class="profile-section-title">PERSONAL INFORMATION</div>
+            <div class="profile-info-grid">
+                <div class="profile-info-item"><span class="profile-info-label">Mobile</span><span class="profile-info-val">+91 9876543210</span></div>
+                <div class="profile-info-item"><span class="profile-info-label">Email</span><span class="profile-info-val">ravi.kumar@gmail.com</span></div>
+                <div class="profile-info-item"><span class="profile-info-label">DOB</span><span class="profile-info-val">15 Aug 2004</span></div>
+                <div class="profile-info-item"><span class="profile-info-label">Gender</span><span class="profile-info-val">Male</span></div>
+            </div>
+
+            <div class="profile-section-title">MEMBERSHIP</div>
+            <div class="profile-info-grid">
+                <div class="profile-info-item"><span class="profile-info-label">Joined</span><span class="profile-info-val">25 Sep 2026</span></div>
+                <div class="profile-info-item"><span class="profile-info-label">Approved</span><span class="profile-info-val">27 Sep 2026</span></div>
+                <div class="profile-info-item" style="grid-column: 1/-1;"><span class="profile-info-label">Approved By</span><span class="profile-info-val">Super Admin</span></div>
+            </div>
+
+            <div class="profile-section-title">ACTIVITY</div>
+            <div class="activity-stats-row">
+                <div class="act-stat-box"><span class="act-stat-num">450.6</span><span class="act-stat-lbl">Points</span></div>
+                <div class="act-stat-box"><span class="act-stat-num">8</span><span class="act-stat-lbl">Events</span></div>
+                <div class="act-stat-box"><span class="act-stat-num">12</span><span class="act-stat-lbl">Tasks</span></div>
+                <div class="act-stat-box"><span class="act-stat-num">7</span><span class="act-stat-lbl">Polls</span></div>
+                <div class="act-stat-box"><span class="act-stat-num">2</span><span class="act-stat-lbl">Resolutions</span></div>
+            </div>
+
+            <div class="profile-action-buttons">
+                <button class="btn-action btn-edit" onclick="alert('Edit User mode enabled')">Edit</button>
+                <button class="btn-action btn-suspend" onclick="alert('User suspended successfully')">Suspend</button>
+                <button class="btn-action btn-role" onclick="openChangeRoleModal()">Change Role</button>
+                <button class="btn-action btn-activity" onclick="alert('Loading activity logs...')">View Activity</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHANGE ROLE SELECTION MODAL -->
+    <div class="modal-overlay" id="changeRoleModal">
+        <div class="zoom-modal" style="max-width: 450px;">
+            <div class="modal-close" onclick="closeChangeRoleModal()"><i class="fa-solid fa-xmark"></i></div>
+            <div class="modal-title">Change User Role</div>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <h4 id="roleModalName" style="font-size:16px; font-weight:800; color:#111;">Ravi Kumar</h4>
+                <p id="roleModalId" style="font-size:12px; color:#666;">TNSF-KDP-001245</p>
+                <p style="font-size:13px; margin-top:8px;">Current Role: <strong id="roleModalCurrent">General User</strong></p>
+            </div>
+            
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <button class="login-btn" style="background:#f1c40f; color:#000;" onclick="selectRole('General')">APPOINT AS GENERAL USER</button>
+                <button class="login-btn" style="background:#e67e22; color:#fff;" onclick="openAppointVipModal()">APPOINT AS VIP USER</button>
+                <button class="login-btn" style="background:#8e44ad; color:#fff;" onclick="openAppointAdminModal()">APPOINT AS CONSTITUENCY ADMIN</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- APPOINT VIP MODAL -->
+    <div class="modal-overlay" id="appointVipModal">
+        <div class="zoom-modal" style="max-width: 480px;">
+            <div class="modal-close" onclick="closeAppointVipModal()"><i class="fa-solid fa-xmark"></i></div>
+            <div class="modal-title">APPOINT VIP</div>
+            
+            <form id="vipAppointmentForm" onsubmit="confirmVipAppointment(event)">
+                <div class="form-group">
+                    <label>User:</label>
+                    <input type="text" id="vipTargetUser" value="Ravi Kumar" readonly style="background:#eee;">
+                </div>
+                <div class="form-group">
+                    <label>VIP Type / Designation:</label>
+                    <select id="vipTypeSelect" required>
+                        <option value="">Select ▼</option>
+                        <option value="District Coordinator">District Coordinator</option>
+                        <option value="Senior Patron">Senior Patron</option>
+                        <option value="Youth Ambassador">Youth Ambassador</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Reason:</label>
+                    <textarea id="vipReason" rows="2" placeholder="Enter reason for VIP appointment..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Effective Date:</label>
+                    <input type="date" id="vipEffectiveDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Expiry (Optional):</label>
+                    <input type="date" id="vipExpiryDate">
+                </div>
+                <div class="form-group">
+                    <label style="margin-bottom:8px;">Permissions:</label>
+                    <div style="display:flex; flex-direction:column; gap:6px; font-size:13px;">
+                        <label><input type="checkbox" checked> VIP Dashboard</label>
+                        <label><input type="checkbox" checked> VIP Activities</label>
+                        <label><input type="checkbox" checked> Special Events</label>
+                        <label><input type="checkbox"> VIP Reports</label>
+                        <label><input type="checkbox"> VIP Communication</label>
+                    </div>
+                </div>
+                <button type="submit" class="login-btn" style="background:#27ae60; color:#fff;">CONFIRM APPOINTMENT</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- APPOINT CONSTITUENCY ADMIN MODAL -->
+    <div class="modal-overlay" id="appointAdminModal">
+        <div class="zoom-modal" style="max-width: 450px;">
+            <div class="modal-close" onclick="closeAppointAdminModal()"><i class="fa-solid fa-xmark"></i></div>
+            <div class="modal-title">Appoint Constituency Admin</div>
+            
+            <div style="margin-bottom: 15px;">
+                <h4 style="font-size:15px; font-weight:800;" id="adminTargetName">Ravi Kumar</h4>
+                <p style="font-size:12px; color:#666;" id="adminTargetId">TNSF-KDP-001245</p>
+                <p style="font-size:13px; margin-top:5px;">Current: <strong id="adminTargetCurrent">VIP User</strong></p>
+            </div>
+
+            <div class="form-group">
+                <label>Constituency:</label>
+                <select id="adminConstituencySelect">
+                    <option value="Proddatur">Proddatur ▼</option>
+                    <option value="Kadapa">Kadapa</option>
+                    <option value="Rayachoti">Rayachoti</option>
+                    <option value="Jammalamadugu">Jammalamadugu</option>
+                    <option value="Badvel">Badvel</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Admin Permissions:</label>
+                <button type="button" class="login-btn" style="background:#f39c12; color:#fff; padding:8px; font-size:12px;" onclick="alert('Permission config panel opened')">Configure</button>
+            </div>
+
+            <button type="button" class="login-btn" style="background:#8e44ad; color:#fff;" onclick="confirmAdminAppointment()">APPOINT ADMIN</button>
         </div>
     </div>
 
@@ -1297,7 +1754,6 @@
             const pass = passwordInput.value.trim();
 
             if (mId === 'TNSF-PDTR-0001' && pass === 'Tnsf@123') {
-                // General Member Login
                 loginModalOverlay.style.opacity = '0';
                 setTimeout(() => {
                     loginModalOverlay.style.display = 'none';
@@ -1305,7 +1761,6 @@
                     superAdminView.style.display = 'none';
                 }, 400);
             } else if (mId === 'TNSF-KP-ADMIN' && pass === 'Admin@kp') {
-                // Super Admin Login
                 loginModalOverlay.style.opacity = '0';
                 setTimeout(() => {
                     loginModalOverlay.style.display = 'none';
@@ -1325,48 +1780,37 @@
             loginModalOverlay.style.opacity = '1';
         }
 
+        // --- NAVIGATION BETWEEN ADMIN DASHBOARD & MEMBER MANAGEMENT ---
+        const adminDashboardHome = document.getElementById('adminDashboardHome');
+        const memberManagementSection = document.getElementById('memberManagementSection');
+
+        function showAdminDashboard() {
+            adminDashboardHome.style.display = 'block';
+            memberManagementSection.style.display = 'none';
+        }
+
+        function openMemberManagement() {
+            adminDashboardHome.style.display = 'none';
+            memberManagementSection.style.display = 'block';
+        }
+
         // --- STAT MODAL CONSTITUENCY BREAKDOWN ---
         const statModalOverlay = document.getElementById('statModalOverlay');
-        const modalCloseBtn = document.getElementById('modalCloseBtn');
         const modalTitle = document.getElementById('modalTitle');
         const constituencyList = document.getElementById('constituencyList');
 
         const constituencyData = {
             general: { title: "General Members Constituency Breakdown (Total: 12,450)", items: [
-                { name: "Kadapa", count: "2,400" },
-                { name: "Rayachoti", count: "1,850" },
-                { name: "Proddatur", count: "2,200" },
-                { name: "Jammalamadugu", count: "1,500" },
-                { name: "Badvel", count: "1,300" },
-                { name: "Mydukur", count: "1,600" },
-                { name: "Kamalapuram", count: "1,600" }
+                { name: "Kadapa", count: "2,400" }, { name: "Rayachoti", count: "1,850" }, { name: "Proddatur", count: "2,200" }, { name: "Jammalamadugu", count: "1,500" }, { name: "Badvel", count: "1,300" }, { name: "Mydukur", count: "1,600" }, { name: "Kamalapuram", count: "1,600" }
             ]},
             vip: { title: "VIP's Constituency Breakdown (Total: 340)", items: [
-                { name: "Kadapa", count: "80" },
-                { name: "Rayachoti", count: "50" },
-                { name: "Proddatur", count: "70" },
-                { name: "Jammalamadugu", count: "40" },
-                { name: "Badvel", count: "35" },
-                { name: "Mydukur", count: "35" },
-                { name: "Kamalapuram", count: "30" }
+                { name: "Kadapa", count: "80" }, { name: "Rayachoti", count: "50" }, { name: "Proddatur", count: "70" }, { name: "Jammalamadugu", count: "40" }, { name: "Badvel", count: "35" }, { name: "Mydukur", count: "35" }, { name: "Kamalapuram", count: "30" }
             ]},
             admins: { title: "Admins Across All Constituencies (Total: 48)", items: [
-                { name: "Kadapa Parliament HQ", count: "12 Admins" },
-                { name: "Kadapa Constituency", count: "6 Admins" },
-                { name: "Rayachoti Constituency", count: "6 Admins" },
-                { name: "Proddatur Constituency", count: "6 Admins" },
-                { name: "Jammalamadugu Constituency", count: "6 Admins" },
-                { name: "Badvel Constituency", count: "6 Admins" },
-                { name: "Kamalapuram Constituency", count: "6 Admins" }
+                { name: "Kadapa Parliament HQ", count: "12 Admins" }, { name: "Kadapa Constituency", count: "6 Admins" }, { name: "Rayachoti Constituency", count: "6 Admins" }, { name: "Proddatur Constituency", count: "6 Admins" }, { name: "Jammalamadugu Constituency", count: "6 Admins" }, { name: "Badvel Constituency", count: "6 Admins" }, { name: "Kamalapuram Constituency", count: "6 Admins" }
             ]},
             pending: { title: "Pending Members Constituency Breakdown (Total: 185)", items: [
-                { name: "Kadapa", count: "35" },
-                { name: "Rayachoti", count: "25" },
-                { name: "Proddatur", count: "40" },
-                { name: "Jammalamadugu", count: "20" },
-                { name: "Badvel", count: "25" },
-                { name: "Mydukur", count: "20" },
-                { name: "Kamalapuram", count: "20" }
+                { name: "Kadapa", count: "35" }, { name: "Rayachoti", count: "25" }, { name: "Proddatur", count: "40" }, { name: "Jammalamadugu", count: "20" }, { name: "Badvel", count: "25" }, { name: "Mydukur", count: "20" }, { name: "Kamalapuram", count: "20" }
             ]}
         };
 
@@ -1383,48 +1827,127 @@
             statModalOverlay.classList.add('active');
         }
 
-        modalCloseBtn.addEventListener('click', () => {
-            statModalOverlay.classList.remove('active');
-        });
+        function closeStatModal() { statModalOverlay.classList.remove('active'); }
 
-        statModalOverlay.addEventListener('click', (e) => {
-            if (e.target === statModalOverlay) {
-                statModalOverlay.classList.remove('active');
+        // --- USER DETAILS MODAL & ROLE WORKFLOWS ---
+        const userDetailsModal = document.getElementById('userDetailsModal');
+        const changeRoleModal = document.getElementById('changeRoleModal');
+        const appointVipModal = document.getElementById('appointVipModal');
+        const appointAdminModal = document.getElementById('appointAdminModal');
+
+        let activeUser = { name: 'Ravi Kumar', id: 'TNSF-KDP-001245', role: 'General User', constituency: 'Proddatur', status: 'Active' };
+
+        function openUserDetails(name, id, role, constituency, status) {
+            activeUser = { name, id, role, constituency, status };
+            document.getElementById('detName').textContent = name;
+            document.getElementById('detId').textContent = id;
+            document.getElementById('detRole').textContent = role;
+            document.getElementById('detConstituency').textContent = constituency;
+            document.getElementById('detStatus').textContent = status === 'Active' ? '🟢 Active' : '🔴 Inactive';
+            userDetailsModal.classList.add('active');
+        }
+
+        function closeUserDetailsModal() { userDetailsModal.classList.remove('active'); }
+
+        function openChangeRoleModal() {
+            userDetailsModal.classList.remove('active');
+            document.getElementById('roleModalName').textContent = activeUser.name;
+            document.getElementById('roleModalId').textContent = activeUser.id;
+            document.getElementById('roleModalCurrent').textContent = activeUser.role;
+            changeRoleModal.classList.add('active');
+        }
+
+        function closeChangeRoleModal() { changeRoleModal.classList.remove('active'); }
+
+        function selectRole(roleType) {
+            activeUser.role = roleType + ' User';
+            alert('Role updated successfully to ' + activeUser.role);
+            closeChangeRoleModal();
+        }
+
+        function openAppointVipModal() {
+            changeRoleModal.classList.remove('active');
+            document.getElementById('vipTargetUser').value = activeUser.name;
+            appointVipModal.classList.add('active');
+        }
+
+        function closeAppointVipModal() { appointVipModal.classList.remove('active'); }
+
+        function confirmVipAppointment(e) {
+            e.preventDefault();
+            activeUser.role = 'VIP User';
+            alert('VIP Appointment Confirmed! VIP features now enabled for ' + activeUser.name);
+            appointVipModal.classList.remove('active');
+            
+            // Enable VIP features on general view simulator
+            document.getElementById('vipFeatureSection').style.display = 'block';
+        }
+
+        function openAppointAdminModal() {
+            changeRoleModal.classList.remove('active');
+            document.getElementById('adminTargetName').textContent = activeUser.name;
+            document.getElementById('adminTargetId').textContent = activeUser.id;
+            document.getElementById('adminTargetCurrent').textContent = activeUser.role;
+            appointAdminModal.classList.add('active');
+        }
+
+        function closeAppointAdminModal() { appointAdminModal.classList.remove('active'); }
+
+        function confirmAdminAppointment() {
+            activeUser.role = 'Constituency Admin';
+            alert(activeUser.name + ' successfully appointed as Constituency Admin!');
+            appointAdminModal.classList.remove('active');
+        }
+
+        // --- FILTER & SEARCH TABLE LOGIC ---
+        function filterMembers() {
+            const query = document.getElementById('memberSearchInput').value.toLowerCase();
+            const filterRole = document.getElementById('filterRole').value.toLowerCase();
+            const filterStatus = document.getElementById('filterStatus').value.toLowerCase();
+            const tbody = document.getElementById('memberTableBody');
+            const rows = tbody.getElementsByTagName('tr');
+
+            for (let i = 0; i < rows.length; i++) {
+                const text = rows[i].textContent.toLowerCase();
+                const roleText = rows[i].cells[2].textContent.toLowerCase();
+                const statusText = rows[i].cells[3].textContent.toLowerCase();
+
+                const matchesQuery = text.includes(query);
+                const matchesRole = !filterRole || roleText.includes(filterRole);
+                const matchesStatus = !filterStatus || statusText.includes(filterStatus);
+
+                if (matchesQuery && matchesRole && matchesStatus) {
+                    rows[i].style.display = '';
+                } else {
+                    rows[i].style.display = 'none';
+                }
             }
-        });
+        }
 
         // --- WATER BUBBLE SOUND GENERATOR ---
         let audioCtx = null;
         function playWaterBubbleSound() {
             try {
-                if (!audioCtx) {
-                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                }
-                if (audioCtx.state === 'suspended') {
-                    audioCtx.resume();
-                }
+                if (!audioCtx) { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+                if (audioCtx.state === 'suspended') { audioCtx.resume(); }
 
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
-
                 osc.type = 'sine';
                 const now = audioCtx.currentTime;
                 osc.frequency.setValueAtTime(300, now);
                 osc.frequency.exponentialRampToValueAtTime(800, now + 0.08);
-
                 gain.gain.setValueAtTime(0.3, now);
                 gain.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
-
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
-
                 osc.start(now);
                 osc.stop(now + 0.08);
             } catch (e) {}
         }
 
         document.addEventListener('click', (e) => {
-            if (e.target.closest('button, a, .menu-toggle, .close-menu, .dot, .hub-item, .stat-card')) {
+            if (e.target.closest('button, a, .menu-toggle, .close-menu, .dot, .hub-item, .stat-card, tr')) {
                 playWaterBubbleSound();
             }
         });
@@ -1432,16 +1955,14 @@
         // --- 3D INTRO TEXT ANIMATION ---
         const mainTitle = "MY TNSF";
         const subTitle = "KADAPA";
-
         const topContainer = document.getElementById('topText');
         const bottomContainer = document.getElementById('bottomText');
 
         let delayCount = 0;
         mainTitle.split('').forEach((char) => {
             const span = document.createElement('span');
-            if (char === ' ') {
-                span.style.width = '15px';
-            } else {
+            if (char === ' ') { span.style.width = '15px'; }
+            else {
                 span.classList.add('letter');
                 span.textContent = char;
                 span.style.animationDelay = `${delayCount * 0.12}s`;
@@ -1460,11 +1981,8 @@
         });
 
         const totalAnimationDuration = (delayCount * 120) + 800;
-
         window.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                document.body.classList.add('loaded');
-            }, totalAnimationDuration);
+            setTimeout(() => { document.body.classList.add('loaded'); }, totalAnimationDuration);
         });
 
         // --- MOBILE MENU TOGGLE LOGIC ---
@@ -1500,20 +2018,11 @@
 
         function updateSlider() {
             sliderWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentIndex);
-            });
+            dots.forEach((dot, index) => { dot.classList.toggle('active', index === currentIndex); });
         }
 
-        function nextSlide() {
-            currentIndex = (currentIndex + 1) % totalSlides;
-            updateSlider();
-        }
-
-        function prevSlide() {
-            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-            updateSlider();
-        }
+        function nextSlide() { currentIndex = (currentIndex + 1) % totalSlides; updateSlider(); }
+        function prevSlide() { currentIndex = (currentIndex - 1 + totalSlides) % totalSlides; updateSlider(); }
 
         nextBtn.addEventListener('click', () => { nextSlide(); resetTimer(); });
         prevBtn.addEventListener('click', () => { prevSlide(); resetTimer(); });
