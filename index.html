@@ -3,12 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TNSF Hub</title>
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
+    <title>TNSF Kadapa Parliament</title>
+    <!-- Google Fonts & FontAwesome Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
+        :root {
+            --primary-yellow: #FFD700;
+            --accent-yellow: #FFC107;
+            --dark-bg: #1a1a1a;
+            --light-bg: #fffdf0;
+            --card-bg: #ffffff;
+            --text-main: #222222;
+            --text-muted: #666666;
+            --border-color: #f0e68c;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -17,85 +28,65 @@
         }
 
         body {
-            background-color: #f8f9fa;
-            color: #333;
+            background-color: #f7f7f7;
+            color: var(--text-main);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
         }
 
-        /* Mobile Container Frame */
-        .mobile-container {
+        /* Mobile App Container Wrapper */
+        .app-container {
             width: 100%;
             max-width: 480px;
             height: 100vh;
-            max-height: 900px;
-            background-color: #ffffff;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            max-height: 920px;
+            background-color: var(--light-bg);
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
             display: flex;
             flex-direction: column;
             position: relative;
             overflow: hidden;
         }
 
-        @media(min-width: 481px) {
-            .mobile-container {
+        @media (min-width: 481px) {
+            .app-container {
                 border-radius: 30px;
                 border: 8px solid #333;
             }
         }
 
-        /* App Pages View Management */
-        .app-page {
-            display: none;
-            flex: 1;
-            overflow-y: auto;
-            padding-bottom: 70px; /* Space for bottom nav */
-        }
-        .app-page.active {
-            display: block;
-        }
-
-        /* Header Styles */
+        /* Header */
         header {
-            background-color: #ffcc00;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            background-color: var(--primary-yellow);
             padding: 12px 16px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            z-index: 10;
         }
 
         .header-left {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
-        .logo {
+        .logo-img {
             width: 40px;
             height: 40px;
-            background: #fff;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 10px;
-            border: 2px solid #333;
-            color: #d90429;
-            text-align: center;
-            line-height: 1.1;
+            object-fit: cover;
+            border: 2px solid #fff;
         }
 
-        .brand-title {
+        .header-title {
             font-size: 22px;
             font-weight: 700;
-            color: #111;
             letter-spacing: 0.5px;
+            color: #111;
         }
 
         .header-right {
@@ -106,12 +97,13 @@
 
         .lang-btn {
             background: #fff;
-            border: 1px solid #ccc;
-            padding: 4px 10px;
+            border: none;
+            padding: 6px 12px;
             border-radius: 20px;
-            font-size: 13px;
             font-weight: 600;
+            font-size: 13px;
             cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
         .menu-btn {
@@ -122,63 +114,21 @@
             color: #111;
         }
 
-        /* Side Menu Drawer */
-        .side-menu {
-            position: absolute;
-            top: 0;
-            right: -100%;
-            width: 75%;
-            height: 100%;
-            background: #fff;
-            z-index: 200;
-            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-            transition: right 0.3s ease-in-out;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .side-menu.open {
-            right: 0;
-        }
-
-        .menu-header {
-            background: #ffcc00;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .menu-close {
-            background: none;
-            border: none;
-            font-size: 22px;
-            cursor: pointer;
-        }
-
-        .menu-links {
-            list-style: none;
-            padding: 20px;
-        }
-
-        .menu-links li {
-            padding: 12px 0;
-            border-bottom: 1px solid #eee;
-            font-weight: 500;
-            cursor: pointer;
-        }
-
-        .menu-links li i {
-            margin-right: 10px;
-            color: #ff9f00;
-        }
-
-        /* Scrollable Content Area */
+        /* Main Scrollable Content */
         .content {
-            padding: 16px;
-            overflow-y: auto;
             flex: 1;
-            padding-bottom: 80px;
+            overflow-y: auto;
+            padding: 16px;
+            padding-bottom: 90px;
+        }
+
+        /* Scrollbar styling */
+        .content::-webkit-scrollbar {
+            width: 4px;
+        }
+        .content::-webkit-scrollbar-thumb {
+            background: #e0e0e0;
+            border-radius: 4px;
         }
 
         /* TNSF Hub Section */
@@ -186,19 +136,19 @@
             text-align: center;
             font-size: 20px;
             font-weight: 700;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             color: #222;
         }
 
         .hub-section-title span {
-            color: #ff9f00;
+            color: #e6b800;
         }
 
         .hub-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 16px 10px;
-            margin-bottom: 16px;
+            gap: 16px;
+            margin-bottom: 20px;
         }
 
         .hub-item {
@@ -207,619 +157,767 @@
             align-items: center;
             text-align: center;
             cursor: pointer;
+            text-decoration: none;
+            color: var(--text-main);
         }
 
         .hub-icon-circle {
             width: 60px;
             height: 60px;
             background: #fff;
-            border: 2px solid #ffcc00;
+            border: 2px solid var(--primary-yellow);
             border-radius: 50%;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             font-size: 22px;
-            color: #111;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.04);
+            color: #333;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.04);
             transition: transform 0.2s;
         }
 
-        .hub-icon-circle:hover {
+        .hub-item:hover .hub-icon-circle {
             transform: scale(1.05);
-            background: #fffdf0;
+            background: var(--primary-yellow);
         }
 
-        .hub-item span {
+        .hub-label {
             font-size: 12px;
             font-weight: 500;
             margin-top: 6px;
-            color: #333;
         }
 
         /* Advertisement Banner */
         .ad-banner {
-            background: linear-gradient(135deg, #fff9c4 0%, #ffe082 100%);
+            background: linear-gradient(135deg, #fff9c4, #fffde7);
+            border: 1px solid #ffe082;
             border-radius: 12px;
             padding: 12px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 16px;
-            border: 1px solid #ffd54f;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
         }
 
-        .ad-text-box h4 {
-            font-size: 10px;
-            background: #ffeb3b;
-            padding: 2px 6px;
+        .ad-text h4 {
+            font-size: 11px;
+            background: var(--primary-yellow);
+            padding: 2px 8px;
             border-radius: 4px;
             display: inline-block;
             font-weight: 700;
             margin-bottom: 4px;
         }
 
-        .ad-text-box p {
-            font-size: 11px;
+        .ad-text p {
+            font-size: 13px;
             font-weight: 600;
             color: #333;
         }
 
         .ad-banner img {
-            height: 50px;
+            width: 60px;
+            object-fit: contain;
         }
 
-        /* Profile Card */
+        /* My Profile Card */
         .profile-card {
             background: #fff;
-            border: 1px solid #eee;
             border-radius: 16px;
             padding: 16px;
             display: flex;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-            margin-bottom: 16px;
+            gap: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+            margin-bottom: 20px;
         }
 
         .profile-avatar {
-            width: 65px;
-            height: 65px;
-            border: 3px solid #ffcc00;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
+            border: 3px solid var(--primary-yellow);
             background: #ddd;
             display: flex;
-            align-items: center;
             justify-content: center;
-            font-size: 30px;
+            align-items: center;
+            font-size: 32px;
             color: #777;
-            margin-right: 14px;
         }
 
         .profile-info h3 {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 700;
-            color: #111;
         }
 
         .profile-info p {
-            font-size: 12px;
-            color: #666;
-            margin-bottom: 8px;
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
         }
 
-        .profile-actions {
-            display: flex;
-            gap: 8px;
-        }
-
-        .btn-view {
-            background: #ffcc00;
+        .view-profile-btn {
+            background: var(--primary-yellow);
             border: none;
-            padding: 6px 12px;
+            padding: 8px 16px;
             border-radius: 20px;
-            font-size: 11px;
             font-weight: 600;
+            font-size: 12px;
             cursor: pointer;
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: background 0.2s;
         }
 
-        .btn-edit {
-            background: #fff;
-            border: 1px solid #ccc;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-            cursor: pointer;
+        .view-profile-btn:hover {
+            background: #e5c100;
         }
 
         /* Parliament Section */
         .parliament-section {
             background: #fff;
-            border: 1px solid #e0e0e0;
             border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            border: 1px solid #eee;
+            margin-bottom: 20px;
         }
 
         .parliament-header {
-            background: #ffcc00;
-            padding: 12px 16px;
+            background: var(--primary-yellow);
+            padding: 14px 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-weight: 700;
-            font-size: 15px;
-            color: #111;
-        }
-
-        .parliament-body {
-            padding: 16px;
-        }
-
-        .map-explorer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: #fffdf5;
-            padding: 12px;
-            border-radius: 12px;
-            margin-bottom: 16px;
-            border: 1px dashed #ffcc00;
-        }
-
-        .map-preview {
-            width: 120px;
-            height: 90px;
-            background: #e8f5e9;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
+            font-size: 16px;
             cursor: pointer;
         }
 
-        .map-preview img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
+        .map-container {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #fffdf5;
+            border-bottom: 1px solid #f0f0f0;
+            position: relative;
         }
 
-        .map-prompt {
-            text-align: right;
-            flex: 1;
-            padding-left: 12px;
+        .map-svg-wrapper {
+            width: 100%;
+            max-width: 280px;
+            height: 180px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .map-prompt p {
+        .map-svg-wrapper svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .constituency-path {
+            fill: #81c784;
+            stroke: #fff;
+            stroke-width: 1.5;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .constituency-path:hover, .constituency-path.active {
+            fill: #43a047;
+            filter: brightness(1.1);
+        }
+
+        .map-hint {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
             font-size: 13px;
             font-weight: 600;
-            color: #222;
+            color: #444;
         }
 
-        .map-prompt i {
-            font-size: 24px;
-            color: #ffbc00;
-            margin-top: 4px;
+        .map-hint i {
+            color: #fbc02d;
+            font-size: 16px;
         }
 
         /* Constituency Details Card */
         .constituency-details {
-            text-align: center;
+            padding: 16px;
         }
 
         .constituency-title {
+            text-align: center;
             font-size: 16px;
             font-weight: 700;
             margin-bottom: 12px;
             position: relative;
-            display: inline-block;
         }
 
         .constituency-title::after {
             content: '';
-            position: absolute;
-            bottom: -3px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: #ffcc00;
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: var(--primary-yellow);
+            margin: 4px auto 0 auto;
+            border-radius: 2px;
         }
 
-        .stats-row {
+        .stats-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 8px;
-            margin-bottom: 16px;
-            padding-top: 8px;
-            border-top: 1px solid #f0f0f0;
+            text-align: center;
+            margin-bottom: 14px;
         }
 
-        .stat-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .stat-item {
+            background: #fafafa;
+            padding: 10px 6px;
+            border-radius: 10px;
+            border: 1px solid #eee;
         }
 
-        .stat-box i {
+        .stat-item i {
+            color: #fbc02d;
             font-size: 16px;
-            color: #ffb300;
             margin-bottom: 4px;
         }
 
-        .stat-box span.label {
+        .stat-item .stat-label {
             font-size: 11px;
-            color: #666;
+            color: var(--text-muted);
+            display: block;
         }
 
-        .stat-box span.value {
+        .stat-item .stat-value {
             font-size: 13px;
             font-weight: 700;
-            color: #111;
+            color: #222;
         }
 
-        .view-details-btn {
-            background: #ffcc00;
-            border: none;
+        .details-action-btn {
             width: 100%;
+            background: var(--primary-yellow);
+            border: none;
             padding: 10px;
-            border-radius: 25px;
+            border-radius: 20px;
             font-weight: 600;
             font-size: 13px;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: background 0.2s;
         }
 
-        /* Bottom Navigation Bar */
+        .details-action-btn:hover {
+            background: #e5c100;
+        }
+
+        /* Bottom Navigation / Footer */
         .bottom-nav {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            background: #fff;
-            border-top: 1px solid #eee;
+            background: #ffffff;
+            border-top: 1px solid #eaeaea;
             display: flex;
             justify-content: space-around;
-            padding: 8px 0;
-            z-index: 100;
+            padding: 10px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            z-index: 10;
         }
 
         .nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: none;
-            border: none;
-            cursor: pointer;
+            text-decoration: none;
             color: #777;
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 500;
+            cursor: pointer;
+            transition: color 0.2s;
         }
 
         .nav-item i {
             font-size: 18px;
-            margin-bottom: 2px;
+            margin-bottom: 3px;
         }
 
         .nav-item.active {
             color: #111;
         }
 
-        .nav-item.active .home-pill {
-            background: #ffcc00;
-            padding: 4px 16px;
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #111;
-            font-weight: 700;
-        }
-        
-        .nav-item.active .home-pill i {
-            color: #111;
+        .nav-item.active .active-indicator {
+            width: 36px;
+            height: 36px;
+            background: var(--primary-yellow);
+            border-radius: 50%;
+            position: absolute;
+            z-index: -1;
+            margin-top: -6px;
         }
 
-        /* View Profile Page Styles */
-        .profile-page-content {
+        /* Unique Menu Drawer Overlay */
+        .menu-drawer {
+            position: absolute;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            height: 100%;
+            background: #ffffff;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            z-index: 100;
+            transition: right 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
             padding: 20px;
-            text-align: center;
         }
-        .profile-page-avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: #e0e0e0;
-            margin: 0 auto 16px auto;
+
+        .menu-drawer.open {
+            right: 0;
+        }
+
+        .drawer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 12px;
+        }
+
+        .drawer-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .drawer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .drawer-links li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            font-size: 15px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 50px;
-            color: #666;
-            border: 4px solid #ffcc00;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid #f9f9f9;
         }
-        .profile-detail-card {
+
+        .drawer-links li a i {
+            color: var(--accent-yellow);
+            width: 20px;
+        }
+
+        /* Profile Page Modal View */
+        .profile-page-modal {
+            position: absolute;
+            top: 0;
+            left: 100%;
+            width: 100%;
+            height: 100%;
             background: #fff;
-            border-radius: 12px;
-            padding: 16px;
-            text-align: left;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            margin-top: 16px;
+            z-index: 100;
+            transition: left 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
         }
-        .profile-detail-card h4 {
-            margin-bottom: 10px;
-            color: #444;
+
+        .profile-page-modal.open {
+            left: 0;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
             border-bottom: 1px solid #eee;
-            padding-bottom: 6px;
+            padding-bottom: 12px;
         }
-        .profile-detail-card p {
-            font-size: 13px;
-            margin-bottom: 8px;
-            color: #555;
-        }
-        .back-btn {
-            background: #333;
-            color: #fff;
+
+        .modal-back-btn {
+            background: none;
             border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
+            font-size: 20px;
             cursor: pointer;
-            font-size: 12px;
-            margin-top: 20px;
+        }
+
+        .profile-details-content {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .user-meta-box {
+            background: #fafafa;
+            padding: 14px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #eee;
+        }
+
+        .user-meta-box label {
+            font-size: 11px;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .user-meta-box span {
+            font-size: 14px;
+            font-weight: 600;
+            color: #222;
         }
     </style>
 </head>
 <body>
 
-<div class="mobile-container">
-
-    <!-- COMMON HEADER -->
+<div class="app-container">
+    <!-- Header -->
     <header>
         <div class="header-left">
-            <div class="logo">
-                <span>TNSF</span>
-            </div>
-            <div class="brand-title">TNSF</div>
+            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100" alt="Logo" class="logo-img" id="headerLogo">
+            <span class="header-title">TNSF</span>
         </div>
         <div class="header-right">
-            <button class="lang-btn" onclick="toggleLanguage()">E | తె</button>
-            <button class="menu-btn" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
+            <button class="lang-btn" id="langToggleBtn" onclick="toggleLanguage()">E | తె</button>
+            <button class="menu-btn" onclick="toggleMenu(true)"><i class="fa-solid fa-bars"></i></button>
         </div>
     </header>
 
-    <!-- SIDE MENU DRAWER -->
-    <div class="side-menu" id="sideMenu">
-        <div class="menu-header">
-            <h3>Unique Menu</h3>
-            <button class="menu-close" onclick="toggleMenu()"><i class="fa-solid fa-xmark"></i></button>
+    <!-- Main Content Area -->
+    <div class="content" id="mainContent">
+        
+        <!-- TNSF Hub Section -->
+        <div class="hub-section-title" id="hubTitle">TNSF <span>Hub</span></div>
+        <div class="hub-grid">
+            <a href="#" class="hub-item" onclick="openProfileModal()">
+                <div class="hub-icon-circle"><i class="fa-solid fa-user"></i></div>
+                <span class="hub-label" data-tr="myProfile">My Profile</span>
+            </a>
+            <a href="#" class="hub-item">
+                <div class="hub-icon-circle"><i class="fa-solid fa-users"></i></div>
+                <span class="hub-label" data-tr="membership">Membership</span>
+            </a>
+            <a href="#" class="hub-item">
+                <div class="hub-icon-circle"><i class="fa-solid fa-calendar-days"></i></div>
+                <span class="hub-label" data-tr="events">Events</span>
+            </a>
+            <a href="#" class="hub-item">
+                <div class="hub-icon-circle"><i class="fa-solid fa-headset"></i></div>
+                <span class="hub-label" data-tr="studentHelp">Student Help</span>
+            </a>
+            <a href="#" class="hub-item">
+                <div class="hub-icon-circle"><i class="fa-solid fa-newspaper"></i></div>
+                <span class="hub-label" data-tr="news">News</span>
+            </a>
+            <a href="#" class="hub-item">
+                <div class="hub-icon-circle"><i class="fa-solid fa-phone"></i></div>
+                <span class="hub-label" data-tr="contact">Contact</span>
+            </a>
         </div>
-        <ul class="menu-links">
-            <li onclick="switchPage('home'); toggleMenu();"><i class="fa-solid fa-house"></i> Home</li>
-            <li onclick="toggleMenu()"><i class="fa-solid fa-user-shield"></i> Leadership</li>
-            <li onclick="toggleMenu()"><i class="fa-solid fa-bullhorn"></i> Campaigns</li>
-            <li onclick="toggleMenu()"><i class="fa-solid fa-file-lines"></i> Documents & Policy</li>
-            <li onclick="toggleMenu()"><i class="fa-solid fa-circle-info"></i> About TNSF</li>
-            <li onclick="toggleMenu()"><i class="fa-solid fa-gear"></i> Settings</li>
+
+        <!-- Advertisement Banner -->
+        <div class="ad-banner">
+            <div class="ad-text">o
+                <h4 data-tr="adTag">ADVERTISEMENT</h4>
+                <p data-tr="adDesc">Student Opportunities • Updates • Support</p>
+            </div>
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png" alt="Cap">
+        </div>
+
+        <!-- My Profile Card -->
+        <div class="profile-card">
+            <div class="profile-avatar">
+                <i class="fa-solid fa-user-tie"></i>
+            </div>
+            <div class="profile-info">
+                <h3 data-tr="myProfileCardTitle">My Profile</h3>
+                <p data-tr="tnsfMember">TNSF Member</p>
+                <button class="view-profile-btn" onclick="openProfileModal()">
+                    <span data-tr="viewProfile">View Profile</span> <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- TNSF Kadapa Parliament Map Section -->
+        <div class="parliament-section">
+            <div class="parliament-header" onclick="toggleParliamentSection()">
+                <span data-tr="parliamentTitle">TNSF KADAPA PARLIAMENT</span>
+                <i class="fa-solid fa-chevron-up" id="parliamentChevron"></i>
+            </div>
+            <div id="parliamentBody">
+                <div class="map-container">
+                    <div class="map-svg-wrapper">
+                        <!-- Interactive SVG Constituency Map -->
+                        <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Constituency Segment 1: Proddatur -->
+                            <path class="constituency-path active" id="path-proddatur" d="M40,90 C60,70 100,60 130,80 C150,95 140,130 110,140 C80,150 50,130 40,90 Z" onclick="selectConstituency('proddatur')" />
+                            <!-- Constituency Segment 2: Kadapa -->
+                            <path class="constituency-path" id="path-kadapa" d="M135,75 C170,60 210,80 220,110 C225,140 190,160 150,145 C130,135 125,100 135,75 Z" onclick="selectConstituency('kadapa')" />
+                            <!-- Constituency Segment 3: Jammalamadugu -->
+                            <path class="constituency-path" id="path-jammalamadugu" d="M190,40 C230,30 270,60 280,100 C270,140 230,155 215,115 C205,90 195,65 190,40 Z" onclick="selectConstituency('jammalamadugu')" />
+                            <!-- Constituency Segment 4: Badvel -->
+                            <path class="constituency-path" id="path-badvel" d="M70,30 C110,20 150,35 160,65 C130,70 90,65 70,30 Z" onclick="selectConstituency('badvel')" />
+                        </svg>
+                    </div>
+                    <div class="map-hint">
+                        <i class="fa-solid fa-hand-pointer"></i>
+                        <span data-tr="mapHint">Tap to explore constituencies</span>
+                    </div>
+                </div>
+
+                <!-- Constituency Details View -->
+                <div class="constituency-details">
+                    <h4 class="constituency-title" id="constituencyName">Proddatur Constituency</h4>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <i class="fa-solid fa-users"></i>
+                            <span class="stat-label" data-tr="membersLabel">Members</span>
+                            <span class="stat-value" id="statMembers">12,450+</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                            <span class="stat-label" data-tr="activitiesLabel">Activities</span>
+                            <span class="stat-value" id="statActivities">25+</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fa-solid fa-phone-volume"></i>
+                            <span class="stat-label" data-tr="contactLabel">Office</span>
+                            <span class="stat-value" id="statContact">08564-123456</span>
+                        </div>
+                    </div>
+                    <button class="details-action-btn">
+                        <span data-tr="viewDetails">View Details</span> <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bottom Navigation Bar / Footer -->
+    <nav class="bottom-nav">
+        <a class="nav-item active" href="#">
+            <div class="active-indicator"></div>
+            <i class="fa-solid fa-house"></i>
+            <span data-tr="navHome">Home</span>
+        </a>
+        <a class="nav-item" href="#">
+            <i class="fa-solid fa-network-wired"></i>
+            <span data-tr="navHub">Hub</span>
+        </a>
+        <a class="nav-item" href="#">
+            <i class="fa-solid fa-users-rectangle"></i>
+            <span data-tr="navMembership">Membership</span>
+        </a>
+        <a class="nav-item" href="#">
+            <i class="fa-solid fa-bell"></i>
+            <span data-tr="navUpdates">Updates</span>
+        </a>
+        <a class="nav-item" onclick="openProfileModal()">
+            <i class="fa-solid fa-user"></i>
+            <span data-tr="navProfile">Profile</span>
+        </a>
+    </nav>
+
+    <!-- Unique Menu Drawer -->
+    <div class="menu-drawer" id="menuDrawer">
+        <div class="drawer-header">
+            <h3>TNSF Menu</h3>
+            <button class="drawer-close" onclick="toggleMenu(false)"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <ul class="drawer-links">
+            <li><a href="#" onclick="toggleMenu(false)"><i class="fa-solid fa-house"></i> Home Dashboard</a></li>
+            <li><a href="#" onclick="openProfileModal(); toggleMenu(false);"><i class="fa-solid fa-user"></i> My Profile</a></li>
+            <li><a href="#" onclick="toggleMenu(false)"><i class="fa-solid fa-id-card"></i> Digital Membership Card</a></li>
+            <li><a href="#" onclick="toggleMenu(false)"><i class="fa-solid fa-calendar-alt"></i> Upcoming Events & Meets</a></li>
+            <li><a href="#" onclick="toggleMenu(false)"><i class="fa-solid fa-bullhorn"></i> Parliament Announcements</a></li>
+            <li><a href="#" onclick="toggleMenu(false)"><i class="fa-solid fa-gear"></i> App Settings</a></li>
+            <li><a href="#" onclick="toggleMenu(false)"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
         </ul>
     </div>
 
-    <!-- PAGE 1: HOME -->
-    <div id="page-home" class="app-page active">
-        <div class="content">
-            <!-- TNSF Hub Grid -->
-            <h2 class="hub-section-title">TNSF <span>Hub</span></h2>
-            <div class="hub-grid">
-                <div class="hub-item" onclick="switchPage('profile')">
-                    <div class="hub-icon-circle"><i class="fa-solid fa-user"></i></div>
-                    <span>My Profile</span>
-                </div>
-                <div class="hub-item">
-                    <div class="hub-icon-circle"><i class="fa-solid fa-users"></i></div>
-                    <span>Membership</span>
-                </div>
-                <div class="hub-item">
-                    <div class="hub-icon-circle"><i class="fa-solid fa-calendar-days"></i></div>
-                    <span>Events</span>
-                </div>
-                <div class="hub-item">
-                    <div class="hub-icon-circle"><i class="fa-solid fa-headset"></i></div>
-                    <span>Student Help</span>
-                </div>
-                <div class="hub-item">
-                    <div class="hub-icon-circle"><i class="fa-solid fa-newspaper"></i></div>
-                    <span>News</span>
-                </div>
-                <div class="hub-item">
-                    <div class="hub-icon-circle"><i class="fa-solid fa-phone"></i></div>
-                    <span>Contact</span>
-                </div>
-            </div>
-
-            <!-- Advertisement Banner -->
-            <div class="ad-banner">
-                <div class="ad-text-box">
-                    <h4>ADVERTISEMENT</h4>
-                    <p>Student Opportunities • Updates • Support</p>
-                </div>
-                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png" alt="Graduation Cap icon">
-            </div>
-
-            <!-- Profile Card -->
-            <div class="profile-card">
-                <div class="profile-avatar">
-                    <i class="fa-solid fa-user"></i>
-                </div>
-                <div class="profile-info">
-                    <h3>My Profile</h3>
-                    <p>TNSF Member</p>
-                    <div class="profile-actions">
-                        <button class="btn-view" onclick="switchPage('profile')">
-                            <i class="fa-solid fa-user"></i> View Profile
-                        </button>
-                        <button class="btn-edit">Edit</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TNSF Kadapa Parliament Section -->
-            <div class="parliament-section">
-                <div class="parliament-header">
-                    <span>TNSF KADAPA PARLIAMENT</span>
-                    <i class="fa-solid fa-chevron-up"></i>
-                </div>
-                <div class="parliament-body">
-                    <div class="map-explorer">
-                        <div class="map-preview" onclick="openMapDetails('Kadapa Full Map')">
-                            <!-- Using provided schematic Parliament map representation style -->
-                            <svg viewBox="0 0 200 150" width="100%" height="100%">
-                                <path d="M40,30 Q80,10 130,40 T160,100 T100,130 T30,100 Z" fill="#c8e6c9" stroke="#2e7d32" stroke-width="3"/>
-                            </svg>
-                        </div>
-                        <div class="map-prompt">
-                            <p>Tap to explore constituencies</p>
-                            <i class="fa-solid fa-hand-pointer"></i>
-                        </div>
-                    </div>
-
-                    <!-- Constituency Data Container -->
-                    <div class="constituency-details" id="constituencyContainer">
-                        <h4 class="constituency-title" id="constName">Proddatur Constituency</h4>
-                        <div class="stats-row">
-                            <div class="stat-box">
-                                <i class="fa-solid fa-users"></i>
-                                <span class="label">Members</span>
-                                <span class="value" id="statMembers">12,450+</span>
-                            </div>
-                            <div class="stat-box">
-                                <i class="fa-solid fa-graduation-cap"></i>
-                                <span class="label">Activities</span>
-                                <span class="value" id="statActivities">25+</span>
-                            </div>
-                            <div class="stat-box">
-                                <i class="fa-solid fa-phone"></i>
-                                <span class="label">Contact Office</span>
-                                <span class="value" id="statContact">08564-123456</span>
-                            </div>
-                        </div>
-                        <button class="view-details-btn" onclick="alert('Opening constituency detailed directory...')">View Details <i class="fa-solid fa-arrow-right"></i></button>
-                    </div>
-                </div>
-            </div>
+    <!-- View Profile Page Modal -->
+    <div class="profile-page-modal" id="profileModal">
+        <div class="modal-header">
+            <button class="modal-back-btn" onclick="closeProfileModal()"><i class="fa-solid fa-arrow-left"></i></button>
+            <h3>Member Profile</h3>
         </div>
-    </div>
-
-    <!-- PAGE 2: VIEW PROFILE PAGE -->
-    <div id="page-profile" class="app-page">
-        <div class="profile-page-content">
-            <div class="profile-page-avatar">
-                <i class="fa-solid fa-user"></i>
+        <div class="profile-details-content">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <div style="width: 80px; height: 80px; background: var(--primary-yellow); border-radius: 50%; margin: 0 auto 10px auto; display: flex; align-items: center; justify-content: center; font-size: 36px; color: #222;">
+                    <i class="fa-solid fa-user-graduate"></i>
+                </div>
+                <h2>Chenna Laxmi Narayana</h2>
+                <p style="color: #666; font-size: 13px;">B.Tech Student & TNSF Member</p>
             </div>
-            <h2>John Doe</h2>
-            <p style="color: #666; font-size: 14px;">TNSF Active Member</p>
             
-            <div class="profile-detail-card">
-                <h4>Membership Information</h4>
-                <p><strong>Member ID:</strong> TNSF-KDP-2026-8942</p>
-                <p><strong>Parliament:</strong> Kadapa Parliament</p>
-                <p><strong>Constituency:</strong> Proddatur</p>
-                <p><strong>Status:</strong> Verified & Active</p>
+            <div class="user-meta-box">
+                <label>Constituency</label>
+                <span>Proddatur, YSR Kadapa District</span>
             </div>
-
-            <div class="profile-detail-card">
-                <h4>Contact Details</h4>
-                <p><strong>Email:</strong> john.doe@tnsfhub.org</p>
-                <p><strong>Phone:</strong> +91 98765 43210</p>
+            <div class="user-meta-box">
+                <label>Membership ID</label>
+                <span>TNSF-KDP-2026-8942</span>
             </div>
-
-            <button class="back-btn" onclick="switchPage('home')"><i class="fa-solid fa-arrow-left"></i> Back to Home</button>
+            <div class="user-meta-box">
+                <label>Registered Email</label>
+                <span>student.tnsf@gmail.com</span>
+            </div>
+            <div class="user-meta-box">
+                <label>Active Role</label>
+                <span>Parliament Coordinator & Web Cell</span>
+            </div>
         </div>
     </div>
-
-    <!-- BOTTOM NAVIGATION BAR -->
-    <nav class="bottom-nav">
-        <button class="nav-item active" onclick="switchPage('home')">
-            <div class="home-pill">
-                <i class="fa-solid fa-house"></i>
-                <span>Home</span>
-            </div>
-        </button>
-        <button class="nav-item" onclick="switchPage('home');">
-            <i class="fa-solid fa-network-wired"></i>
-            <span>Hub</span>
-        </button>
-        <button class="nav-item" onclick="alert('Membership Page')">
-            <i class="fa-solid fa-users"></i>
-            <span>Membership</span>
-        </button>
-        <button class="nav-item" onclick="alert('Updates Page')">
-            <i class="fa-solid fa-bell"></i>
-            <span>Updates</span>
-        </button>
-        <button class="nav-item" onclick="switchPage('profile')">
-            <i class="fa-solid fa-user"></i>
-            <span>Profile</span>
-        </button>
-    </nav>
-
 </div>
 
 <script>
+    // Constituency Data Set
+    const constituencyData = {
+        proddatur: { name: "Proddatur Constituency", members: "12,450+", activities: "25+", contact: "08564-123456" },
+        kadapa: { name: "Kadapa Constituency", members: "18,200+", activities: "40+", contact: "08562-987654" },
+        jammalamadugu: { name: "Jammalamadugu Constituency", members: "9,600+", activities: "18+", contact: "08565-456789" },
+        badvel: { name: "Badvel Constituency", members: "10,150+", activities: "21+", contact: "08566-654321" }
+    };
+
+    function selectConstituency(id) {
+        // Highlight active path on SVG
+        document.querySelectorAll('.constituency-path').forEach(p => p.classList.remove('active'));
+        document.getElementById('path-' + id).classList.add('active');
+
+        // Update card information dynamically
+        const data = constituencyData[id];
+        document.getElementById('constituencyName').innerText = data.name;
+        document.getElementById('statMembers').innerText = data.members;
+        document.getElementById('statActivities').innerText = data.activities;
+        document.getElementById('statContact').innerText = data.contact;
+    }
+
     // Toggle Menu Drawer
-    function toggleMenu() {
-        const menu = document.getElementById('sideMenu');
-        menu.classList.toggle('open');
-    }
-
-    // Language Toggle simulation
-    function toggleLanguage() {
-        const title = document.querySelector('.brand-title');
-        if(title.innerText === 'TNSF') {
-            title.innerText = 'టి.ఎన్.యస్.ఎఫ్';
-            alert('Language switched to Telugu');
+    function toggleMenu(isOpen) {
+        const drawer = document.getElementById('menuDrawer');
+        if (isOpen) {
+            drawer.classList.add('open');
         } else {
-            title.innerText = 'TNSF';
-            alert('Language switched to English');
+            drawer.classList.remove('open');
         }
     }
 
-    // Single Page Navigation Switcher
-    function switchPage(pageId) {
-        document.querySelectorAll('.app-page').forEach(page => {
-            page.classList.remove('active');
+    // Toggle Profile Page Modal
+    function openProfileModal() {
+        document.getElementById('profileModal').classList.add('open');
+    }
+
+    function closeProfileModal() {
+        document.getElementById('profileModal').classList.remove('open');
+    }
+
+    // Toggle Parliament Section Collapse/Expand
+    function toggleParliamentSection() {
+        const body = document.getElementById('parliamentBody');
+        const chevron = document.getElementById('parliamentChevron');
+        if (body.style.display === 'none') {
+            body.style.display = 'block';
+            chevron.classList.replace('fa-chevron-down', 'fa-chevron-up');
+        } else {
+            body.style.display = 'none';
+            chevron.classList.replace('fa-chevron-up', 'fa-chevron-down');
+        }
+    }
+
+    // Language Toggle Feature (English / Telugu localization simulation)
+    let isTelugu = false;
+    const translations = {
+        en: {
+            myProfile: "My Profile",
+            membership: "Membership",
+            events: "Events",
+            studentHelp: "Student Help",
+            news: "News",
+            contact: "Contact",
+            adTag: "ADVERTISEMENT",
+            adDesc: "Student Opportunities • Updates • Support",
+            myProfileCardTitle: "My Profile",
+            tnsfMember: "TNSF Member",
+            viewProfile: "View Profile",
+            parliamentTitle: "TNSF KADAPA PARLIAMENT",
+            mapHint: "Tap to explore constituencies",
+            membersLabel: "Members",
+            activitiesLabel: "Student Activities",
+            contactLabel: "Contact Office",
+            viewDetails: "View Details",
+            navHome: "Home",
+            navHub: "Hub",
+            navMembership: "Membership",
+            navUpdates: "Updates",
+            navProfile: "Profile"
+        },
+        te: {
+            myProfile: "నా ప్రొఫైల్",
+            membership: "సభ్యత్వం",
+            events: "కార్য়క్రమాలు",
+            studentHelp: "విద్యార్థి సహాయం",
+            news: "వార్తలు",
+            contact: "సంప్రదించండి",
+            adTag: "ప్రకటన",
+            adDesc: "విద్యార్థి అవకాశాలు • అప్‌డేట్‌లు • మద్దతు",
+            myProfileCardTitle: "నా ప్రొఫైల్",
+            tnsfMember: "TNSF సభ్యుడు",
+            viewProfile: "ప్రొఫైల్ వీక్షించండి",
+            parliamentTitle: "TNSF కడప పార్లమెంట్",
+            mapHint: "నియోజకవర్గాలను అన్వేషించడానికి నొక్కండి",
+            membersLabel: "సభ్యులు",
+            activitiesLabel: "కార్యకలాపాలు",
+            contactLabel: "కార్యాలయం",
+            viewDetails: "వివరాలను వీక్షించండి",
+            navHome: "హోమ్",
+            navHub: "హబ్",
+            navMembership: "సభ్యత్వం",
+            navUpdates: "అప్‌డేట్‌లు",
+            navProfile: "ప్రొఫైల్"
+        }
+    };
+
+    function toggleLanguage() {
+        isTelugu = !isTelugu;
+        const langCode = isTelugu ? 'te' : 'en';
+        document.getElementById('langToggleBtn').innerText = isTelugu ? 'తె | E' : 'E | తె';
+        
+        // Update all elements with data-tr attribute
+        document.querySelectorAll('[data-tr]').forEach(el => {
+            const key = el.getAttribute('data-tr');
+            if (translations[langCode][key]) {
+                el.innerText = translations[langCode][key];
+            }
         });
-        
-        if(pageId === 'home') {
-            document.getElementById('page-home').classList.add('active');
-        } else if(pageId === 'profile') {
-            document.getElementById('page-profile').classList.add('active');
-        }
-    }
-
-    // Map Part Click Handler: Minimizes to open part map view and updates stats dynamically
-    function openMapDetails(partName) {
-        const constName = document.getElementById('constName');
-        const members = document.getElementById('statMembers');
-        const activities = document.getElementById('statActivities');
-        const contact = document.getElementById('statContact');
-
-        // Simulate picking different constituency parts dynamically when map preview is clicked
-        const options = [
-            { name: "Proddatur Constituency", members: "12,450+", activities: "25+", contact: "08564-123456" },
-            { name: "Kadapa Urban Constituency", members: "18,200+", activities: "40+", contact: "08562-987654" },
-            { name: "Jammalamadugu Constituency", members: "9,800+", activities: "15+", contact: "08565-445566" }
-        ];
-
-        let randomChoice = options[Math.floor(Math.random() * options.length)];
-        
-        constName.innerText = randomChoice.name;
-        members.innerText = randomChoice.members;
-        activities.innerText = randomChoice.activities;
-        contact.innerText = randomChoice.contact;
-
-        // Visual feedback
-        alert("Minimizing map view to focus on: " + randomChoice.name);
     }
 </script>
 
