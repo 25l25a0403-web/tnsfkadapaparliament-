@@ -18,7 +18,7 @@
         }
 
         body {
-            background-color: #ffffff; /* Full white background */
+            background-color: #ffffff;
             color: #333;
             overflow-x: hidden;
             min-height: 100vh;
@@ -40,7 +40,7 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -66,7 +66,7 @@
         }
 
         .login-header-text h1 {
-            color: #ffcc00; /* Yellow colour heading */
+            color: #ffcc00;
             font-size: 24px;
             font-weight: 800;
             margin-bottom: 10px;
@@ -80,11 +80,11 @@
         }
 
         .login-card, .form-card {
-            background-color: #ffffff; /* Full white card */
+            background-color: #ffffff;
             border: 2px solid #ffcc00;
             border-radius: 20px;
             padding: 30px 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.04);
             display: flex;
             flex-direction: column;
             gap: 20px;
@@ -93,7 +93,7 @@
         .input-group {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
             position: relative;
         }
 
@@ -111,7 +111,7 @@
 
         .input-wrapper input, .input-wrapper select, .input-wrapper textarea {
             width: 100%;
-            padding: 12px 15px;
+            padding: 12px 45px 12px 15px;
             border: 2px solid #ffcc00;
             border-radius: 10px;
             font-size: 14px;
@@ -121,12 +121,19 @@
             transition: all 0.3s;
         }
 
-        .input-wrapper input[type="password"], .input-wrapper input[type="text"] {
-            padding-right: 45px;
+        .input-wrapper textarea {
+            padding: 12px 15px;
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .input-wrapper input[type="file"] {
+            padding: 9px 12px;
+            cursor: pointer;
         }
 
         .input-wrapper input::placeholder, .input-wrapper textarea::placeholder {
-            color: #d4a000; /* Yellow placeholders */
+            color: #d4a000;
             opacity: 0.8;
         }
 
@@ -138,7 +145,7 @@
         .input-wrapper i.field-icon {
             position: absolute;
             right: 15px;
-            color: #d4a000; /* Yellow icons */
+            color: #d4a000;
             font-size: 16px;
         }
 
@@ -147,8 +154,8 @@
             z-index: 10;
         }
 
-        .primary-btn {
-            background-color: #ffcc00; /* Yellow button */
+        .btn-primary {
+            background-color: #ffcc00;
             color: #000;
             border: none;
             padding: 14px;
@@ -160,12 +167,27 @@
             box-shadow: 0 4px 12px rgba(255, 204, 0, 0.2);
             text-align: center;
             text-decoration: none;
-            display: inline-block;
         }
 
-        .primary-btn:hover {
+        .btn-primary:hover {
             background-color: #e6b800;
             transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: #ffffff;
+            color: #333;
+            border: 2px solid #ffcc00;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background-color: #fffdf0;
         }
 
         .register-option {
@@ -175,10 +197,9 @@
         }
 
         .register-option a {
-            color: #d4a000; /* Yellow text */
+            color: #d4a000;
             font-weight: 700;
             text-decoration: none;
-            cursor: pointer;
         }
 
         .register-option a:hover {
@@ -192,119 +213,114 @@
             padding: 15px;
         }
 
-
         /* ================= REGISTRATION VIEW ================= */
         #register-view {
+            padding: 30px 15px;
+            background-color: #ffffff;
             justify-content: center;
             align-items: center;
-            padding: 30px 20px;
-            background-color: #ffffff;
         }
 
-        .reg-container {
+        .register-container {
             width: 100%;
-            max-width: 550px;
+            max-width: 500px;
             margin: auto;
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
 
-        .reg-header {
-            text-align: center;
-        }
-
-        .reg-header h1 {
-            color: #ffcc00; /* Yellow heading */
-            font-size: 22px;
-            font-weight: 800;
-            margin-bottom: 5px;
-        }
-
         .step-indicator {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             font-size: 12px;
-            font-weight: 600;
-            color: #666;
-        }
-
-        .step-indicator span.active-step {
-            color: #d4a000;
             font-weight: 700;
+            color: #d4a000;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .form-step {
             display: none;
             flex-direction: column;
-            gap: 16px;
+            gap: 15px;
         }
 
         .form-step.active {
             display: flex;
         }
 
-        .btn-group {
+        .form-actions {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             margin-top: 10px;
         }
 
-        .btn-group button {
+        .form-actions button {
             flex: 1;
         }
 
-        .secondary-btn {
-            background-color: #f5f5f5;
-            color: #333;
-            border: 1px solid #ccc;
-            padding: 14px;
-            border-radius: 10px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .secondary-btn:hover {
-            background-color: #e5e5e5;
-        }
-
         .terms-box {
-            font-size: 12px;
-            color: #555;
-            background: #fffdf0;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #ffe680;
-            max-height: 120px;
-            overflow-y: auto;
-            line-height: 1.4;
-        }
-
-        .checkbox-group {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 10px;
             font-size: 13px;
-            font-weight: 600;
+            color: #333;
             cursor: pointer;
+            margin-top: 5px;
         }
 
-        .checkbox-group input {
-            width: 18px;
-            height: 18px;
+        .terms-box input {
+            margin-top: 3px;
             accent-color: #ffcc00;
+            width: 16px;
+            height: 16px;
+        }
+
+        .terms-link {
+            color: #d4a000;
+            text-decoration: underline;
             cursor: pointer;
+            font-weight: 600;
+        }
+
+        .preview-summary {
+            background: #ffffff;
+            border: 1px solid #ffe680;
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+
+        .preview-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            border-bottom: 1px solid #f9f9f9;
+            padding-bottom: 6px;
+        }
+
+        .preview-item span:first-child {
+            font-weight: 600;
+            color: #555;
+        }
+
+        .preview-item span:last-child {
+            color: #000;
+            font-weight: 500;
         }
 
         .success-box {
             text-align: center;
-            padding: 20px 0;
+            padding: 30px 20px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
             align-items: center;
         }
 
@@ -315,7 +331,8 @@
 
         .success-box h2 {
             font-size: 20px;
-            color: #333;
+            font-weight: 700;
+            color: #000;
         }
 
         .success-box p {
@@ -330,14 +347,13 @@
             background-color: #ffffff;
         }
 
-        /* Header */
         header {
             background-color: #ffffff;
             padding: 12px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -359,7 +375,7 @@
         .brand-text h1 {
             font-size: 16px;
             font-weight: 700;
-            color: #ffcc00; /* Yellow items/text */
+            color: #ffcc00;
             line-height: 1.2;
         }
 
@@ -369,7 +385,6 @@
             color: #333;
         }
 
-        /* Desktop Nav Links */
         .nav-links {
             display: none;
             list-style: none;
@@ -378,7 +393,7 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #ffcc00; /* Yellow items/text */
+            color: #ffcc00;
             font-size: 13px;
             font-weight: 600;
             transition: color 0.3s, transform 0.3s;
@@ -389,7 +404,6 @@
             transform: scale(1.05);
         }
 
-        /* Menu Button */
         .menu-toggle {
             font-size: 24px;
             cursor: pointer;
@@ -402,7 +416,6 @@
             transform: scale(1.1);
         }
 
-        /* --- MOBILE ANIMATED FULL-SCREEN MENU --- */
         .mobile-menu-overlay {
             position: fixed;
             top: 0;
@@ -466,7 +479,6 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            transition: color 0.3s, transform 0.3s;
         }
 
         .mobile-nav-links a i {
@@ -474,11 +486,6 @@
             font-size: 18px;
             width: 25px;
             text-align: center;
-        }
-
-        .mobile-nav-links a:hover {
-            color: #d4a000;
-            transform: translateX(5px);
         }
 
         .container {
@@ -498,142 +505,110 @@
             margin-bottom: 25px;
         }
 
-        /* Announcements Card - 2 cm height & Full White */
-        .admin-ad-card {
-            background: #ffffff;
+        /* Announcements Banner Card (Matching reference 1000280113.jpg) */
+        .admin-banner-card {
+            background-color: #ffffff;
             border: 2px solid #ffcc00;
-            border-radius: 12px;
-            height: 2cm;
-            padding: 0 15px;
+            border-radius: 16px;
+            overflow: hidden;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.03);
+            justify-content: center;
         }
 
-        .ad-content {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 12px;
-            font-weight: 600;
-            color: #333;
+        .admin-banner-card img {
+            width: 100%;
+            height: auto;
+            max-height: 180px;
+            object-fit: cover;
+            display: block;
         }
 
-        .ad-content i {
-            color: #ffcc00;
-            font-size: 18px;
-        }
-
-        .ad-badge {
-            background-color: #ffcc00;
-            color: #000;
-            font-size: 10px;
-            font-weight: 700;
-            padding: 4px 10px;
-            border-radius: 6px;
-            text-transform: uppercase;
-        }
-
-        /* My Profile Card - 3 cm height & Full White */
+        /* Profile Card (Matching reference 1000280114.png without edit button) */
         .profile-card {
             background-color: #ffffff;
             border: 2px solid #ffcc00;
-            border-radius: 14px;
-            height: 3cm;
-            padding: 0 18px;
+            border-radius: 20px;
+            padding: 16px 20px;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 8px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.03);
-        }
-
-        .profile-top {
-            display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: center;
+            gap: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            flex-wrap: wrap;
         }
 
-        .profile-title-area {
+        .profile-left {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
         }
 
-        .profile-title-area img {
-            width: 42px;
-            height: 42px;
+        .profile-avatar {
+            width: 65px;
+            height: 65px;
             border-radius: 50%;
-            border: 2px solid #ffcc00;
+            border: 3px solid #ffcc00;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
         }
 
-        .profile-title-area h2 {
-            font-size: 15px;
-            font-weight: 700;
-            color: #000000;
+        .profile-avatar i {
+            font-size: 32px;
+            color: #888;
         }
 
-        .profile-title-area p {
-            font-size: 11px;
-            color: #555;
+        .profile-info h2 {
+            font-size: 20px;
+            font-weight: 800;
+            color: #000000;
+            line-height: 1.2;
+        }
+
+        .profile-info p {
+            font-size: 14px;
             font-weight: 500;
-        }
-
-        .profile-badge {
-            background-color: #ffffff;
-            border: 1px solid #ffcc00;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            color: #000000;
-        }
-
-        .profile-badge i {
-            color: #ffcc00;
-        }
-
-        .profile-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .profile-tags {
-            font-size: 11px;
-            color: #000000;
-            font-weight: 500;
+            color: #444;
+            margin-top: 2px;
         }
 
         .view-profile-btn {
-            background-color: #ffcc00;
+            background: linear-gradient(135deg, #ffcc00 0%, #ffaa00 100%);
             color: #000000;
-            padding: 5px 14px;
-            border-radius: 20px;
+            padding: 10px 22px;
+            border-radius: 30px;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 12px;
+            font-weight: 700;
+            font-size: 14px;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            box-shadow: 0 3px 10px rgba(255, 204, 0, 0.3);
             transition: all 0.3s;
         }
 
         .view-profile-btn:hover {
-            background-color: #e6b800;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 204, 0, 0.5);
         }
 
         /* --- TNSF HUB SECTION --- */
         .hub-section {
-            background: #ffffff; /* Full white card */
+            background: #ffffff;
             border: 2px solid #ffcc00;
-            border-radius: 15px;
-            padding: 25px 15px;
+            border-radius: 20px;
+            padding: 25px 20px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.03);
             margin-bottom: 30px;
         }
@@ -644,7 +619,7 @@
             margin-bottom: 20px;
             position: relative;
             padding-left: 10px;
-            color: #ffcc00; /* Heading yellow */
+            color: #ffcc00;
             border-left: 4px solid #ffcc00;
         }
 
@@ -672,7 +647,7 @@
         .hub-icon-circle {
             width: 60px;
             height: 60px;
-            background-color: #ffffff; /* Full white icon cards */
+            background-color: #ffffff;
             border: 2px solid #ffcc00;
             border-radius: 50%;
             display: flex;
@@ -687,7 +662,6 @@
         .hub-item:hover .hub-icon-circle {
             background-color: #ffcc00;
             color: #000;
-            box-shadow: 0 6px 15px rgba(255, 204, 0, 0.4);
         }
 
         .hub-item span {
@@ -696,7 +670,6 @@
             color: #000000;
         }
 
-        /* Footer */
         footer {
             text-align: center;
             padding: 20px;
@@ -706,7 +679,62 @@
             border-top: 1px solid #f5f5f5;
         }
 
-        /* --- RESPONSIVE MEDIA QUERIES --- */
+        /* --- TERMS MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(3px);
+            z-index: 9999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            border: 2px solid #ffcc00;
+            border-radius: 15px;
+            padding: 25px;
+            max-width: 500px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .modal-content h3 {
+            color: #ffcc00;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .modal-content p {
+            font-size: 13px;
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .close-modal-btn {
+            align-self: flex-end;
+            background: #ffcc00;
+            color: #000;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
         @media (min-width: 768px) {
             .nav-links {
                 display: flex;
@@ -757,10 +785,10 @@
                         </div>
                     </div>
 
-                    <button type="button" class="primary-btn" id="loginBtn">Login to Dashboard</button>
+                    <button type="button" class="btn-primary" id="loginBtn">Login to Dashboard</button>
 
                     <div class="register-option">
-                        Don't have an account? <a id="openRegisterBtn">Register Here</a>
+                        Don't have an account? <a href="#" id="openRegisterBtn">Register Here</a>
                     </div>
                 </div>
             </div>
@@ -771,196 +799,182 @@
     </div>
 
 
-    <!-- ================= VIEW 2: MULTI-STEP REGISTRATION FORM ================= -->
+    <!-- ================= VIEW 2: REGISTRATION FORM VIEW ================= -->
     <div id="register-view" class="view-section">
-        <div class="container" style="display: flex; justify-content: center; align-items: center; flex: 1;">
-            <div class="reg-container">
-                <div class="reg-header">
-                    <h1>TNSF Membership Registration</h1>
-                    <p style="font-size: 12px; color: #666;">Join the student movement of Kadapa Parliament</p>
+        <div class="register-container">
+            <div class="login-header-text">
+                <h1>TNSF Membership Portal ✊</h1>
+                <p>Complete the application steps to join TNSF Kadapa Parliament.</p>
+            </div>
+
+            <div class="form-card">
+                <div class="step-indicator" id="stepIndicator">Step 1 of 4: Personal Details</div>
+
+                <!-- STEP 1: Personal Details -->
+                <div class="form-step active" data-step="1">
+                    <div class="input-group">
+                        <label>Full Name</label>
+                        <div class="input-wrapper">
+                            <input type="text" id="regFullName" placeholder="Enter full name">
+                            <i class="fa-solid fa-user field-icon"></i>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Mobile Number</label>
+                        <div class="input-wrapper">
+                            <input type="tel" id="regMobile" placeholder="Enter mobile number">
+                            <i class="fa-solid fa-phone field-icon"></i>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Email Address</label>
+                        <div class="input-wrapper">
+                            <input type="email" id="regEmail" placeholder="Enter email address">
+                            <i class="fa-solid fa-envelope field-icon"></i>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Date of Birth</label>
+                        <div class="input-wrapper">
+                            <input type="date" id="regDob">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Gender</label>
+                        <div class="input-wrapper">
+                            <select id="regGender">
+                                <option value="">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <i class="fa-solid fa-venus-mars field-icon"></i>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Upload Photo</label>
+                        <div class="input-wrapper">
+                            <input type="file" id="regPhoto" accept="image/*">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" id="backToLoginBtn">Cancel</button>
+                        <button type="button" class="btn-primary next-step-btn">Next Step</button>
+                    </div>
                 </div>
 
-                <!-- Progress Tracker -->
-                <div class="step-indicator">
-                    <span id="ind-1" class="active-step">1. Personal</span>
-                    <span id="ind-2">2. Education</span>
-                    <span id="ind-3">3. Location</span>
-                    <span id="ind-4">4. Confirm</span>
+                <!-- STEP 2: Education -->
+                <div class="form-step" data-step="2">
+                    <div class="input-group">
+                        <label>College / Institution Name</label>
+                        <div class="input-wrapper">
+                            <input type="text" id="regCollege" placeholder="Enter college name">
+                            <i class="fa-solid fa-graduation-cap field-icon"></i>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Course / Degree</label>
+                        <div class="input-wrapper">
+                            <input type="text" id="regCourse" placeholder="e.g. B.Tech, Degree, Intermediate">
+                            <i class="fa-solid fa-book field-icon"></i>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary prev-step-btn">Previous</button>
+                        <button type="button" class="btn-primary next-step-btn">Next Step</button>
+                    </div>
                 </div>
 
-                <div class="form-card">
-                    <!-- STEP 1: Personal Details -->
-                    <div class="form-step active" id="step-1">
-                        <h3 style="font-size: 15px; color: #d4a000; font-weight: 700;">Step 1 — Personal Details</h3>
-                        
-                        <div class="input-group">
-                            <label>Full Name</label>
-                            <div class="input-wrapper">
-                                <input type="text" id="reg-name" placeholder="Enter your full name">
-                            </div>
-                        </div>
-
-                        <div class="input-group">
-                            <label>Mobile Number</label>
-                            <div class="input-wrapper">
-                                <input type="tel" id="reg-mobile" placeholder="Enter 10-digit mobile number">
-                            </div>
-                        </div>
-
-                        <div class="input-group">
-                            <label>Email Address</label>
-                            <div class="input-wrapper">
-                                <input type="email" id="reg-email" placeholder="Enter email address">
-                            </div>
-                        </div>
-
-                        <div class="input-group">
-                            <label>Date of Birth</label>
-                            <div class="input-wrapper">
-                                <input type="date" id="reg-dob">
-                            </div>
-                        </div>
-
-                        <div class="input-group">
-                            <label>Gender</label>
-                            <div class="input-wrapper">
-                                <select id="reg-gender">
-                                    <option value="">Select Gender</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="input-group">
-                            <label>Upload Photo</label>
-                            <div class="input-wrapper">
-                                <input type="file" id="reg-photo" accept="image/*">
-                            </div>
-                        </div>
-
-                        <div class="btn-group">
-                            <button type="button" class="secondary-btn" id="backToLoginBtn">Cancel</button>
-                            <button type="button" class="primary-btn" onclick="nextStep(1)">Next <i class="fa-solid fa-arrow-right"></i></button>
+                <!-- STEP 3: Location -->
+                <div class="form-step" data-step="3">
+                    <div class="input-group">
+                        <label>Constituency</label>
+                        <div class="input-wrapper">
+                            <select id="regConstituency">
+                                <option value="">Select Constituency</option>
+                                <option value="Proddatur">Proddatur</option>
+                                <option value="Kadapa">Kadapa</option>
+                                <option value="Jammalamadugu">Jammalamadugu</option>
+                                <option value="Badvel">Badvel</option>
+                                <option value="Rayachoti">Rayachoti</option>
+                                <option value="Pulivendula">Pulivendula</option>
+                                <option value="Mydukur">Mydukur</option>
+                            </select>
+                            <i class="fa-solid fa-map-location-dot field-icon"></i>
                         </div>
                     </div>
-
-                    <!-- STEP 2: Education -->
-                    <div class="form-step" id="step-2">
-                        <h3 style="font-size: 15px; color: #d4a000; font-weight: 700;">Step 2 — Education</h3>
-
-                        <div class="input-group">
-                            <label>College / Institution</label>
-                            <div class="input-wrapper">
-                                <input type="text" id="reg-college" placeholder="Enter college name">
-                            </div>
-                        </div>
-
-                        <div class="input-group">
-                            <label>Course / Degree</label>
-                            <div class="input-wrapper">
-                                <input type="text" id="reg-course" placeholder="e.g. B.Tech, Degree, Inter">
-                            </div>
-                        </div>
-
-                        <div class="btn-group">
-                            <button type="button" class="secondary-btn" onclick="prevStep(2)"><i class="fa-solid fa-arrow-left"></i> Previous</button>
-                            <button type="button" class="primary-btn" onclick="nextStep(2)">Next <i class="fa-solid fa-arrow-right"></i></button>
+                    <div class="input-group">
+                        <label>Mandal</label>
+                        <div class="input-wrapper">
+                            <input type="text" id="regMandal" placeholder="Enter mandal">
+                            <i class="fa-solid fa-location-crosshairs field-icon"></i>
                         </div>
                     </div>
-
-                    <!-- STEP 3: Location -->
-                    <div class="form-step" id="step-3">
-                        <h3 style="font-size: 15px; color: #d4a000; font-weight: 700;">Step 3 — Location Details</h3>
-
-                        <div class="input-group">
-                            <label>Constituency</label>
-                            <div class="input-wrapper">
-                                <input type="text" id="reg-constituency" placeholder="e.g. Proddatur, Kadapa">
-                            </div>
-                        </div>
-
-                        <div class="input-group">
-                            <label>Mandal</label>
-                            <div class="input-wrapper">
-                                <input type="text" id="reg-mandal" placeholder="Enter Mandal">
-                            </div>
-                        </div>
-
-                        <div class="input-group">
-                            <label>Village / Town</label>
-                            <div class="input-wrapper">
-                                <input type="text" id="reg-village" placeholder="Enter Village or Town">
-                            </div>
-                        </div>
-
-                        <div class="input-group">
-                            <label>Full Address</label>
-                            <div class="input-wrapper">
-                                <textarea id="reg-address" placeholder="Enter complete door/street address" rows="2"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="btn-group">
-                            <button type="button" class="secondary-btn" onclick="prevStep(3)"><i class="fa-solid fa-arrow-left"></i> Previous</button>
-                            <button type="button" class="primary-btn" onclick="prepareConfirmation()">Preview <i class="fa-solid fa-eye"></i></button>
+                    <div class="input-group">
+                        <label>Village / Town</label>
+                        <div class="input-wrapper">
+                            <input type="text" id="regVillage" placeholder="Enter village or town">
+                            <i class="fa-solid fa-city field-icon"></i>
                         </div>
                     </div>
-
-                    <!-- STEP 4: Confirmation & Terms -->
-                    <div class="form-step" id="step-4">
-                        <h3 style="font-size: 15px; color: #d4a000; font-weight: 700;">Step 4 — Confirmation & Terms</h3>
-                        
-                        <div style="font-size: 13px; color: #333; display: flex; flex-direction: column; gap: 6px; background: #fafafa; padding: 12px; border-radius: 8px;">
-                            <div><strong>Name:</strong> <span id="prev-name"></span></div>
-                            <div><strong>Mobile:</strong> <span id="prev-mobile"></span></div>
-                            <div><strong>Email:</strong> <span id="prev-email"></span></div>
-                            <div><strong>College:</strong> <span id="prev-college"></span></div>
-                            <div><strong>Constituency:</strong> <span id="prev-constituency"></span></div>
+                    <div class="input-group">
+                        <label>Full Address</label>
+                        <div class="input-wrapper">
+                            <textarea id="regAddress" placeholder="Enter complete door no, street, landmark"></textarea>
                         </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary prev-step-btn">Previous</button>
+                        <button type="button" class="btn-primary" id="goToPreviewBtn">Preview Details</button>
+                    </div>
+                </div>
 
-                        <div class="input-group">
-                            <label>Terms and Conditions</label>
-                            <div class="terms-box">
-                                1. I agree to abide by the rules, regulations, and core objectives of the Telugu Nadu Students Federation (TNSF).<br>
-                                2. I confirm that the details furnished above are accurate and true to the best of my knowledge.<br>
-                                3. Membership is subject to verification and approval by the respective Constituency Admin.
-                            </div>
-                        </div>
+                <!-- STEP 4: Confirmation & Preview -->
+                <div class="form-step" data-step="4">
+                    <label style="font-size: 14px; font-weight: 700; color: #333;">Review Your Information</label>
+                    <div class="preview-summary" id="previewSummaryContent"></div>
 
-                        <label class="checkbox-group">
-                            <input type="checkbox" id="termsAgree">
-                            <span>I agree to TNSF membership terms and conditions</span>
+                    <div class="terms-box">
+                        <input type="checkbox" id="termsCheck">
+                        <label for="termsCheck" style="cursor: pointer;">
+                            I agree to TNSF membership terms and conditions. <span class="terms-link" id="openTermsModal">Open Terms</span>
                         </label>
-
-                        <div class="btn-group">
-                            <button type="button" class="secondary-btn" onclick="editForm()"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
-                            <button type="button" class="primary-btn" id="submitAppBtn" style="background-color: #28a745; color: #fff;">Submit Membership Application</button>
-                        </div>
                     </div>
 
-                    <!-- STEP 5: Success Message -->
-                    <div class="form-step" id="step-success">
-                        <div class="success-box">
-                            <i class="fa-solid fa-circle-check"></i>
-                            <h2>Application Submitted!</h2>
-                            <p>Your application has been sent to your Constituency Admin for verification. You will receive login credentials upon approval.</p>
-                            <button type="button" class="primary-btn" id="backToLoginFromSuccess">Back to Login</button>
-                        </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary prev-step-btn">Edit Details</button>
+                        <button type="button" class="btn-primary" id="submitAppBtn">[ Submit Membership Application ]</button>
+                    </div>
+                </div>
+
+                <!-- SUCCESS SUBMISSION STATE -->
+                <div class="form-step" data-step="success">
+                    <div class="success-box">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <h2>Application Submitted!</h2>
+                        <p>Your application has been sent to your Constituency Admin for verification.</p>
+                        <button type="button" class="btn-primary" id="backToLoginFromSuccess" style="margin-top: 10px;">Return to Login</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="auth-footer">
-            ©2026 TNSF KADAPA PARLIAMENT. All Rights Reserved.
+    </div>
+
+
+    <!-- ================= TERMS & CONDITIONS MODAL ================= -->
+    <div class="modal-overlay" id="termsModal">
+        <div class="modal-content">
+            <h3>TNSF Membership Terms & Conditions</h3>
+            <p>1. By registering, you pledge support to the core objectives, student welfare policies, and democratic principles of the Telugu Nadu Students Federation (TNSF) Kadapa Parliament.</p>
+            <p>2. The information submitted will be reviewed and verified by your respective constituency administrator.</p>
+            <p>3. Members are expected to actively participate in student development programs, uphold organizational discipline, and maintain ethical standards across community platforms.</p>
+            <button type="button" class="close-modal-btn" id="closeTermsModal">Close</button>
         </div>
     </div>
 
 
     <!-- ================= VIEW 3: DASHBOARD PAGE ================= -->
     <div id="dashboard-view" class="view-section">
-        <!-- Header -->
         <header>
             <div class="brand">
                 <img src="https://i.ibb.co/3yk71Q9/logo.png" alt="Logo" onerror="this.src='https://via.placeholder.com/45?text=L'">
@@ -970,9 +984,8 @@
                 </div>
             </div>
             
-            <!-- Desktop Navbar Menu -->
             <ul class="nav-links">
-                <li><a href="#" class="nav-home">Home</a></li>
+                <li><a href="#">Home</a></li>
                 <li><a href="#">Resolution Desk</a></li>
                 <li><a href="#">Gallery</a></li>
                 <li><a href="#">Inbox</a></li>
@@ -984,19 +997,17 @@
                 <li><a href="#" id="logoutBtnNav" style="color: #d9534f;"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
             </ul>
 
-            <!-- Mobile Hamburger Button -->
             <div class="menu-toggle" id="menuToggleBtn">
                 <i class="fa-solid fa-bars"></i>
             </div>
         </header>
 
-        <!-- MOBILE ANIMATED OVERLAY MENU -->
         <div class="mobile-menu-overlay" id="mobileMenuOverlay">
             <div class="close-menu" id="closeMenuBtn">
                 <i class="fa-solid fa-xmark"></i>
             </div>
             <ul class="mobile-nav-links">
-                <li><a href="#" class="nav-home"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="#"><i class="fa-solid fa-house"></i> Home</a></li>
                 <li><a href="#"><i class="fa-solid fa-graduation-cap"></i> Resolution Desk</a></li>
                 <li><a href="#"><i class="fa-solid fa-images"></i> Gallery</a></li>
                 <li><a href="#"><i class="fa-solid fa-envelope"></i> Inbox</a></li>
@@ -1010,91 +1021,45 @@
         </div>
 
         <div class="container">
-            <!-- Hero Section -->
             <div class="hero-section">
-                <!-- Announcements Card (2 cm height) -->
-                <div class="admin-ad-card">
-                    <div class="ad-content">
-                        <i class="fa-solid fa-bullhorn"></i>
-                        <span>Admin Announcement: Welcome delegates to the Kadapa Parliament session!</span>
-                    </div>
-                    <div class="ad-badge">Notice</div>
+                <!-- Announcements Banner Card (Matching reference 1000280113.jpg) -->
+                <div class="admin-banner-card">
+                    <img src="https://i.ibb.co/3y13V2t/1000280113.jpg" alt="Campaign Banner" onerror="this.src='https://via.placeholder.com/1200x300?text=TNSF+Campaign+Banner'">
                 </div>
 
-                <!-- My Profile Card (3 cm height) -->
+                <!-- My Profile Card (Matching reference 1000280114.png without edit button) -->
                 <div class="profile-card">
-                    <div class="profile-top">
-                        <div class="profile-title-area">
-                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Profile" onerror="this.src='https://via.placeholder.com/42?text=P'">
-                            <div>
-                                <h2>Chenna Laxmi Narayana</h2>
-                                <p>Constituency Representative</p>
-                            </div>
+                    <div class="profile-left">
+                        <div class="profile-avatar">
+                            <i class="fa-solid fa-user"></i>
                         </div>
-                        <div class="profile-badge">
-                            <i class="fa-solid fa-star"></i> 450.6 Points
+                        <div class="profile-info">
+                            <h2>My Profile</h2>
+                            <p>TNSF Member</p>
                         </div>
                     </div>
-                    <div class="profile-footer">
-                        <div class="profile-tags">Your Journey &nbsp;•&nbsp; Your Points</div>
-                        <a href="#" class="view-profile-btn">View Profile <i class="fa-solid fa-arrow-right"></i></a>
-                    </div>
+                    <a href="#" class="view-profile-btn">
+                        <i class="fa-solid fa-user"></i> View Profile
+                    </a>
                 </div>
             </div>
 
             <!-- TNSF Hub Section -->
             <div class="hub-section">
                 <div class="hub-title">TNSF Hub</div>
-                
                 <div class="hub-grid">
-                    <a href="#" class="hub-item">
-                        <div class="hub-icon-circle"><i class="fa-solid fa-user"></i></div>
-                        <span>Profile</span>
-                    </a>
-                    <a href="#" class="hub-item">
-                        <div class="hub-icon-circle"><i class="fa-solid fa-square-poll-vertical"></i></div>
-                        <span>Polls</span>
-                    </a>
-                    <a href="#" class="hub-item">
-                        <div class="hub-icon-circle"><i class="fa-solid fa-list-check"></i></div>
-                        <span>Tasks</span>
-                    </a>
-                    <a href="#" class="hub-item">
-                        <div class="hub-icon-circle"><i class="fa-solid fa-user-plus"></i></div>
-                        <span>Refer</span>
-                    </a>
-                    <a href="#" class="hub-item">
-                        <div class="hub-icon-circle"><i class="fa-solid fa-graduation-cap"></i></div>
-                        <span>Resolution Desk</span>
-                    </a>
-                    <a href="#" class="hub-item">
-                        <div class="hub-icon-circle"><i class="fa-solid fa-images"></i></div>
-                        <span>Gallery</span>
-                    </a>
-                    <a href="#" class="hub-item">
-                        <div class="hub-icon-circle"><i class="fa-solid fa-envelope"></i></div>
-                        <span>Inbox</span>
-                    </a>
-                    <a href="#" class="hub-item">
-                        <div class="hub-icon-circle"><i class="fa-solid fa-map-location-dot"></i></div>
-                        <span>Constituencies</span>
-                    </a>
-                    <a href="#" class="hub-item">
-                        <div class="hub-icon-circle"><i class="fa-solid fa-user-tie"></i></div>
-                        <span>Leadership</span>
-                    </a>
-                    <a href="#" class="hub-item">
-                        <div class="hub-icon-circle"><i class="fa-solid fa-calendar-days"></i></div>
-                        <span>Events</span>
-                    </a>
-                    <a href="#" class="hub-item">
-                        <div class="hub-icon-circle"><i class="fa-solid fa-comments"></i></div>
-                        <span>Feedback</span>
-                    </a>
-                    <a href="#" class="hub-item">
-                        <div class="hub-icon-circle"><i class="fa-solid fa-headset"></i></div>
-                        <span>Contact Us</span>
-                    </a>
+                    <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-user"></i></div><span>Profile</span></a>
+                    <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-square-poll-vertical"></i></div><span>Polls</span></a>
+                    <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-list-check"></i></div><span>Tasks</span></a>
+                    <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-user-plus"></i></div><span>Refer</span></a>
+                    <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-graduation-cap"></i></div><span>Resolution Desk</span></a>
+                    <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-images"></i></div><span>Gallery</span></a>
+                    <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-envelope"></i></div><span>Inbox</span></a>
+                    <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-map-location-dot"></i></div><span>Constituencies</span></a>
+                    <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-user-tie"></i></div><span>Leadership</span></a>
+                    <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-calendar-days"></i></div><span>Events</span></a>
+                    <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-comments"></i></div><span>Feedback</span></a>
+                    <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-headset"></i></div><span>Contact Us</span></a>
                 </div>
             </div>
         </div>
@@ -1104,9 +1069,144 @@
         </footer>
     </div>
 
+
     <!-- JavaScript Interaction Logic -->
     <script>
-        // --- Password Eye Toggle ---
+        const loginView = document.getElementById('login-view');
+        const registerView = document.getElementById('register-view');
+        const dashboardView = document.getElementById('dashboard-view');
+
+        const openRegisterBtn = document.getElementById('openRegisterBtn');
+        const backToLoginBtn = document.getElementById('backToLoginBtn');
+        const backToLoginFromSuccess = document.getElementById('backToLoginFromSuccess');
+        const loginBtn = document.getElementById('loginBtn');
+        const logoutBtnNav = document.getElementById('logoutBtnNav');
+        const logoutBtnMobile = document.getElementById('logoutBtnMobile');
+
+        function switchView(viewToShow) {
+            [loginView, registerView, dashboardView].forEach(v => v.classList.remove('active'));
+            viewToShow.classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        openRegisterBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            currentStep = 1;
+            showStep(currentStep);
+            switchView(registerView);
+        });
+
+        backToLoginBtn.addEventListener('click', () => switchView(loginView));
+        backToLoginFromSuccess.addEventListener('click', () => switchView(loginView));
+
+        loginBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            switchView(dashboardView);
+        });
+
+        function handleLogout(e) {
+            e.preventDefault();
+            document.getElementById('password').value = '';
+            document.getElementById('userId').value = '';
+            switchView(loginView);
+        }
+
+        logoutBtnNav.addEventListener('click', handleLogout);
+        logoutBtnMobile.addEventListener('click', handleLogout);
+
+        let currentStep = 1;
+        const steps = document.querySelectorAll('.form-step');
+        const stepIndicator = document.getElementById('stepIndicator');
+
+        const stepTitles = {
+            1: "Step 1 of 4: Personal Details",
+            2: "Step 2 of 4: Education Details",
+            3: "Step 3 of 4: Location Details",
+            4: "Step 4 of 4: Confirmation & Preview",
+            success: "Application Status"
+        };
+
+        function showStep(step) {
+            steps.forEach(s => s.classList.remove('active'));
+            const targetStep = document.querySelector(`.form-step[data-step="${step}"]`);
+            if (targetStep) targetStep.classList.add('active');
+            stepIndicator.textContent = stepTitles[step] || "";
+        }
+
+        document.querySelectorAll('.next-step-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (currentStep < 4) {
+                    currentStep++;
+                    showStep(currentStep);
+                }
+            });
+        });
+
+        document.querySelectorAll('.prev-step-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (currentStep > 1) {
+                    currentStep--;
+                    showStep(currentStep);
+                }
+            });
+        });
+
+        const goToPreviewBtn = document.getElementById('goToPreviewBtn');
+        goToPreviewBtn.addEventListener('click', () => {
+            const fullName = document.getElementById('regFullName').value || 'Not provided';
+            const mobile = document.getElementById('regMobile').value || 'Not provided';
+            const email = document.getElementById('regEmail').value || 'Not provided';
+            const dob = document.getElementById('regDob').value || 'Not provided';
+            const gender = document.getElementById('regGender').value || 'Not provided';
+            const college = document.getElementById('regCollege').value || 'Not provided';
+            const course = document.getElementById('regCourse').value || 'Not provided';
+            const constituency = document.getElementById('regConstituency').value || 'Not provided';
+            const mandal = document.getElementById('regMandal').value || 'Not provided';
+            const village = document.getElementById('regVillage').value || 'Not provided';
+            const address = document.getElementById('regAddress').value || 'Not provided';
+
+            const summaryContent = document.getElementById('previewSummaryContent');
+            summaryContent.innerHTML = `
+                <div class="preview-item"><span>Full Name:</span> <span>${fullName}</span></div>
+                <div class="preview-item"><span>Mobile:</span> <span>${mobile}</span></div>
+                <div class="preview-item"><span>Email:</span> <span>${email}</span></div>
+                <div class="preview-item"><span>Date of Birth:</span> <span>${dob}</span></div>
+                <div class="preview-item"><span>Gender:</span> <span>${gender}</span></div>
+                <div class="preview-item"><span>College:</span> <span>${college}</span></div>
+                <div class="preview-item"><span>Course:</span> <span>${course}</span></div>
+                <div class="preview-item"><span>Constituency:</span> <span>${constituency}</span></div>
+                <div class="preview-item"><span>Mandal:</span> <span>${mandal}</span></div>
+                <div class="preview-item"><span>Village/Town:</span> <span>${village}</span></div>
+                <div class="preview-item"><span>Address:</span> <span>${address}</span></div>
+            `;
+
+            currentStep = 4;
+            showStep(currentStep);
+        });
+
+        const submitAppBtn = document.getElementById('submitAppBtn');
+        submitAppBtn.addEventListener('click', () => {
+            const termsChecked = document.getElementById('termsCheck').checked;
+            if (!termsChecked) {
+                alert('Please agree to the TNSF membership terms before submitting.');
+                return;
+            }
+            showStep('success');
+        });
+
+        const termsModal = document.getElementById('termsModal');
+        const openTermsModal = document.getElementById('openTermsModal');
+        const closeTermsModal = document.getElementById('closeTermsModal');
+
+        openTermsModal.addEventListener('click', (e) => {
+            e.preventDefault();
+            termsModal.classList.add('active');
+        });
+
+        closeTermsModal.addEventListener('click', () => {
+            termsModal.classList.remove('active');
+        });
+
         const togglePassword = document.getElementById('togglePassword');
         const passwordInput = document.getElementById('password');
 
@@ -1117,138 +1217,12 @@
             togglePassword.classList.toggle('fa-eye-slash');
         });
 
-        // --- Views ---
-        const loginView = document.getElementById('login-view');
-        const registerView = document.getElementById('register-view');
-        const dashboardView = document.getElementById('dashboard-view');
-        
-        const loginBtn = document.getElementById('loginBtn');
-        const logoutBtnNav = document.getElementById('logoutBtnNav');
-        const logoutBtnMobile = document.getElementById('logoutBtnMobile');
-        const openRegisterBtn = document.getElementById('openRegisterBtn');
-        const backToLoginBtn = document.getElementById('backToLoginBtn');
-        const backToLoginFromSuccess = document.getElementById('backToLoginFromSuccess');
-        const submitAppBtn = document.getElementById('submitAppBtn');
-
-        function switchView(targetView) {
-            loginView.classList.remove('active');
-            registerView.classList.remove('active');
-            dashboardView.classList.remove('active');
-            targetView.classList.add('active');
-            window.scrollTo(0, 0);
-        }
-
-        loginBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            switchView(dashboardView);
-        });
-
-        openRegisterBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            resetForm();
-            switchView(registerView);
-        });
-
-        backToLoginBtn.addEventListener('click', () => {
-            switchView(loginView);
-        });
-
-        backToLoginFromSuccess.addEventListener('click', () => {
-            switchView(loginView);
-        });
-
-        function handleLogout(e) {
-            e.preventDefault();
-            passwordInput.value = '';
-            document.getElementById('userId').value = '';
-            switchView(loginView);
-        }
-
-        logoutBtnNav.addEventListener('click', handleLogout);
-        logoutBtnMobile.addEventListener('click', handleLogout);
-
-        // --- Multi-Step Form Logic ---
-        let currentStep = 1;
-
-        function showStep(step) {
-            document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
-            document.getElementById(`step-${step}`).classList.add('active');
-            
-            for (let i = 1; i <= 4; i++) {
-                const ind = document.getElementById(`ind-${i}`);
-                if (ind) {
-                    if (i === step) ind.classList.add('active-step');
-                    else ind.classList.remove('active-step');
-                }
-            }
-            currentStep = step;
-        }
-
-        function nextStep(step) {
-            // Basic validation per step
-            if (step === 1) {
-                const name = document.getElementById('reg-name').value.trim();
-                const mobile = document.getElementById('reg-mobile').value.trim();
-                if (!name || !mobile) {
-                    alert('Please fill out your Full Name and Mobile number.');
-                    return;
-                }
-            }
-            showStep(step + 1);
-        }
-
-        function prevStep(step) {
-            showStep(step - 1);
-        }
-
-        function prepareConfirmation() {
-            document.getElementById('prev-name').textContent = document.getElementById('reg-name').value || '-';
-            document.getElementById('prev-mobile').textContent = document.getElementById('reg-mobile').value || '-';
-            document.getElementById('prev-email').textContent = document.getElementById('reg-email').value || '-';
-            document.getElementById('prev-college').textContent = document.getElementById('reg-college').value || '-';
-            document.getElementById('prev-constituency').textContent = document.getElementById('reg-constituency').value || '-';
-            showStep(4);
-        }
-
-        function editForm() {
-            showStep(1);
-        }
-
-        submitAppBtn.addEventListener('click', () => {
-            const agree = document.getElementById('termsAgree').checked;
-            if (!agree) {
-                alert('Please agree to the TNSF membership terms and conditions to submit.');
-                return;
-            }
-            document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
-            document.getElementById('step-success').classList.add('active');
-        });
-
-        function resetForm() {
-            currentStep = 1;
-            showStep(1);
-            document.getElementById('termsAgree').checked = false;
-        }
-
-        // --- Mobile Menu Toggle ---
         const menuToggleBtn = document.getElementById('menuToggleBtn');
         const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
         const closeMenuBtn = document.getElementById('closeMenuBtn');
-        const mobileLinks = document.querySelectorAll('.mobile-nav-links a');
 
-        menuToggleBtn.addEventListener('click', () => {
-            mobileMenuOverlay.classList.add('active');
-        });
-
-        closeMenuBtn.addEventListener('click', () => {
-            mobileMenuOverlay.classList.remove('active');
-        });
-
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenuOverlay.classList.remove('active');
-            });
-        });
+        menuToggleBtn.addEventListener('click', () => mobileMenuOverlay.classList.add('active'));
+        closeMenuBtn.addEventListener('click', () => mobileMenuOverlay.classList.remove('active'));
     </script>
 </body>
 </html>
