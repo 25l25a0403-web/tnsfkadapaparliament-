@@ -710,7 +710,6 @@
             display: none;
         }
 
-        /* Search bar styling */
         .admin-search-container {
             position: relative;
             width: 100%;
@@ -723,7 +722,7 @@
             border-radius: 10px;
             font-size: 13px;
             background-color: #ffffff;
-            color: #d4a000; /* Yellow colour text */
+            color: #d4a000;
             outline: none;
         }
 
@@ -740,7 +739,6 @@
             color: #d4a000;
         }
 
-        /* Single Stat Cards Grid */
         .stat-cards-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -749,7 +747,7 @@
         }
 
         .stat-card {
-            background-color: #ffffff; /* Full white card */
+            background-color: #ffffff;
             border: 2px solid #ffcc00;
             border-radius: 15px;
             padding: 18px 12px;
@@ -760,17 +758,16 @@
         .stat-card h3 {
             font-size: 13px;
             font-weight: 600;
-            color: #ffcc00; /* Yellow colour text */
+            color: #ffcc00;
             margin-bottom: 6px;
         }
 
         .stat-card p {
             font-size: 20px;
             font-weight: 800;
-            color: #ffcc00; /* Yellow colour text */
+            color: #ffcc00;
         }
 
-        /* Recent activity box */
         .recent-activity-section {
             background: #ffffff;
             border: 2px solid #ffcc00;
@@ -859,7 +856,6 @@
             cursor: pointer;
         }
 
-        /* --- DESKTOP / LAPTOP RESPONSIVE MEDIA QUERIES --- */
         @media (min-width: 768px) {
             .nav-links {
                 display: flex;
@@ -878,7 +874,6 @@
                 font-size: 18px;
             }
 
-            /* Super Admin Desktop Header adjustments */
             .admin-header {
                 flex-direction: row;
                 justify-content: space-between;
@@ -917,7 +912,7 @@
                     <div class="input-group">
                         <label for="userId">User ID</label>
                         <div class="input-wrapper">
-                            <input type="text" id="userId" placeholder="Enter User ID (admin for Super Admin)">
+                            <input type="text" id="userId" placeholder="Enter User ID (Type 'admin' for Admin dashboard)">
                             <i class="fa-solid fa-user field-icon"></i>
                         </div>
                     </div>
@@ -1215,6 +1210,104 @@
     </div>
 
 
+    <!-- ================= VIEW 4: SUPER ADMIN DASHBOARD PAGE ================= -->
+    <div id="super-admin-view" class="view-section">
+        <header class="admin-header">
+            <div class="admin-header-top">
+                <div class="brand">
+                    <img src="https://i.ibb.co/3yk71Q9/logo.png" alt="Logo" onerror="this.src='https://via.placeholder.com/45?text=L'">
+                    <div class="brand-text">
+                        <h1>TNSF Super Admin</h1>
+                        <span>KADAPA PARLIAMENT</span>
+                    </div>
+                </div>
+
+                <div class="admin-datetime" id="liveDateTime"></div>
+
+                <div class="menu-toggle" id="adminMenuToggleBtn">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </div>
+
+            <div class="admin-search-container">
+                <input type="text" placeholder="Search parliamentary records...">
+                <i class="fa-solid fa-search"></i>
+            </div>
+        </header>
+
+        <div class="mobile-menu-overlay" id="adminMenuOverlay">
+            <div class="close-menu" id="adminCloseMenuBtn">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            <ul class="mobile-nav-links">
+                <li><a href="#" class="logoutAdminBtn" style="color: #d9534f;"><i class="fa-solid fa-right-from-bracket"></i> Logout Admin</a></li>
+            </ul>
+        </div>
+
+        <div class="container">
+            <div class="stat-cards-grid">
+                <div class="stat-card">
+                    <h3>General</h3>
+                    <p>3,420</p>
+                </div>
+                <div class="stat-card">
+                    <h3>VIP</h3>
+                    <p>184</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Admins</h3>
+                    <p>42</p>
+                </div>
+            </div>
+
+            <div class="hub-section">
+                <div class="hub-title">Capital Hub</div>
+                <div class="hub-grid">
+                    <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-users"></i></div><span>Users</span></a>
+                    <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-user-shield"></i></div><span>Admins</span></a>
+                    <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-crown"></i></div><span>VIP's</span></a>
+                    <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-id-card"></i></div><span>Membership's</span></a>
+                    <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-square-poll-vertical"></i></div><span>Polls</span></a>
+                    <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-list-check"></i></div><span>Tasks</span></a>
+                    <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-graduation-cap"></i></div><span>Resolution Desk</span></a>
+                    <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-images"></i></div><span>Gallery</span></a>
+                    <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-envelope"></i></div><span>Inbox</span></a>
+                    <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-map-location-dot"></i></div><span>Constituencies</span></a>
+                    <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-user-tie"></i></div><span>Leadership</span></a>
+                    <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-calendar-days"></i></div><span>Events</span></a>
+                    <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-users-rectangle"></i></div><span>Committees</span></a>
+                    <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-comments"></i></div><span>Feedback</span></a>
+                    <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-hand-holding-heart"></i></div><span>Donations</span></a>
+                    <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-chart-line"></i></div><span>Reports</span></a>
+                    <a href="#" class="hub-item"><div class="hub-icon-circle"><i class="fa-solid fa-bell"></i></div><span>Notifications</span></a>
+                </div>
+            </div>
+
+            <div class="recent-activity-section">
+                <div class="hub-title" style="margin-bottom: 10px;">Recent Activity</div>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <span>New membership application submitted by Proddatur unit</span>
+                        <span>10 mins ago</span>
+                    </div>
+                    <div class="activity-item">
+                        <span>Constituency poll published for Kadapa Parliament</span>
+                        <span>45 mins ago</span>
+                    </div>
+                    <div class="activity-item">
+                        <span>Admin role updated for Rayachoti constituency</span>
+                        <span>2 hours ago</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Copyright © 2026 TNSF KADAPA PARLIAMENT - Super Admin Portal. All rights reserved.</p>
+        </footer>
+    </div>
+
+
     <!-- JavaScript Interaction Logic -->
     <script>
         const loginView = document.getElementById('login-view');
@@ -1245,10 +1338,11 @@
         backToLoginBtn.addEventListener('click', () => switchView(loginView));
         backToLoginFromSuccess.addEventListener('click', () => switchView(loginView));
 
-        // Login Routing Logic (If username is 'admin', open Super Admin Dashboard)
+        // Conditional Login Routing based on User ID credentials
         loginBtn.addEventListener('click', (e) => {
             e.preventDefault();
             const userIdVal = document.getElementById('userId').value.trim().toLowerCase();
+            
             if (userIdVal === 'admin') {
                 switchView(superAdminView);
             } else {
@@ -1266,12 +1360,10 @@
         logoutBtnNav.addEventListener('click', handleLogout);
         logoutBtnMobile.addEventListener('click', handleLogout);
 
-        // Logout handlers for Admin
         document.querySelectorAll('.logoutAdminBtn').forEach(btn => {
             btn.addEventListener('click', handleLogout);
         });
 
-        // Live Date & Time for Desktop Super Admin Header
         function updateDateTime() {
             const now = new Date();
             const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
@@ -1282,8 +1374,6 @@
         setInterval(updateDateTime, 1000);
         updateDateTime();
 
-
-        // --- Multi-Step Form Logic ---
         let currentStep = 1;
         const steps = document.querySelectorAll('.form-step');
         const stepIndicator = document.getElementById('stepIndicator');
@@ -1387,7 +1477,6 @@
             togglePassword.classList.toggle('fa-eye-slash');
         });
 
-        // User Mobile Menu Toggle
         const menuToggleBtn = document.getElementById('menuToggleBtn');
         const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
         const closeMenuBtn = document.getElementById('closeMenuBtn');
@@ -1395,7 +1484,6 @@
         if (menuToggleBtn) menuToggleBtn.addEventListener('click', () => mobileMenuOverlay.classList.add('active'));
         if (closeMenuBtn) closeMenuBtn.addEventListener('click', () => mobileMenuOverlay.classList.remove('active'));
 
-        // Super Admin Mobile Menu Toggle
         const adminMenuToggleBtn = document.getElementById('adminMenuToggleBtn');
         const adminMenuOverlay = document.getElementById('adminMenuOverlay');
         const adminCloseMenuBtn = document.getElementById('adminCloseMenuBtn');
@@ -1405,3 +1493,4 @@
     </script>
 </body>
 </html>
+        
