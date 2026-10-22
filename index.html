@@ -18,8 +18,8 @@
         }
 
         body {
-            background-color: #ffffff; /* Pure white background */
-            color: #ffffff;
+            background-color: #ffffff; /* Full white background */
+            color: #333;
             overflow-x: hidden;
             min-height: 100vh;
             display: flex;
@@ -31,7 +31,7 @@
             display: none;
             width: 100%;
             flex: 1;
-            animation: fadeIn 0.5s ease-in-out;
+            animation: fadeIn 0.4s ease-in-out;
         }
 
         .view-section.active {
@@ -79,12 +79,12 @@
             line-height: 1.5;
         }
 
-        .login-card {
-            background-color: #ffffff; /* Pure white login card */
+        .login-card, .form-card {
+            background-color: #ffffff; /* Full white card */
             border: 2px solid #ffcc00;
             border-radius: 20px;
             padding: 30px 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
             display: flex;
             flex-direction: column;
             gap: 20px;
@@ -93,7 +93,7 @@
         .input-group {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
             position: relative;
         }
 
@@ -109,9 +109,9 @@
             align-items: center;
         }
 
-        .input-wrapper input {
+        .input-wrapper input, .input-wrapper select, .input-wrapper textarea {
             width: 100%;
-            padding: 12px 45px 12px 15px;
+            padding: 12px 15px;
             border: 2px solid #ffcc00;
             border-radius: 10px;
             font-size: 14px;
@@ -121,12 +121,16 @@
             transition: all 0.3s;
         }
 
-        .input-wrapper input::placeholder {
-            color: #d4a000; /* Yellow colour placeholders */
+        .input-wrapper input[type="password"], .input-wrapper input[type="text"] {
+            padding-right: 45px;
+        }
+
+        .input-wrapper input::placeholder, .input-wrapper textarea::placeholder {
+            color: #d4a000; /* Yellow placeholders */
             opacity: 0.8;
         }
 
-        .input-wrapper input:focus {
+        .input-wrapper input:focus, .input-wrapper select:focus, .input-wrapper textarea:focus {
             border-color: #e6b800;
             box-shadow: 0 0 8px rgba(255, 204, 0, 0.2);
         }
@@ -134,7 +138,7 @@
         .input-wrapper i.field-icon {
             position: absolute;
             right: 15px;
-            color: #d4a000; /* Yellow colour icons */
+            color: #d4a000; /* Yellow icons */
             font-size: 16px;
         }
 
@@ -143,7 +147,7 @@
             z-index: 10;
         }
 
-        .login-btn {
+        .primary-btn {
             background-color: #ffcc00; /* Yellow button */
             color: #000;
             border: none;
@@ -154,10 +158,12 @@
             cursor: pointer;
             transition: all 0.3s;
             box-shadow: 0 4px 12px rgba(255, 204, 0, 0.2);
-            margin-top: 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
         }
 
-        .login-btn:hover {
+        .primary-btn:hover {
             background-color: #e6b800;
             transform: translateY(-2px);
         }
@@ -172,6 +178,7 @@
             color: #d4a000; /* Yellow text */
             font-weight: 700;
             text-decoration: none;
+            cursor: pointer;
         }
 
         .register-option a:hover {
@@ -186,12 +193,144 @@
         }
 
 
+        /* ================= REGISTRATION VIEW ================= */
+        #register-view {
+            justify-content: center;
+            align-items: center;
+            padding: 30px 20px;
+            background-color: #ffffff;
+        }
+
+        .reg-container {
+            width: 100%;
+            max-width: 550px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .reg-header {
+            text-align: center;
+        }
+
+        .reg-header h1 {
+            color: #ffcc00; /* Yellow heading */
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .step-indicator span.active-step {
+            color: #d4a000;
+            font-weight: 700;
+        }
+
+        .form-step {
+            display: none;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .form-step.active {
+            display: flex;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .btn-group button {
+            flex: 1;
+        }
+
+        .secondary-btn {
+            background-color: #f5f5f5;
+            color: #333;
+            border: 1px solid #ccc;
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .secondary-btn:hover {
+            background-color: #e5e5e5;
+        }
+
+        .terms-box {
+            font-size: 12px;
+            color: #555;
+            background: #fffdf0;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ffe680;
+            max-height: 120px;
+            overflow-y: auto;
+            line-height: 1.4;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .checkbox-group input {
+            width: 18px;
+            height: 18px;
+            accent-color: #ffcc00;
+            cursor: pointer;
+        }
+
+        .success-box {
+            text-align: center;
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .success-box i {
+            font-size: 50px;
+            color: #ffcc00;
+        }
+
+        .success-box h2 {
+            font-size: 20px;
+            color: #333;
+        }
+
+        .success-box p {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+
         /* ================= DASHBOARD VIEW ================= */
         #dashboard-view {
             background-color: #ffffff;
         }
 
-        /* Header (White colour header) */
+        /* Header */
         header {
             background-color: #ffffff;
             padding: 12px 20px;
@@ -239,7 +378,7 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #ffcc00; /* Yellow colour items and text */
+            color: #ffcc00; /* Yellow items/text */
             font-size: 13px;
             font-weight: 600;
             transition: color 0.3s, transform 0.3s;
@@ -250,7 +389,7 @@
             transform: scale(1.05);
         }
 
-        /* Menu Button (Yellow colour items and text) */
+        /* Menu Button */
         .menu-toggle {
             font-size: 24px;
             cursor: pointer;
@@ -331,7 +470,7 @@
         }
 
         .mobile-nav-links a i {
-            color: #ffcc00; /* Yellow item icons */
+            color: #ffcc00;
             font-size: 18px;
             width: 25px;
             text-align: center;
@@ -359,7 +498,7 @@
             margin-bottom: 25px;
         }
 
-        /* Announcements Card - Exactly 2 cm height (~76px) & Pure White */
+        /* Announcements Card - 2 cm height & Full White */
         .admin-ad-card {
             background: #ffffff;
             border: 2px solid #ffcc00;
@@ -396,7 +535,7 @@
             text-transform: uppercase;
         }
 
-        /* My Profile Card - Exactly 3 cm height (~113px) & Pure White */
+        /* My Profile Card - 3 cm height & Full White */
         .profile-card {
             background-color: #ffffff;
             border: 2px solid #ffcc00;
@@ -426,14 +565,14 @@
             width: 42px;
             height: 42px;
             border-radius: 50%;
-            border: 2px solid #ffcc00; /* Yellow item */
+            border: 2px solid #ffcc00;
             object-fit: cover;
         }
 
         .profile-title-area h2 {
             font-size: 15px;
             font-weight: 700;
-            color: #000000; /* Text black */
+            color: #000000;
         }
 
         .profile-title-area p {
@@ -452,11 +591,11 @@
             display: flex;
             align-items: center;
             gap: 5px;
-            color: #000000; /* Text black */
+            color: #000000;
         }
 
         .profile-badge i {
-            color: #ffcc00; /* Yellow item */
+            color: #ffcc00;
         }
 
         .profile-footer {
@@ -467,13 +606,13 @@
 
         .profile-tags {
             font-size: 11px;
-            color: #000000; /* Text black */
+            color: #000000;
             font-weight: 500;
         }
 
         .view-profile-btn {
-            background-color: #ffcc00; /* Yellow item */
-            color: #000000; /* Text black */
+            background-color: #ffcc00;
+            color: #000000;
             padding: 5px 14px;
             border-radius: 20px;
             text-decoration: none;
@@ -489,9 +628,9 @@
             background-color: #e6b800;
         }
 
-        /* --- TNSF HUB SECTION (Hub card pure white, heading yellow, text black) --- */
+        /* --- TNSF HUB SECTION --- */
         .hub-section {
-            background: #ffffff; /* Pure white card */
+            background: #ffffff; /* Full white card */
             border: 2px solid #ffcc00;
             border-radius: 15px;
             padding: 25px 15px;
@@ -533,14 +672,14 @@
         .hub-icon-circle {
             width: 60px;
             height: 60px;
-            background-color: #ffffff; /* Pure white round icon cards */
-            border: 2px solid #ffcc00; /* Yellow item */
+            background-color: #ffffff; /* Full white icon cards */
+            border: 2px solid #ffcc00;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 20px;
-            color: #ffcc00; /* Yellow icon */
+            color: #ffcc00;
             box-shadow: 0 3px 8px rgba(255, 204, 0, 0.15);
             transition: all 0.3s ease;
         }
@@ -554,7 +693,7 @@
         .hub-item span {
             font-size: 12px;
             font-weight: 600;
-            color: #000000; /* Text black */
+            color: #000000;
         }
 
         /* Footer */
@@ -618,10 +757,10 @@
                         </div>
                     </div>
 
-                    <button type="button" class="login-btn" id="loginBtn">Login to Dashboard</button>
+                    <button type="button" class="primary-btn" id="loginBtn">Login to Dashboard</button>
 
                     <div class="register-option">
-                        Don't have an account? <a href="#" id="registerLink">Register option</a>
+                        Don't have an account? <a id="openRegisterBtn">Register Here</a>
                     </div>
                 </div>
             </div>
@@ -632,7 +771,194 @@
     </div>
 
 
-    <!-- ================= VIEW 2: DASHBOARD PAGE ================= -->
+    <!-- ================= VIEW 2: MULTI-STEP REGISTRATION FORM ================= -->
+    <div id="register-view" class="view-section">
+        <div class="container" style="display: flex; justify-content: center; align-items: center; flex: 1;">
+            <div class="reg-container">
+                <div class="reg-header">
+                    <h1>TNSF Membership Registration</h1>
+                    <p style="font-size: 12px; color: #666;">Join the student movement of Kadapa Parliament</p>
+                </div>
+
+                <!-- Progress Tracker -->
+                <div class="step-indicator">
+                    <span id="ind-1" class="active-step">1. Personal</span>
+                    <span id="ind-2">2. Education</span>
+                    <span id="ind-3">3. Location</span>
+                    <span id="ind-4">4. Confirm</span>
+                </div>
+
+                <div class="form-card">
+                    <!-- STEP 1: Personal Details -->
+                    <div class="form-step active" id="step-1">
+                        <h3 style="font-size: 15px; color: #d4a000; font-weight: 700;">Step 1 — Personal Details</h3>
+                        
+                        <div class="input-group">
+                            <label>Full Name</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="reg-name" placeholder="Enter your full name">
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label>Mobile Number</label>
+                            <div class="input-wrapper">
+                                <input type="tel" id="reg-mobile" placeholder="Enter 10-digit mobile number">
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label>Email Address</label>
+                            <div class="input-wrapper">
+                                <input type="email" id="reg-email" placeholder="Enter email address">
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label>Date of Birth</label>
+                            <div class="input-wrapper">
+                                <input type="date" id="reg-dob">
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label>Gender</label>
+                            <div class="input-wrapper">
+                                <select id="reg-gender">
+                                    <option value="">Select Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label>Upload Photo</label>
+                            <div class="input-wrapper">
+                                <input type="file" id="reg-photo" accept="image/*">
+                            </div>
+                        </div>
+
+                        <div class="btn-group">
+                            <button type="button" class="secondary-btn" id="backToLoginBtn">Cancel</button>
+                            <button type="button" class="primary-btn" onclick="nextStep(1)">Next <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: Education -->
+                    <div class="form-step" id="step-2">
+                        <h3 style="font-size: 15px; color: #d4a000; font-weight: 700;">Step 2 — Education</h3>
+
+                        <div class="input-group">
+                            <label>College / Institution</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="reg-college" placeholder="Enter college name">
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label>Course / Degree</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="reg-course" placeholder="e.g. B.Tech, Degree, Inter">
+                            </div>
+                        </div>
+
+                        <div class="btn-group">
+                            <button type="button" class="secondary-btn" onclick="prevStep(2)"><i class="fa-solid fa-arrow-left"></i> Previous</button>
+                            <button type="button" class="primary-btn" onclick="nextStep(2)">Next <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3: Location -->
+                    <div class="form-step" id="step-3">
+                        <h3 style="font-size: 15px; color: #d4a000; font-weight: 700;">Step 3 — Location Details</h3>
+
+                        <div class="input-group">
+                            <label>Constituency</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="reg-constituency" placeholder="e.g. Proddatur, Kadapa">
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label>Mandal</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="reg-mandal" placeholder="Enter Mandal">
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label>Village / Town</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="reg-village" placeholder="Enter Village or Town">
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label>Full Address</label>
+                            <div class="input-wrapper">
+                                <textarea id="reg-address" placeholder="Enter complete door/street address" rows="2"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="btn-group">
+                            <button type="button" class="secondary-btn" onclick="prevStep(3)"><i class="fa-solid fa-arrow-left"></i> Previous</button>
+                            <button type="button" class="primary-btn" onclick="prepareConfirmation()">Preview <i class="fa-solid fa-eye"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 4: Confirmation & Terms -->
+                    <div class="form-step" id="step-4">
+                        <h3 style="font-size: 15px; color: #d4a000; font-weight: 700;">Step 4 — Confirmation & Terms</h3>
+                        
+                        <div style="font-size: 13px; color: #333; display: flex; flex-direction: column; gap: 6px; background: #fafafa; padding: 12px; border-radius: 8px;">
+                            <div><strong>Name:</strong> <span id="prev-name"></span></div>
+                            <div><strong>Mobile:</strong> <span id="prev-mobile"></span></div>
+                            <div><strong>Email:</strong> <span id="prev-email"></span></div>
+                            <div><strong>College:</strong> <span id="prev-college"></span></div>
+                            <div><strong>Constituency:</strong> <span id="prev-constituency"></span></div>
+                        </div>
+
+                        <div class="input-group">
+                            <label>Terms and Conditions</label>
+                            <div class="terms-box">
+                                1. I agree to abide by the rules, regulations, and core objectives of the Telugu Nadu Students Federation (TNSF).<br>
+                                2. I confirm that the details furnished above are accurate and true to the best of my knowledge.<br>
+                                3. Membership is subject to verification and approval by the respective Constituency Admin.
+                            </div>
+                        </div>
+
+                        <label class="checkbox-group">
+                            <input type="checkbox" id="termsAgree">
+                            <span>I agree to TNSF membership terms and conditions</span>
+                        </label>
+
+                        <div class="btn-group">
+                            <button type="button" class="secondary-btn" onclick="editForm()"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
+                            <button type="button" class="primary-btn" id="submitAppBtn" style="background-color: #28a745; color: #fff;">Submit Membership Application</button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 5: Success Message -->
+                    <div class="form-step" id="step-success">
+                        <div class="success-box">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <h2>Application Submitted!</h2>
+                            <p>Your application has been sent to your Constituency Admin for verification. You will receive login credentials upon approval.</p>
+                            <button type="button" class="primary-btn" id="backToLoginFromSuccess">Back to Login</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="auth-footer">
+            ©2026 TNSF KADAPA PARLIAMENT. All Rights Reserved.
+        </div>
+    </div>
+
+
+    <!-- ================= VIEW 3: DASHBOARD PAGE ================= -->
     <div id="dashboard-view" class="view-section">
         <!-- Header -->
         <header>
@@ -686,7 +1012,7 @@
         <div class="container">
             <!-- Hero Section -->
             <div class="hero-section">
-                <!-- Announcements Card (2 cm height, pure white) -->
+                <!-- Announcements Card (2 cm height) -->
                 <div class="admin-ad-card">
                     <div class="ad-content">
                         <i class="fa-solid fa-bullhorn"></i>
@@ -695,7 +1021,7 @@
                     <div class="ad-badge">Notice</div>
                 </div>
 
-                <!-- My Profile Card (3 cm height, pure white) -->
+                <!-- My Profile Card (3 cm height) -->
                 <div class="profile-card">
                     <div class="profile-top">
                         <div class="profile-title-area">
@@ -791,39 +1117,120 @@
             togglePassword.classList.toggle('fa-eye-slash');
         });
 
-        // --- View Switching Logic ---
+        // --- Views ---
         const loginView = document.getElementById('login-view');
+        const registerView = document.getElementById('register-view');
         const dashboardView = document.getElementById('dashboard-view');
+        
         const loginBtn = document.getElementById('loginBtn');
         const logoutBtnNav = document.getElementById('logoutBtnNav');
         const logoutBtnMobile = document.getElementById('logoutBtnMobile');
-        const registerLink = document.getElementById('registerLink');
+        const openRegisterBtn = document.getElementById('openRegisterBtn');
+        const backToLoginBtn = document.getElementById('backToLoginBtn');
+        const backToLoginFromSuccess = document.getElementById('backToLoginFromSuccess');
+        const submitAppBtn = document.getElementById('submitAppBtn');
+
+        function switchView(targetView) {
+            loginView.classList.remove('active');
+            registerView.classList.remove('active');
+            dashboardView.classList.remove('active');
+            targetView.classList.add('active');
+            window.scrollTo(0, 0);
+        }
 
         loginBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            loginView.classList.remove('active');
-            dashboardView.classList.add('active');
-            window.scrollTo(0, 0);
+            switchView(dashboardView);
+        });
+
+        openRegisterBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            resetForm();
+            switchView(registerView);
+        });
+
+        backToLoginBtn.addEventListener('click', () => {
+            switchView(loginView);
+        });
+
+        backToLoginFromSuccess.addEventListener('click', () => {
+            switchView(loginView);
         });
 
         function handleLogout(e) {
             e.preventDefault();
-            dashboardView.classList.remove('active');
-            loginView.classList.add('active');
             passwordInput.value = '';
             document.getElementById('userId').value = '';
-            window.scrollTo(0, 0);
+            switchView(loginView);
         }
 
         logoutBtnNav.addEventListener('click', handleLogout);
         logoutBtnMobile.addEventListener('click', handleLogout);
 
-        registerLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            alert('Registration desk will open soon. Please contact your constituency admin.');
+        // --- Multi-Step Form Logic ---
+        let currentStep = 1;
+
+        function showStep(step) {
+            document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+            document.getElementById(`step-${step}`).classList.add('active');
+            
+            for (let i = 1; i <= 4; i++) {
+                const ind = document.getElementById(`ind-${i}`);
+                if (ind) {
+                    if (i === step) ind.classList.add('active-step');
+                    else ind.classList.remove('active-step');
+                }
+            }
+            currentStep = step;
+        }
+
+        function nextStep(step) {
+            // Basic validation per step
+            if (step === 1) {
+                const name = document.getElementById('reg-name').value.trim();
+                const mobile = document.getElementById('reg-mobile').value.trim();
+                if (!name || !mobile) {
+                    alert('Please fill out your Full Name and Mobile number.');
+                    return;
+                }
+            }
+            showStep(step + 1);
+        }
+
+        function prevStep(step) {
+            showStep(step - 1);
+        }
+
+        function prepareConfirmation() {
+            document.getElementById('prev-name').textContent = document.getElementById('reg-name').value || '-';
+            document.getElementById('prev-mobile').textContent = document.getElementById('reg-mobile').value || '-';
+            document.getElementById('prev-email').textContent = document.getElementById('reg-email').value || '-';
+            document.getElementById('prev-college').textContent = document.getElementById('reg-college').value || '-';
+            document.getElementById('prev-constituency').textContent = document.getElementById('reg-constituency').value || '-';
+            showStep(4);
+        }
+
+        function editForm() {
+            showStep(1);
+        }
+
+        submitAppBtn.addEventListener('click', () => {
+            const agree = document.getElementById('termsAgree').checked;
+            if (!agree) {
+                alert('Please agree to the TNSF membership terms and conditions to submit.');
+                return;
+            }
+            document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+            document.getElementById('step-success').classList.add('active');
         });
 
-        // --- Mobile Menu Toggle Logic ---
+        function resetForm() {
+            currentStep = 1;
+            showStep(1);
+            document.getElementById('termsAgree').checked = false;
+        }
+
+        // --- Mobile Menu Toggle ---
         const menuToggleBtn = document.getElementById('menuToggleBtn');
         const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
         const closeMenuBtn = document.getElementById('closeMenuBtn');
