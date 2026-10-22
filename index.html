@@ -505,7 +505,6 @@
             margin-bottom: 25px;
         }
 
-        /* Announcements Banner Card (Matching reference 1000280113.jpg) */
         .admin-banner-card {
             background-color: #ffffff;
             border: 2px solid #ffcc00;
@@ -526,7 +525,6 @@
             display: block;
         }
 
-        /* Profile Card (Matching reference 1000280114.png without edit button) */
         .profile-card {
             background-color: #ffffff;
             border: 2px solid #ffcc00;
@@ -679,6 +677,132 @@
             border-top: 1px solid #f5f5f5;
         }
 
+
+        /* ================= SUPER ADMIN DASHBOARD VIEW ================= */
+        #super-admin-view {
+            background-color: #ffffff;
+        }
+
+        .admin-header {
+            background-color: #ffffff;
+            padding: 12px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            border-bottom: 1px solid #f0f0f0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        .admin-header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .admin-datetime {
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+            display: none;
+        }
+
+        /* Search bar styling */
+        .admin-search-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .admin-search-container input {
+            width: 100%;
+            padding: 10px 40px 10px 15px;
+            border: 2px solid #ffcc00;
+            border-radius: 10px;
+            font-size: 13px;
+            background-color: #ffffff;
+            color: #d4a000; /* Yellow colour text */
+            outline: none;
+        }
+
+        .admin-search-container input::placeholder {
+            color: #d4a000;
+            opacity: 0.8;
+        }
+
+        .admin-search-container i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #d4a000;
+        }
+
+        /* Single Stat Cards Grid */
+        .stat-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background-color: #ffffff; /* Full white card */
+            border: 2px solid #ffcc00;
+            border-radius: 15px;
+            padding: 18px 12px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.03);
+        }
+
+        .stat-card h3 {
+            font-size: 13px;
+            font-weight: 600;
+            color: #ffcc00; /* Yellow colour text */
+            margin-bottom: 6px;
+        }
+
+        .stat-card p {
+            font-size: 20px;
+            font-weight: 800;
+            color: #ffcc00; /* Yellow colour text */
+        }
+
+        /* Recent activity box */
+        .recent-activity-section {
+            background: #ffffff;
+            border: 2px solid #ffcc00;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.03);
+        }
+
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .activity-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            border-bottom: 1px solid #f9f9f9;
+            padding-bottom: 8px;
+            color: #333;
+        }
+
+        .activity-item span:last-child {
+            font-size: 11px;
+            color: #777;
+        }
+
+
         /* --- TERMS MODAL --- */
         .modal-overlay {
             position: fixed;
@@ -735,6 +859,7 @@
             cursor: pointer;
         }
 
+        /* --- DESKTOP / LAPTOP RESPONSIVE MEDIA QUERIES --- */
         @media (min-width: 768px) {
             .nav-links {
                 display: flex;
@@ -751,6 +876,26 @@
             }
             .brand-text h1 {
                 font-size: 18px;
+            }
+
+            /* Super Admin Desktop Header adjustments */
+            .admin-header {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .admin-header-top {
+                width: auto;
+                gap: 20px;
+            }
+
+            .admin-datetime {
+                display: block;
+            }
+
+            .admin-search-container {
+                width: 320px;
             }
         }
     </style>
@@ -772,7 +917,7 @@
                     <div class="input-group">
                         <label for="userId">User ID</label>
                         <div class="input-wrapper">
-                            <input type="text" id="userId" placeholder="Enter your User ID">
+                            <input type="text" id="userId" placeholder="Enter User ID (admin for Super Admin)">
                             <i class="fa-solid fa-user field-icon"></i>
                         </div>
                     </div>
@@ -973,7 +1118,7 @@
     </div>
 
 
-    <!-- ================= VIEW 3: DASHBOARD PAGE ================= -->
+    <!-- ================= VIEW 3: USER DASHBOARD PAGE ================= -->
     <div id="dashboard-view" class="view-section">
         <header>
             <div class="brand">
@@ -1022,12 +1167,12 @@
 
         <div class="container">
             <div class="hero-section">
-                <!-- Announcements Banner Card (Matching reference 1000280113.jpg) -->
+                <!-- Announcements Banner Card -->
                 <div class="admin-banner-card">
                     <img src="https://i.ibb.co/3y13V2t/1000280113.jpg" alt="Campaign Banner" onerror="this.src='https://via.placeholder.com/1200x300?text=TNSF+Campaign+Banner'">
                 </div>
 
-                <!-- My Profile Card (Matching reference 1000280114.png without edit button) -->
+                <!-- My Profile Card -->
                 <div class="profile-card">
                     <div class="profile-left">
                         <div class="profile-avatar">
@@ -1075,6 +1220,7 @@
         const loginView = document.getElementById('login-view');
         const registerView = document.getElementById('register-view');
         const dashboardView = document.getElementById('dashboard-view');
+        const superAdminView = document.getElementById('super-admin-view');
 
         const openRegisterBtn = document.getElementById('openRegisterBtn');
         const backToLoginBtn = document.getElementById('backToLoginBtn');
@@ -1084,7 +1230,7 @@
         const logoutBtnMobile = document.getElementById('logoutBtnMobile');
 
         function switchView(viewToShow) {
-            [loginView, registerView, dashboardView].forEach(v => v.classList.remove('active'));
+            [loginView, registerView, dashboardView, superAdminView].forEach(v => v.classList.remove('active'));
             viewToShow.classList.add('active');
             window.scrollTo(0, 0);
         }
@@ -1099,9 +1245,15 @@
         backToLoginBtn.addEventListener('click', () => switchView(loginView));
         backToLoginFromSuccess.addEventListener('click', () => switchView(loginView));
 
+        // Login Routing Logic (If username is 'admin', open Super Admin Dashboard)
         loginBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            switchView(dashboardView);
+            const userIdVal = document.getElementById('userId').value.trim().toLowerCase();
+            if (userIdVal === 'admin') {
+                switchView(superAdminView);
+            } else {
+                switchView(dashboardView);
+            }
         });
 
         function handleLogout(e) {
@@ -1114,6 +1266,24 @@
         logoutBtnNav.addEventListener('click', handleLogout);
         logoutBtnMobile.addEventListener('click', handleLogout);
 
+        // Logout handlers for Admin
+        document.querySelectorAll('.logoutAdminBtn').forEach(btn => {
+            btn.addEventListener('click', handleLogout);
+        });
+
+        // Live Date & Time for Desktop Super Admin Header
+        function updateDateTime() {
+            const now = new Date();
+            const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+            const dtString = now.toLocaleDateString('en-US', options);
+            const dtElem = document.getElementById('liveDateTime');
+            if (dtElem) dtElem.textContent = dtString;
+        }
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+
+
+        // --- Multi-Step Form Logic ---
         let currentStep = 1;
         const steps = document.querySelectorAll('.form-step');
         const stepIndicator = document.getElementById('stepIndicator');
@@ -1217,12 +1387,21 @@
             togglePassword.classList.toggle('fa-eye-slash');
         });
 
+        // User Mobile Menu Toggle
         const menuToggleBtn = document.getElementById('menuToggleBtn');
         const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
         const closeMenuBtn = document.getElementById('closeMenuBtn');
 
-        menuToggleBtn.addEventListener('click', () => mobileMenuOverlay.classList.add('active'));
-        closeMenuBtn.addEventListener('click', () => mobileMenuOverlay.classList.remove('active'));
+        if (menuToggleBtn) menuToggleBtn.addEventListener('click', () => mobileMenuOverlay.classList.add('active'));
+        if (closeMenuBtn) closeMenuBtn.addEventListener('click', () => mobileMenuOverlay.classList.remove('active'));
+
+        // Super Admin Mobile Menu Toggle
+        const adminMenuToggleBtn = document.getElementById('adminMenuToggleBtn');
+        const adminMenuOverlay = document.getElementById('adminMenuOverlay');
+        const adminCloseMenuBtn = document.getElementById('adminCloseMenuBtn');
+
+        if (adminMenuToggleBtn) adminMenuToggleBtn.addEventListener('click', () => adminMenuOverlay.classList.add('active'));
+        if (adminCloseMenuBtn) adminCloseMenuBtn.addEventListener('click', () => adminMenuOverlay.classList.remove('active'));
     </script>
 </body>
 </html>
